@@ -6,6 +6,6 @@ namespace WIMSystem.Models.Contracts
 {
     public interface IWIMTeams
     {
-        IList<ITeam> TeamsList { get; set; }
+        IList<ITeam> TeamsList { get; }
     }
 }
