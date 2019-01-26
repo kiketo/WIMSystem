@@ -6,9 +6,14 @@ namespace WIMSystem.Models.Contracts
 {
     public interface IWorkItem
     {
-        int ID { get; set; }
+        int ID { get; }
         string Title { get; set; }
         string Description { get; set; }
-        IList<string> Comments { get; }
+        IList<Comment> ListOfComments { get; }
+
+        void AddComment(Comment comment);
+
+        void AddHistoryItem(HistoryItem history);
+        
     }
 }
