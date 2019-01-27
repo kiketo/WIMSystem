@@ -14,7 +14,7 @@ namespace WIMSystem.Models
         private IMember assignee;
 
         public Bug(string title, string description, IList<string> stepsToReproduce,
-            PriorityType priority, SeverityType severity, BugStatusType bugStatus,
+            PriorityType priority, BugSeverityType severity, BugStatusType bugStatus,
             IMember assignee = null)
             : base(title, description)
         {
@@ -51,7 +51,7 @@ namespace WIMSystem.Models
 
         public PriorityType Priority { get; set; }
 
-        public SeverityType Severity { get; set; }
+        public BugSeverityType Severity { get; set; }
 
         public BugStatusType BugStatus { get ; set ; }
 

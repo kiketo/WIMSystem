@@ -10,7 +10,7 @@ namespace WIMSystem.Models.Contracts
     {
         IList<string> StepsToReproduce { get;}
         PriorityType Priority { get; set; }
-        SeverityType Severity { get; set; }
+        BugSeverityType Severity { get; set; }
         BugStatusType BugStatus { get; set; }
         IMember Assignee { get; }
     }

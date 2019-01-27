@@ -9,7 +9,7 @@ namespace WIMSystem.Models.Contracts
     public interface IStory
     {
         PriorityType Priority { get; set; }
-        SeverityType Severity { get; set; }
+        BugSeverityType Severity { get; set; }
         StoryStatusType storyStatus { get; set; }
         IMember Assignee { get; set; }
     }
