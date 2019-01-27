@@ -9,10 +9,10 @@ using WIMSystem.Models.Enums;
 
 namespace WIMSystem.Core.Contracts
 {
-    interface IFactory
+    public interface IFactory
     {
          
-        Board CreateBoard (string name, List <WorkItem> workItems,List <HistoryItem>historyItems);
+        Board CreateBoard (string name, IList <IWorkItem> workItems);
 
         Bug CreateBug(string title, string description, IList<string> stepsToReproduce,
             PriorityType priority, BugSeverityType severity, BugStatusType bugStatus,
@@ -20,7 +20,7 @@ namespace WIMSystem.Core.Contracts
 
         Comment CreateComment(string message, Member author);
 
-        Feedback CreateFeedback(int rating, FeedbackStatusType feedbackStatusType);
+        Feedback CreateFeedback(string title, string description, int rating, FeedbackStatusType feedbackStatus);
 
         HistoryItem CreateHistoryItem(string description, DateTime creationDate, IMember member, IBoard board, ITeam team);
 
@@ -28,7 +28,7 @@ namespace WIMSystem.Core.Contracts
 
         //Story CreateStory();
 
-        Team CreateTeam(string name, List<Member>membersList, List<Board>boardsList, List<HistoryItem>historyList);
+        Team CreateTeam(string name, IList<IMember>membersList, IList<IBoard>boardsList);
 
     }
 }
