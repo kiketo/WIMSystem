@@ -65,7 +65,7 @@ namespace WIMSystem.Models.Abstract
 
             set
             {
-                if(string.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
                     throw new ArgumentNullException("Description", "Description cannot be empty!");
                 }
@@ -79,13 +79,9 @@ namespace WIMSystem.Models.Abstract
             }
         }
 
-        public IList<Comment> ListOfComments
-        {
-            get
-            {
-                return this.listOfComments;
-            }
-        }
+        public IList<Comment> ListOfComments { get; }
+
+        public IList<HistoryItem> ListOfHistoryItems { get; }
 
         public void AddComment(Comment comment)
         {

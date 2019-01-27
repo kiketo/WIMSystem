@@ -6,11 +6,10 @@ using WIMSystem.Models.Enums;
 
 namespace WIMSystem.Models.Contracts
 {
-    public interface IStory
+    public interface IStory : IAssignableWorkItem
     {
         PriorityType Priority { get; set; }
-        BugSeverityType Severity { get; set; }
-        StoryStatusType storyStatus { get; set; }
-        IMember Assignee { get; set; }
+        StorySizeType StorySize { get; set; }
+        StoryStatusType StoryStatus { get; set; }
     }
 }

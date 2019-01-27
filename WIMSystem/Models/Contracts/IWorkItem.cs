@@ -10,6 +10,7 @@ namespace WIMSystem.Models.Contracts
         string Title { get; set; }
         string Description { get; set; }
         IList<Comment> ListOfComments { get; }
+        IList<HistoryItem> ListOfHistoryItems { get; }
 
         void AddComment(Comment comment);
 

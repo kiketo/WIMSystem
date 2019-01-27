@@ -8,15 +8,13 @@ using WIMSystem.Models.Enums;
 
 namespace WIMSystem.Models
 {
-    public class Bug : WorkItem, IBug
+    public class Bug : AssignableWorkItem, IBug
     {
         private readonly IList<string> stepsToReproduce;
-        private IMember assignee;
 
         public Bug(string title, string description, IList<string> stepsToReproduce,
-            PriorityType priority, BugSeverityType severity, BugStatusType bugStatus,
-            IMember assignee = null)
-            : base(title, description)
+            PriorityType priority, BugSeverityType severity, BugStatusType bugStatus,IMember assignee=null) // assignee is optional?
+            : base(title, description,assignee)
         {
             if (stepsToReproduce == null)
             {
@@ -30,7 +28,7 @@ namespace WIMSystem.Models
             this.Priority = priority;
             this.Severity = severity;
             this.BugStatus = bugStatus;
-            this.assignee = assignee;
+            
         }
 
         public IList<string> StepsToReproduce
@@ -41,22 +39,10 @@ namespace WIMSystem.Models
             }
         }
 
-        public IMember Assignee //will use method to assign/unassign to team members
-        {
-            get
-            {
-                return this.assignee;
-            }
-        }
-
         public PriorityType Priority { get; set; }
 
         public BugSeverityType Severity { get; set; }
 
         public BugStatusType BugStatus { get ; set ; }
-
-        
-
-        
     }
 }
