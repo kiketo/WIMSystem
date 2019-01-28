@@ -15,12 +15,12 @@ namespace WIMSystem.Models
         
 
         public Story(string title, string description, PriorityType priority,
-            StorySizeType storySize, StoryStatusType storyStatus, IMember assignee=null) //assignee is optional?
+            StorySizeType storySize, IMember assignee=null) //assignee is optional?
             : base(title, description,assignee)
         {
             this.Priority = priority;
             this.StorySize = storySize;
-            this.StoryStatus = storyStatus;
+            this.StoryStatus = StoryStatusType.NotDone;
         }
 
         public PriorityType Priority { get; set; }

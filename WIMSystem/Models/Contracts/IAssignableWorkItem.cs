@@ -7,5 +7,9 @@ namespace WIMSystem.Models.Contracts
     public interface IAssignableWorkItem : IWorkItem
     {
         IMember Assignee { get; }
+
+        void AssignMember(IMember member);
+
+        void UnassignMember();
     }
 }

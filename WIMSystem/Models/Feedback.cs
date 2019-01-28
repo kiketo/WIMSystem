@@ -10,13 +10,13 @@ namespace WIMSystem.Models
     public class Feedback : WorkItem, IFeedback
     {
         private int rating;
-        private FeedbackStatusType feedbackStatus;
+        //private FeedbackStatusType feedbackStatus;
 
-        public Feedback(string title, string description, int rating, FeedbackStatusType feedbackStatus) 
+        public Feedback(string title, string description, int rating) 
             :base (title,description)
         {
             this.Rating = rating;
-            this.FeedbackStatus = feedbackStatus;
+            this.FeedbackStatus = FeedbackStatusType.Unscheduled;
         }
 
         public int Rating { get; set; } //what is rating and how do we check it?

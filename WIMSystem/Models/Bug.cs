@@ -13,7 +13,7 @@ namespace WIMSystem.Models
         private readonly IList<string> stepsToReproduce;
 
         public Bug(string title, string description, IList<string> stepsToReproduce,
-            PriorityType priority, BugSeverityType severity, BugStatusType bugStatus,IMember assignee=null) // assignee is optional?
+            PriorityType priority, BugSeverityType severity, /*BugStatusType bugStatus*/IMember assignee=null) // assignee is optional?
             : base(title, description,assignee)
         {
             if (stepsToReproduce == null)
@@ -27,7 +27,7 @@ namespace WIMSystem.Models
             this.stepsToReproduce = stepsToReproduce;
             this.Priority = priority;
             this.Severity = severity;
-            this.BugStatus = bugStatus;
+            this.BugStatus = BugStatusType.Active;
             
         }
 
