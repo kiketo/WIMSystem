@@ -10,14 +10,16 @@ namespace WIMSystem.Models
         #region Fields
         private string teamName;
         private IList<IMember> memberList;
-        private IList<IBoard> boardList;
+        private IDictionary<string,IBoard> boardList;
         #endregion
         #region Ctor
-        public Team(string teamName, IList<IMember> memberList, IList<IBoard> boardList)
+        public Team(string teamName)//, IList<IMember> memberList, IDictionary<string, IBoard> boardList)
         {
             this.TeamName = teamName;
-            this.MemberList = memberList;
-            this.BoardList = boardList;
+            //this.MemberList = new List<IMember>();
+            //this.MemberList = memberList;
+            //this.BoardList = new Dictionary<string, IBoard>();
+            //this.BoardList = boardList;
         }
         #endregion
         #region Prop
@@ -52,7 +54,7 @@ namespace WIMSystem.Models
             }
         }
 
-        public IList<IBoard> BoardList
+        public IDictionary<string,IBoard> BoardList
         {
             get
             {
@@ -63,6 +65,18 @@ namespace WIMSystem.Models
                 this.boardList = value;
             }
         }
+        #endregion
+        #region Methods
+        public void AddMember ()
+        {
+
+        }
+
+        public void AddBoard()
+        {
+
+        }
+
         #endregion
     }
 }

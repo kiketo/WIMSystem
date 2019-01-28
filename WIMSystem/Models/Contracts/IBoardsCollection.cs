@@ -4,9 +4,8 @@ using System.Text;
 
 namespace WIMSystem.Models.Contracts
 {
-    public interface IMembersCollection
+    public interface IBoardsCollection
     {
-        IDictionary<string, IMember> Members { get; }
-        
+        IDictionary<string, IBoard> BoardsInTheTeam { get; }
     }
 }

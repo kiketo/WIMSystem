@@ -8,6 +8,6 @@ namespace WIMSystem.Models.Contracts
     {
         string TeamName { get; set; }
         IList<IMember> MemberList { get; }
-        IList<IBoard> BoardList { get; }
+        IDictionary<string,IBoard> BoardList { get; }
     }
 }
