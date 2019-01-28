@@ -32,7 +32,7 @@ namespace WIMSystem.Core
             return new Feedback(title,description,rating, feedbackStatus);
         }
 
-        public HistoryItem CreateHistoryItem(string description, DateTime creationDate, IMember member, IBoard board, ITeam team)
+        public HistoryItem CreateHistoryItem(string description, DateTime creationDate, IMember member, IBoard board, T team)
         {
            return new HistoryItem(description,creationDate,member,board,team);
         }

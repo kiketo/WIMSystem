@@ -5,38 +5,38 @@ using WIMSystem.Models.Contracts;
 
 namespace WIMSystem.Models
 {
-    public class WIMTeams : IEnumerable<T>, IWIMTeams
+    public class DictionaryContainer<T> : IEnumerable<T>, IWIMTeams
     {
-        private IDictionary<string,T> teamsList;
+        private IDictionary<string, T> containerList;
 
-        public IDictionary<string,T> TeamsList
+        public IDictionary<string, T> ContainerList
         {
-            get => new Dictionary<string,T>(teamsList);
+            get => new Dictionary<string, T>(containerList);
         }
 
-        public IEnumerator<T> GetEnumerator()
+        public IEnumerator<Contracts.T> GetEnumerator()
         {
-            foreach (var item in this.teamsList)
+            foreach (var item in this.containerList)
             {
                 yield return item.Value;
             }
         }
 
-        public void AddTeam(T newTeam)
+        public void AddTeam(Contracts.T newTeam)
         {
-            this.teamsList.Add(newTeam.TeamName, newTeam);
+            this.containerList.Add(newTeam.TeamName, newTeam);
         }
 
         public T this[string index]
         {
-            get => this.teamsList[index];
+            get => this.containerList[index];
             private set
             {
-                this.teamsList[index] = value;
+                this.containerList[index] = value;
             }
         }
 
-        public void RemoveTeam(T removeTeam)
+        public void RemoveTeam(Contracts.T removeTeam)
         {
             RemoveTeam(removeTeam.TeamName);
         }
@@ -44,11 +44,11 @@ namespace WIMSystem.Models
 
         public void RemoveTeam(string teamName)
         {
-            if (teamsList.ContainsKey(teamName))
+            if (containerList.ContainsKey(teamName))
             {
                 throw new ArgumentOutOfRangeException("There is not such team");
             }
-            this.teamsList.Remove(teamName);
+            this.containerList.Remove(teamName);
         }
 
 

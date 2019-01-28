@@ -8,40 +8,33 @@ namespace WIMSystem.Models
     public class MembersCollection : IMembersCollection
     {
         // The single instance
-        private static IDictionary<string, IMember> members;
+        private readonly IDictionary<string, IMember> membersList;
+        private static MembersCollection instance;
 
         static MembersCollection()
         {
-            members = new Dictionary<string, IMember>();
-
+            instance = new MembersCollection();
         }
-        //private MembersCollection() { }
-
+        private MembersCollection()
+        {
+            this.membersList = new Dictionary<string, IMember>();
+        }
 
         public IDictionary<string, IMember> Members
         {
             get
             {
-                var membersToGet = members;
-                return membersToGet;
-            }
-            private set
-            {
-                members = value;
+                return new Dictionary<string, IMember>(membersList);
             }
         }
 
         public void AddMember(IMember newMember)
         {
-            try
+            if (this.membersList.ContainsKey(newMember.MemberName))
             {
-                this.Members.Add(newMember.MemberName, newMember);
+                throw new ArgumentException($"{nameof(T)} with that name exist!");
             }
-            catch (Exception)
-            {
-                //To be improved:
-                throw new Exception("The name should be unique");
-            }
+            this.membersList.Add(newMember.MemberName, newMember);
         }
 
     }
