@@ -8,6 +8,6 @@ namespace WIMSystem.Models.Contracts
         DateTime CreationDate { get; }
         IMember Member { get; }
         IBoard Board { get; }
-        T Team { get; }
+        ITeam Team { get; }
     }
 }

@@ -5,13 +5,14 @@ namespace WIMSystem.Models
 {
     public interface IWIMTeams
     {
-        T this[string index] { get; }
+        ITeam this[string index] { get; }
 
-        IDictionary<string, T> TeamsList { get; }
+        IDictionary<string, ITeam> TeamsList { get; }
 
-        void AddTeam(T newTeam);
-        IEnumerator<T> GetEnumerator();
-        void RemoveTeam(T removeTeam);
+        void AddTeam(ITeam newTeam);
+        IEnumerator<ITeam> GetEnumerator();
+        void RemoveTeam(ITeam removeTeam);
         void RemoveTeam(string teamName);
+        bool Contains(string teamName);
     }
 }

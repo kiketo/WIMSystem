@@ -5,16 +5,21 @@ using WIMSystem.Models.Contracts;
 
 namespace WIMSystem.Models
 {
-    public class WIMTeams : IEnumerable<T>, IWIMTeams
+    public class WIMTeams : IEnumerable<ITeam>, IWIMTeams
     {
-        private IDictionary<string,T> teamsList;
+        private IDictionary<string,ITeam> teamsList;
 
-        public IDictionary<string,T> TeamsList
+        public WIMTeams()
         {
-            get => new Dictionary<string,T>(teamsList);
+            this.teamsList = new Dictionary<string,ITeam>();
         }
 
-        public IEnumerator<T> GetEnumerator()
+        public IDictionary<string,ITeam> TeamsList
+        {
+            get => new Dictionary<string,ITeam>(teamsList);
+        }
+
+        public IEnumerator<ITeam> GetEnumerator()
         {
             foreach (var item in this.teamsList)
             {
@@ -22,12 +27,12 @@ namespace WIMSystem.Models
             }
         }
 
-        public void AddTeam(T newTeam)
+        public void AddTeam(ITeam newTeam)
         {
             this.teamsList.Add(newTeam.TeamName, newTeam);
         }
 
-        public T this[string index]
+        public ITeam this[string index]
         {
             get => this.teamsList[index];
             private set
@@ -36,7 +41,7 @@ namespace WIMSystem.Models
             }
         }
 
-        public void RemoveTeam(T removeTeam)
+        public void RemoveTeam(ITeam removeTeam)
         {
             RemoveTeam(removeTeam.TeamName);
         }
@@ -46,11 +51,19 @@ namespace WIMSystem.Models
         {
             if (teamsList.ContainsKey(teamName))
             {
-                throw new ArgumentOutOfRangeException("There is not such team");
+                throw new ArgumentOutOfRangeException($"Team with {teamName} does not exists");
             }
             this.teamsList.Remove(teamName);
         }
 
+        public bool Contains(string teamName)
+        {
+            if (teamsList.ContainsKey(teamName))
+            {
+                return true;
+            }
+            return false;
+        }
 
         IEnumerator IEnumerable.GetEnumerator()
         {

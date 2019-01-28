@@ -5,7 +5,7 @@ using WIMSystem.Models.Contracts;
 
 namespace WIMSystem.Models
 {
-    public class Team : T
+    public class Team : ITeam
     {
         #region Fields
         private string teamName;

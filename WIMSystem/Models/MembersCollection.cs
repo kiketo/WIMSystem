@@ -32,7 +32,7 @@ namespace WIMSystem.Models
         {
             if (this.membersList.ContainsKey(newMember.MemberName))
             {
-                throw new ArgumentException($"{nameof(T)} with that name exist!");
+                throw new ArgumentException($"{nameof(ITeam)} with that name exist!");
             }
             this.membersList.Add(newMember.MemberName, newMember);
         }

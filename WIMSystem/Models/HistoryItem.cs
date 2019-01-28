@@ -9,9 +9,9 @@ namespace WIMSystem.Models
         private readonly DateTime creationDate;
         private readonly IMember member;
         private readonly IBoard board;
-        private readonly T team;
+        private readonly ITeam team;
 
-        public HistoryItem(string description, DateTime creationDate, IMember member, IBoard board, T team)
+        public HistoryItem(string description, DateTime creationDate, IMember member, IBoard board, ITeam team)
         {
             this.Description = description;
             this.creationDate = creationDate;
@@ -41,7 +41,7 @@ namespace WIMSystem.Models
         {
             get => this.board;
         }
-        public T Team
+        public ITeam Team
         {
             get => this.team;
         }

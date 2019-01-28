@@ -22,7 +22,7 @@ namespace WIMSystem.Core.Contracts
 
         Feedback CreateFeedback(string title, string description, int rating, FeedbackStatusType feedbackStatus);
 
-        HistoryItem CreateHistoryItem(string description, DateTime creationDate, IMember member, IBoard board, T team);
+        HistoryItem CreateHistoryItem(string description, DateTime creationDate, IMember member, IBoard board, ITeam team);
 
         Member CreateMember(string memberName, IList<IWorkItem> memberWorkItems);
 

@@ -14,34 +14,24 @@
     internal class WIMEngine
     {
         private const string InvalidCommand = "Invalid command name: {0}!";
-        private const string CategoryExists = "Category with name {0} already exists!";
-        private const string CategoryCreated = "Category with name {0} was created!";
-        private const string CategoryDoesNotExist = "Category {0} does not exist!";
-        private const string ProductDoesNotExist = "Product {0} does not exist!";
-        private const string ProductAddedToCategory = "Product {0} added to category {1}!";
-        private const string ProductRemovedCategory = "Product {0} removed from category {1}!";
-        private const string ShampooAlreadyExist = "Shampoo with name {0} already exists!";
-        private const string ShampooCreated = "Shampoo with name {0} was created!";
-        private const string ToothpasteAlreadyExist = "Toothpaste with name {0} already exists!";
-        private const string ToothpasteCreated = "Toothpaste with name {0} was created!";
-        private const string ProductAddedToShoppingCart = "Product {0} was added to the shopping cart!";
-        private const string ProductDoesNotExistInShoppingCart = "Shopping cart does not contain product with name {0}!";
-        private const string ProductRemovedFromShoppingCart = "Product {0} was removed from the shopping cart!";
-        private const string TotalPriceInShoppingCart = "${0} total price currently in the shopping cart!";
-        private const string InvalidGenderType = "Invalid gender type!";
-        private const string InvalidUsageType = "Invalid usage type!";
+        private const string ObjectExists = "{0} with name {1} already exists!";
+        private const string ObjectCreated = "{0} with name {1} was created!";
+        private const string ObjectDoesNotExist = "{0} {1} does not exist!";
+
         private const char SPLIT_CHAR = ',';
 
 
         private readonly IFactory factory;
-        private readonly IWIMTeams wimteams;
+        private readonly IWIMTeams wimTeams;
+        private readonly IMembersCollection membersList;
         private readonly ICommandParser commandParser;
 
 
-        public WIMEngine(IFactory factory, IWIMTeams wimTeams, ICommandParser commandParser)
+        public WIMEngine(IFactory factory, IWIMTeams wimTeams, IMembersCollection membersList, ICommandParser commandParser)
         {
             this.factory = factory;
-            this.wimteams = wimteams;
+            this.wimTeams = wimTeams;
+            this.membersList = membersList;
             this.commandParser = commandParser;
         }
 
@@ -80,13 +70,13 @@
             {
                 case "CreateTeam":
                     var teamName = command.Parameters[0];
-                    return this.CreateTeam(categoryName);
+                    return this.CreateTeam(teamName);
                 case "CreateMember":
                     var memberName = command.Parameters[0];
-                    return this.CreateMember(categoryName);
+                    return this.CreateMember(memberName);
                 case "CreateBoard":
                     var boardName = command.Parameters[0];
-                    return this.CreateBoard(categoryName);
+                    return this.CreateBoard(boardName);
 
                 case "AddToTeam":
                     var teamNameToAdd = command.Parameters[0];
@@ -128,6 +118,62 @@
             }
         }
 
+        private string CreateTeam(string teamName)
+        {
+            if (wimTeams.Contains(teamName))
+            {
+                return string.Format(ObjectExists, nameof(Team),teamName);
+            }
+
+            var team = this.factory.CreateTeam(teamName,null,null);
+            wimTeams.AddTeam(team);
+
+            return string.Format(ObjectCreated, nameof(Team),teamName);
+        }
+
+        private string CreateMember(string memberName)
+        {
+            if (wimTeams.Contains(memberName))
+            {
+                return string.Format(ObjectExists, nameof(Member), memberName);
+            }
+
+            var member = this.factory.CreateMember(memberName, null);
+            membersList.AddMember(member);
+
+            return string.Format(ObjectCreated, nameof(Member), memberName);
+        }
+
+        private string CreateBoard(string boardName)
+        {
+            throw new NotImplementedException();
+        }
+
+        private string AddToTeam(string teamNameToAdd, string memberNameForAdding)
+        {
+            throw new NotImplementedException();
+        }
+
+        private string RemoveFromTeam(string teamNameToRemove, string memberNameForRemoving)
+        {
+            throw new NotImplementedException();
+        }
+
+        private string CreateFeedback(string feedbackTitle, string feedbackDescription, List<string> feedbackComments)
+        {
+            throw new NotImplementedException();
+        }
+
+        private string CreateStory(string storyTitle, string storyDescription, PriorityType storyPriority, StorySizeType storySize, IMember storyAssignee, List<string> storyComments)
+        {
+            throw new NotImplementedException();
+        }
+
+        private string CreateBug(string bugTitle, string bugDescription, List<string> stepsToReproduce, PriorityType bugPriority, BugSeverityType bugSeverity, IMember bugAssignee, List<string> bugComments)
+        {
+            throw new NotImplementedException();
+        }
+
         private void PrintReports(IList<string> reports)
         {
             var output = new StringBuilder();
@@ -141,132 +187,9 @@
             //writer.Write(output.ToString());
         }
 
-        //private string CreateCategory(string categoryName)
-        //{
-        //    if (this.categories.ContainsKey(categoryName))
-        //    {
-        //        return string.Format(CategoryExists, categoryName);
-        //    }
-
-        //    var category = this.factory.CreateCategory(categoryName);
-        //    this.categories.Add(categoryName, category);
-
-        //    return string.Format(CategoryCreated, categoryName);
-        //}
-
-        //private string AddToCategory(string categoryNameToAdd, string productToAdd)
-        //{
-        //    if (!this.categories.ContainsKey(categoryNameToAdd))
-        //    {
-        //        return string.Format(CategoryDoesNotExist, categoryNameToAdd);
-        //    }
-
-        //    if (!this.products.ContainsKey(productToAdd))
-        //    {
-        //        return string.Format(ProductDoesNotExist, productToAdd);
-        //    }
-
-        //    var category = this.categories[categoryNameToAdd];
-        //    var product = this.products[productToAdd];
-
-        //    category.AddProduct(product);
-
-        //    return string.Format(ProductAddedToCategory, productToAdd, categoryNameToAdd);
-        //}
-
-        //private string RemoveCategory(string categoryNameToAdd, string productToRemove)
-        //{
-        //    if (!this.categories.ContainsKey(categoryNameToAdd))
-        //    {
-        //        return string.Format(CategoryDoesNotExist, categoryNameToAdd);
-        //    }
-
-        //    if (!this.products.ContainsKey(productToRemove))
-        //    {
-        //        return string.Format(ProductDoesNotExist, productToRemove);
-        //    }
-
-        //    var category = this.categories[categoryNameToAdd];
-        //    var product = this.products[productToRemove];
-
-        //    category.RemoveProduct(product);
-
-        //    return string.Format(ProductRemovedCategory, productToRemove, categoryNameToAdd);
-        //}
-
-        //private string ShowCategory(string categoryToShow)
-        //{
-        //    if (!this.categories.ContainsKey(categoryToShow))
-        //    {
-        //        return string.Format(CategoryDoesNotExist, categoryToShow);
-        //    }
-
-        //    var category = this.categories[categoryToShow];
-
-        //    return category.Print();
-        //}
-
-        //private string CreateShampoo(string shampooName, string shampooBrand, decimal shampooPrice, GenderType shampooGender, uint shampooMilliliters, UsageType shampooUsage)
-        //{
-        //    if (this.products.ContainsKey(shampooName))
-        //    {
-        //        return string.Format(ShampooAlreadyExist, shampooName);
-        //    }
-
-        //    var shampoo = this.factory.CreateShampoo(shampooName, shampooBrand, shampooPrice, shampooGender, shampooMilliliters, shampooUsage);
-        //    this.products.Add(shampooName, shampoo);
-
-        //    return string.Format(ShampooCreated, shampooName);
-        //}
-
-        //private string CreateToothpaste(string toothpasteName, string toothpasteBrand, decimal toothpastePrice, GenderType toothpasteGender, IList<string> toothpasteIngredients)
-        //{
-        //    if (this.products.ContainsKey(toothpasteName))
-        //    {
-        //        return string.Format(ToothpasteAlreadyExist, toothpasteName);
-        //    }
-
-        //    var toothpaste = this.factory.CreateToothpaste(toothpasteName, toothpasteBrand, toothpastePrice, toothpasteGender, toothpasteIngredients);
-        //    this.products.Add(toothpasteName, toothpaste);
-
-        //    return string.Format(ToothpasteCreated, toothpasteName);
-        //}
-
-        //private string AddToShoppingCart(string productName)
-        //{
-        //    if (!this.products.ContainsKey(productName))
-        //    {
-        //        return string.Format(ProductDoesNotExist, productName);
-        //    }
-
-        //    var product = this.products[productName];
-        //    this.shoppingCart.AddProduct(product);
-
-        //    return string.Format(ProductAddedToShoppingCart, productName);
-        //}
-
-        //private string RemoveFromShoppingCart(string productName)
-        //{
-        //    if (!this.products.ContainsKey(productName))
-        //    {
-        //        return string.Format(ProductDoesNotExist, productName);
-        //    }
-
-        //    var product = this.products[productName];
-
-        //    if (!this.shoppingCart.ContainsProduct(product))
-        //    {
-        //        return string.Format(ProductDoesNotExistInShoppingCart, productName);
-        //    }
-
-        //    this.shoppingCart.RemoveProduct(product);
-
-        //    return string.Format(ProductRemovedFromShoppingCart, productName);
-        //}
-
         private IMember GetMember(string memberAsString)
         {
-           
+            return membersList[memberAsString];
             
         }
 
