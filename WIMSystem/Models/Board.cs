@@ -29,7 +29,7 @@ namespace WIMSystem.Models
                     throw new ArgumentOutOfRangeException("Board name should be between 5 and 10 symbols.");
                 }
 
-                //Name should be unique in the team
+                //Board name should be unique in the team
                 this.boardName = value;
             }
         }

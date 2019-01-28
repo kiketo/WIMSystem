@@ -24,16 +24,19 @@ namespace WIMSystem.Core.Engine
         // The property for retrieving the single instance 
         public List<Team> TeamList
         {
-            get {
-                
-                return teamList; }
-            private set { this.teamList = value; }
+            get
+            {
+                List<Team> teamListToGet = teamList;
+                return teamListToGet;
+            }
+            private set
+            {
+                teamList = value;
+            }
         }
-
-
         public void AddTeam(Team newTeam)
         {
-          this.TeamList.
+            this.TeamList.Add(newTeam);
         }
 
         //Надолу дали е ОК??? и какво става с другия WINTeams.cs ?
@@ -46,15 +49,15 @@ namespace WIMSystem.Core.Engine
 
         public IEnumerator<ITeam> GetEnumerator()
         {
-            foreach (var item in this.teamList)
+            foreach (var item in teamList)
             {
                 yield return item;
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return this.GetEnumerator();
-        }
-    }
+        //IEnumerator IEnumerable.GetEnumerator()
+        //{
+        //    return this.GetEnumerator();
+        //}
+    }   //
 }
