@@ -9,12 +9,11 @@ namespace WIMSystem.Core
 {
     internal class CommandParser : ICommandParser
     {
-        public IList<ICommand> ReadCommands(IReader reader)
+       public IList<ICommand> ReadCommands()
         {
             var commands = new List<ICommand>();
 
             var currentLine = Console.ReadLine();
-            // var currentLine = reader.Read();
 
             while (!string.IsNullOrEmpty(currentLine))
             {
@@ -22,7 +21,6 @@ namespace WIMSystem.Core
                 commands.Add(currentCommand);
 
                 currentLine = Console.ReadLine();
-                // var currentLine = reader.Read();
 
             }
 

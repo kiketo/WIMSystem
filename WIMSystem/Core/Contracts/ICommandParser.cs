@@ -5,6 +5,6 @@ namespace WIMSystem.Core.Contracts
 {
     internal interface ICommandParser
     {
-        IList<ICommand> ReadCommands(IReader reader);
+        IList<ICommand> ReadCommands();
     }
 }

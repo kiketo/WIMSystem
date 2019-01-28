@@ -8,8 +8,10 @@
     using WIMSystem.Models.Enums;
     using WIMSystem.Models;
     using WIMSystem.Core.Contracts;
+    using WIMSystem.Core.Utils;
+    using WIMSystem.Models.Contracts;
 
-    internal class WIMEngine : IEngine
+    internal class WIMEngine
     {
         private const string InvalidCommand = "Invalid command name: {0}!";
         private const string CategoryExists = "Category with name {0} already exists!";
@@ -31,22 +33,16 @@
         private const char SPLIT_CHAR = ',';
 
 
-        private readonly IWIMFactory factory;
-       // private readonly IShoppingCart shoppingCart;
+        private readonly IFactory factory;
+        private readonly IWIMTeams wimteams;
         private readonly ICommandParser commandParser;
-        protected readonly IDictionary<string, ICategory> categories;
-        protected readonly IDictionary<string, IProduct> products;
 
-        public CosmeticsEngine(
-            ICosmeticsFactory factory,
-            IShoppingCart shoppingCart,
-            ICommandParser commandParser)
+
+        public WIMEngine(IFactory factory, IWIMTeams wimTeams, ICommandParser commandParser)
         {
             this.factory = factory;
-            this.shoppingCart = shoppingCart;
+            this.wimteams = wimteams;
             this.commandParser = commandParser;
-            this.categories = new Dictionary<string, ICategory>();
-            this.products = new Dictionary<string, IProduct>();
         }
 
         public void Start()
@@ -56,23 +52,7 @@
             this.PrintReports(commandResult);
         }
 
-        // This is removed due to inadequate testing. You will need to use Console which is Integration testing.
-        //private IList<ICommand> ReadCommands()
-        //{
-        //    var commands = new List<ICommand>();
-
-        //    var currentLine = Console.ReadLine();
-
-        //    while (!string.IsNullOrEmpty(currentLine))
-        //    {
-        //        var currentCommand = Command.Parse(currentLine);
-        //        commands.Add(currentCommand);
-
-        //        currentLine = Console.ReadLine();
-        //    }
-
-        //    return commands;
-        //}
+       
 
         private IList<string> ProcessCommands(IList<ICommand> commands)
         {
@@ -122,8 +102,8 @@
                     var bugTitle = command.Parameters[0];
                     var bugDescription = command.Parameters[1];
                     var stepsToReproduce = command.Parameters[2].Trim().Split(SPLIT_CHAR).ToList();
-                    var bugPriority = this.GetPriority(command.Parameters[3]);
-                    var bugSeverity = this.GetSeverity(command.Parameters[4]);
+                    var bugPriority = StringToEnum<PriorityType>.Convert(command.Parameters[3]);
+                    var bugSeverity = StringToEnum<BugSeverityType>.Convert(command.Parameters[4]);
                     var bugAssignee = this.GetMember(command.Parameters[5]);
                     var bugComments = command.Parameters[6].Trim().Split(SPLIT_CHAR).ToList();
                     return this.CreateBug(bugTitle,bugDescription,stepsToReproduce,bugPriority,bugSeverity,bugAssignee,bugComments);
@@ -131,8 +111,8 @@
                 case "CreateStory":
                     var storyTitle = command.Parameters[0];
                     var storyDescription = command.Parameters[1];
-                    var storyPriority = this.GetPriority(command.Parameters[3]);
-                    var storySize = this.GetSize(command.Parameters[4]);
+                    var storyPriority = StringToEnum<PriorityType>.Convert(command.Parameters[3]);
+                    var storySize = StringToEnum<StorySizeType>.Convert(command.Parameters[4]);
                     var storyAssignee = this.GetMember(command.Parameters[5]);
                     var storyComments = command.Parameters[6].Trim().Split(SPLIT_CHAR).ToList();
                     return this.CreateStory(storyTitle,storyDescription,storyPriority,storySize,storyAssignee,storyComments);
@@ -161,155 +141,134 @@
             //writer.Write(output.ToString());
         }
 
-        private string CreateCategory(string categoryName)
+        //private string CreateCategory(string categoryName)
+        //{
+        //    if (this.categories.ContainsKey(categoryName))
+        //    {
+        //        return string.Format(CategoryExists, categoryName);
+        //    }
+
+        //    var category = this.factory.CreateCategory(categoryName);
+        //    this.categories.Add(categoryName, category);
+
+        //    return string.Format(CategoryCreated, categoryName);
+        //}
+
+        //private string AddToCategory(string categoryNameToAdd, string productToAdd)
+        //{
+        //    if (!this.categories.ContainsKey(categoryNameToAdd))
+        //    {
+        //        return string.Format(CategoryDoesNotExist, categoryNameToAdd);
+        //    }
+
+        //    if (!this.products.ContainsKey(productToAdd))
+        //    {
+        //        return string.Format(ProductDoesNotExist, productToAdd);
+        //    }
+
+        //    var category = this.categories[categoryNameToAdd];
+        //    var product = this.products[productToAdd];
+
+        //    category.AddProduct(product);
+
+        //    return string.Format(ProductAddedToCategory, productToAdd, categoryNameToAdd);
+        //}
+
+        //private string RemoveCategory(string categoryNameToAdd, string productToRemove)
+        //{
+        //    if (!this.categories.ContainsKey(categoryNameToAdd))
+        //    {
+        //        return string.Format(CategoryDoesNotExist, categoryNameToAdd);
+        //    }
+
+        //    if (!this.products.ContainsKey(productToRemove))
+        //    {
+        //        return string.Format(ProductDoesNotExist, productToRemove);
+        //    }
+
+        //    var category = this.categories[categoryNameToAdd];
+        //    var product = this.products[productToRemove];
+
+        //    category.RemoveProduct(product);
+
+        //    return string.Format(ProductRemovedCategory, productToRemove, categoryNameToAdd);
+        //}
+
+        //private string ShowCategory(string categoryToShow)
+        //{
+        //    if (!this.categories.ContainsKey(categoryToShow))
+        //    {
+        //        return string.Format(CategoryDoesNotExist, categoryToShow);
+        //    }
+
+        //    var category = this.categories[categoryToShow];
+
+        //    return category.Print();
+        //}
+
+        //private string CreateShampoo(string shampooName, string shampooBrand, decimal shampooPrice, GenderType shampooGender, uint shampooMilliliters, UsageType shampooUsage)
+        //{
+        //    if (this.products.ContainsKey(shampooName))
+        //    {
+        //        return string.Format(ShampooAlreadyExist, shampooName);
+        //    }
+
+        //    var shampoo = this.factory.CreateShampoo(shampooName, shampooBrand, shampooPrice, shampooGender, shampooMilliliters, shampooUsage);
+        //    this.products.Add(shampooName, shampoo);
+
+        //    return string.Format(ShampooCreated, shampooName);
+        //}
+
+        //private string CreateToothpaste(string toothpasteName, string toothpasteBrand, decimal toothpastePrice, GenderType toothpasteGender, IList<string> toothpasteIngredients)
+        //{
+        //    if (this.products.ContainsKey(toothpasteName))
+        //    {
+        //        return string.Format(ToothpasteAlreadyExist, toothpasteName);
+        //    }
+
+        //    var toothpaste = this.factory.CreateToothpaste(toothpasteName, toothpasteBrand, toothpastePrice, toothpasteGender, toothpasteIngredients);
+        //    this.products.Add(toothpasteName, toothpaste);
+
+        //    return string.Format(ToothpasteCreated, toothpasteName);
+        //}
+
+        //private string AddToShoppingCart(string productName)
+        //{
+        //    if (!this.products.ContainsKey(productName))
+        //    {
+        //        return string.Format(ProductDoesNotExist, productName);
+        //    }
+
+        //    var product = this.products[productName];
+        //    this.shoppingCart.AddProduct(product);
+
+        //    return string.Format(ProductAddedToShoppingCart, productName);
+        //}
+
+        //private string RemoveFromShoppingCart(string productName)
+        //{
+        //    if (!this.products.ContainsKey(productName))
+        //    {
+        //        return string.Format(ProductDoesNotExist, productName);
+        //    }
+
+        //    var product = this.products[productName];
+
+        //    if (!this.shoppingCart.ContainsProduct(product))
+        //    {
+        //        return string.Format(ProductDoesNotExistInShoppingCart, productName);
+        //    }
+
+        //    this.shoppingCart.RemoveProduct(product);
+
+        //    return string.Format(ProductRemovedFromShoppingCart, productName);
+        //}
+
+        private IMember GetMember(string memberAsString)
         {
-            if (this.categories.ContainsKey(categoryName))
-            {
-                return string.Format(CategoryExists, categoryName);
-            }
-
-            var category = this.factory.CreateCategory(categoryName);
-            this.categories.Add(categoryName, category);
-
-            return string.Format(CategoryCreated, categoryName);
+           
+            
         }
 
-        private string AddToCategory(string categoryNameToAdd, string productToAdd)
-        {
-            if (!this.categories.ContainsKey(categoryNameToAdd))
-            {
-                return string.Format(CategoryDoesNotExist, categoryNameToAdd);
-            }
-
-            if (!this.products.ContainsKey(productToAdd))
-            {
-                return string.Format(ProductDoesNotExist, productToAdd);
-            }
-
-            var category = this.categories[categoryNameToAdd];
-            var product = this.products[productToAdd];
-
-            category.AddProduct(product);
-
-            return string.Format(ProductAddedToCategory, productToAdd, categoryNameToAdd);
-        }
-
-        private string RemoveCategory(string categoryNameToAdd, string productToRemove)
-        {
-            if (!this.categories.ContainsKey(categoryNameToAdd))
-            {
-                return string.Format(CategoryDoesNotExist, categoryNameToAdd);
-            }
-
-            if (!this.products.ContainsKey(productToRemove))
-            {
-                return string.Format(ProductDoesNotExist, productToRemove);
-            }
-
-            var category = this.categories[categoryNameToAdd];
-            var product = this.products[productToRemove];
-
-            category.RemoveProduct(product);
-
-            return string.Format(ProductRemovedCategory, productToRemove, categoryNameToAdd);
-        }
-
-        private string ShowCategory(string categoryToShow)
-        {
-            if (!this.categories.ContainsKey(categoryToShow))
-            {
-                return string.Format(CategoryDoesNotExist, categoryToShow);
-            }
-
-            var category = this.categories[categoryToShow];
-
-            return category.Print();
-        }
-
-        private string CreateShampoo(string shampooName, string shampooBrand, decimal shampooPrice, GenderType shampooGender, uint shampooMilliliters, UsageType shampooUsage)
-        {
-            if (this.products.ContainsKey(shampooName))
-            {
-                return string.Format(ShampooAlreadyExist, shampooName);
-            }
-
-            var shampoo = this.factory.CreateShampoo(shampooName, shampooBrand, shampooPrice, shampooGender, shampooMilliliters, shampooUsage);
-            this.products.Add(shampooName, shampoo);
-
-            return string.Format(ShampooCreated, shampooName);
-        }
-
-        private string CreateToothpaste(string toothpasteName, string toothpasteBrand, decimal toothpastePrice, GenderType toothpasteGender, IList<string> toothpasteIngredients)
-        {
-            if (this.products.ContainsKey(toothpasteName))
-            {
-                return string.Format(ToothpasteAlreadyExist, toothpasteName);
-            }
-
-            var toothpaste = this.factory.CreateToothpaste(toothpasteName, toothpasteBrand, toothpastePrice, toothpasteGender, toothpasteIngredients);
-            this.products.Add(toothpasteName, toothpaste);
-
-            return string.Format(ToothpasteCreated, toothpasteName);
-        }
-
-        private string AddToShoppingCart(string productName)
-        {
-            if (!this.products.ContainsKey(productName))
-            {
-                return string.Format(ProductDoesNotExist, productName);
-            }
-
-            var product = this.products[productName];
-            this.shoppingCart.AddProduct(product);
-
-            return string.Format(ProductAddedToShoppingCart, productName);
-        }
-
-        private string RemoveFromShoppingCart(string productName)
-        {
-            if (!this.products.ContainsKey(productName))
-            {
-                return string.Format(ProductDoesNotExist, productName);
-            }
-
-            var product = this.products[productName];
-
-            if (!this.shoppingCart.ContainsProduct(product))
-            {
-                return string.Format(ProductDoesNotExistInShoppingCart, productName);
-            }
-
-            this.shoppingCart.RemoveProduct(product);
-
-            return string.Format(ProductRemovedFromShoppingCart, productName);
-        }
-
-        private GenderType GetGender(string genderAsString)
-        {
-            switch (genderAsString)
-            {
-                case "men":
-                    return GenderType.Men;
-                case "women":
-                    return GenderType.Women;
-                case "unisex":
-                    return GenderType.Unisex;
-                default:
-                    throw new InvalidOperationException(InvalidGenderType);
-            }
-        }
-
-        private UsageType GetUsage(string usageAsString)
-        {
-            switch (usageAsString)
-            {
-                case "everyday":
-                    return UsageType.EveryDay;
-                case "medical":
-                    return UsageType.Medical;
-                default:
-                    throw new InvalidOperationException(InvalidUsageType);
-            }
-        }
     }
 }
