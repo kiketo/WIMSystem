@@ -6,6 +6,7 @@ namespace WIMSystem.Models.Contracts
 {
     interface IMembersCollection
     {
-        IDictionary<string, IMember> membersCollection();
+        IDictionary<string, IMember> Members { get; }
+        
     }
 }
