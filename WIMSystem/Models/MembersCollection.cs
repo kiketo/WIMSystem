@@ -5,7 +5,7 @@ using WIMSystem.Models.Contracts;
 
 namespace WIMSystem.Models
 {
-    class MembersCollection : IMembersCollection
+    public class MembersCollection : IMembersCollection
     {
         // The single instance
         private static IDictionary<string, IMember> members;
