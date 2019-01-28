@@ -2,6 +2,7 @@
 {
     public enum BugStatusType
     {
-
+        Active,
+        Fixed
     }
 }

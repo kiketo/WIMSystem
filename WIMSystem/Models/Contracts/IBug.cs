@@ -6,13 +6,11 @@ using WIMSystem.Models.Enums;
 
 namespace WIMSystem.Models.Contracts
 {
-    public interface IBug
+    public interface IBug: IAssignableWorkItem
     {
-        IList<string> stepsToReproduce { get; set; }
+        IList<string> StepsToReproduce { get;}
         PriorityType Priority { get; set; }
-        SeverityType Severity { get; set; }
-        BugStatusType bugStatus { get; set; }
-        Member Assignee { get; set; }
+        BugSeverityType Severity { get; set; }
+        BugStatusType BugStatus { get; set; }
     }
-
 }

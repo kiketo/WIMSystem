@@ -6,9 +6,9 @@ using WIMSystem.Models.Enums;
 
 namespace WIMSystem.Models.Contracts
 {
-    public interface IFeedback
+    public interface IFeedback : IWorkItem
     {
         int Rating { get; set; }
-        FeedbackStatusType feedbackStatus { get; set; }
+        FeedbackStatusType FeedbackStatus { get; set; }
     }
 }
