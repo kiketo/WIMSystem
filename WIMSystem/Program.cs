@@ -9,9 +9,6 @@ namespace WIMSystem
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-
-            IBug asdasd = new Bug();
-            asdasd.AddComment
         }
     }
 }

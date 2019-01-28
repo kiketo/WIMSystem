@@ -10,7 +10,6 @@ namespace WIMSystem.Models
     public class Feedback : WorkItem, IFeedback
     {
         private int rating;
-        //private FeedbackStatusType feedbackStatus;
 
         public Feedback(string title, string description, int rating) 
             :base (title,description)
