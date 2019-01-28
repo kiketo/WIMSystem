@@ -37,5 +37,14 @@ namespace WIMSystem.Models
             this.membersList.Add(newMember.MemberName, newMember);
         }
 
+
+        public IMember this[string index]
+        {
+            get => this.membersList[index];
+            private set
+            {
+                this.membersList[index] = value;
+            }
+        }
     }
 }

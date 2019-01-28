@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WIMSystem.Models.Contracts
 {
-    interface INameble
+    public interface INameble
     {
         string Name { get; set; }
     }

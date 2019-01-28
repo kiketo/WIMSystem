@@ -5,7 +5,7 @@ using WIMSystem.Models.Contracts;
 
 namespace WIMSystem.Models
 {
-    public class DictionaryContainer<T> : IEnumerable<T>, IWIMTeams
+    public class DictionaryContainer<T> : IEnumerable<T> where T:INameble
     {
         private IDictionary<string, T> containerList;
 
@@ -14,7 +14,7 @@ namespace WIMSystem.Models
             get => new Dictionary<string, T>(containerList);
         }
 
-        public IEnumerator<Contracts.T> GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
             foreach (var item in this.containerList)
             {
@@ -22,9 +22,13 @@ namespace WIMSystem.Models
             }
         }
 
-        public void AddTeam(Contracts.T newTeam)
+        public void AddTeam(T newItem)
         {
-            this.containerList.Add(newTeam.TeamName, newTeam);
+            if (this.containerList.ContainsKey(newItem.Name))
+            {
+                throw new ArgumentException($"{nameof(T)} with that name exist!");
+            }
+            this.containerList.Add(newItem.Name, newItem);
         }
 
         public T this[string index]
@@ -36,9 +40,9 @@ namespace WIMSystem.Models
             }
         }
 
-        public void RemoveTeam(Contracts.T removeTeam)
+        public void RemoveTeam(T removeItem)
         {
-            RemoveTeam(removeTeam.TeamName);
+            RemoveTeam(removeItem.Name);
         }
 
 
