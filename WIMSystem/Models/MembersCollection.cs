@@ -15,7 +15,7 @@ namespace WIMSystem.Models
             members = new Dictionary<string, IMember>();
 
         }
-        private MembersCollection() { }
+        //private MembersCollection() { }
 
 
         public IDictionary<string, IMember> Members

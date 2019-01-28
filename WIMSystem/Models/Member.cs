@@ -12,10 +12,10 @@ namespace WIMSystem.Models
         private IList<IWorkItem> memberWorkItem;
         #endregion
         #region Ctor
-        public Member(string memberName, IList<IWorkItem> memberWorkItem)
+        public Member(string memberName)//, IList<IWorkItem> memberWorkItem)
         {
             this.MemberName = memberName;
-            this.MemberWorkItems = memberWorkItem;
+            //this.MemberWorkItems = memberWorkItem;
         }
         #endregion
         #region Prop
@@ -33,6 +33,9 @@ namespace WIMSystem.Models
                     throw new ArgumentOutOfRangeException("Members name should be between 5 and 15 symbols.");
                 }
                 //Name should be unique in the application
+
+
+
                 this.memberName = value;
             }
         }
