@@ -15,8 +15,8 @@ namespace WIMSystem.Models
         
 
         public Story(string title, string description, PriorityType priority,
-            StorySizeType storySize, IMember assignee=null) //assignee is optional?
-            : base(title, description,assignee)
+            StorySizeType storySize, IBoard board, IMember assignee=null) //assignee is optional?
+            : base(title, description,board,assignee)
         {
             this.Priority = priority;
             this.StorySize = storySize;

@@ -11,8 +11,8 @@ namespace WIMSystem.Models
     {
         private int rating;
 
-        public Feedback(string title, string description, int rating) 
-            :base (title,description)
+        public Feedback(string title, string description, int rating, IBoard board) 
+            :base (title,description,board)
         {
             this.Rating = rating;
             this.FeedbackStatus = FeedbackStatusType.Unscheduled;

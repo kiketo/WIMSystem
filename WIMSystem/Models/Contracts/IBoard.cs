@@ -6,7 +6,8 @@ namespace WIMSystem.Models.Contracts
 {
     public interface IBoard
     {
-        string BoardName { get; set; }
-        IList<IWorkItem> BoardWorkItems { get; }
+        string BoardName { get; }
+        ITeam Team { get; }
+        IDictionary<string,IWorkItem> BoardWorkItems { get; }
     }
 }

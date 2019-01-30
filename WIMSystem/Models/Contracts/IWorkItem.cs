@@ -9,6 +9,7 @@ namespace WIMSystem.Models.Contracts
         int ID { get; }
         string Title { get; set; }
         string Description { get; set; }
+        IBoard Board { get; }
         IList<Comment> ListOfComments { get; }
         IList<HistoryItem> ListOfHistoryItems { get; }
 

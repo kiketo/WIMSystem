@@ -9,8 +9,8 @@ namespace WIMSystem.Models.Abstract
     {
         IMember assignee;
 
-        public AssignableWorkItem(string title, string description, IMember assignee = null)
-            :base (title,description)
+        public AssignableWorkItem(string title, string description, IBoard board, IMember assignee = null)
+            :base (title,description,board)
         {
             this.Assignee = assignee;
         }

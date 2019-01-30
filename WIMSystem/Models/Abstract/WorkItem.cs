@@ -11,18 +11,19 @@ namespace WIMSystem.Models.Abstract
         private int id;
         private string title;
         private string description;
-        private IList<Comment> listOfComments;
-        private IList<HistoryItem> listOfHistoryItems;
+        private IBoard board;
+        private IList<IComment> listOfComments;
+        private IList<IHistoryItem> listOfHistoryItems;
 
-        public WorkItem(string title, string description)
+        public WorkItem(string title, string description,IBoard board)
         {
             this.id = IDProvider.GenerateUniqueID();
             this.Title = title;
             this.Description = description;
-            listOfComments = new List<Comment>();
-            listOfHistoryItems = new List<HistoryItem>();
+            this.Board = board;
+            listOfComments = new List<IComment>();
+            listOfHistoryItems = new List<IHistoryItem>();
         }
-
 
         public int ID
         {
@@ -50,11 +51,16 @@ namespace WIMSystem.Models.Abstract
                 {
                     throw new ArgumentOutOfRangeException("Title", "Title should be more than 10 and lesser than 50 characters long!");
                 }
-
-                this.title = value;
+                if (board.BoardWorkItems.ContainsKey(value)) //
+                {
+                    Console.WriteLine($"This board already contains Work Item with name {value}!");
+                }
+                else
+                {
+                    this.title = value;
+                }
             }
         }
-
 
         public string Description
         {
@@ -82,6 +88,22 @@ namespace WIMSystem.Models.Abstract
         public IList<Comment> ListOfComments { get; }
 
         public IList<HistoryItem> ListOfHistoryItems { get; }
+
+        public IBoard Board
+        {
+            get
+            {
+                return this.board;
+            }
+            private set
+            {
+                if(value==null)
+                {
+                    throw new ArgumentNullException("board", "Board cannot be null!");
+                }
+                this.board = value;
+            }
+        }
 
         public void AddComment(Comment comment)
         {

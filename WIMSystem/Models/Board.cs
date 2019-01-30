@@ -8,12 +8,14 @@ namespace WIMSystem.Models
     public class Board : IBoard
     {
         private string boardName;
-        private IList<IWorkItem> boardWorkItems;
+        private IDictionary<string,IWorkItem> boardWorkItems;
+        private ITeam team;
 
-        public Board(string boardName, IList<IWorkItem> boardWorkItems)
+        public Board(string boardName, ITeam team)
         {
             this.BoardName = boardName;
-            this.BoardWorkItems = boardWorkItems;
+            boardWorkItems = new Dictionary<string, IWorkItem>();
+            this.Team = team;
         }
 
         public string BoardName
@@ -22,29 +24,49 @@ namespace WIMSystem.Models
             {
                 return this.boardName;
             }
-            set
+            private set
             {
                 if (value.Length<5||value.Length>10)
                 {
                     throw new ArgumentOutOfRangeException("Board name should be between 5 and 10 symbols.");
                 }
-
                 //Board name should be unique in the team
-                this.boardName = value;
+                if (team.BoardList.ContainsKey(value))
+                {
+                    Console.WriteLine("Board with the same name already exists in the current Team.");
+                }
+                else
+                {
+                    this.boardName = value;
+                }
             }
         }
 
-        public IList<IWorkItem> BoardWorkItems
+        public IDictionary<string,IWorkItem> BoardWorkItems
         {
             get
             {
-                IList<IWorkItem> workItems = this.boardWorkItems;
-                return workItems;
-            }
-            set
-            {
-                this.boardWorkItems = value;
+                return new Dictionary<string, IWorkItem>(this.boardWorkItems);
             }
         }
+
+        public ITeam Team
+        {
+            get
+            {
+                return this.team;
+            }
+            private set
+            {
+                if(value==null)
+                {
+                    throw new ArgumentNullException("team", "Team cannot be null!");
+                }
+                this.team = value;
+            }
+        }
+
+
+        
     }
 }
