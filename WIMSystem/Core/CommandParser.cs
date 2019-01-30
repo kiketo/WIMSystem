@@ -21,7 +21,6 @@ namespace WIMSystem.Core
                 commands.Add(currentCommand);
 
                 currentLine = Console.ReadLine();
-
             }
 
             return commands;

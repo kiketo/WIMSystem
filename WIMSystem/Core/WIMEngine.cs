@@ -42,8 +42,6 @@
             this.PrintReports(commandResult);
         }
 
-       
-
         private IList<string> ProcessCommands(IList<ICommand> commands)
         {
             var reports = new List<string>();
