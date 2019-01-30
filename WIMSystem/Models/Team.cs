@@ -10,16 +10,16 @@ namespace WIMSystem.Models
         #region Fields
         private string teamName;
         private IList<IMember> memberList;
-        private IDictionary<string,IBoard> boardList;
+        private IDictionary<string, IBoard> boardList;
+        private IWIMTeams teamsList;
+
         #endregion
         #region Ctor
-        public Team(string teamName)//, IList<IMember> memberList, IDictionary<string, IBoard> boardList)
+        public Team(string teamName, IWIMTeams teamsList)
         {
             this.TeamName = teamName;
-            //this.MemberList = new List<IMember>();
-            //this.MemberList = memberList;
-            //this.BoardList = new Dictionary<string, IBoard>();
-            //this.BoardList = boardList;
+            this.teamsList = teamsList;
+            memberList = new List<IMember>();
         }
         #endregion
         #region Prop
@@ -30,15 +30,21 @@ namespace WIMSystem.Models
             {
                 return this.teamName;
             }
-            set
+
+            private set
             {
                 if (value.Length < 5 || value.Length > 15)
                 {
                     throw new ArgumentOutOfRangeException("Teams name should be between 5 and 15 symbols.");
                 }
-
-                this.teamName = value;
-
+                if (teamsList.Contains(value))
+                {
+                    Console.WriteLine("I Tova trqbva da se opravi");
+                }
+                else
+                {
+                    this.teamName = value;
+                }
             }
         }
 
@@ -48,33 +54,44 @@ namespace WIMSystem.Models
             {
                 return this.memberList;
             }
-            set
-            {
-                this.MemberList = value;
-            }
         }
 
-        public IDictionary<string,IBoard> BoardList
+        public IDictionary<string, IBoard> BoardList
         {
             get
             {
-                return this.boardList;
+                return new Dictionary<string,IBoard>(this.boardList);
             }
-            set
-            {
-                this.boardList = value;
-            }
+
         }
         #endregion
         #region Methods
-        public void AddMember ()
+        public void AddMemberToTeam(IMember member)
         {
+            if (member == null)
+            {
+                throw new ArgumentNullException("member", "Member cannot be null!");
+            }
 
+            if (memberList.Contains(member))
+            {
+                Console.WriteLine($"This team already has {member.MemberName}");
+            }
+
+            else
+            {
+                memberList.Add(member);
+            }
         }
 
-        public void AddBoard()
+        public void AddBoard(IBoard board)
         {
+            if (board == null)
+            {
+                throw new ArgumentNullException("board", "Board cannot be null!");
+            }
 
+            this.boardList.Add(board.BoardName,board);
         }
 
         #endregion

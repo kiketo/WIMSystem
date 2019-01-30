@@ -10,12 +10,12 @@ namespace WIMSystem.Models.Contracts
         string Title { get; set; }
         string Description { get; set; }
         IBoard Board { get; }
-        IList<Comment> ListOfComments { get; }
-        IList<HistoryItem> ListOfHistoryItems { get; }
+        IList<IComment> ListOfComments { get; }
+        IList<IHistoryItem> ListOfHistoryItems { get; }
 
-        void AddComment(Comment comment);
+        void AddComment(IComment comment);
 
-        void AddHistoryItem(HistoryItem history);
+        void AddHistoryItem(IHistoryItem history);
         
     }
 }

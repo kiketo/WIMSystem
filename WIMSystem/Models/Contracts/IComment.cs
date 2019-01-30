@@ -7,6 +7,6 @@ namespace WIMSystem.Models.Contracts
     public interface IComment
     {
         string Message { get; }
-        Member Author { get; }
+        IMember Author { get; }
     }
 }

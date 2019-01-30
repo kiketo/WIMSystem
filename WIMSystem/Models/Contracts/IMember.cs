@@ -6,7 +6,7 @@ namespace WIMSystem.Models.Contracts
 {
     public interface IMember
     {
-        string MemberName { get; set; }
+        string MemberName { get; }
         IList<IWorkItem> MemberWorkItems { get; }
     }
 }

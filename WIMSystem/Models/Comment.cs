@@ -8,9 +8,9 @@ namespace WIMSystem.Models
     public class Comment : IComment
     {
         private string message;
-        private Member author;
+        private IMember author;
 
-        public Comment(string message, Member author)
+        public Comment(string message, IMember author)
         {
             if(string.IsNullOrEmpty(message))
             {
@@ -32,7 +32,7 @@ namespace WIMSystem.Models
             }
         }
 
-        public Member Author
+        public IMember Author
         {
             get
             {

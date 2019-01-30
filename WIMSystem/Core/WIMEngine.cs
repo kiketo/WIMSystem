@@ -69,49 +69,69 @@
             switch (command.Name)
             {
                 case "CreateTeam":
-                    var teamName = command.Parameters[0];
-                    return this.CreateTeam(teamName);
+                    {
+                        var teamName = command.Parameters[0];
+                        return this.CreateTeam(teamName);
+                    }
+                    
                 case "CreateMember":
-                    var memberName = command.Parameters[0];
-                    return this.CreateMember(memberName);
+                    {
+                        var memberName = command.Parameters[0];
+                        return this.CreateMember(memberName);
+                    }
+                    
                 case "CreateBoard":
-                    var boardName = command.Parameters[0];
-                    return this.CreateBoard(boardName);
+                    {
+                        var boardName = command.Parameters[0];
+                        var teamName = command.Parameters[1];
+                        return this.CreateBoard(boardName);
+                    }
+                    
 
-                case "AddToTeam":
-                    var teamNameToAdd = command.Parameters[0];
-                    var memberNameForAdding = command.Parameters[1];
-                    return this.AddToTeam(teamNameToAdd,memberNameForAdding);
+                case "AddMemberToTeam":
+                    {
+                        var teamNameToAdd = command.Parameters[0];
+                        var memberNameForAdding = command.Parameters[1];
+                        return this.AddToTeam(teamNameToAdd, memberNameForAdding);
+                    }
 
-                case "RemoveFromTeam":
-                    var teamNameToRemove = command.Parameters[0];
-                    var memberNameForRemoving = command.Parameters[1];
-                    return this.RemoveFromTeam(teamNameToRemove, memberNameForRemoving);
+                case "RemoveMemberFromTeam":
+                    {
+                        var teamNameToRemove = command.Parameters[0];
+                        var memberNameForRemoving = command.Parameters[1];
+                        return this.RemoveFromTeam(teamNameToRemove, memberNameForRemoving);
+                    }
 
                 case "CreateBug":
-                    var bugTitle = command.Parameters[0];
-                    var bugDescription = command.Parameters[1];
-                    var stepsToReproduce = command.Parameters[2].Trim().Split(SPLIT_CHAR).ToList();
-                    var bugPriority = StringToEnum<PriorityType>.Convert(command.Parameters[3]);
-                    var bugSeverity = StringToEnum<BugSeverityType>.Convert(command.Parameters[4]);
-                    var bugAssignee = this.GetMember(command.Parameters[5]);
-                    var bugComments = command.Parameters[6].Trim().Split(SPLIT_CHAR).ToList();
-                    return this.CreateBug(bugTitle,bugDescription,stepsToReproduce,bugPriority,bugSeverity,bugAssignee,bugComments);
+                    {
+                        var bugTitle = command.Parameters[0];
+                        var bugDescription = command.Parameters[1];
+                        var stepsToReproduce = command.Parameters[2].Trim().Split(SPLIT_CHAR).ToList();
+                        var bugPriority = StringToEnum<PriorityType>.Convert(command.Parameters[3]);
+                        var bugSeverity = StringToEnum<BugSeverityType>.Convert(command.Parameters[4]);
+                        var bugAssignee = this.GetMember(command.Parameters[5]);
+                        var bugComments = command.Parameters[6].Trim().Split(SPLIT_CHAR).ToList();
+                        return this.CreateBug(bugTitle, bugDescription, stepsToReproduce, bugPriority, bugSeverity, bugAssignee, bugComments);
+                    }
 
                 case "CreateStory":
-                    var storyTitle = command.Parameters[0];
-                    var storyDescription = command.Parameters[1];
-                    var storyPriority = StringToEnum<PriorityType>.Convert(command.Parameters[3]);
-                    var storySize = StringToEnum<StorySizeType>.Convert(command.Parameters[4]);
-                    var storyAssignee = this.GetMember(command.Parameters[5]);
-                    var storyComments = command.Parameters[6].Trim().Split(SPLIT_CHAR).ToList();
-                    return this.CreateStory(storyTitle,storyDescription,storyPriority,storySize,storyAssignee,storyComments);
+                    {
+                        var storyTitle = command.Parameters[0];
+                        var storyDescription = command.Parameters[1];
+                        var storyPriority = StringToEnum<PriorityType>.Convert(command.Parameters[3]);
+                        var storySize = StringToEnum<StorySizeType>.Convert(command.Parameters[4]);
+                        var storyAssignee = this.GetMember(command.Parameters[5]);
+                        var storyComments = command.Parameters[6].Trim().Split(SPLIT_CHAR).ToList();
+                        return this.CreateStory(storyTitle, storyDescription, storyPriority, storySize, storyAssignee, storyComments);
+                    }
 
                 case "CreateFeedback":
-                    var feedbackTitle = command.Parameters[0];
-                    var feedbackDescription = command.Parameters[1];
-                    var feedbackComments = command.Parameters[6].Trim().Split(SPLIT_CHAR).ToList();
-                    return this.CreateFeedback(feedbackTitle,feedbackDescription,feedbackComments);
+                    {
+                        var feedbackTitle = command.Parameters[0];
+                        var feedbackDescription = command.Parameters[1];
+                        var feedbackComments = command.Parameters[6].Trim().Split(SPLIT_CHAR).ToList();
+                        return this.CreateFeedback(feedbackTitle, feedbackDescription, feedbackComments);
+                    }
 
                 default:
                     return string.Format(InvalidCommand, command.Name);

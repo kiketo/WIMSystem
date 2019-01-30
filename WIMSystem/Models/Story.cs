@@ -7,7 +7,7 @@ using WIMSystem.Models.Enums;
 
 namespace WIMSystem.Models
 {
-    public class Story : AssignableWorkItem, IStory
+    public class Story : AssignableWorkItem, IStory, IAssignableWorkItem, IWorkItem
     {
         private PriorityType priority;
         private StorySizeType storySize;

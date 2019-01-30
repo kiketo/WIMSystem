@@ -25,7 +25,6 @@ namespace WIMSystem.Models
             get => this.description;
             set
             {
-
                 this.description = value;
             }
         }

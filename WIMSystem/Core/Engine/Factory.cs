@@ -32,9 +32,9 @@ namespace WIMSystem.Core
             return new Feedback(title, description, rating, feedbackStatus);
         }
 
-        public HistoryItem CreateHistoryItem(string description, DateTime creationDate, IMember member, IBoard board, ITeam team)
+        public HistoryItem CreateHistoryItem(string description, IMember member, IBoard board, ITeam team)
         {
-            return new HistoryItem(description, creationDate, member, board, team);
+            return new HistoryItem(description, DateTime.Now, member, board, team);
         }
 
         public Member CreateMember(string memberName, IList<IWorkItem> memberWorkItems)
@@ -45,6 +45,11 @@ namespace WIMSystem.Core
         public Team CreateTeam(string name, IList<IMember> membersList, IList<IBoard> boardsList)
         {
             return new Team(name, membersList, boardsList);
+        }
+
+        public Comment CreateComment(string message, IMember author)
+        {
+            return new Comment(message, author);
         }
     }
 }

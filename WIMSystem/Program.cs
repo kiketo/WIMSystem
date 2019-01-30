@@ -10,10 +10,6 @@ namespace WIMSystem
         {
             Console.WriteLine("Hello World!");
 
-            var membersList = new MembersCollection();
-            var membersList2 = new MembersCollection();
-            
-
         }
     }
 }

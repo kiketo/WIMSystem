@@ -37,6 +37,10 @@ namespace WIMSystem.Models
             this.membersList.Add(newMember.MemberName, newMember);
         }
 
+        public bool Contains(string name)
+        {
+            return membersList.ContainsKey(name);
+        }
 
         public IMember this[string index]
         {

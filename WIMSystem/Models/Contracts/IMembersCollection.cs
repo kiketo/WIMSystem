@@ -8,6 +8,7 @@ namespace WIMSystem.Models.Contracts
     {
         IDictionary<string, IMember> Members { get; }
         void AddMember(IMember newMember);
+        bool Contains(string name);
         IMember this[string index] { get; }
     }
 }

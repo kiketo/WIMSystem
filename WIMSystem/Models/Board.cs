@@ -16,6 +16,7 @@ namespace WIMSystem.Models
             this.BoardName = boardName;
             boardWorkItems = new Dictionary<string, IWorkItem>();
             this.Team = team;
+
         }
 
         public string BoardName
@@ -38,6 +39,7 @@ namespace WIMSystem.Models
                 else
                 {
                     this.boardName = value;
+
                 }
             }
         }

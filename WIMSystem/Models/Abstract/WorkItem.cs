@@ -85,9 +85,9 @@ namespace WIMSystem.Models.Abstract
             }
         }
 
-        public IList<Comment> ListOfComments { get; }
+        public IList<IComment> ListOfComments { get; }
 
-        public IList<HistoryItem> ListOfHistoryItems { get; }
+        public IList<IHistoryItem> ListOfHistoryItems { get; }
 
         public IBoard Board
         {
@@ -105,7 +105,7 @@ namespace WIMSystem.Models.Abstract
             }
         }
 
-        public void AddComment(Comment comment)
+        public void AddComment(IComment comment)
         {
             if(comment==null)
             {
@@ -115,7 +115,7 @@ namespace WIMSystem.Models.Abstract
             listOfComments.Add(comment);
         }
 
-        public void AddHistoryItem(HistoryItem history)
+        public void AddHistoryItem(IHistoryItem history)
         {
             if(history == null)
             {
