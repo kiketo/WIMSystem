@@ -86,7 +86,6 @@
                         var teamName = command.Parameters[1];
                         return this.CreateBoard(boardName);
                     }
-                    
 
                 case "AddMemberToTeam":
                     {
@@ -145,7 +144,7 @@
                 return string.Format(ObjectExists, nameof(Team),teamName);
             }
 
-            var team = this.factory.CreateTeam(teamName,null,null);
+            var team = this.factory.CreateTeam(teamName,null);
             wimTeams.AddTeam(team);
 
             return string.Format(ObjectCreated, nameof(Team),teamName);

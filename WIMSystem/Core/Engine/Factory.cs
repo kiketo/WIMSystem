@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using WIMSystem.Core.Contracts;
-
 using WIMSystem.Models;
 using WIMSystem.Models.Contracts;
 using WIMSystem.Models.Abstract;
@@ -12,44 +11,45 @@ namespace WIMSystem.Core
 {
     public class Factory : IFactory
     {
-        public Board CreateBoard(string name, IList<IWorkItem> workItems)
+        public ITeam CreateTeam(string teamName, IWIMTeams teamsList)
         {
-            return new Board(name, workItems);
+            return new Team(teamName,teamsList);
         }
 
-        public Bug CreateBug(string title, string description, IList<string> stepsToReproduce, PriorityType priority, BugSeverityType severity, BugStatusType bugStatus, IMember assignee = null)
+        public IMember CreateMember(string memberName, IMembersCollection membersCollection)
         {
-            return new Bug(title, description, stepsToReproduce, priority, severity, bugStatus);
+            return new Member(memberName, membersCollection);
         }
 
-        public Comment CreateComment(string message, Member author)
+        public IBoard CreateBoard(string name, ITeam team)
+        {
+            return new Board(name,team);
+        }
+
+        public IBug CreateBug(string title, string description, IList<string> stepsToReproduce, PriorityType priority, BugSeverityType severity,IBoard board, IMember assignee = null)
+        {
+            return new Bug(title, description, stepsToReproduce, priority, severity,board);
+        }
+
+        public IFeedback CreateFeedback(string title, string description, int rating, IBoard board)
+        {
+            return new Feedback(title, description, rating, board);
+        }
+
+        public IStory CreateStory(string title, string description, PriorityType priority,
+            StorySizeType storySize, IBoard board, IMember assignee = null)
+        {
+            return new Story(title, description,priority,storySize,board);
+        }
+
+        public IComment CreateComment(string message, IMember author)
         {
             return new Comment(message, author);
         }
 
-        public Feedback CreateFeedback(string title, string description, int rating, FeedbackStatusType feedbackStatus)
-        {
-            return new Feedback(title, description, rating, feedbackStatus);
-        }
-
-        public HistoryItem CreateHistoryItem(string description, IMember member, IBoard board, ITeam team)
+        public IHistoryItem CreateHistoryItem(string description, IMember member, IBoard board, ITeam team)
         {
             return new HistoryItem(description, DateTime.Now, member, board, team);
-        }
-
-        public Member CreateMember(string memberName, IList<IWorkItem> memberWorkItems)
-        {
-            return new Member(memberName, memberWorkItems);
-        }
-
-        public Team CreateTeam(string name, IList<IMember> membersList, IList<IBoard> boardsList)
-        {
-            return new Team(name, membersList, boardsList);
-        }
-
-        public Comment CreateComment(string message, IMember author)
-        {
-            return new Comment(message, author);
         }
     }
 }
