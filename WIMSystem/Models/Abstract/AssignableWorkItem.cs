@@ -7,8 +7,6 @@ namespace WIMSystem.Models.Abstract
 {
     public abstract class AssignableWorkItem : WorkItem
     {
-        IMember assignee;
-
         public AssignableWorkItem(string title, string description, IBoard board, IMember assignee = null)
             :base (title,description,board)
         {

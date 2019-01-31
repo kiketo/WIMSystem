@@ -9,11 +9,6 @@ namespace WIMSystem.Models
 {
     public class Story : AssignableWorkItem, IStory, IAssignableWorkItem, IWorkItem
     {
-        private PriorityType priority;
-        private StorySizeType storySize;
-        private StoryStatusType storyStatus;
-        
-
         public Story(string title, string description, PriorityType priority,
             StorySizeType storySize, IBoard board, IMember assignee=null) //assignee is optional?
             : base(title, description,board,assignee)

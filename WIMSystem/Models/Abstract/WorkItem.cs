@@ -15,7 +15,7 @@ namespace WIMSystem.Models.Abstract
         private IList<IComment> listOfComments;
         private IList<IHistoryItem> listOfHistoryItems;
 
-        public WorkItem(string title, string description,IBoard board)
+        public WorkItem(string title, string description, IBoard board)
         {
             this.id = IDProvider.GenerateUniqueID();
             this.Title = title;
@@ -40,7 +40,7 @@ namespace WIMSystem.Models.Abstract
                 return this.title;
             }
 
-            set
+            private set
             {
                 if (string.IsNullOrEmpty(value))
                 {
@@ -69,7 +69,7 @@ namespace WIMSystem.Models.Abstract
                 return this.description;
             }
 
-            set
+            private set
             {
                 if (string.IsNullOrEmpty(value))
                 {
@@ -97,7 +97,7 @@ namespace WIMSystem.Models.Abstract
             }
             private set
             {
-                if(value==null)
+                if (value == null)
                 {
                     throw new ArgumentNullException("board", "Board cannot be null!");
                 }
@@ -107,7 +107,7 @@ namespace WIMSystem.Models.Abstract
 
         public void AddComment(IComment comment)
         {
-            if(comment==null)
+            if (comment == null)
             {
                 throw new ArgumentNullException("Comment", "Comment cannot be empty!");
             }
@@ -117,7 +117,7 @@ namespace WIMSystem.Models.Abstract
 
         public void AddHistoryItem(IHistoryItem history)
         {
-            if(history == null)
+            if (history == null)
             {
                 throw new ArgumentNullException("History");
             }
