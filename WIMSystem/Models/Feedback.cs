@@ -9,8 +9,6 @@ namespace WIMSystem.Models
 {
     public class Feedback : WorkItem, IFeedback
     {
-        private int rating;
-
         public Feedback(string title, string description, int rating, IBoard board) 
             :base (title,description,board)
         {
