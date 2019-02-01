@@ -1,10 +1,10 @@
-﻿namespace WIMSystem.Core
-{
-    using System;
+﻿    using System;
     using System.Collections.Generic;
 
     using WIMSystem.Core.Contracts;
 
+namespace WIMSystem.Core
+{
     internal class Command : ICommand
     {
         private const char SplitCommandSymbol = ' ';

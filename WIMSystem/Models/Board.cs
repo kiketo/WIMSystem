@@ -68,7 +68,10 @@ namespace WIMSystem.Models
             }
         }
 
+        public void AddWorkItemToBoard(IWorkItem workItem)
+        {
+            throw new NotImplementedException();
+        }
 
-        
     }
 }

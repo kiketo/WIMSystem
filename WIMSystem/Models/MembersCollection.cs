@@ -9,7 +9,7 @@ namespace WIMSystem.Models
     {
         // The single instance
         private readonly IDictionary<string, IMember> membersList;
-        private static MembersCollection instance;
+        private static IMembersCollection instance;
 
         static MembersCollection()
         {
@@ -18,6 +18,11 @@ namespace WIMSystem.Models
         private MembersCollection()
         {
             this.membersList = new Dictionary<string, IMember>();
+        }
+
+        public static IMembersCollection Instance
+        {
+            get { return instance; }
         }
 
         public IDictionary<string, IMember> Members

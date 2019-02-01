@@ -19,7 +19,8 @@ namespace WIMSystem.Models
         {
             this.TeamName = teamName;
             this.teamsList = teamsList;
-            memberList = new List<IMember>();
+            this.memberList = new List<IMember>();
+            this.boardList = new Dictionary<string, IBoard>();
         }
         #endregion
         #region Prop
@@ -37,7 +38,7 @@ namespace WIMSystem.Models
                 {
                     throw new ArgumentOutOfRangeException("Teams name should be between 5 and 15 symbols.");
                 }
-                if (teamsList.Contains(value))
+                if (this.teamsList.Contains(value))
                 {
                     Console.WriteLine("I Tova trqbva da se opravi");
                 }
@@ -60,7 +61,7 @@ namespace WIMSystem.Models
         {
             get
             {
-                return new Dictionary<string,IBoard>(this.boardList);
+                return new Dictionary<string, IBoard>(this.boardList);
             }
 
         }
@@ -70,28 +71,76 @@ namespace WIMSystem.Models
         {
             if (member == null)
             {
-                throw new ArgumentNullException("member", "Member cannot be null!");
+                throw new ArgumentException("Member cannot be null!");
             }
 
-            if (memberList.Contains(member))
+            if (this.memberList.Contains(member))
             {
-                Console.WriteLine($"This team already has {member.MemberName}");
+                throw new ArgumentException($"This team already has {member.MemberName}");
             }
 
             else
             {
-                memberList.Add(member);
+                this.memberList.Add(member);
+                //return $"{member.MemberName} is added to {this.TeamName} member list";
             }
         }
 
-        public void AddBoard(IBoard board)
+        public void RemoveMemberFromTeam(IMember member)
+        {
+            if (member == null)
+            {
+                throw new ArgumentException($"Member can not be null.");
+
+            }
+
+            if (!this.memberList.Contains(member))
+            {
+                throw new ArgumentException($"This team does not has {member.MemberName} member.");
+            }
+
+            else
+            {
+                this.memberList.Remove(member);
+                //return $"{member.MemberName} is removed from {this.TeamName} member list";
+            }
+        }
+
+        public void AddBoardToTeam(IBoard board)
         {
             if (board == null)
             {
-                throw new ArgumentNullException("board", "Board cannot be null!");
+                throw new ArgumentException("Board cannot be null!");
+            }
+            if (this.boardList.ContainsKey(board.BoardName))
+            {
+                throw new ArgumentException($"This team already has {board.BoardName} board");
             }
 
-            this.boardList.Add(board.BoardName,board);
+            else
+            {
+                this.boardList.Add(board.BoardName, board);
+
+                //$"{board.BoardName} is added to {this.TeamName} board list";
+            }
+        }
+
+        public void RemoveBoardFromTeam(IBoard board)
+        {
+            if (board == null)
+            {
+                throw new ArgumentException("Board cannot be null!");
+            }
+            if (!this.boardList.ContainsKey(board.BoardName))
+            {
+                throw new ArgumentException($"This team has  {board.BoardName} board");
+            }
+
+            else
+            {
+                this.boardList.Remove(board.BoardName);
+                //return $"{board.BoardName} is added to {this.TeamName} board list";
+            }
         }
 
         #endregion

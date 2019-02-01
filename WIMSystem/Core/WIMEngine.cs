@@ -1,28 +1,31 @@
-﻿namespace Cosmetics.Engine
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using WIMSystem.Core.Contracts;
+using WIMSystem.Core.Utils;
+using WIMSystem.Models;
+using WIMSystem.Models.Contracts;
+using WIMSystem.Models.Enums;
+
+namespace WIMSystem.Core
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-
-    using WIMSystem.Models.Enums;
-    using WIMSystem.Models;
-    using WIMSystem.Core.Contracts;
-    using WIMSystem.Core.Utils;
-    using WIMSystem.Models.Contracts;
-
     internal class WIMEngine
     {
         private const string InvalidCommand = "Invalid command name: {0}!";
         private const string ObjectExists = "{0} with name {1} already exists!";
         private const string ObjectCreated = "{0} with name {1} was created!";
         private const string ObjectDoesNotExist = "{0} {1} does not exist!";
+        private const string ObjectAddedToTeam = "{0} {1} added to {2} team";
+        private const string ObjectRemovedFromTeam = "{0} {1} removed from {2} team";
+
 
         private const char SPLIT_CHAR = ',';
 
 
         private readonly IFactory factory;
         private readonly IWIMTeams wimTeams;
+
         private readonly IMembersCollection membersList;
         private readonly ICommandParser commandParser;
 
@@ -37,7 +40,7 @@
 
         public void Start()
         {
-            var commands = commandParser.ReadCommands();
+            var commands = this.commandParser.ReadCommands();
             var commandResult = this.ProcessCommands(commands);
             this.PrintReports(commandResult);
         }
@@ -66,37 +69,38 @@
         {
             switch (command.Name)
             {
+
                 case "CreateTeam":
                     {
                         var teamName = command.Parameters[0];
                         return this.CreateTeam(teamName);
                     }
-                    
+
                 case "CreateMember":
                     {
                         var memberName = command.Parameters[0];
                         return this.CreateMember(memberName);
                     }
-                    
+
                 case "CreateBoard":
                     {
                         var boardName = command.Parameters[0];
-                        var teamName = command.Parameters[1];
-                        return this.CreateBoard(boardName);
+                        var team = this.GetTeam(command.Parameters[1]);
+                        return this.CreateBoard(boardName, team);
                     }
 
                 case "AddMemberToTeam":
                     {
-                        var teamNameToAdd = command.Parameters[0];
-                        var memberNameForAdding = command.Parameters[1];
-                        return this.AddToTeam(teamNameToAdd, memberNameForAdding);
+                        var teamToAddTo = this.GetTeam(command.Parameters[0]);
+                        var memberForAdding = this.GetMember(command.Parameters[1]);
+                        return this.AddMemberToTeam(teamToAddTo, memberForAdding);
                     }
 
                 case "RemoveMemberFromTeam":
                     {
-                        var teamNameToRemove = command.Parameters[0];
-                        var memberNameForRemoving = command.Parameters[1];
-                        return this.RemoveFromTeam(teamNameToRemove, memberNameForRemoving);
+                        var teamToRemove = this.GetTeam(command.Parameters[0]);
+                        var memberForRemoving = this.GetMember(command.Parameters[1]);
+                        return this.RemoveMemberFromTeam(teamToRemove, memberForRemoving);
                     }
 
                 case "CreateBug":
@@ -106,9 +110,11 @@
                         var stepsToReproduce = command.Parameters[2].Trim().Split(SPLIT_CHAR).ToList();
                         var bugPriority = StringToEnum<PriorityType>.Convert(command.Parameters[3]);
                         var bugSeverity = StringToEnum<BugSeverityType>.Convert(command.Parameters[4]);
-                        var bugAssignee = this.GetMember(command.Parameters[5]);
-                        var bugComments = command.Parameters[6].Trim().Split(SPLIT_CHAR).ToList();
-                        return this.CreateBug(bugTitle, bugDescription, stepsToReproduce, bugPriority, bugSeverity, bugAssignee, bugComments);
+                        var board = this.GetBoard(command.Parameters[5]);
+                        var bugAssignee = this.GetMember(command.Parameters[6]);
+                        //var bugComments = command.Parameters[6].Trim().Split(SPLIT_CHAR).ToList();
+
+                        return this.CreateBug(bugTitle, bugDescription, stepsToReproduce, bugPriority, bugSeverity, board,bugAssignee);
                     }
 
                 case "CreateStory":
@@ -117,17 +123,20 @@
                         var storyDescription = command.Parameters[1];
                         var storyPriority = StringToEnum<PriorityType>.Convert(command.Parameters[3]);
                         var storySize = StringToEnum<StorySizeType>.Convert(command.Parameters[4]);
-                        var storyAssignee = this.GetMember(command.Parameters[5]);
-                        var storyComments = command.Parameters[6].Trim().Split(SPLIT_CHAR).ToList();
-                        return this.CreateStory(storyTitle, storyDescription, storyPriority, storySize, storyAssignee, storyComments);
+                        var board = this.GetBoard(command.Parameters[5]);
+                        var storyAssignee = this.GetMember(command.Parameters[6]);
+
+                        return this.CreateStory(storyTitle, storyDescription, storyPriority, storySize, board, storyAssignee);
                     }
 
                 case "CreateFeedback":
                     {
                         var feedbackTitle = command.Parameters[0];
                         var feedbackDescription = command.Parameters[1];
-                        var feedbackComments = command.Parameters[6].Trim().Split(SPLIT_CHAR).ToList();
-                        return this.CreateFeedback(feedbackTitle, feedbackDescription, feedbackComments);
+                        var feedbackRating = int.Parse(command.Parameters[2]);
+                        var board = this.GetBoard(command.Parameters[3]);
+
+                        return this.CreateFeedback(feedbackTitle, feedbackDescription,feedbackRating,board);
                     }
 
                 default:
@@ -135,60 +144,113 @@
             }
         }
 
+
         private string CreateTeam(string teamName)
         {
-            if (wimTeams.Contains(teamName))
+            if (this.wimTeams.Contains(teamName))
             {
-                return string.Format(ObjectExists, nameof(Team),teamName);
+                return string.Format(ObjectExists, nameof(Team), teamName);
             }
 
-            var team = this.factory.CreateTeam(teamName,null);
-            wimTeams.AddTeam(team);
+            var team = this.factory.CreateTeam(teamName, this.wimTeams);
+            this.wimTeams.AddTeam(team);
 
-            return string.Format(ObjectCreated, nameof(Team),teamName);
+            return string.Format(ObjectCreated, nameof(Team), teamName);
         }
 
         private string CreateMember(string memberName)
         {
-            if (wimTeams.Contains(memberName))
+            if (this.wimTeams.Contains(memberName))
             {
-                return string.Format(ObjectExists, nameof(Member), memberName);
+                throw new ArgumentException(string.Format(ObjectExists, nameof(Member), memberName));
             }
 
-            var member = this.factory.CreateMember(memberName, null);
-            membersList.AddMember(member);
+            var member = this.factory.CreateMember(memberName, this.membersList);
+            this.membersList.AddMember(member);
 
             return string.Format(ObjectCreated, nameof(Member), memberName);
         }
 
-        private string CreateBoard(string boardName)
+        private string CreateBoard(string boardName, ITeam team)
         {
-            throw new NotImplementedException();
+            var board = this.factory.CreateBoard(boardName, team);
+            if (board == null)
+            {
+                throw new ArgumentException(string.Format(ObjectExists, nameof(Board), board));
+            }
+            team.AddBoardToTeam(board);
+
+            return string.Format(ObjectCreated, nameof(Board), boardName);
+
         }
 
-        private string AddToTeam(string teamNameToAdd, string memberNameForAdding)
+        private string AddMemberToTeam(ITeam teamToAddTo, IMember memberForAdding)
         {
-            throw new NotImplementedException();
+            teamToAddTo.AddMemberToTeam(memberForAdding);
+            return string.Format(ObjectAddedToTeam, nameof(Member), memberForAdding.MemberName, teamToAddTo.TeamName);
         }
 
-        private string RemoveFromTeam(string teamNameToRemove, string memberNameForRemoving)
+        private string RemoveMemberFromTeam(ITeam teamToRemoveFrom, IMember memberForRemoving)
         {
-            throw new NotImplementedException();
+            teamToRemoveFrom.RemoveMemberFromTeam(memberForRemoving);
+            return string.Format(ObjectRemovedFromTeam, nameof(Member), memberForRemoving.MemberName, teamToRemoveFrom.TeamName);
+
         }
 
-        private string CreateFeedback(string feedbackTitle, string feedbackDescription, List<string> feedbackComments)
+        private string AddBoardToTeam(ITeam teamToAddTo, IBoard boardForAdding)
         {
-            throw new NotImplementedException();
+            teamToAddTo.AddBoardToTeam(boardForAdding);
+            return string.Format(ObjectAddedToTeam, nameof(Board), boardForAdding.BoardName, teamToAddTo.TeamName);
+
+
         }
 
-        private string CreateStory(string storyTitle, string storyDescription, PriorityType storyPriority, StorySizeType storySize, IMember storyAssignee, List<string> storyComments)
+        private string RemoveBoardFromTeam(ITeam teamToRemoveFrom, IBoard boardForRemoving)
         {
-            throw new NotImplementedException();
+            teamToRemoveFrom.RemoveBoardFromTeam(boardForRemoving);
+            return string.Format(ObjectRemovedFromTeam, nameof(Board), boardForRemoving.BoardName, teamToRemoveFrom.TeamName);
+
         }
 
-        private string CreateBug(string bugTitle, string bugDescription, List<string> stepsToReproduce, PriorityType bugPriority, BugSeverityType bugSeverity, IMember bugAssignee, List<string> bugComments)
+        private string CreateFeedback(string feedbackTitle, string feedbackDescription, int raiting, IBoard board)
         {
-            throw new NotImplementedException();
+            var feedback = this.factory.CreateFeedback(feedbackTitle, feedbackDescription, raiting, board);
+            if (feedback == null)
+            {
+                throw new ArgumentException(string.Format(ObjectExists, nameof(Feedback), feedback.Title));
+            }
+            //team.AddBoardToTeam(board);
+            board.AddWorkItemToBoard(feedback);
+
+            return string.Format(ObjectCreated, nameof(Feedback), feedback.Title);
+
+
+        }
+
+        private string CreateStory(string storyTitle, string storyDescription, PriorityType storyPriority, StorySizeType storySize, IBoard board, IMember storyAssignee = null)
+        {
+            var story = this.factory.CreateStory(storyTitle, storyDescription, storyPriority, storySize, board, storyAssignee);
+            if (story == null)
+            {
+                throw new ArgumentException(string.Format(ObjectExists, nameof(Story), story.Title));
+            }
+
+            board.AddWorkItemToBoard(story);
+
+            return string.Format(ObjectCreated, nameof(Story), story.Title);
+        }
+
+        private string CreateBug(string bugTitle, string bugDescription, List<string> stepsToReproduce, PriorityType bugPriority, BugSeverityType bugSeverity, IBoard board, IMember bugAssignee)
+        {
+            var bug = this.factory.CreateBug(bugTitle, bugDescription, stepsToReproduce, bugPriority, bugSeverity, board, bugAssignee);
+            if (bug == null)
+            {
+                throw new ArgumentException(string.Format(ObjectExists, nameof(Bug), bug.Title));
+            }
+
+            board.AddWorkItemToBoard(bug);
+
+            return string.Format(ObjectCreated, nameof(Bug), bug.Title);
         }
 
         private void PrintReports(IList<string> reports)
@@ -206,9 +268,27 @@
 
         private IMember GetMember(string memberAsString)
         {
-            return membersList[memberAsString];
-            
+            var member = this.membersList[memberAsString];
+            return member;
+
         }
 
+        private ITeam GetTeam(string teamAsString)
+        {
+            var team = this.wimTeams[teamAsString];
+            return team;
+
+        }
+
+        private IBoard GetBoard(string boardAsString)
+        {
+            var teamResult = this.wimTeams.TeamsList
+                            .Select(team => team.Value)
+                            .Where(team => team.BoardList.Keys.Any(board => board == boardAsString))
+                            .Single();
+            var boardResult = teamResult.BoardList[boardAsString];
+            return boardResult;
+
+        }
     }
 }

@@ -9,9 +9,21 @@ namespace WIMSystem.Models
     {
         private IDictionary<string,ITeam> teamsList;
 
-        public WIMTeams()
+        private static IWIMTeams instance;
+
+        static WIMTeams()
+        {
+            instance = new WIMTeams();
+        }
+
+        private WIMTeams()
         {
             this.teamsList = new Dictionary<string,ITeam>();
+        }
+
+        public static IWIMTeams Instance
+        {
+            get { return instance; }
         }
 
         public IDictionary<string,ITeam> TeamsList
@@ -58,11 +70,8 @@ namespace WIMSystem.Models
 
         public bool Contains(string teamName)
         {
-            if (teamsList.ContainsKey(teamName))
-            {
-                return true;
-            }
-            return false;
+            return (teamsList.ContainsKey(teamName));
+        
         }
 
         IEnumerator IEnumerable.GetEnumerator()
