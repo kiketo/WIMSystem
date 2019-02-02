@@ -34,18 +34,18 @@ namespace WIMSystem.Models
 
             private set
             {
-                if (value.Length < 5 || value.Length > 15)
+                if (value.Length < 3 || value.Length > 25)
                 {
-                    throw new ArgumentOutOfRangeException("Teams name should be between 5 and 15 symbols.");
+                    throw new ArgumentOutOfRangeException("Teams name should be between 3 and 25 symbols.");
                 }
-                if (this.teamsList.Contains(value))
-                {
-                    Console.WriteLine("I Tova trqbva da se opravi");
-                }
-                else
-                {
-                    this.teamName = value;
-                }
+                //if (this.teamsList.Contains(value))
+                //{
+                //    Console.WriteLine("I Tova trqbva da se opravi");
+                //}
+                //else
+                //{
+                //}
+                this.teamName = value;
             }
         }
 

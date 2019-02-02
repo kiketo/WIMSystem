@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WIMSystem.Core
 {
-    internal class CommandParser : ICommandParser
+    internal class ConsoleCommandParser : ICommandParser
     {
        public IList<ICommand> ReadCommands()
         {

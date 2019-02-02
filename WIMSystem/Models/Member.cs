@@ -35,14 +35,14 @@ namespace WIMSystem.Models
                     throw new ArgumentOutOfRangeException("Members name should be between 5 and 15 symbols.");
                 }
                 //Name should be unique in the application
-                if(membersCollection.Contains(value))
-                {
-                    Console.WriteLine("Trqbva da se prepravi!");
-                }
-                else
-                {
+                //if(membersCollection.Contains(value))
+                //{
+                //    Console.WriteLine("Trqbva da se prepravi!");
+                //}
+                //else
+                //{
+                //}
                     this.memberName = value;
-                }
             }
         }
 

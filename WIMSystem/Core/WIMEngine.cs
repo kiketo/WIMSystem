@@ -38,11 +38,24 @@ namespace WIMSystem.Core
             this.commandParser = commandParser;
         }
 
+        //public void Start()
+        //{
+        //    IList<ICommand> commands = new List<ICommand>();
+        //    do
+        //    {
+        //        commands = this.commandParser.ReadCommands();
+        //        var commandResult = this.ProcessCommands(commands);
+        //        this.PrintReports(commandResult);
+        //    }
+        //    while (commands.Count > 0);
+
+        //}
+
         public void Start()
         {
-            var commands = this.commandParser.ReadCommands();
-            var commandResult = this.ProcessCommands(commands);
-            this.PrintReports(commandResult);
+                var commands = this.commandParser.ReadCommands();
+                var commandResult = this.ProcessCommands(commands);
+                this.PrintReports(commandResult);
         }
 
         private IList<string> ProcessCommands(IList<ICommand> commands)
@@ -51,14 +64,14 @@ namespace WIMSystem.Core
 
             foreach (var command in commands)
             {
-                try
+                // try
                 {
                     var report = this.ProcessSingleCommand(command);
                     reports.Add(report);
                 }
-                catch (Exception ex)
+                //  catch (Exception ex)
                 {
-                    reports.Add(ex.Message);
+                    //      reports.Add(ex.Message);
                 }
             }
 
@@ -114,7 +127,7 @@ namespace WIMSystem.Core
                         var bugAssignee = this.GetMember(command.Parameters[6]);
                         //var bugComments = command.Parameters[6].Trim().Split(SPLIT_CHAR).ToList();
 
-                        return this.CreateBug(bugTitle, bugDescription, stepsToReproduce, bugPriority, bugSeverity, board,bugAssignee);
+                        return this.CreateBug(bugTitle, bugDescription, stepsToReproduce, bugPriority, bugSeverity, board, bugAssignee);
                     }
 
                 case "CreateStory":
@@ -136,7 +149,7 @@ namespace WIMSystem.Core
                         var feedbackRating = int.Parse(command.Parameters[2]);
                         var board = this.GetBoard(command.Parameters[3]);
 
-                        return this.CreateFeedback(feedbackTitle, feedbackDescription,feedbackRating,board);
+                        return this.CreateFeedback(feedbackTitle, feedbackDescription, feedbackRating, board);
                     }
 
                 default:
