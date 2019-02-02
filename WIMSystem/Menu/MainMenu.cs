@@ -114,20 +114,16 @@ namespace WIMSystem.Menu
 
             var parameters = Console.ReadLine();
 
-            //var key = Console.ReadKey();
+            this.commandParser.SaveCommand(string.Concat(
+                this.mainMenuItems[indexOfItem].CommandText,
+                " ",
+                parameters));
+            //Console.WriteLine(string.Concat(
+            //    this.mainMenuItems[indexOfItem].CommandText,
+            //    " ",
+            //    parameters));
+            this.engine.ExecuteCommands(this.commandParser);
 
-           // if (key.Key == ConsoleKey.Enter)
-            {
-                this.commandParser.SaveCommand(string.Concat(
-                    this.mainMenuItems[indexOfItem].CommandText,
-                    " ",
-                    parameters));
-                //Console.WriteLine(string.Concat(
-                //    this.mainMenuItems[indexOfItem].CommandText,
-                //    " ",
-                //    parameters));
-                this.engine.ExecuteCommands(this.commandParser);
-            }
             Console.WriteLine();
             Console.Write("Press any key for main menu...");
             Console.ReadKey();
