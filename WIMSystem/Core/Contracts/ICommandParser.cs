@@ -3,8 +3,11 @@ using WIMSystem.Core.Contracts;
 
 namespace WIMSystem.Core.Contracts
 {
-    internal interface ICommandParser
+    public interface ICommandParser
     {
         IList<ICommand> ReadCommands();
+
+        void SaveCommand(string commandString);
+
     }
 }

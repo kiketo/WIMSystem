@@ -10,7 +10,7 @@ using WIMSystem.Models.Enums;
 
 namespace WIMSystem.Core
 {
-    internal class WIMEngine
+    internal class WIMEngine : IWIMEngine
     {
         private const string InvalidCommand = "Invalid command name: {0}!";
         private const string ObjectExists = "{0} with name {1} already exists!";
@@ -25,17 +25,13 @@ namespace WIMSystem.Core
 
         private readonly IFactory factory;
         private readonly IWIMTeams wimTeams;
-
         private readonly IMembersCollection membersList;
-        private readonly ICommandParser commandParser;
 
-
-        public WIMEngine(IFactory factory, IWIMTeams wimTeams, IMembersCollection membersList, ICommandParser commandParser)
+        public WIMEngine(IFactory factory, IWIMTeams wimTeams, IMembersCollection membersList)
         {
             this.factory = factory;
             this.wimTeams = wimTeams;
             this.membersList = membersList;
-            this.commandParser = commandParser;
         }
 
         //public void Start()
@@ -51,9 +47,9 @@ namespace WIMSystem.Core
 
         //}
 
-        public void Start()
+        public void ExecuteCommands(ICommandParser commandParser)
         {
-                var commands = this.commandParser.ReadCommands();
+                var commands = commandParser.ReadCommands();
                 var commandResult = this.ProcessCommands(commands);
                 this.PrintReports(commandResult);
         }
