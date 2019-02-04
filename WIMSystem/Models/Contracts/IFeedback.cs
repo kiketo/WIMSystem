@@ -8,8 +8,8 @@ namespace WIMSystem.Models.Contracts
 {
     public interface IFeedback : IWorkItem
     {
-        int Rating { get; }
-        FeedbackStatusType FeedbackStatus { get;}
+        int Rating { get; set; }
+        FeedbackStatusType FeedbackStatus { get; set; }
 
         void ChangeRating(int rating);
         void ChangeStatus(string status);

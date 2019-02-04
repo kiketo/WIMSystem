@@ -9,7 +9,7 @@ namespace WIMSystem.Models.Contracts
     {
         IPerson Assignee { get; }
 
-        PriorityType Priority { get; }
+        PriorityType Priority { get; set; }
 
         void AssignMember(IPerson member);
 

@@ -17,9 +17,9 @@ namespace WIMSystem.Models
             this.StoryStatus = StoryStatusType.NotDone;
         }
 
-        public StorySizeType StorySize { get; private set; }
+        public StorySizeType StorySize { get; set; }
 
-        public StoryStatusType StoryStatus { get; private set; }
+        public StoryStatusType StoryStatus { get; set; }
 
         public void ChangeSize(string size)
         {

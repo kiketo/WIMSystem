@@ -8,8 +8,8 @@ namespace WIMSystem.Models.Contracts
 {
     public interface IStory : IAssignableWorkItem, IWorkItem
     {
-        StorySizeType StorySize { get; }
-        StoryStatusType StoryStatus { get; }
+        StorySizeType StorySize { get; set; }
+        StoryStatusType StoryStatus { get; set; }
 
         void ChangeSize(string size);
         void ChangeStatus(string status);
