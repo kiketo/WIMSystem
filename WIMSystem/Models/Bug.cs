@@ -8,24 +8,25 @@ using WIMSystem.Models.Enums;
 
 namespace WIMSystem.Models
 {
-    public class Bug : AssignableWorkItem, IBug
+    public class Bug : AssignableWorkItem, IBug, IAssignableWorkItem, IWorkItem
     {
         private readonly IList<string> stepsToReproduce;
 
         public Bug(string title, string description, IList<string> stepsToReproduce,
             PriorityType priority, BugSeverityType severity, IBoard board, IMember assignee=null) // assignee is optional?
-            : base(title, description,board,assignee)
+            : base(title, description,priority,board,assignee)
         {
             if (stepsToReproduce == null)
             {
-                throw new ArgumentNullException("stepsToReproduce");
+                throw new ArgumentNullException("stepsToReproduce","Steps to reproduce cannot be null!");
             }
+
             if (!stepsToReproduce.Any())
             {
                 throw new ArgumentException("stepsToReproduce", "There must be at least one step to reproduce for the bug!");
             }
+
             this.stepsToReproduce = stepsToReproduce;
-            this.Priority = priority;
             this.Severity = severity;
             this.BugStatus = BugStatusType.Active;
             
@@ -39,10 +40,36 @@ namespace WIMSystem.Models
             }
         }
 
-        public PriorityType Priority { get; set; }
+        public BugSeverityType Severity { get; private set; }
 
-        public BugSeverityType Severity { get; set; }
+        public BugStatusType BugStatus { get ; private set; }
 
-        public BugStatusType BugStatus { get ; set ; }
+        public void ChangeSeverity(string severity)
+        {
+            if (severity == null)
+            {
+                throw new ArgumentNullException("severity", "Severity cannot be null or empty!");
+            }
+
+            else
+            {
+                BugSeverityType severityEnum = (BugSeverityType)Enum.Parse(typeof(BugSeverityType), severity, true);
+                this.Severity = severityEnum;
+            }
+        }
+
+        public void ChangeStatus(string status)
+        {
+            if (status == null)
+            {
+                throw new ArgumentNullException("status", "Status cannot be null or empty!");
+            }
+
+            else
+            {
+                BugStatusType statusEnum = (BugStatusType)Enum.Parse(typeof(BugStatusType), status, true);
+                this.BugStatus = statusEnum;
+            }
+        }
     }
 }

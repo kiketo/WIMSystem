@@ -11,17 +11,42 @@ namespace WIMSystem.Models
     {
         public Story(string title, string description, PriorityType priority,
             StorySizeType storySize, IBoard board, IMember assignee=null) //assignee is optional?
-            : base(title, description,board,assignee)
+            : base(title, description,priority,board,assignee)
         {
-            this.Priority = priority;
             this.StorySize = storySize;
             this.StoryStatus = StoryStatusType.NotDone;
         }
 
-        public PriorityType Priority { get; set; }
+        public StorySizeType StorySize { get; private set; }
 
-        public StorySizeType StorySize { get; set; }
+        public StoryStatusType StoryStatus { get; private set; }
 
-        public StoryStatusType StoryStatus { get; set; }
+        public void ChangeSize(string size)
+        {
+            if (size == null)
+            {
+                throw new ArgumentNullException("size", "Size cannot be null or empty!");
+            }
+
+            else
+            {
+                StorySizeType sizeEnum = (StorySizeType)Enum.Parse(typeof(StorySizeType), size, true);
+                this.StorySize = sizeEnum;
+            }
+        }
+
+        public void ChangeStatus(string status)
+        {
+            if (status == null)
+            {
+                throw new ArgumentNullException("status", "Status cannot be null or empty!");
+            }
+
+            else
+            {
+                StoryStatusType statusEnum = (StoryStatusType)Enum.Parse(typeof(StoryStatusType), status, true);
+                this.StoryStatus = statusEnum;
+            }
+        }
     }
 }

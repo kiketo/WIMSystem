@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using WIMSystem.Models.Enums;
 
 namespace WIMSystem.Models.Contracts
 {
@@ -8,8 +9,12 @@ namespace WIMSystem.Models.Contracts
     {
         IMember Assignee { get; }
 
+        PriorityType Priority { get; }
+
         void AssignMember(IMember member);
 
         void UnassignMember();
+
+        void ChangePriority(string priority);
     }
 }
