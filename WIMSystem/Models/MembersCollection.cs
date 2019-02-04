@@ -8,7 +8,7 @@ namespace WIMSystem.Models
     public class MembersCollection : IMembersCollection
     {
         // The single instance
-        private readonly IDictionary<string, IMember> membersList;
+        private readonly IDictionary<string, IPerson> membersList;
         private static IMembersCollection instance;
 
         static MembersCollection()
@@ -17,7 +17,7 @@ namespace WIMSystem.Models
         }
         private MembersCollection()
         {
-            this.membersList = new Dictionary<string, IMember>();
+            this.membersList = new Dictionary<string, IPerson>();
         }
 
         public static IMembersCollection Instance
@@ -25,15 +25,15 @@ namespace WIMSystem.Models
             get { return instance; }
         }
 
-        public IDictionary<string, IMember> Members
+        public IDictionary<string, IPerson> Members
         {
             get
             {
-                return new Dictionary<string, IMember>(membersList);
+                return new Dictionary<string, IPerson>(membersList);
             }
         }
 
-        public void AddMember(IMember newMember)
+        public void AddMember(IPerson newMember)
         {
             if (this.membersList.ContainsKey(newMember.MemberName))
             {
@@ -47,7 +47,7 @@ namespace WIMSystem.Models
             return membersList.ContainsKey(name);
         }
 
-        public IMember this[string index]
+        public IPerson this[string index]
         {
             get => this.membersList[index];
             private set

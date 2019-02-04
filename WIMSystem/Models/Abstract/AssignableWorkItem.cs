@@ -8,7 +8,7 @@ namespace WIMSystem.Models.Abstract
 {
     public abstract class AssignableWorkItem : WorkItem, IAssignableWorkItem, IWorkItem
     {
-        public AssignableWorkItem(string title, string description, PriorityType priority, IBoard board, IMember assignee = null)
+        public AssignableWorkItem(string title, string description, PriorityType priority, IBoard board, IPerson assignee = null)
             :base (title,description,board)
         {
             this.Priority = priority;
@@ -17,9 +17,9 @@ namespace WIMSystem.Models.Abstract
 
         public PriorityType Priority { get; private set; }
 
-        public IMember Assignee { get; private set; }
+        public IPerson Assignee { get; private set; }
 
-        public void AssignMember (IMember member)
+        public void AssignMember (IPerson member)
         {
             if(member==null)
             {

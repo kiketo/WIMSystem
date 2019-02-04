@@ -7,11 +7,11 @@ namespace WIMSystem.Models.Contracts
 {
     public interface IAssignableWorkItem : IWorkItem
     {
-        IMember Assignee { get; }
+        IPerson Assignee { get; }
 
         PriorityType Priority { get; }
 
-        void AssignMember(IMember member);
+        void AssignMember(IPerson member);
 
         void UnassignMember();
 

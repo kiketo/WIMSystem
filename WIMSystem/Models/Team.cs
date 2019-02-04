@@ -9,7 +9,7 @@ namespace WIMSystem.Models
     {
         #region Fields
         private string teamName;
-        private IList<IMember> memberList;
+        private IList<IPerson> memberList;
         private IDictionary<string, IBoard> boardList;
         private IWIMTeams teamsList;
 
@@ -19,7 +19,7 @@ namespace WIMSystem.Models
         {
             this.TeamName = teamName;
             this.teamsList = teamsList;
-            this.memberList = new List<IMember>();
+            this.memberList = new List<IPerson>();
             this.boardList = new Dictionary<string, IBoard>();
         }
         #endregion
@@ -49,7 +49,7 @@ namespace WIMSystem.Models
             }
         }
 
-        public IList<IMember> MemberList
+        public IList<IPerson> MemberList
         {
             get
             {
@@ -67,7 +67,7 @@ namespace WIMSystem.Models
         }
         #endregion
         #region Methods
-        public void AddMemberToTeam(IMember member)
+        public void AddMemberToTeam(IPerson member)
         {
             if (member == null)
             {
@@ -86,7 +86,7 @@ namespace WIMSystem.Models
             }
         }
 
-        public void RemoveMemberFromTeam(IMember member)
+        public void RemoveMemberFromTeam(IPerson member)
         {
             if (member == null)
             {

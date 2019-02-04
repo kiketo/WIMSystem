@@ -13,7 +13,7 @@ namespace WIMSystem.Models
         private readonly IList<string> stepsToReproduce;
 
         public Bug(string title, string description, IList<string> stepsToReproduce,
-            PriorityType priority, BugSeverityType severity, IBoard board, IMember assignee=null) // assignee is optional?
+            PriorityType priority, BugSeverityType severity, IBoard board, IPerson assignee=null) // assignee is optional?
             : base(title, description,priority,board,assignee)
         {
             if (stepsToReproduce == null)

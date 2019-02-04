@@ -6,7 +6,7 @@ namespace WIMSystem.Models.Contracts
     {
         string Description { get; set; }
         DateTime CreationDate { get; }
-        IMember Member { get; }
+        IPerson Member { get; }
         IBoard Board { get; }
         ITeam Team { get; }
     }

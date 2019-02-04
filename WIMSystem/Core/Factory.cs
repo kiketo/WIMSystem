@@ -26,9 +26,9 @@ namespace WIMSystem.Core
             return new Team(teamName, teamsList);
         }
 
-        public IMember CreateMember(string memberName, IMembersCollection membersCollection)
+        public IPerson CreateMember(string memberName, IMembersCollection membersCollection)
         {
-            return new Member(memberName, membersCollection);
+            return new Person(memberName, membersCollection);
         }
 
         public IBoard CreateBoard(string name, ITeam team)
@@ -36,7 +36,7 @@ namespace WIMSystem.Core
             return new Board(name, team);
         }
 
-        public IBug CreateBug(string title, string description, IList<string> stepsToReproduce, PriorityType priority, BugSeverityType severity, IBoard board, IMember assignee = null)
+        public IBug CreateBug(string title, string description, IList<string> stepsToReproduce, PriorityType priority, BugSeverityType severity, IBoard board, IPerson assignee = null)
         {
             return new Bug(title, description, stepsToReproduce, priority, severity, board);
         }
@@ -47,17 +47,17 @@ namespace WIMSystem.Core
         }
 
         public IStory CreateStory(string title, string description, PriorityType priority,
-            StorySizeType storySize, IBoard board, IMember assignee = null)
+            StorySizeType storySize, IBoard board, IPerson assignee = null)
         {
             return new Story(title, description, priority, storySize, board);
         }
 
-        public IComment CreateComment(string message, IMember author)
+        public IComment CreateComment(string message, IPerson author)
         {
             return new Comment(message, author);
         }
 
-        public IHistoryItem CreateHistoryItem(string description, IMember member, IBoard board, ITeam team)
+        public IHistoryItem CreateHistoryItem(string description, IPerson member, IBoard board, ITeam team)
         {
             return new HistoryItem(description, DateTime.Now, member, board, team);
         }
