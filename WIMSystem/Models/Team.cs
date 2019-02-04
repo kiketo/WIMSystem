@@ -7,23 +7,19 @@ namespace WIMSystem.Models
 {
     public class Team : ITeam
     {
-        #region Fields
+    
         private string teamName;
-        private IList<IPerson> memberList;
-        private IDictionary<string, IBoard> boardList;
-        private IWIMTeams teamsList;
+        private readonly IList<IPerson> memberList;
+        private readonly IDictionary<string, IBoard> boardList;
 
-        #endregion
-        #region Ctor
-        public Team(string teamName, IWIMTeams teamsList)
+     
+        public Team(string teamName)
         {
             this.TeamName = teamName;
-            this.teamsList = teamsList;
+   
             this.memberList = new List<IPerson>();
             this.boardList = new Dictionary<string, IBoard>();
         }
-        #endregion
-        #region Prop
 
         public string TeamName
         {
@@ -38,13 +34,6 @@ namespace WIMSystem.Models
                 {
                     throw new ArgumentOutOfRangeException("Teams name should be between 3 and 25 symbols.");
                 }
-                //if (this.teamsList.Contains(value))
-                //{
-                //    Console.WriteLine("I Tova trqbva da se opravi");
-                //}
-                //else
-                //{
-                //}
                 this.teamName = value;
             }
         }
@@ -65,8 +54,7 @@ namespace WIMSystem.Models
             }
 
         }
-        #endregion
-        #region Methods
+
         public void AddMemberToTeam(IPerson member)
         {
             if (member == null)
@@ -143,6 +131,5 @@ namespace WIMSystem.Models
             }
         }
 
-        #endregion
     }
 }

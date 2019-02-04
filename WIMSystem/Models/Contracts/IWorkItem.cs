@@ -16,6 +16,10 @@ namespace WIMSystem.Models.Contracts
         void AddComment(IComment comment);
 
         void AddHistoryItem(IHistoryItem history);
+
+        void ChangeStatus(string newStatus);
+
+        Enum GetStatus();
         
     }
 }

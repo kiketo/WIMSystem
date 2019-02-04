@@ -13,6 +13,5 @@ namespace WIMSystem.Models.Contracts
         BugStatusType BugStatus { get; set; }
 
         void ChangeSeverity(string severity);
-        void ChangeStatus(string status);
     }
 }

@@ -10,8 +10,8 @@ namespace WIMSystem.Models
     public class Story : AssignableWorkItem, IStory, IAssignableWorkItem, IWorkItem
     {
         public Story(string title, string description, PriorityType priority,
-            StorySizeType storySize, IBoard board, IPerson assignee=null) //assignee is optional?
-            : base(title, description,priority,board,assignee)
+            StorySizeType storySize, IBoard board, IPerson assignee = null) //assignee is optional?
+            : base(title, description, priority, board, assignee)
         {
             this.StorySize = storySize;
             this.StoryStatus = StoryStatusType.NotDone;
@@ -35,7 +35,7 @@ namespace WIMSystem.Models
             }
         }
 
-        public void ChangeStatus(string status)
+        public override void ChangeStatus(string status)
         {
             if (status == null)
             {
@@ -47,6 +47,11 @@ namespace WIMSystem.Models
                 StoryStatusType statusEnum = (StoryStatusType)Enum.Parse(typeof(StoryStatusType), status, true);
                 this.StoryStatus = statusEnum;
             }
+        }
+
+        public override Enum GetStatus()
+        {
+            return this.StoryStatus;
         }
     }
 }

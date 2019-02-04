@@ -42,7 +42,7 @@ namespace WIMSystem.Models
             }
         }
 
-        public void ChangeStatus(string status)
+        public override void ChangeStatus(string status)
         {
             if (status == null)
             {
@@ -55,6 +55,11 @@ namespace WIMSystem.Models
                 FeedbackStatusType statusEnum = Enum.Parse<FeedbackStatusType>(status, true);
                 this.FeedbackStatus = statusEnum;
             }
+        }
+
+        public override Enum GetStatus()
+        {
+            return this.feedbackStatus;
         }
     }
 }

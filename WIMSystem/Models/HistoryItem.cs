@@ -4,7 +4,7 @@ using WIMSystem.Models.Contracts;
 
 namespace WIMSystem.Models
 {
-    public class HistoryItem : IHistoryItem, IWorkItem
+    public class HistoryItem : IHistoryItem
     {
         private string description;
         private readonly DateTime creationDate;
@@ -12,7 +12,7 @@ namespace WIMSystem.Models
         private readonly IBoard board;
         private readonly ITeam team;
 
-        public HistoryItem(string description, DateTime creationDate, IPerson member, IBoard board, ITeam team)
+        public HistoryItem(string description, DateTime creationDate, IPerson member, IBoard board, ITeam team, IWorkItem workItem)
         {
             this.Description = description;
             this.creationDate = creationDate;
@@ -46,22 +46,5 @@ namespace WIMSystem.Models
             get => this.team;
         }
 
-        public int ID => throw new NotImplementedException();
-
-        public string Title => throw new NotImplementedException();
-
-        public IList<IComment> ListOfComments => throw new NotImplementedException();
-
-        public IList<IHistoryItem> ListOfHistoryItems => throw new NotImplementedException();
-
-        public void AddComment(IComment comment)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddHistoryItem(IHistoryItem history)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -13,5 +13,7 @@ namespace WIMSystem.Models.Contracts
         IDictionary<string,IWorkItem> BoardWorkItems { get; }
 
         void AddWorkItemToBoard(IWorkItem workItem);
+
+        string ListWorkItems(Type typeFilter, string statusFilter, IPerson filterMember, string sortBy);
     }
 }

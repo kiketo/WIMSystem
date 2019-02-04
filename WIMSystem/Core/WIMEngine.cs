@@ -277,14 +277,10 @@ namespace WIMSystem.Core
                     {
                         var teamName = command.Parameters[0];
                         var board = this.GetBoard(teamName, command.Parameters[1]);
-                        //var paramFilter = command.Parameters[2].Split(new[] { ':', }, StringSplitOptions.RemoveEmptyEntries);
-                        //if (paramFilter[0] != "filterType") throw new ArgumentException("Type parameter is mandatory for work item filter!");
-                        //var filterByType = this.NormalizeParameter(paramFilter[1]);
-                        //var curAssembly = typeof(WIMEngine).Assembly;
-                        //var typeOfWorkItem = curAssembly.GetType("Models." + command.Parameters[2], true, true);
                         String filterStatus = null, sortBy = null;
                         IPerson filterAssignee = null;
                         Type filterType = null;
+
                         for (int i = 2; i < command.Parameters.Count; i++)
                         {
                             var paramOption = command.Parameters[i].Split(new[] { ':', }, StringSplitOptions.RemoveEmptyEntries);
@@ -299,7 +295,6 @@ namespace WIMSystem.Core
                                     }
                                 case "filterStatus":
                                     {
-                                        //PropertyInfo myPropInfo = filterType.GetProperty(filterType.Name + "Status");
                                         filterStatus = command.Parameters[1];
                                         break;
                                     }
@@ -343,10 +338,7 @@ namespace WIMSystem.Core
                     nameof(WorkItem)
                     ));
             }
-            if (!(workItem is IAssignableWorkItem))
-            {
-                throw new ArgumentException(string.Format($"Members can not be assigned to {workItem.GetType().Name}!"));
-            }
+
             var member = workItem.Assignee;
             workItem.UnassignMember();
             member.MemberWorkItems.Remove(workItem);
@@ -368,10 +360,7 @@ namespace WIMSystem.Core
                     nameof(member)
                     ));
             }
-            if (!(workItem is IAssignableWorkItem))
-            {
-                throw new ArgumentException(string.Format($"Members can not be assigned to {workItem.GetType().Name}!"));
-            }
+
             if (!member.IsMember)
             {
                 throw new ArgumentException(string.Format($"{member.PersonName} is not a member of any team!"));
@@ -384,7 +373,7 @@ namespace WIMSystem.Core
 
         private string ListBoardWorkItems(IBoard board, Type filterType, string filterStatus, IPerson filterAssignee, string sortBy)
         {
-            throw new NotImplementedException();
+            return board.ListWorkItems(filterType, filterStatus, filterAssignee, sortBy);
         }
 
         private string ChangeStatusOfFeedback(IWorkItem workItem, FeedbackStatusType status)

@@ -8,7 +8,7 @@ namespace WIMSystem.Models.Abstract
 {
     public abstract class WorkItem : IWorkItem
     {
-        private int id;
+        private readonly int id;
         private string title;
         private string description;
         private IBoard board;
@@ -97,11 +97,7 @@ namespace WIMSystem.Models.Abstract
             }
             private set
             {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("board", "Board cannot be null!");
-                }
-                this.board = value;
+                this.board = value ?? throw new ArgumentNullException("board", "Board cannot be null!");
             }
         }
 
@@ -124,5 +120,9 @@ namespace WIMSystem.Models.Abstract
 
             listOfHistoryItems.Add(history);
         }
+
+        public abstract void ChangeStatus(string newStatus);
+
+        public abstract Enum GetStatus();
     }
 }

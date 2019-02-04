@@ -13,12 +13,12 @@ namespace WIMSystem.Models
         private readonly IList<string> stepsToReproduce;
 
         public Bug(string title, string description, IList<string> stepsToReproduce,
-            PriorityType priority, BugSeverityType severity, IBoard board, IPerson assignee=null) // assignee is optional?
-            : base(title, description,priority,board,assignee)
+            PriorityType priority, BugSeverityType severity, IBoard board, IPerson assignee = null) // assignee is optional?
+            : base(title, description, priority, board, assignee)
         {
             if (stepsToReproduce == null)
             {
-                throw new ArgumentNullException("stepsToReproduce","Steps to reproduce cannot be null!");
+                throw new ArgumentNullException("stepsToReproduce", "Steps to reproduce cannot be null!");
             }
 
             if (!stepsToReproduce.Any())
@@ -29,7 +29,7 @@ namespace WIMSystem.Models
             this.stepsToReproduce = stepsToReproduce;
             this.Severity = severity;
             this.BugStatus = BugStatusType.Active;
-            
+
         }
 
         public IList<string> StepsToReproduce
@@ -42,7 +42,7 @@ namespace WIMSystem.Models
 
         public BugSeverityType Severity { get; set; }
 
-        public BugStatusType BugStatus { get ; set; }
+        public BugStatusType BugStatus { get; set; }
 
         public void ChangeSeverity(string severity)
         {
@@ -58,18 +58,23 @@ namespace WIMSystem.Models
             }
         }
 
-        public void ChangeStatus(string status)
+        public override void ChangeStatus(string newStatus)
         {
-            if (status == null)
+            if (newStatus == null)
             {
                 throw new ArgumentNullException("status", "Status cannot be null or empty!");
             }
 
             else
             {
-                BugStatusType statusEnum = (BugStatusType)Enum.Parse(typeof(BugStatusType), status, true);
+                BugStatusType statusEnum = (BugStatusType)Enum.Parse(typeof(BugStatusType), newStatus, true);
                 this.BugStatus = statusEnum;
             }
+        }
+
+        public override Enum GetStatus()
+        {
+            return this.BugStatus;
         }
     }
 }
