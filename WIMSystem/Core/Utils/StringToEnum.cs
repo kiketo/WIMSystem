@@ -6,14 +6,14 @@ namespace WIMSystem.Core.Utils
     {
         public static T Convert(string enumToParse)
         {
-            T resultInputType = default(T);
+            T result = default(T);
             bool enumParseResult = false;
-            enumParseResult = Enum.TryParse(enumToParse, true, out resultInputType);
-            if (enumParseResult == false)
+            enumParseResult = Enum.TryParse(enumToParse, true, out result);
+            if (!enumParseResult)
             {
                 throw new ArgumentOutOfRangeException($"Invalid {nameof(T)} type");
             }
-            return resultInputType;
+            return result;
         }
     }
 }
