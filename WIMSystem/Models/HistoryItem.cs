@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using WIMSystem.Models.Contracts;
 
 namespace WIMSystem.Models
 {
-    public class HistoryItem : IHistoryItem
+    public class HistoryItem : IHistoryItem, IWorkItem
     {
         private string description;
         private readonly DateTime creationDate;
@@ -43,6 +44,24 @@ namespace WIMSystem.Models
         public ITeam Team
         {
             get => this.team;
+        }
+
+        public int ID => throw new NotImplementedException();
+
+        public string Title => throw new NotImplementedException();
+
+        public IList<IComment> ListOfComments => throw new NotImplementedException();
+
+        public IList<IHistoryItem> ListOfHistoryItems => throw new NotImplementedException();
+
+        public void AddComment(IComment comment)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddHistoryItem(IHistoryItem history)
+        {
+            throw new NotImplementedException();
         }
     }
 }
