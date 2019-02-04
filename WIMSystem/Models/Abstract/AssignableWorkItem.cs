@@ -15,18 +15,13 @@ namespace WIMSystem.Models.Abstract
             this.Assignee = assignee;
         }
 
-        public PriorityType Priority { get; private set; }
+        public PriorityType Priority { get; set; }
 
         public IPerson Assignee { get; private set; }
 
         public void AssignMember (IPerson member)
         {
-            if(member==null)
-            {
-                throw new ArgumentNullException("member", "Member cannot be null or empty!");
-            }
-
-            this.Assignee = member;
+            this.Assignee = member ?? throw new ArgumentNullException("member", "Member cannot be null or empty!");
         }
 
         public void UnassignMember()

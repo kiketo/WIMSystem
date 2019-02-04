@@ -8,7 +8,7 @@ namespace WIMSystem.Models
     public class Board : IBoard
     {
         private string boardName;
-        private IDictionary<string,IWorkItem> boardWorkItems;
+        private readonly IDictionary<string,IWorkItem> boardWorkItems;
         private ITeam team;
 
         public Board(string boardName, ITeam team)
@@ -62,12 +62,7 @@ namespace WIMSystem.Models
 
             private set
             {
-                if(value==null)
-                {
-                    throw new ArgumentNullException("team", "Team cannot be null!");
-                }
-
-                this.team = value;
+                this.team = value ?? throw new ArgumentNullException("team", "Team cannot be null!");
             }
         }
 

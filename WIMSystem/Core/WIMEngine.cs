@@ -7,6 +7,7 @@ using Utils;
 using WIMSystem.Core.Contracts;
 using WIMSystem.Core.Utils;
 using WIMSystem.Models;
+using WIMSystem.Models.Abstract;
 using WIMSystem.Models.Contracts;
 using WIMSystem.Models.Enums;
 using WIMSystem.Utils;
@@ -21,8 +22,18 @@ namespace WIMSystem.Core
         private const string ObjectDoesNotExist = "{0} {1} does not exist!";
         private const string ObjectAddedToTeam = "{0} {1} added to {2} team";
         private const string ObjectRemovedFromTeam = "{0} {1} removed from {2} team";
+        private const string WorkItemAssigned = "{0} work item is assigned to {1} member";
+        private const string WorkItemUnAssigned = "{0} work item is unassigned to {1} member";
+        private const string WorkItemStatusChange = "{0} work item's status is changed to {1}";
+        private const string FeedbackRatingChange = "{0} feedback's rating is changed to {1}";
+        private const string WorkItemPriorityChange = "{0} work item's priority is changed to {1}";
+        private const string StorySizeChange = "{0} story's size is changed to {1}";
+        private const string BugSeverityChange = "{0} bug's severity is changed to {1}";
 
 
+
+
+        
         private const char SPLIT_CHAR = ',';
 
 
@@ -181,9 +192,8 @@ namespace WIMSystem.Core
                     }
                 case "ShowAllTeamBoards":
                     {
-                        var teamName = command.Parameters[0];
-                        var board = this.GetBoard(teamName, command.Parameters[1]);
-                        return this.ShowAllTeamBoards(board);
+                        var team = this.GetTeam(command.Parameters[0]);
+                        return this.ShowAllTeamBoards(team);
                     }
                 case "ShowBoardActivity":
                     {
@@ -195,7 +205,7 @@ namespace WIMSystem.Core
                     {
                         var teamName = command.Parameters[0];
                         var board = this.GetBoard(teamName, command.Parameters[1]);
-                        var workItem = this.GetWorkItem(board, command.Parameters[2]);
+                        var workItem = this.GetAssignableWorkItem(board, command.Parameters[2]);
                         var priority = StringToEnum<PriorityType>.Convert(command.Parameters[3]);
                         return this.ChangePriority(workItem, priority);
                     }
@@ -251,7 +261,7 @@ namespace WIMSystem.Core
                     {
                         var teamName = command.Parameters[0];
                         var board = this.GetBoard(teamName, command.Parameters[1]);
-                        var workItem = this.GetWorkItem(board, command.Parameters[2]);
+                        var workItem = this.GetAssignableWorkItem(board, command.Parameters[2]);
                         var member = this.GetPerson(command.Parameters[3]);
                         return this.AssignWorkItemToMember(workItem, member);
                     }
@@ -259,9 +269,9 @@ namespace WIMSystem.Core
                     {
                         var teamName = command.Parameters[0];
                         var board = this.GetBoard(teamName, command.Parameters[1]);
-                        var workItem = this.GetWorkItem(board, command.Parameters[2]);
+                        var workItem = this.GetAssignableWorkItem(board, command.Parameters[2]);
                         var member = this.GetPerson(command.Parameters[3]);
-                        return this.UnassignWorkItemToMember(workItem, member);
+                        return this.UnassignWorkItemToMember(workItem);
                     }
                 case "ListBoardWorkItems":
                     {
@@ -315,14 +325,61 @@ namespace WIMSystem.Core
 
         }
 
-        private string UnassignWorkItemToMember(IWorkItem workItem, IPerson member)
+        private IAssignableWorkItem GetAssignableWorkItem(IBoard board, string assignableWorkItemTitle)
         {
-            throw new NotImplementedException();
+            if (board.BoardWorkItems[assignableWorkItemTitle] is IAssignableWorkItem)
+            {
+                return (IAssignableWorkItem)board.BoardWorkItems[assignableWorkItemTitle];
+            }
+            throw new ArgumentException(string.Format($"{board.BoardWorkItems[assignableWorkItemTitle].GetType().Name} is not assignable work item!"));
         }
 
-        private string AssignWorkItemToMember(IWorkItem workItem, IPerson member)
+        private string UnassignWorkItemToMember(IAssignableWorkItem workItem)
         {
-            throw new NotImplementedException();
+
+            if (Validators.IsNullValue(workItem))
+            {
+                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+                    nameof(WorkItem)
+                    ));
+            }
+            if (!(workItem is IAssignableWorkItem))
+            {
+                throw new ArgumentException(string.Format($"Members can not be assigned to {workItem.GetType().Name}!"));
+            }
+            var member = workItem.Assignee;
+            workItem.UnassignMember();
+            member.MemberWorkItems.Remove(workItem);
+            return string.Format(WorkItemUnAssigned, workItem.Title, member.PersonName);
+        }
+
+        private string AssignWorkItemToMember(IAssignableWorkItem workItem, IPerson member)
+        {
+
+            if (Validators.IsNullValue(workItem))
+            {
+                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+                    nameof(WorkItem)
+                    ));
+            }
+            if (Validators.IsNullValue(member))
+            {
+                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+                    nameof(member)
+                    ));
+            }
+            if (!(workItem is IAssignableWorkItem))
+            {
+                throw new ArgumentException(string.Format($"Members can not be assigned to {workItem.GetType().Name}!"));
+            }
+            if (!member.IsMember)
+            {
+                throw new ArgumentException(string.Format($"{member.PersonName} is not a member of any team!"));
+
+            }
+            workItem.AssignMember(member);
+            member.MemberWorkItems.Add(workItem);
+            return string.Format(WorkItemUnAssigned, workItem.Title, member.PersonName);
         }
 
         private string ListBoardWorkItems(IBoard board, Type filterType, string filterStatus, IPerson filterAssignee, string sortBy)
@@ -330,80 +387,183 @@ namespace WIMSystem.Core
             throw new NotImplementedException();
         }
 
-        private object NormalizeParameter(string v)
-        {
-            throw new NotImplementedException();
-        }
-
         private string ChangeStatusOfFeedback(IWorkItem workItem, FeedbackStatusType status)
         {
-            throw new NotImplementedException();
+            if (Validators.IsNullValue(workItem))
+            {
+                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+                    nameof(WorkItem)
+                    ));
+            }
+            if (!(workItem is IFeedback))
+            {
+                throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Feedback)}!"));
+            }
+            ((IFeedback)workItem).FeedbackStatus = status;
+            return string.Format(WorkItemStatusChange, workItem.Title, status);
         }
 
-        private string ChangeRatingOfFeedback(IWorkItem workItem, int priority)
+        private string ChangeRatingOfFeedback(IWorkItem workItem, int rating)
         {
-            throw new NotImplementedException();
+            if (Validators.IsNullValue(workItem))
+            {
+                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+                    nameof(WorkItem)
+                    ));
+            }
+            if (!(workItem is IFeedback))
+            {
+                throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Feedback)}!"));
+            }
+            ((IFeedback)workItem).Rating = rating;
+            return string.Format(FeedbackRatingChange, workItem.Title, rating);
         }
 
         private string ChangeStatusOfStory(IWorkItem workItem, StoryStatusType status)
         {
-            throw new NotImplementedException();
+            if (Validators.IsNullValue(workItem))
+            {
+                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+                    nameof(WorkItem)
+                    ));
+            }
+            if (!(workItem is IStory))
+            {
+                throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Story)}!"));
+            }
+            ((IStory)workItem).StoryStatus = status;
+            return string.Format(WorkItemStatusChange, workItem.Title, status);
         }
 
         private string ChangeSizeOfStory(IWorkItem workItem, StorySizeType size)
         {
-            throw new NotImplementedException();
+            if (Validators.IsNullValue(workItem))
+            {
+                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+                    nameof(WorkItem)
+                    ));
+            }
+            if (!(workItem is IStory))
+            {
+                throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Story)}!"));
+            }
+            ((IStory)workItem).StorySize = size;
+            return string.Format(StorySizeChange, workItem.Title, size);
         }
 
         private string ChangeStatusOfBug(IWorkItem workItem, BugStatusType status)
         {
-            throw new NotImplementedException();
+            if (Validators.IsNullValue(workItem))
+            {
+                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+                    nameof(WorkItem)
+                    ));
+            }
+            if (!(workItem is IBug))
+            {
+                throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Bug)}!"));
+            }
+            ((IBug)workItem).BugStatus = status;
+            return string.Format(WorkItemStatusChange, workItem.Title, status);
         }
 
         private string ChangeSeverityOfBug(IWorkItem workItem, BugSeverityType severity)
         {
-            throw new NotImplementedException();
+            if (Validators.IsNullValue(workItem))
+            {
+                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+                    nameof(WorkItem)
+                    ));
+            }
+            if (!(workItem is IBug))
+            {
+                throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Bug)}!"));
+            }
+            ((IBug)workItem).Severity = severity;
+            return string.Format(WorkItemStatusChange, workItem.Title, severity);
+        }
+
+        private string ChangePriority(IAssignableWorkItem workItem, PriorityType priority)
+        {
+            if (Validators.IsNullValue(workItem))
+            {
+                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+                    nameof(WorkItem)
+                    ));
+            }
+            if (!(workItem is IAssignableWorkItem))
+            {
+                throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Feedback)}!"));
+            }
+            workItem.Priority = priority;
+            return string.Format(WorkItemStatusChange, workItem.Title, priority);
         }
 
         private string ShowBoardActivity(IBoard board)
         {
-            throw new NotImplementedException();
+            if (Validators.IsNullValue(board))
+            {
+                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+                    nameof(board)
+                    ));
+            }
+            return board.ShowBoardActivity();
         }
 
-        private string ShowAllTeamBoards(IBoard board)
+        private string ShowAllTeamBoards(ITeam team)
         {
-            throw new NotImplementedException();
+            if (Validators.IsNullValue(team))
+            {
+                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+                    nameof(team)
+                    ));
+            }
+            return team.ShowAllTeamBoards();
         }
 
         private string ShowAllTeamMembers(ITeam team)
         {
-            throw new NotImplementedException();
+            if (Validators.IsNullValue(team))
+            {
+                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+                    nameof(team)
+                    ));
+            }
+            return team.ShowAllTeamMembers();
         }
 
         private string ShowTeamActivity(ITeam team)
         {
-            throw new NotImplementedException();
+            if (Validators.IsNullValue(team))
+            {
+                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+                    nameof(team)
+                    ));
+            }
+            return team.ShowAllTeamMembers();
         }
 
         private string ShowAllTeams()
         {
-            throw new NotImplementedException();
+            return wimTeams.ShowAllTeams();
         }
 
         private string ShowPersonActivity(IPerson person)
         {
-            throw new NotImplementedException();
+            if (Validators.IsNullValue(person))
+            {
+                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+                    nameof(person)
+                    ));
+            }
+            return person.ShowPersonActivity();  
         }
 
         private string ShowAllPeople()
         {
-            throw new NotImplementedException();
+            return this.personList.ShowAllPeople;
         }
 
-        private string ChangePriority(IWorkItem workItem, PriorityType newPriority)
-        {
-            throw new NotImplementedException();
-        }
 
         private string CreateTeam(string teamName)
         {
@@ -553,7 +713,7 @@ namespace WIMSystem.Core
 
         private IWorkItem GetWorkItem(IBoard board, string workItemAsString)
         {
-            return null;
+            return board.BoardWorkItems[workItemAsString];
         }
 
     }

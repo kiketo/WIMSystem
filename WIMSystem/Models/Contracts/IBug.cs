@@ -9,8 +9,8 @@ namespace WIMSystem.Models.Contracts
     public interface IBug : IAssignableWorkItem, IWorkItem
     {
         IList<string> StepsToReproduce { get; }
-        BugSeverityType Severity { get; }
-        BugStatusType BugStatus { get; }
+        BugSeverityType Severity { get; set; }
+        BugStatusType BugStatus { get; set; }
 
         void ChangeSeverity(string severity);
         void ChangeStatus(string status);

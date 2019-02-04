@@ -40,9 +40,9 @@ namespace WIMSystem.Models
             }
         }
 
-        public BugSeverityType Severity { get; private set; }
+        public BugSeverityType Severity { get; set; }
 
-        public BugStatusType BugStatus { get ; private set; }
+        public BugStatusType BugStatus { get ; set; }
 
         public void ChangeSeverity(string severity)
         {
