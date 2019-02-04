@@ -171,13 +171,13 @@ namespace WIMSystem.Core
         {
             if (this.wimTeams.Contains(memberName))
             {
-                throw new ArgumentException(string.Format(ObjectExists, nameof(Member), memberName));
+                throw new ArgumentException(string.Format(ObjectExists, nameof(Person), memberName));
             }
 
             var member = this.factory.CreateMember(memberName, this.membersList);
             this.membersList.AddMember(member);
 
-            return string.Format(ObjectCreated, nameof(Member), memberName);
+            return string.Format(ObjectCreated, nameof(Person), memberName);
         }
 
         private string CreateBoard(string boardName, ITeam team)
@@ -193,16 +193,16 @@ namespace WIMSystem.Core
 
         }
 
-        private string AddMemberToTeam(ITeam teamToAddTo, IMember memberForAdding)
+        private string AddMemberToTeam(ITeam teamToAddTo, IPerson memberForAdding)
         {
             teamToAddTo.AddMemberToTeam(memberForAdding);
-            return string.Format(ObjectAddedToTeam, nameof(Member), memberForAdding.MemberName, teamToAddTo.TeamName);
+            return string.Format(ObjectAddedToTeam, nameof(Person), memberForAdding.MemberName, teamToAddTo.TeamName);
         }
 
-        private string RemoveMemberFromTeam(ITeam teamToRemoveFrom, IMember memberForRemoving)
+        private string RemoveMemberFromTeam(ITeam teamToRemoveFrom, IPerson memberForRemoving)
         {
             teamToRemoveFrom.RemoveMemberFromTeam(memberForRemoving);
-            return string.Format(ObjectRemovedFromTeam, nameof(Member), memberForRemoving.MemberName, teamToRemoveFrom.TeamName);
+            return string.Format(ObjectRemovedFromTeam, nameof(Person), memberForRemoving.MemberName, teamToRemoveFrom.TeamName);
 
         }
 
@@ -236,7 +236,7 @@ namespace WIMSystem.Core
 
         }
 
-        private string CreateStory(string storyTitle, string storyDescription, PriorityType storyPriority, StorySizeType storySize, IBoard board, IMember storyAssignee = null)
+        private string CreateStory(string storyTitle, string storyDescription, PriorityType storyPriority, StorySizeType storySize, IBoard board, IPerson storyAssignee = null)
         {
             var story = this.factory.CreateStory(storyTitle, storyDescription, storyPriority, storySize, board, storyAssignee);
             if (story == null)
@@ -249,7 +249,7 @@ namespace WIMSystem.Core
             return string.Format(ObjectCreated, nameof(Story), story.Title);
         }
 
-        private string CreateBug(string bugTitle, string bugDescription, List<string> stepsToReproduce, PriorityType bugPriority, BugSeverityType bugSeverity, IBoard board, IMember bugAssignee)
+        private string CreateBug(string bugTitle, string bugDescription, List<string> stepsToReproduce, PriorityType bugPriority, BugSeverityType bugSeverity, IBoard board, IPerson bugAssignee)
         {
             var bug = this.factory.CreateBug(bugTitle, bugDescription, stepsToReproduce, bugPriority, bugSeverity, board, bugAssignee);
             if (bug == null)
@@ -275,7 +275,7 @@ namespace WIMSystem.Core
             //writer.Write(output.ToString());
         }
 
-        private IMember GetMember(string memberAsString)
+        private IPerson GetMember(string memberAsString)
         {
             var member = this.membersList[memberAsString];
             return member;

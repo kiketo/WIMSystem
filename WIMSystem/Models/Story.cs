@@ -10,7 +10,7 @@ namespace WIMSystem.Models
     public class Story : AssignableWorkItem, IStory, IAssignableWorkItem, IWorkItem
     {
         public Story(string title, string description, PriorityType priority,
-            StorySizeType storySize, IBoard board, IMember assignee=null) //assignee is optional?
+            StorySizeType storySize, IBoard board, IPerson assignee=null) //assignee is optional?
             : base(title, description,priority,board,assignee)
         {
             this.StorySize = storySize;

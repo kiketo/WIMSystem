@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WIMSystem.Models.Contracts
 {
-    public interface IMember
+    public interface IPerson
     {
         string MemberName { get; }
         IList<IWorkItem> MemberWorkItems { get; }

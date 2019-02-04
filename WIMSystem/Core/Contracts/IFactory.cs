@@ -8,12 +8,12 @@ namespace WIMSystem.Core.Contracts
     public interface IFactory
     {
         IBoard CreateBoard(string name, ITeam team);
-        IBug CreateBug(string title, string description, IList<string> stepsToReproduce, PriorityType priority, BugSeverityType severity, IBoard board, IMember assignee = null);
-        IComment CreateComment(string message, IMember author);
+        IBug CreateBug(string title, string description, IList<string> stepsToReproduce, PriorityType priority, BugSeverityType severity, IBoard board, IPerson assignee = null);
+        IComment CreateComment(string message, IPerson author);
         IFeedback CreateFeedback(string title, string description, int rating, IBoard board);
-        IHistoryItem CreateHistoryItem(string description, IMember member, IBoard board, ITeam team);
-        IMember CreateMember(string memberName, IMembersCollection membersCollection);
-        IStory CreateStory(string title, string description, PriorityType priority, StorySizeType storySize, IBoard board, IMember assignee = null);
+        IHistoryItem CreateHistoryItem(string description, IPerson member, IBoard board, ITeam team);
+        IPerson CreateMember(string memberName, IMembersCollection membersCollection);
+        IStory CreateStory(string title, string description, PriorityType priority, StorySizeType storySize, IBoard board, IPerson assignee = null);
         ITeam CreateTeam(string teamName, IWIMTeams teamsList);
     }
 }

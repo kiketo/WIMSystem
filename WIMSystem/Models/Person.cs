@@ -5,7 +5,7 @@ using WIMSystem.Models.Contracts;
 
 namespace WIMSystem.Models
 {
-    public class Member : IMember
+    public class Person : IPerson
     {
         #region Fields
         private string memberName;
@@ -13,7 +13,7 @@ namespace WIMSystem.Models
         private IMembersCollection membersCollection;
         #endregion
         #region Ctor
-        public Member(string memberName,IMembersCollection membersCollection)
+        public Person(string memberName,IMembersCollection membersCollection)
         {
             this.MemberName = memberName;
             memberWorkItem = new List<IWorkItem>();
