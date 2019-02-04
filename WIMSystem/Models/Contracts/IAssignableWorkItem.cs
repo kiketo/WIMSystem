@@ -14,5 +14,7 @@ namespace WIMSystem.Models.Contracts
         void AssignMember(IMember member);
 
         void UnassignMember();
+
+        void ChangePriority(string priority);
     }
 }

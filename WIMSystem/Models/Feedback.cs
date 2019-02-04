@@ -7,7 +7,7 @@ using WIMSystem.Models.Enums;
 
 namespace WIMSystem.Models
 {
-    public class Feedback : WorkItem, IFeedback
+    public class Feedback : WorkItem, IFeedback, IWorkItem
     {
         public Feedback(string title, string description, int rating, IBoard board) 
             :base (title,description,board)
@@ -16,8 +16,35 @@ namespace WIMSystem.Models
             this.FeedbackStatus = FeedbackStatusType.Unscheduled;
         }
 
-        public int Rating { get; set; } //what is rating and how do we check it?
+        public int Rating { get; private set; } //what is rating and how do we check it?
 
-        public FeedbackStatusType FeedbackStatus { get; set; }
+        public FeedbackStatusType FeedbackStatus { get; private set; }
+
+        public void ChangeRating(int rating)
+        {
+            if(rating<0)
+            {
+                throw new ArgumentOutOfRangeException("rating", "Rating cannot be negative!");
+            }
+
+            else
+            {
+                this.Rating = rating;
+            }
+        }
+
+        public void ChangeStatus(string status)
+        {
+            if (status == null)
+            {
+                throw new ArgumentNullException("status", "Status cannot be null or empty!");
+            }
+
+            else
+            {
+                FeedbackStatusType statusEnum = (FeedbackStatusType)Enum.Parse(typeof(FeedbackStatusType), status, true);
+                this.FeedbackStatus = statusEnum;
+            }
+        }
     }
 }

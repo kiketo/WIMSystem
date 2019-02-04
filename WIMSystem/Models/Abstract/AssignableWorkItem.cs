@@ -6,7 +6,7 @@ using WIMSystem.Models.Enums;
 
 namespace WIMSystem.Models.Abstract
 {
-    public abstract class AssignableWorkItem : WorkItem, IAssignableWorkItem
+    public abstract class AssignableWorkItem : WorkItem, IAssignableWorkItem, IWorkItem
     {
         public AssignableWorkItem(string title, string description, PriorityType priority, IBoard board, IMember assignee = null)
             :base (title,description,board)
@@ -31,6 +31,12 @@ namespace WIMSystem.Models.Abstract
         public void UnassignMember()
         {
             this.Assignee = null;
+        }
+
+        public void ChangePriority(string priority)
+        {
+            PriorityType priorityEnum = (PriorityType)Enum.Parse(typeof(PriorityType), priority, true);
+            this.Priority = priorityEnum;
         }
 
     }

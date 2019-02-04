@@ -17,8 +17,36 @@ namespace WIMSystem.Models
             this.StoryStatus = StoryStatusType.NotDone;
         }
 
-        public StorySizeType StorySize { get; set; }
+        public StorySizeType StorySize { get; private set; }
 
-        public StoryStatusType StoryStatus { get; set; }
+        public StoryStatusType StoryStatus { get; private set; }
+
+        public void ChangeSize(string size)
+        {
+            if (size == null)
+            {
+                throw new ArgumentNullException("size", "Size cannot be null or empty!");
+            }
+
+            else
+            {
+                StorySizeType sizeEnum = (StorySizeType)Enum.Parse(typeof(StorySizeType), size, true);
+                this.StorySize = sizeEnum;
+            }
+        }
+
+        public void ChangeStatus(string status)
+        {
+            if (status == null)
+            {
+                throw new ArgumentNullException("status", "Status cannot be null or empty!");
+            }
+
+            else
+            {
+                StoryStatusType statusEnum = (StoryStatusType)Enum.Parse(typeof(StoryStatusType), status, true);
+                this.StoryStatus = statusEnum;
+            }
+        }
     }
 }

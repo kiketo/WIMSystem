@@ -8,7 +8,7 @@ using WIMSystem.Models.Enums;
 
 namespace WIMSystem.Models
 {
-    public class Bug : AssignableWorkItem, IBug
+    public class Bug : AssignableWorkItem, IBug, IAssignableWorkItem, IWorkItem
     {
         private readonly IList<string> stepsToReproduce;
 
@@ -40,8 +40,36 @@ namespace WIMSystem.Models
             }
         }
 
-        public BugSeverityType Severity { get; set; }
+        public BugSeverityType Severity { get; private set; }
 
-        public BugStatusType BugStatus { get ; set ; }
+        public BugStatusType BugStatus { get ; private set; }
+
+        public void ChangeSeverity(string severity)
+        {
+            if (severity == null)
+            {
+                throw new ArgumentNullException("severity", "Severity cannot be null or empty!");
+            }
+
+            else
+            {
+                BugSeverityType severityEnum = (BugSeverityType)Enum.Parse(typeof(BugSeverityType), severity, true);
+                this.Severity = severityEnum;
+            }
+        }
+
+        public void ChangeStatus(string status)
+        {
+            if (status == null)
+            {
+                throw new ArgumentNullException("status", "Status cannot be null or empty!");
+            }
+
+            else
+            {
+                BugStatusType statusEnum = (BugStatusType)Enum.Parse(typeof(BugStatusType), status, true);
+                this.BugStatus = statusEnum;
+            }
+        }
     }
 }
