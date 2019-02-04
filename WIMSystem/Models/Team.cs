@@ -76,7 +76,7 @@ namespace WIMSystem.Models
 
             if (this.memberList.Contains(member))
             {
-                throw new ArgumentException($"This team already has {member.MemberName}");
+                throw new ArgumentException($"This team already has {member.PersonName}");
             }
 
             else
@@ -96,7 +96,7 @@ namespace WIMSystem.Models
 
             if (!this.memberList.Contains(member))
             {
-                throw new ArgumentException($"This team does not has {member.MemberName} member.");
+                throw new ArgumentException($"This team does not has {member.PersonName} member.");
             }
 
             else

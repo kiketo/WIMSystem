@@ -4,10 +4,10 @@ using System.Text;
 
 namespace WIMSystem.Models.Contracts
 {
-    public interface IMembersCollection
+    public interface IPersonsCollection
     {
-        IDictionary<string, IPerson> Members { get; }
-        void AddMember(IPerson newMember);
+        IDictionary<string, IPerson> Persons { get; }
+        void AddPerson(IPerson newPerson);
         bool Contains(string name);
         IPerson this[string index] { get; }
     }

@@ -25,6 +25,7 @@ namespace WIMSystem.Models.Abstract
             {
                 throw new ArgumentNullException("member", "Member cannot be null or empty!");
             }
+
             this.Assignee = member;
         }
 

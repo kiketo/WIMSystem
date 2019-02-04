@@ -36,7 +36,7 @@ namespace WIMSystem.Models
         {
             get
             {
-                return this.stepsToReproduce;
+                return new List<string>(this.stepsToReproduce);
             }
         }
 

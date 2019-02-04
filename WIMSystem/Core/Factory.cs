@@ -16,9 +16,9 @@ namespace WIMSystem.Core
             return WIMTeams.Instance;
         }
 
-        public IMembersCollection CreateMembersColection()
+        public IPersonsCollection CreateMembersColection()
         {
-            return MembersCollection.Instance;
+            return PersonsCollection.Instance;
         }
 
         public ITeam CreateTeam(string teamName, IWIMTeams teamsList)
@@ -26,7 +26,7 @@ namespace WIMSystem.Core
             return new Team(teamName, teamsList);
         }
 
-        public IPerson CreateMember(string memberName, IMembersCollection membersCollection)
+        public IPerson CreateMember(string memberName, IPersonsCollection membersCollection)
         {
             return new Person(memberName, membersCollection);
         }

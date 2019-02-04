@@ -8,25 +8,25 @@ namespace WIMSystem.Models
     public class Person : IPerson
     {
         #region Fields
-        private string memberName;
+        private string personName;
         private IList<IWorkItem> memberWorkItem;
-        private IMembersCollection membersCollection;
+        private IPersonsCollection personsCollection;
         #endregion
         #region Ctor
-        public Person(string memberName,IMembersCollection membersCollection)
+        public Person(string personName,IPersonsCollection personsCollection)
         {
-            this.MemberName = memberName;
+            this.PersonName = personName;
             memberWorkItem = new List<IWorkItem>();
-            this.membersCollection = membersCollection;
+            this.personsCollection = personsCollection;
         }
         #endregion
         #region Prop
 
-        public string MemberName
+        public string PersonName
         {
             get
             {
-                return this.memberName;
+                return this.personName;
             }
             private set
             {
@@ -42,7 +42,7 @@ namespace WIMSystem.Models
                 //else
                 //{
                 //}
-                    this.memberName = value;
+                    this.personName = value;
             }
         }
 

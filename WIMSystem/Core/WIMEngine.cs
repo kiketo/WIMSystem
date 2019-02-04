@@ -25,9 +25,9 @@ namespace WIMSystem.Core
 
         private readonly IFactory factory;
         private readonly IWIMTeams wimTeams;
-        private readonly IMembersCollection membersList;
+        private readonly IPersonsCollection membersList;
 
-        public WIMEngine(IFactory factory, IWIMTeams wimTeams, IMembersCollection membersList)
+        public WIMEngine(IFactory factory, IWIMTeams wimTeams, IPersonsCollection membersList)
         {
             this.factory = factory;
             this.wimTeams = wimTeams;
@@ -175,7 +175,7 @@ namespace WIMSystem.Core
             }
 
             var member = this.factory.CreateMember(memberName, this.membersList);
-            this.membersList.AddMember(member);
+            this.membersList.AddPerson(member);
 
             return string.Format(ObjectCreated, nameof(Person), memberName);
         }
@@ -196,13 +196,13 @@ namespace WIMSystem.Core
         private string AddMemberToTeam(ITeam teamToAddTo, IPerson memberForAdding)
         {
             teamToAddTo.AddMemberToTeam(memberForAdding);
-            return string.Format(ObjectAddedToTeam, nameof(Person), memberForAdding.MemberName, teamToAddTo.TeamName);
+            return string.Format(ObjectAddedToTeam, nameof(Person), memberForAdding.PersonName, teamToAddTo.TeamName);
         }
 
         private string RemoveMemberFromTeam(ITeam teamToRemoveFrom, IPerson memberForRemoving)
         {
             teamToRemoveFrom.RemoveMemberFromTeam(memberForRemoving);
-            return string.Format(ObjectRemovedFromTeam, nameof(Person), memberForRemoving.MemberName, teamToRemoveFrom.TeamName);
+            return string.Format(ObjectRemovedFromTeam, nameof(Person), memberForRemoving.PersonName, teamToRemoveFrom.TeamName);
 
         }
 

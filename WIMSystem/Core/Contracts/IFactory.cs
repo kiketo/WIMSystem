@@ -12,7 +12,7 @@ namespace WIMSystem.Core.Contracts
         IComment CreateComment(string message, IPerson author);
         IFeedback CreateFeedback(string title, string description, int rating, IBoard board);
         IHistoryItem CreateHistoryItem(string description, IPerson member, IBoard board, ITeam team);
-        IPerson CreateMember(string memberName, IMembersCollection membersCollection);
+        IPerson CreateMember(string memberName, IPersonsCollection membersCollection);
         IStory CreateStory(string title, string description, PriorityType priority, StorySizeType storySize, IBoard board, IPerson assignee = null);
         ITeam CreateTeam(string teamName, IWIMTeams teamsList);
     }

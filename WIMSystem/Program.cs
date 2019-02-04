@@ -13,7 +13,7 @@ namespace WIMSystem
 
             var factory = new Factory();
             var teamList = WIMTeams.Instance;
-            var memberLits = MembersCollection.Instance;
+            var memberLits = PersonsCollection.Instance;
             var commandParser = new MenuCommandParser();
             var engine = new WIMEngine(factory,teamList,memberLits);
 
