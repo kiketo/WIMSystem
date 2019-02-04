@@ -16,7 +16,6 @@ namespace WIMSystem.Models
             this.BoardName = boardName;
             boardWorkItems = new Dictionary<string, IWorkItem>();
             this.Team = team;
-
         }
 
         public string BoardName
@@ -25,21 +24,23 @@ namespace WIMSystem.Models
             {
                 return this.boardName;
             }
+
             private set
             {
                 if (value.Length<5||value.Length>10)
                 {
                     throw new ArgumentOutOfRangeException("Board name should be between 5 and 10 symbols.");
                 }
+
                 //Board name should be unique in the team
                 if (team.BoardList.ContainsKey(value))
                 {
                     Console.WriteLine("Board with the same name already exists in the current Team.");
                 }
+
                 else
                 {
                     this.boardName = value;
-
                 }
             }
         }
@@ -58,12 +59,14 @@ namespace WIMSystem.Models
             {
                 return this.team;
             }
+
             private set
             {
                 if(value==null)
                 {
                     throw new ArgumentNullException("team", "Team cannot be null!");
                 }
+
                 this.team = value;
             }
         }

@@ -8,7 +8,6 @@ namespace WIMSystem.Models.Contracts
 {
     public interface IStory : IAssignableWorkItem
     {
-        PriorityType Priority { get; set; }
         StorySizeType StorySize { get; set; }
         StoryStatusType StoryStatus { get; set; }
     }

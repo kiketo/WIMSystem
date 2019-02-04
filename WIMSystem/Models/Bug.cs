@@ -14,18 +14,19 @@ namespace WIMSystem.Models
 
         public Bug(string title, string description, IList<string> stepsToReproduce,
             PriorityType priority, BugSeverityType severity, IBoard board, IMember assignee=null) // assignee is optional?
-            : base(title, description,board,assignee)
+            : base(title, description,priority,board,assignee)
         {
             if (stepsToReproduce == null)
             {
-                throw new ArgumentNullException("stepsToReproduce");
+                throw new ArgumentNullException("stepsToReproduce","Steps to reproduce cannot be null!");
             }
+
             if (!stepsToReproduce.Any())
             {
                 throw new ArgumentException("stepsToReproduce", "There must be at least one step to reproduce for the bug!");
             }
+
             this.stepsToReproduce = stepsToReproduce;
-            this.Priority = priority;
             this.Severity = severity;
             this.BugStatus = BugStatusType.Active;
             
@@ -38,8 +39,6 @@ namespace WIMSystem.Models
                 return this.stepsToReproduce;
             }
         }
-
-        public PriorityType Priority { get; set; }
 
         public BugSeverityType Severity { get; set; }
 
