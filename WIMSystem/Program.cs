@@ -14,8 +14,9 @@ namespace WIMSystem
             var factory = new Factory();
             var teamList = WIMTeams.Instance;
             var memberLits = PersonsCollection.Instance;
+            var historyItemsList = HistoryItemsCollection.Instance;
             var commandParser = new MenuCommandParser();
-            var engine = new WIMEngine(factory,teamList,memberLits);
+            var engine = new WIMEngine(factory,teamList,memberLits,historyItemsList);
 
             var mainMenu = new MainMenu(
                 engine,

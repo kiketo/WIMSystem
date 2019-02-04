@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace Cosmetics.Helper
+namespace Utils
 {
     public static class Validators
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Cosmetics.Helper
+namespace Utils
 {
     internal static class Consts
     {
