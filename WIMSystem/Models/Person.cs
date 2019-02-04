@@ -10,14 +10,12 @@ namespace WIMSystem.Models
         #region Fields
         private string personName;
         private IList<IWorkItem> memberWorkItem;
-        private IPersonsCollection personsCollection;
         #endregion
         #region Ctor
-        public Person(string personName,IPersonsCollection personsCollection)
+        public Person(string personName)
         {
             this.PersonName = personName;
             memberWorkItem = new List<IWorkItem>();
-            this.personsCollection = personsCollection;
         }
         #endregion
         #region Prop
@@ -35,14 +33,7 @@ namespace WIMSystem.Models
                     throw new ArgumentOutOfRangeException("Members name should be between 5 and 15 symbols.");
                 }
                 //Name should be unique in the application
-                //if(membersCollection.Contains(value))
-                //{
-                //    Console.WriteLine("Trqbva da se prepravi!");
-                //}
-                //else
-                //{
-                //}
-                    this.personName = value;
+                this.personName = value;
             }
         }
 
@@ -57,10 +48,6 @@ namespace WIMSystem.Models
                 this.memberWorkItem = value;
             }
         }
-
-        
-
-
         #endregion
         #region Methods
 
