@@ -115,11 +115,11 @@ namespace WIMSystem.Core
                         return this.CreateBoard(boardName, team);
                     }
 
-                case "AddMemberToTeam":
+                case "AddPersonToTeam":
                     {
-                        var teamToAddTo = this.GetTeam(command.Parameters[0]);
-                        var memberForAdding = this.GetPerson(command.Parameters[1]);
-                        return this.AddMemberToTeam(teamToAddTo, memberForAdding);
+                        var memberForAdding = this.GetPerson(command.Parameters[0]);
+                        var teamToAddTo = this.GetTeam(command.Parameters[1]);
+                        return this.AddMemberToTeam(memberForAdding, teamToAddTo);
                     }
 
                 case "RemoveMemberFromTeam":
@@ -138,23 +138,23 @@ namespace WIMSystem.Core
                         var bugSeverity = StringToEnum<BugSeverityType>.Convert(command.Parameters[4]);
                         var teamName = command.Parameters[5];
                         var board = this.GetBoard(teamName, command.Parameters[6]);
-                        var bugAssignee = this.GetPerson(command.Parameters[7]);
+                        //var bugAssignee = this.GetPerson(command.Parameters[7]);
                         //var bugComments = command.Parameters[6].Trim().Split(SPLIT_CHAR).ToList();
 
-                        return this.CreateBug(bugTitle, bugDescription, stepsToReproduce, bugPriority, bugSeverity, board, bugAssignee);
+                        return this.CreateBug(bugTitle, bugDescription, stepsToReproduce, bugPriority, bugSeverity, board);
                     }
 
                 case "CreateStory":
                     {
                         var storyTitle = command.Parameters[0];
                         var storyDescription = command.Parameters[1];
-                        var storyPriority = StringToEnum<PriorityType>.Convert(command.Parameters[3]);
-                        var storySize = StringToEnum<StorySizeType>.Convert(command.Parameters[4]);
-                        var teamName = command.Parameters[5];
-                        var board = this.GetBoard(teamName, command.Parameters[6]);
-                        var storyAssignee = this.GetPerson(command.Parameters[7]);
+                        var storyPriority = StringToEnum<PriorityType>.Convert(command.Parameters[2]);
+                        var storySize = StringToEnum<StorySizeType>.Convert(command.Parameters[3]);
+                        var teamName = command.Parameters[4];
+                        var board = this.GetBoard(teamName, command.Parameters[5]);
+                        //var storyAssignee = this.GetPerson(command.Parameters[7]);
 
-                        return this.CreateStory(storyTitle, storyDescription, storyPriority, storySize, board, storyAssignee);
+                        return this.CreateStory(storyTitle, storyDescription, storyPriority, storySize, board);//, storyAssignee);
                     }
 
                 case "CreateFeedback":
@@ -164,20 +164,19 @@ namespace WIMSystem.Core
                         var feedbackRating = int.Parse(command.Parameters[2]);
                         var teamName = command.Parameters[3];
                         var board = this.GetBoard(teamName, command.Parameters[4]);
-
                         return this.CreateFeedback(feedbackTitle, feedbackDescription, feedbackRating, board);
                     }
 
-                case "AddComment":
-                    {
-                        var teamName = this.GetTeam(command.Parameters[0]);
-                        var boardName = this.GetBoard(teamName.TeamName, command.Parameters[1]);
-                        var workItemTitle = this.GetWorkItem(boardName, command.Parameters[2]);
-                        var comment = command.Parameters[3];
-                        var authorName = this.Get
+                //case "AddComment":
+                //    {
+                //        var teamName = this.GetTeam(command.Parameters[0]);
+                //        var boardName = this.GetBoard(teamName.TeamName, command.Parameters[1]);
+                //        var workItemTitle = this.GetWorkItem(boardName, command.Parameters[2]);
+                //        var comment = command.Parameters[3];
+                //        var authorName = this.Get
 
-                        return this.AddComment()
-                    }
+                //        return this.AddComment()
+                //    }
 
                 case "ShowAllPeople":
                     {
@@ -261,7 +260,7 @@ namespace WIMSystem.Core
                         var member = this.GetPerson(command.Parameters[3]);
                         return this.AssignWorkItemToMember(workItem, member);
                     }
-                case "UnassignWorkItemToMember":
+                case "UnassignWorkItem":
                     {
                         var teamName = command.Parameters[0];
                         var board = this.GetBoard(teamName, command.Parameters[1]);
@@ -364,7 +363,7 @@ namespace WIMSystem.Core
 
             workItem.AssignMember(member);
             member.MemberWorkItems.Add(workItem);
-            return string.Format(WorkItemUnAssigned, workItem.Title, member.PersonName);
+            return string.Format(WorkItemAssigned, workItem.Title, member.PersonName);
         }
 
         private string ListBoardWorkItems(IBoard board, Type filterType, string filterStatus, IPerson filterAssignee, string sortBy)
@@ -456,7 +455,7 @@ namespace WIMSystem.Core
                     nameof(board)
                     ));
             }
-            return board.ShowBoardActivity();
+            return "";//TODO board.ShowBoardActivity();
         }
 
         private string ShowAllTeamBoards(ITeam team)
@@ -505,12 +504,12 @@ namespace WIMSystem.Core
                     nameof(person)
                     ));
             }
-            return person.ShowPersonActivity();  
+            return "";//TODO person.ShowPersonActivity();  
         }
 
         private string ShowAllPeople()
         {
-            return this.personList.ShowAllPeople;
+            return "";//TODO this.personList.ShowAllPeople;
         }
 
 
@@ -529,7 +528,7 @@ namespace WIMSystem.Core
 
         private string CreatePerson(string personName)
         {
-            if (this.wimTeams.Contains(personName))
+            if (this.personList.Contains(personName))
             {
                 throw new ArgumentException(string.Format(ObjectExists, nameof(Person), personName));
             }
@@ -553,7 +552,7 @@ namespace WIMSystem.Core
 
         }
 
-        private string AddMemberToTeam(ITeam teamToAddTo, IPerson memberForAdding)
+        private string AddMemberToTeam(IPerson memberForAdding, ITeam teamToAddTo)
         {
             teamToAddTo.AddMemberToTeam(memberForAdding);            
             return string.Format(ObjectAddedToTeam, nameof(Person), memberForAdding.PersonName, teamToAddTo.TeamName);
@@ -609,7 +608,7 @@ namespace WIMSystem.Core
             return string.Format(ObjectCreated, nameof(Story), story.Title);
         }
 
-        private string CreateBug(string bugTitle, string bugDescription, List<string> stepsToReproduce, PriorityType bugPriority, BugSeverityType bugSeverity, IBoard board, IPerson bugAssignee)
+        private string CreateBug(string bugTitle, string bugDescription, List<string> stepsToReproduce, PriorityType bugPriority, BugSeverityType bugSeverity, IBoard board, IPerson bugAssignee=null)
         {
             var bug = this.factory.CreateBug(bugTitle, bugDescription, stepsToReproduce, bugPriority, bugSeverity, board, bugAssignee);
 
@@ -623,7 +622,7 @@ namespace WIMSystem.Core
             return string.Format(ObjectCreated, nameof(Bug), bug.Title);
         }
 
-        private string AddComment(string )
+        //private string AddComment(string )
 
         private void PrintReports(IList<string> reports)
         {
@@ -649,8 +648,9 @@ namespace WIMSystem.Core
         {
             var teamResult = this.wimTeams.TeamsList
                             .Select(team => team.Value)
-                            .Where(team => team.MemberList.Any(member => member == memberAsString))
+                            .Where(team => team.MemberList.Any(member => member.PersonName == memberAsString))
                             .Single();
+            return null;
         }
 
         private ITeam GetTeam(string teamAsString)
@@ -662,11 +662,11 @@ namespace WIMSystem.Core
 
         private IBoard GetBoard(string teamName, string boardAsString)
         {
-            var teamResult = this.wimTeams.TeamsList
-                            .Select(team => team.Value)
-                            .Where(team => team.BoardList.Keys.Any(board => board == boardAsString))
-                            .Single();
-            var boardResult = teamResult.BoardList[boardAsString];
+            //var teamResult = this.wimTeams.TeamsList
+            //                .Select(team => team.Value)
+            //                .Where(team => team.BoardList.Keys.Any(board => board == boardAsString))
+            //                .Single();
+            var boardResult = wimTeams[teamName].BoardList[boardAsString];
             return boardResult;
 
         }

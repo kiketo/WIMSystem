@@ -17,10 +17,10 @@ namespace WIMSystem.Models.Abstract
 
         public WorkItem(string title, string description, IBoard board)
         {
+            this.Board = board;
             this.id = IDProvider.GenerateUniqueID();
             this.Title = title;
             this.Description = description;
-            this.Board = board;
             listOfComments = new List<IComment>();
             listOfHistoryItems = new List<IHistoryItem>();
         }

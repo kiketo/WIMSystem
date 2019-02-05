@@ -16,9 +16,9 @@ namespace WIMSystem.Models
 
         public Board(string boardName, ITeam team)
         {
+            this.Team = team;
             this.BoardName = boardName;
             this.boardWorkItems = new Dictionary<string, IWorkItem>();
-            this.Team = team;
         }
 
         public string BoardName
@@ -71,7 +71,16 @@ namespace WIMSystem.Models
 
         public void AddWorkItemToBoard(IWorkItem workItem)
         {
-            throw new NotImplementedException();
+            if (workItem == null)
+            {
+                throw new ArgumentNullException("Work item cannot be null!");
+            }
+            if (this.boardWorkItems.ContainsKey(workItem.Title))
+            {
+
+                throw new ArgumentException(string.Format($"{this.boardName} contains work item with title {workItem.Title}"));
+            }
+            this.boardWorkItems.Add(workItem.Title, workItem);
         }
 
         public string ListWorkItems(Type typeFilter, string statusFilter, IPerson filterMember, string sortBy)

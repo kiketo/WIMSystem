@@ -12,6 +12,5 @@ namespace WIMSystem.Models.Contracts
         StoryStatusType StoryStatus { get; set; }
 
         void ChangeSize(string size);
-        void ChangeStatus(string status);
     }
 }

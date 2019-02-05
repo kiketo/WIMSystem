@@ -16,11 +16,13 @@ namespace WIMSystem
             var memberLits = PersonsCollection.Instance;
             var historyItemsList = HistoryItemsCollection.Instance;
             var commandParser = new MenuCommandParser();
+            var batchParser = new ConsoleCommandParser();
             var engine = new WIMEngine(factory,teamList,memberLits,historyItemsList);
 
             var mainMenu = new MainMenu(
                 engine,
                 commandParser,
+                batchParser,
                 MainMenuItems.mainMenuItems,
                 MainMenuLogo.logo);
             mainMenu.Start();

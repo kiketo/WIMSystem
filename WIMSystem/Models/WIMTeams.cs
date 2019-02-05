@@ -8,9 +8,9 @@ namespace WIMSystem.Models
 {
     public class WIMTeams : IEnumerable<ITeam>, IWIMTeams
     {
-        private IDictionary<string,ITeam> teamsList;
+        private readonly IDictionary<string,ITeam> teamsList;
 
-        private static IWIMTeams instance;
+        private readonly static IWIMTeams instance;
 
         static WIMTeams()
         {

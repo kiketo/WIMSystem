@@ -26,6 +26,11 @@ namespace WIMSystem.Models.Abstract
 
         public void UnassignMember()
         {
+            if (Assignee == null)
+            {
+                throw new ArgumentException(string.Format($"{this.Title} has no assigned member"));
+
+            }
             this.Assignee = null;
         }
 

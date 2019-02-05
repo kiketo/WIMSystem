@@ -1,0 +1,14 @@
+CreateTeam GoshoTeam
+CreatePerson Gosho
+AddPersonToTeam Gosho GoshoTeam
+CreateBoard GoshoBoard GoshoTeam
+CreateBug MyBug67890 BuuuuggggDes go,fast,now 1 Critical GoshoTeam GoshoBoard
+CreateStory MyStory890 StoryDessss Low Small GoshoTeam GoshoBoard
+CreateFeedback MyFeedback FeedBackDessss 1 GoshoTeam GoshoBoard
+ChangeStatus GoshoTeam GoshoBoard MyFeedback Done
+ChangePriority GoshoTeam GoshoBoard MyStory890 High
+ChangeSeverityOfBug GoshoTeam GoshoBoard MyBug67890 Minor
+ChangeSizeOfStory GoshoTeam GoshoBoard MyStory890 Large
+ChangeRatingOfFeedback GoshoTeam GoshoBoard MyFeedback 3
+AssignWorkItemToMember GoshoTeam GoshoBoard MyStory890 Gosho
+UnassignWorkItem GoshoTeam GoshoBoard MyStory890

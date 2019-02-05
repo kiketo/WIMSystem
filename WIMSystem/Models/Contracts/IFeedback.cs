@@ -12,6 +12,5 @@ namespace WIMSystem.Models.Contracts
         FeedbackStatusType FeedbackStatus { get; set; }
 
         void ChangeRating(int rating);
-        void ChangeStatus(string status);
     }
 }
