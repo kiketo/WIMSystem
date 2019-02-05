@@ -61,5 +61,15 @@ namespace WIMSystem.Models
         {
             return this.feedbackStatus;
         }
+
+        public override string ToString()
+        {
+            StringBuilder str = new StringBuilder();
+            str.AppendLine(base.ToString());
+            str.AppendLine($"Rating: {this.Rating}");
+            str.AppendLine($"Feedback status: {this.FeedbackStatus}");
+
+            return str.ToString();
+        }
     }
 }

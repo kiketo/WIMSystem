@@ -39,5 +39,13 @@ namespace WIMSystem.Models
                 return this.author;
             }
         }
+
+        public override string ToString()
+        {
+            StringBuilder str = new StringBuilder();
+            str.AppendLine($"{this.Author.PersonName}: {this.Message}");
+
+            return str.ToString();
+        }
     }
 }

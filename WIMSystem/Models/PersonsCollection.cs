@@ -56,5 +56,24 @@ namespace WIMSystem.Models
                 this.personsList[index] = value;
             }
         }
+
+        public override string ToString()
+        {
+
+            StringBuilder str = new StringBuilder();
+            if (this.Persons.Count>0)
+            {
+                foreach (var person in this.Persons)
+                {
+                    str.AppendLine(this.Persons.Values.ToString());
+                }
+            }
+            else
+            {
+                str.AppendLine("Thare are no persons in the application");
+            }
+
+            return str.ToString();
+        }
     }
 }
