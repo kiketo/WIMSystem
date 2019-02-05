@@ -15,6 +15,7 @@ namespace WIMSystem.Models
         {
             instance = new PersonsCollection();
         }
+
         private PersonsCollection()
         {
             this.personsList = new Dictionary<string, IPerson>();
@@ -37,7 +38,7 @@ namespace WIMSystem.Models
         {
             if (this.personsList.ContainsKey(newPerson.PersonName))
             {
-                throw new ArgumentException($"{nameof(ITeam)} with that name exist!");
+                throw new ArgumentException($"{nameof(ITeam)} with that name exist!"); //Стенли: Не трябва ли да е nameof(IPerson)?
             }
             this.personsList.Add(newPerson.PersonName, newPerson);
         }

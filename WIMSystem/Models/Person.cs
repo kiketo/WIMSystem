@@ -7,18 +7,18 @@ namespace WIMSystem.Models
 {
     public class Person : IPerson
     {
-        #region Fields
+        
         private string personName;
         private IList<IWorkItem> memberWorkItem;
-        #endregion
-        #region Ctor
+        private bool isAssignedToTeam;
+        
+        
         public Person(string personName)
         {
             this.PersonName = personName;
             memberWorkItem = new List<IWorkItem>();
+            this.IsAssignedToTeam = isAssignedToTeam;
         }
-        #endregion
-        #region Prop
 
         public string PersonName
         {
@@ -26,13 +26,14 @@ namespace WIMSystem.Models
             {
                 return this.personName;
             }
+
             private set
             {
                 if (value.Length<5||value.Length>15)
                 {
                     throw new ArgumentOutOfRangeException("Members name should be between 5 and 15 symbols.");
                 }
-                //Name should be unique in the application
+
                 this.personName = value;
             }
         }
@@ -43,14 +44,25 @@ namespace WIMSystem.Models
             {
                 return this.memberWorkItem;
             }
+
             set
             {
                 this.memberWorkItem = value;
             }
         }
-        #endregion
-        #region Methods
 
-        #endregion
+        public bool IsAssignedToTeam
+        {
+            get
+            {
+                return this.isAssignedToTeam;
+            }
+
+            set
+            {
+                this.isAssignedToTeam = value;
+            }
+        }
+
     }
 }

@@ -69,7 +69,9 @@ namespace WIMSystem.Models
 
             else
             {
+                member.IsAssignedToTeam = true;
                 this.memberList.Add(member);
+
                 //return $"{member.MemberName} is added to {this.TeamName} member list";
             }
         }
@@ -89,6 +91,7 @@ namespace WIMSystem.Models
 
             else
             {
+                member.IsAssignedToTeam = false;
                 this.memberList.Remove(member);
                 //return $"{member.MemberName} is removed from {this.TeamName} member list";
             }

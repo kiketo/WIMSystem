@@ -101,10 +101,10 @@ namespace WIMSystem.Core
                         return this.CreateTeam(teamName);
                     }
 
-                case "CreateMember":
+                case "CreatePerson":
                     {
-                        var memberName = command.Parameters[0];
-                        return this.CreateMember(memberName);
+                        var personName = command.Parameters[0];
+                        return this.CreatePerson(personName);
                     }
 
                 case "CreateBoard":
@@ -165,6 +165,11 @@ namespace WIMSystem.Core
                         var board = this.GetBoard(teamName, command.Parameters[4]);
 
                         return this.CreateFeedback(feedbackTitle, feedbackDescription, feedbackRating, board);
+                    }
+
+                case "AddComment":
+                    {
+                        var comment = command.Parameters[0];
                     }
 
                 case "ShowAllPeople":
@@ -361,11 +366,12 @@ namespace WIMSystem.Core
                     ));
             }
 
-            if (!member.IsMember)
+            if (!member.IsAssignedToTeam)
             {
                 throw new ArgumentException(string.Format($"{member.PersonName} is not a member of any team!"));
 
             }
+
             workItem.AssignMember(member);
             member.MemberWorkItems.Add(workItem);
             return string.Format(WorkItemUnAssigned, workItem.Title, member.PersonName);
@@ -567,17 +573,17 @@ namespace WIMSystem.Core
             return string.Format(ObjectCreated, nameof(Team), teamName);
         }
 
-        private string CreateMember(string memberName)
+        private string CreatePerson(string personName)
         {
-            if (this.wimTeams.Contains(memberName))
+            if (this.wimTeams.Contains(personName))
             {
-                throw new ArgumentException(string.Format(ObjectExists, nameof(Person), memberName));
+                throw new ArgumentException(string.Format(ObjectExists, nameof(Person), personName));
             }
 
-            var member = this.factory.CreateMember(memberName, this.personList);
-            this.personList.AddPerson(member);
+            var person = this.factory.CreatePerson(personName);
+            this.personList.AddPerson(person);
 
-            return string.Format(ObjectCreated, nameof(Person), memberName);
+            return string.Format(ObjectCreated, nameof(Person), personName);
         }
 
         private string CreateBoard(string boardName, ITeam team)
@@ -595,7 +601,7 @@ namespace WIMSystem.Core
 
         private string AddMemberToTeam(ITeam teamToAddTo, IPerson memberForAdding)
         {
-            teamToAddTo.AddMemberToTeam(memberForAdding);
+            teamToAddTo.AddMemberToTeam(memberForAdding);            
             return string.Format(ObjectAddedToTeam, nameof(Person), memberForAdding.PersonName, teamToAddTo.TeamName);
         }
 
@@ -652,6 +658,7 @@ namespace WIMSystem.Core
         private string CreateBug(string bugTitle, string bugDescription, List<string> stepsToReproduce, PriorityType bugPriority, BugSeverityType bugSeverity, IBoard board, IPerson bugAssignee)
         {
             var bug = this.factory.CreateBug(bugTitle, bugDescription, stepsToReproduce, bugPriority, bugSeverity, board, bugAssignee);
+
             if (bug == null)
             {
                 throw new ArgumentException(string.Format(ObjectExists, nameof(Bug), bug.Title));
