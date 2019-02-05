@@ -12,6 +12,7 @@ namespace WIMSystem.Models
         private string boardName;
         private readonly IDictionary<string, IWorkItem> boardWorkItems;
         private ITeam team;
+       
 
         public Board(string boardName, ITeam team)
         {
@@ -80,7 +81,7 @@ namespace WIMSystem.Models
                 if (!string.IsNullOrEmpty(statusFilter) || filterMember != null || !string.IsNullOrEmpty(sortBy))
                 {
 
-                    throw new ArgumentException(string.Format($"Type filter must be specified if staus or member filter is used!"));
+                    throw new ArgumentException(string.Format($"Type filter must be specified if status or member filter is used!"));
                 }
             }
             IEnumerable<IWorkItem> filteredCollection = this.boardWorkItems.Select(x => x.Value);
@@ -112,6 +113,6 @@ namespace WIMSystem.Models
             }
             return result.ToString();
         }
-
+                
     }
 }

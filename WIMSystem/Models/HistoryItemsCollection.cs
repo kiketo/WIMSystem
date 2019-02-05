@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using WIMSystem.Models.Contracts;
 
@@ -54,6 +55,32 @@ namespace WIMSystem.Models
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
+        }
+
+        public void ShowBoardActivity(IBoard board)
+        {
+            var filteredActivity = Instance.HistoryItemsList.Where(team=>team.Team.TeamName==board.Team.TeamName);
+            filteredActivity = filteredActivity.Where(x => x.Board.BoardName == board.BoardName);
+
+            Console.WriteLine($"Activity history for board: {board.BoardName} in team: {board.Team.TeamName}");
+            foreach (var item in filteredActivity)
+            {
+                Console.WriteLine(item.FilteredByBoardToString());
+            }
+            
+        }
+
+        public void ShowTeamActivity(ITeam team)
+        {
+            var filteredActivity = Instance.HistoryItemsList.Where(teamm => teamm.Team.TeamName == team.TeamName);
+            
+
+            Console.WriteLine($"Activity history for team: {team.TeamName}");
+            foreach (var item in filteredActivity)
+            {
+                Console.WriteLine(item.FilteredByTeamToString());
+            }
+
         }
     }
 }
