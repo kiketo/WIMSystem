@@ -13,8 +13,8 @@ namespace WIMSystem.Models.Contracts
         void AddMemberToTeam(IPerson member);
         void RemoveBoardFromTeam(IBoard board);
         void RemoveMemberFromTeam(IPerson member);
-        void ShowAllTeamMembers();
-        void ShowAllTeamBoards();
+        string ShowAllTeamMembers();
+        string ShowAllTeamBoards();
 
 
     }

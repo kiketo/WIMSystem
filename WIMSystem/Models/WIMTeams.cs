@@ -82,20 +82,21 @@ namespace WIMSystem.Models
             return this.GetEnumerator();
         }
 
-        public void ShowAllTeams ()
+        public string ShowAllTeams ()
         {
-
+            StringBuilder str = new StringBuilder();
             if (this.TeamsList.Count == 0)
             {
-                Console.WriteLine("There are no teams created!");
+                str.AppendLine("There are no teams created!");
             }
             else
             {
                 foreach (var item in this.TeamsList)
                 {
-                    Console.WriteLine(item.Value.TeamName);
+                    str.AppendLine(item.Value.TeamName);
                 }
             }
+            return str.ToString();
         }
 
         public override string ToString()
