@@ -7,16 +7,16 @@ namespace WIMSystem.Models
 {
     public class Team : ITeam
     {
-    
+
         private string teamName;
         private readonly IList<IPerson> memberList;
         private readonly IDictionary<string, IBoard> boardList;
 
-     
+
         public Team(string teamName)
         {
             this.TeamName = teamName;
-   
+
             this.memberList = new List<IPerson>();
             this.boardList = new Dictionary<string, IBoard>();
         }
@@ -133,7 +133,7 @@ namespace WIMSystem.Models
 
         public void ShowAllTeamMembers()
         {
-            if (this.MemberList.Count==0)
+            if (this.MemberList.Count == 0)
             {
                 Console.WriteLine($"There are no members in team {this.TeamName}!");
             }
@@ -149,7 +149,7 @@ namespace WIMSystem.Models
 
         public void ShowAllTeamBoards()
         {
-            if (this.BoardList.Count==0)
+            if (this.BoardList.Count == 0)
             {
                 Console.WriteLine($"There are no boards in team {this.TeamName}!");
             }
@@ -161,6 +161,14 @@ namespace WIMSystem.Models
                     Console.WriteLine(board.Value.BoardName);
                 }
             }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder str = new StringBuilder();
+
+
+            return
         }
 
     }

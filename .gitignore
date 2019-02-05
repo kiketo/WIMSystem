@@ -331,3 +331,4 @@ ASALocalRun/
 
 #Meld copied original files
 *.orig
+/WIMSystem/Models/DictionaryContainer.cs

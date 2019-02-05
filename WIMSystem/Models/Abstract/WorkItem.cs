@@ -124,5 +124,26 @@ namespace WIMSystem.Models.Abstract
         public abstract void ChangeStatus(string newStatus);
 
         public abstract Enum GetStatus();
+
+        public override string ToString()
+        {
+            StringBuilder str = new StringBuilder();
+            str.AppendLine($"Team: {this.Board.Team.TeamName}");
+            str.AppendLine($"Board: {this.Board.BoardName}");
+            str.AppendLine($"Work Item ID: {this.ID}");
+            str.AppendLine($"Title: {this.Title}");
+            str.AppendLine($"Description: {this.Description}");
+            if (this.ListOfComments.Count > 0)
+            {
+                str.AppendLine("Comments:");
+                foreach (var comment in this.ListOfComments)
+                {
+                    str.AppendLine($"Author: {comment.Author}");
+                    str.AppendLine($"Comment: {comment.Message}");
+                }
+            }
+
+            return str.ToString();
+        }
     }
 }
