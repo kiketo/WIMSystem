@@ -10,5 +10,7 @@ namespace WIMSystem.Models.Contracts
         void AddHistoryItem(IHistoryItem newHistoryItem);
         bool Contains(IHistoryItem historyItem);
         IEnumerator<IHistoryItem> GetEnumerator();
+        void ShowTeamActivity(ITeam team);
+        void ShowBoardActivity(IBoard board);
     }
 }
