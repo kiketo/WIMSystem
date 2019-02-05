@@ -26,6 +26,7 @@ namespace WIMSystem.Models
             {
                 return this.personName;
             }
+
             private set
             {
                 if (value.Length<5||value.Length>15)
@@ -50,7 +51,18 @@ namespace WIMSystem.Models
             }
         }
 
-        public bool IsAssignedToTeam { get; set; }
+        public bool IsAssignedToTeam
+        {
+            get
+            {
+                return this.isAssignedToTeam;
+            }
+
+            set
+            {
+                this.isAssignedToTeam = value;
+            }
+        }
 
     }
 }

@@ -167,6 +167,11 @@ namespace WIMSystem.Core
                         return this.CreateFeedback(feedbackTitle, feedbackDescription, feedbackRating, board);
                     }
 
+                case "AddComment":
+                    {
+                        var comment = command.Parameters[0];
+                    }
+
                 case "ShowAllPeople":
                     {
                         return this.ShowAllPeople();
@@ -361,11 +366,12 @@ namespace WIMSystem.Core
                     ));
             }
 
-            if (!member.IsMember)
+            if (!member.IsAssignedToTeam)
             {
                 throw new ArgumentException(string.Format($"{member.PersonName} is not a member of any team!"));
 
             }
+
             workItem.AssignMember(member);
             member.MemberWorkItems.Add(workItem);
             return string.Format(WorkItemUnAssigned, workItem.Title, member.PersonName);
@@ -652,6 +658,7 @@ namespace WIMSystem.Core
         private string CreateBug(string bugTitle, string bugDescription, List<string> stepsToReproduce, PriorityType bugPriority, BugSeverityType bugSeverity, IBoard board, IPerson bugAssignee)
         {
             var bug = this.factory.CreateBug(bugTitle, bugDescription, stepsToReproduce, bugPriority, bugSeverity, board, bugAssignee);
+
             if (bug == null)
             {
                 throw new ArgumentException(string.Format(ObjectExists, nameof(Bug), bug.Title));
