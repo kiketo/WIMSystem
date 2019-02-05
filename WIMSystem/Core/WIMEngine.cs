@@ -101,10 +101,10 @@ namespace WIMSystem.Core
                         return this.CreateTeam(teamName);
                     }
 
-                case "CreateMember":
+                case "CreatePerson":
                     {
-                        var memberName = command.Parameters[0];
-                        return this.CreateMember(memberName);
+                        var personName = command.Parameters[0];
+                        return this.CreatePerson(personName);
                     }
 
                 case "CreateBoard":
@@ -567,17 +567,17 @@ namespace WIMSystem.Core
             return string.Format(ObjectCreated, nameof(Team), teamName);
         }
 
-        private string CreateMember(string memberName)
+        private string CreatePerson(string personName)
         {
-            if (this.wimTeams.Contains(memberName))
+            if (this.wimTeams.Contains(personName))
             {
-                throw new ArgumentException(string.Format(ObjectExists, nameof(Person), memberName));
+                throw new ArgumentException(string.Format(ObjectExists, nameof(Person), personName));
             }
 
-            var member = this.factory.CreateMember(memberName, this.personList);
-            this.personList.AddPerson(member);
+            var person = this.factory.CreatePerson(personName);
+            this.personList.AddPerson(person);
 
-            return string.Format(ObjectCreated, nameof(Person), memberName);
+            return string.Format(ObjectCreated, nameof(Person), personName);
         }
 
         private string CreateBoard(string boardName, ITeam team)
@@ -595,7 +595,7 @@ namespace WIMSystem.Core
 
         private string AddMemberToTeam(ITeam teamToAddTo, IPerson memberForAdding)
         {
-            teamToAddTo.AddMemberToTeam(memberForAdding);
+            teamToAddTo.AddMemberToTeam(memberForAdding);            
             return string.Format(ObjectAddedToTeam, nameof(Person), memberForAdding.PersonName, teamToAddTo.TeamName);
         }
 

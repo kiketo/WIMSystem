@@ -26,9 +26,9 @@ namespace WIMSystem.Core
             return new Team(teamName, teamsList);
         }
 
-        public IPerson CreateMember(string memberName, IPersonsCollection membersCollection)
+        public IPerson CreatePerson(string memberName)
         {
-            return new Person(memberName, membersCollection);
+            return new Person(memberName);
         }
 
         public IBoard CreateBoard(string name, ITeam team)

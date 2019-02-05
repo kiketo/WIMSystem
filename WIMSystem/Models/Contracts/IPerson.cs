@@ -8,5 +8,6 @@ namespace WIMSystem.Models.Contracts
     {
         string PersonName { get; }
         IList<IWorkItem> MemberWorkItems { get; }
+        bool IsAssignedToTeam { get; set; }
     }
 }
