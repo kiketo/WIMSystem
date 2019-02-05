@@ -10,6 +10,7 @@ namespace WIMSystem.Models.Contracts
         IBoard Board { get; }
         ITeam Team { get; }
         string FilteredByTeamToString();
+        string FilteredByPersonToString();
         string FilteredByBoardToString();
     }
 }

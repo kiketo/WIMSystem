@@ -176,7 +176,7 @@ namespace WIMSystem.Core
                         var comment = command.Parameters[3];
                         var authorName = this.GetMember(teamName, command.Parameters[4]);
 
-                        return this.AddComment()
+                        return this.AddComment();
                     }
 
                 case "ShowAllPeople":
@@ -489,7 +489,7 @@ namespace WIMSystem.Core
                     nameof(team)
                     ));
             }
-            return team.ShowAllTeamMembers();
+            return team.ShowAllTeamMembers();  //Стенли: Мисля, че трябва да е ShowTeamActivity?
         }
 
         private string ShowAllTeams()

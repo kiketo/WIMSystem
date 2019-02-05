@@ -87,6 +87,20 @@ namespace WIMSystem.Models
             return str.ToString();
         }
 
+        public string ShowPersonActivity(IPerson person)
+        {
+            var str = new StringBuilder();
+            var filteredActivity = Instance.HistoryItemsList.Where(member=>member.Member.PersonName==person.PersonName);
+
+            str.AppendLine($"Activity history for person: {person.PersonName}");
+            foreach (var activity in filteredActivity)
+            {
+                str.AppendLine(activity.FilteredByPersonToString());
+            }
+
+            return str.ToString();
+        }
+
         public override string ToString()
         {
             StringBuilder str = new StringBuilder();
