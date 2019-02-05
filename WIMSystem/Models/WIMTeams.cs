@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using WIMSystem.Models.Contracts;
 
 namespace WIMSystem.Models
@@ -95,6 +96,32 @@ namespace WIMSystem.Models
                     Console.WriteLine(item.Value.TeamName);
                 }
             }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder str = new StringBuilder();
+            foreach (var team in this.TeamsList)
+            {
+                str.AppendLine($"Team name: {team.Value.TeamName}");
+                str.AppendLine("  List of members:");
+                foreach (var member in team.Value.MemberList)
+                {
+                    str.AppendLine($"    {member.PersonName}");
+                }
+                str.AppendLine("  List of boards:");
+                foreach (var board in team.Value.BoardList)
+                {
+                    str.AppendLine($"    {board.Value.BoardName}");
+                    str.AppendLine("      items in the board:");
+                    foreach (var item in board.Value.BoardWorkItems)
+                    {
+                        str.AppendLine($"        {item.Value.Title}: {item.Value.Description}");
+                    }
+                }
+            }
+
+            return str.ToString();
         }
     }
 }
