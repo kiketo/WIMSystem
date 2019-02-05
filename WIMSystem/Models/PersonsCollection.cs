@@ -43,6 +43,18 @@ namespace WIMSystem.Models
             this.personsList.Add(newPerson.PersonName, newPerson);
         }
 
+        public string ShowAllPeople()
+        {
+            var people = this.Persons;
+
+            if (people.Count == 0)
+            {
+                return "There are no people registered yet!";
+            }
+
+            return string.Join(Environment.NewLine + "-", people);
+        }
+
         public bool Contains(string name)
         {
             return personsList.ContainsKey(name);
