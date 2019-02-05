@@ -139,10 +139,26 @@ namespace WIMSystem.Models
             }
             else
             {
-                Console.WriteLine($"Members in team {this.teamName}:");
-                foreach (var item in this.MemberList)
+                Console.WriteLine($"Members in team {this.TeamName}:");
+                foreach (var member in this.MemberList)
                 {
-                    Console.WriteLine(item.PersonName);
+                    Console.WriteLine(member.PersonName);
+                }
+            }
+        }
+
+        public void ShowAllTeamBoards()
+        {
+            if (this.BoardList.Count==0)
+            {
+                Console.WriteLine($"There are no boards in team {this.TeamName}!");
+            }
+            else
+            {
+                Console.WriteLine($"Boards in team {this.TeamName}:");
+                foreach (var board in this.BoardList)
+                {
+                    Console.WriteLine(board.Value.BoardName);
                 }
             }
         }
