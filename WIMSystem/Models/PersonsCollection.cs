@@ -38,7 +38,7 @@ namespace WIMSystem.Models
         {
             if (this.personsList.ContainsKey(newPerson.PersonName))
             {
-                throw new ArgumentException($"{nameof(ITeam)} with that name exist!"); //Стенли: Не трябва ли да е nameof(IPerson)?
+                throw new ArgumentException($"{nameof(Person)} with that name exist!");
             }
             this.personsList.Add(newPerson.PersonName, newPerson);
         }
