@@ -38,12 +38,14 @@ namespace WIMSystem.Models
                 yield return item.Value;
             }
         }
-
+        //Кико: При създаването на нов Team, трябва да се добавя и тук!!!
         public void AddTeam(ITeam newTeam)
         {
             this.teamsList.Add(newTeam.TeamName, newTeam);
         }
 
+
+        //Кико: какво прави това?
         public ITeam this[string index]
         {
             get => this.teamsList[index];
@@ -77,6 +79,22 @@ namespace WIMSystem.Models
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
+        }
+
+        public void ShowAllTeams ()
+        {
+
+            if (this.TeamsList.Count == 0)
+            {
+                Console.WriteLine("There are no teams created!");
+            }
+            else
+            {
+                foreach (var item in this.TeamsList)
+                {
+                    Console.WriteLine(item.Value.TeamName);
+                }
+            }
         }
     }
 }

@@ -14,5 +14,6 @@ namespace WIMSystem.Models
         void RemoveTeam(ITeam removeTeam);
         void RemoveTeam(string teamName);
         bool Contains(string teamName);
+        void ShowAllTeams();
     }
 }

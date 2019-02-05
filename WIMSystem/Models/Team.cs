@@ -131,5 +131,21 @@ namespace WIMSystem.Models
             }
         }
 
+        public void ShowAllTeamMembers()
+        {
+            if (this.MemberList.Count==0)
+            {
+                Console.WriteLine($"There are no members in team {this.TeamName}!");
+            }
+            else
+            {
+                Console.WriteLine($"Members in team {this.teamName}:");
+                foreach (var item in this.MemberList)
+                {
+                    Console.WriteLine(item.PersonName);
+                }
+            }
+        }
+
     }
 }
