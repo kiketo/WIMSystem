@@ -200,7 +200,6 @@ namespace WIMSystem.Models
                 str.AppendLine("There are no boards in the team!");
             }
 
-
             return str.ToString();
         }
 

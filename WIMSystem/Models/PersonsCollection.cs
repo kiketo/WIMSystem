@@ -38,9 +38,31 @@ namespace WIMSystem.Models
         {
             if (this.personsList.ContainsKey(newPerson.PersonName))
             {
-                throw new ArgumentException($"{nameof(ITeam)} with that name exist!"); //Стенли: Не трябва ли да е nameof(IPerson)?
+                throw new ArgumentException($"{nameof(Person)} with that name exist!");
             }
             this.personsList.Add(newPerson.PersonName, newPerson);
+        }
+
+        public string ShowAllPeople()
+        {
+            var output = new StringBuilder();
+
+            if (Persons.Count == 0)
+            {
+                output.AppendLine("There are no people registered yet!");
+            }
+
+            else
+            {
+                output.AppendLine("Registered people:");
+
+                foreach (var person in Persons)
+                {
+                    output.AppendLine($"-{person.Value.PersonName}");
+                }
+            }
+
+            return output.ToString();
         }
 
         public bool Contains(string name)
