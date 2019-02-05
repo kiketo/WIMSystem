@@ -57,30 +57,34 @@ namespace WIMSystem.Models
             return this.GetEnumerator();
         }
 
-        public void ShowBoardActivity(IBoard board)
+        public string ShowBoardActivity(IBoard board)
         {
+            StringBuilder str = new StringBuilder();
             var filteredActivity = Instance.HistoryItemsList.Where(team=>team.Team.TeamName==board.Team.TeamName);
             filteredActivity = filteredActivity.Where(x => x.Board.BoardName == board.BoardName);
 
-            Console.WriteLine($"Activity history for board: {board.BoardName} in team: {board.Team.TeamName}");
+            str.AppendLine($"Activity history for board: {board.BoardName} in team: {board.Team.TeamName}");
             foreach (var item in filteredActivity)
             {
-                Console.WriteLine(item.FilteredByBoardToString());
+                str.AppendLine(item.FilteredByBoardToString());
             }
-            
+
+            return str.ToString();
         }
 
-        public void ShowTeamActivity(ITeam team)
+        public string ShowTeamActivity(ITeam team)
         {
+            StringBuilder str = new StringBuilder();
             var filteredActivity = Instance.HistoryItemsList.Where(teamm => teamm.Team.TeamName == team.TeamName);
-            
 
-            Console.WriteLine($"Activity history for team: {team.TeamName}");
+
+            str.AppendLine($"Activity history for team: {team.TeamName}");
             foreach (var item in filteredActivity)
             {
-                Console.WriteLine(item.FilteredByTeamToString());
+                str.AppendLine(item.FilteredByTeamToString());
             }
 
+            return str.ToString();
         }
     }
 }

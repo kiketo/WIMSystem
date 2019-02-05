@@ -134,44 +134,48 @@ namespace WIMSystem.Models
             }
         }
 
-        public void ShowAllTeamMembers()
+        public string ShowAllTeamMembers()
         {
+            StringBuilder str = new StringBuilder();
             if (this.MemberList.Count == 0)
             {
-                Console.WriteLine($"There are no members in team {this.TeamName}!");
+                str.AppendLine($"There are no members in team {this.TeamName}!");
             }
             else
             {
-                Console.WriteLine($"Members in team {this.TeamName}:");
+                str.AppendLine($"Members in team {this.TeamName}:");
                 foreach (var member in this.MemberList)
                 {
-                    Console.WriteLine(member.PersonName);
+                    str.AppendLine(member.PersonName);
                 }
             }
+            return str.ToString();
         }
 
-        public void ShowAllTeamBoards()
+        public string ShowAllTeamBoards()
         {
+            StringBuilder str = new StringBuilder();
             if (this.BoardList.Count == 0)
             {
-                Console.WriteLine($"There are no boards in team {this.TeamName}!");
+                str.AppendLine($"There are no boards in team {this.TeamName}!");
             }
             else
             {
-                Console.WriteLine($"Boards in team {this.TeamName}:");
+                str.AppendLine($"Boards in team {this.TeamName}:");
                 foreach (var board in this.BoardList)
                 {
-                    Console.WriteLine(board.Value.BoardName);
+                    str.AppendLine(board.Value.BoardName);
                 }
             }
+
+            return str.ToString();
         }
 
         public override string ToString()
         {
             StringBuilder str = new StringBuilder();
 
-
-            return "";
+            return str.ToString();
         }
 
     }

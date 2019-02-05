@@ -35,7 +35,23 @@ namespace WIMSystem.Models.Abstract
             this.Priority = priorityEnum;
         }
 
-        
+        public override string ToString()
+        {
+            StringBuilder str = new StringBuilder();
+            str.AppendLine(base.ToString());
+
+            str.AppendLine($"Priority: {this.Priority}");
+            if (this.Assignee==null)
+            {
+                str.AppendLine("UNASSIGNED item");
+            }
+            else
+            {
+                str.AppendLine($"Assigned to: {this.Assignee.PersonName}");
+            }
+
+            return str.ToString();
+        }
 
     }
 }
