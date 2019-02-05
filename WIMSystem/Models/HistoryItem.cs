@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using WIMSystem.Models.Contracts;
 
 namespace WIMSystem.Models
@@ -44,6 +45,38 @@ namespace WIMSystem.Models
         public ITeam Team
         {
             get => this.team;
+        }
+        public override string ToString()
+        {
+            StringBuilder str = new StringBuilder();
+            str.AppendLine($"Date and time: {this.CreationDate}");
+            str.AppendLine($"Team: {this.Team.TeamName}");
+            str.AppendLine($"Board: {this.Board.BoardName}");
+            str.AppendLine($"Member: {this.Member.PersonName}");
+            str.AppendLine($"Description: {this.Description}");
+
+            return str.ToString();
+        }
+
+        public string FilteredByTeamToString()
+        {
+            StringBuilder str = new StringBuilder();
+            str.AppendLine($"Date and time: {this.CreationDate}");
+            str.AppendLine($"Board: {this.Board.BoardName}");
+            str.AppendLine($"Member: {this.Member.PersonName}");
+            str.AppendLine($"Description: {this.Description}");
+
+            return str.ToString();
+        }
+
+        public string FilteredByBoardToString()
+        {
+            StringBuilder str = new StringBuilder();
+            str.AppendLine($"Date and time: {this.CreationDate}");
+            str.AppendLine($"Member: {this.Member.PersonName}");
+            str.AppendLine($"Description: {this.Description}");
+
+            return str.ToString();
         }
 
     }
