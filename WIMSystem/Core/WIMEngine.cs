@@ -222,13 +222,13 @@ namespace WIMSystem.Core
                         var severity = StringToEnum<BugSeverityType>.Convert(command.Parameters[3]);
                         return this.ChangeSeverityOfBug(workItem, severity);
                     }
-                case "ChangeStatusOfBug":
+                case "ChangeStatus":
                     {
                         var teamName = command.Parameters[0];
                         var board = this.GetBoard(teamName, command.Parameters[1]);
                         var workItem = this.GetWorkItem(board, command.Parameters[2]);
-                        var status = StringToEnum<BugStatusType>.Convert(command.Parameters[3]);
-                        return this.ChangeStatusOfBug(workItem, status);
+                        var status = command.Parameters[3];
+                        return this.ChangeStatus(workItem, status);
                     }
                 case "ChangeSizeOfStory":
                     {
@@ -238,14 +238,6 @@ namespace WIMSystem.Core
                         var size = StringToEnum<StorySizeType>.Convert(command.Parameters[3]);
                         return this.ChangeSizeOfStory(workItem, size);
                     }
-                case "ChangeStatusOfStory":
-                    {
-                        var teamName = command.Parameters[0];
-                        var board = this.GetBoard(teamName, command.Parameters[1]);
-                        var workItem = this.GetWorkItem(board, command.Parameters[2]);
-                        var status = StringToEnum<StoryStatusType>.Convert(command.Parameters[3]);
-                        return this.ChangeStatusOfStory(workItem, status);
-                    }
                 case "ChangeRatingOfFeedback":
                     {
                         var teamName = command.Parameters[0];
@@ -253,14 +245,6 @@ namespace WIMSystem.Core
                         var workItem = this.GetWorkItem(board, command.Parameters[2]);
                         var priority = int.Parse(command.Parameters[3]);
                         return this.ChangeRatingOfFeedback(workItem, priority);
-                    }
-                case "ChangeStatusOfFeedback":
-                    {
-                        var teamName = command.Parameters[0];
-                        var board = this.GetBoard(teamName, command.Parameters[1]);
-                        var workItem = this.GetWorkItem(board, command.Parameters[2]);
-                        var status = StringToEnum<FeedbackStatusType>.Convert(command.Parameters[3]);
-                        return this.ChangeStatusOfFeedback(workItem, status);
                     }
                 case "AssignWorkItemToMember":
                     {
@@ -275,7 +259,6 @@ namespace WIMSystem.Core
                         var teamName = command.Parameters[0];
                         var board = this.GetBoard(teamName, command.Parameters[1]);
                         var workItem = this.GetAssignableWorkItem(board, command.Parameters[2]);
-                        var member = this.GetPerson(command.Parameters[3]);
                         return this.UnassignWorkItemToMember(workItem);
                     }
                 case "ListBoardWorkItems":
@@ -382,22 +365,6 @@ namespace WIMSystem.Core
             return board.ListWorkItems(filterType, filterStatus, filterAssignee, sortBy);
         }
 
-        private string ChangeStatusOfFeedback(IWorkItem workItem, FeedbackStatusType status)
-        {
-            if (Validators.IsNullValue(workItem))
-            {
-                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
-                    nameof(WorkItem)
-                    ));
-            }
-            if (!(workItem is IFeedback))
-            {
-                throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Feedback)}!"));
-            }
-            ((IFeedback)workItem).FeedbackStatus = status;
-            return string.Format(WorkItemStatusChange, workItem.Title, status);
-        }
-
         private string ChangeRatingOfFeedback(IWorkItem workItem, int rating)
         {
             if (Validators.IsNullValue(workItem))
@@ -412,22 +379,6 @@ namespace WIMSystem.Core
             }
             ((IFeedback)workItem).Rating = rating;
             return string.Format(FeedbackRatingChange, workItem.Title, rating);
-        }
-
-        private string ChangeStatusOfStory(IWorkItem workItem, StoryStatusType status)
-        {
-            if (Validators.IsNullValue(workItem))
-            {
-                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
-                    nameof(WorkItem)
-                    ));
-            }
-            if (!(workItem is IStory))
-            {
-                throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Story)}!"));
-            }
-            ((IStory)workItem).StoryStatus = status;
-            return string.Format(WorkItemStatusChange, workItem.Title, status);
         }
 
         private string ChangeSizeOfStory(IWorkItem workItem, StorySizeType size)
@@ -446,7 +397,7 @@ namespace WIMSystem.Core
             return string.Format(StorySizeChange, workItem.Title, size);
         }
 
-        private string ChangeStatusOfBug(IWorkItem workItem, BugStatusType status)
+        private string ChangeStatus(IWorkItem workItem, string status)
         {
             if (Validators.IsNullValue(workItem))
             {
@@ -454,11 +405,7 @@ namespace WIMSystem.Core
                     nameof(WorkItem)
                     ));
             }
-            if (!(workItem is IBug))
-            {
-                throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Bug)}!"));
-            }
-            ((IBug)workItem).BugStatus = status;
+            workItem.ChangeStatus(status);
             return string.Format(WorkItemStatusChange, workItem.Title, status);
         }
 

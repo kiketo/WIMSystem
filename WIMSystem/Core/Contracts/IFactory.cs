@@ -11,7 +11,7 @@ namespace WIMSystem.Core.Contracts
         IBug CreateBug(string title, string description, IList<string> stepsToReproduce, PriorityType priority, BugSeverityType severity, IBoard board, IPerson assignee = null);
         IComment CreateComment(string message, IPerson author);
         IFeedback CreateFeedback(string title, string description, int rating, IBoard board);
-        IHistoryItem CreateHistoryItem(string description, IPerson member, IBoard board, ITeam team);
+        IHistoryItem CreateHistoryItem(string description, IPerson member, IBoard board, ITeam team, IWorkItem workItem);
         IPerson CreatePerson(string peronName);
         IStory CreateStory(string title, string description, PriorityType priority, StorySizeType storySize, IBoard board, IPerson assignee = null);
         ITeam CreateTeam(string teamName, IWIMTeams teamsList);

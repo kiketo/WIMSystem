@@ -23,7 +23,7 @@ namespace WIMSystem.Core
 
         public ITeam CreateTeam(string teamName, IWIMTeams teamsList)
         {
-            return new Team(teamName, teamsList);
+            return new Team(teamName);
         }
 
         public IPerson CreatePerson(string memberName)
@@ -57,9 +57,9 @@ namespace WIMSystem.Core
             return new Comment(message, author);
         }
 
-        public IHistoryItem CreateHistoryItem(string description, IPerson member, IBoard board, ITeam team)
+        public IHistoryItem CreateHistoryItem(string description, IPerson member, IBoard board, ITeam team, IWorkItem workItem)
         {
-            return new HistoryItem(description, DateTime.Now, member, board, team);
+            return new HistoryItem(description, DateTime.Now, member, board, team, workItem);
         }
     }
 }

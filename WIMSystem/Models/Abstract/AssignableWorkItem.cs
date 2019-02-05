@@ -35,7 +35,7 @@ namespace WIMSystem.Models.Abstract
             this.Priority = priorityEnum;
         }
 
-        public override
+        
 
     }
 }
