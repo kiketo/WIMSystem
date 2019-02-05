@@ -7,4 +7,7 @@ Work Item Management (WIM) Console Application
 
 Трябва да се имплементират тези интерфейси и да се направят валидации.
 Навсякъде кодете срещу абстракции (IList, IMember IBug и т.н. 
+
+Трело линк:
+https://trello.com/b/Ockj2Cxm/oop-teamwork-assignment
  
