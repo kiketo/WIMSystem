@@ -64,5 +64,23 @@ namespace WIMSystem.Models
             }
         }
 
+        public override string ToString()
+        {
+            StringBuilder str = new StringBuilder();
+            str.AppendLine($"Person Name: {this.PersonName}");
+            str.AppendLine($"Assigned to team: {this.IsAssignedToTeam}");
+            if (this.MemberWorkItems.Count>0)
+            {
+                str.AppendLine("Work items:");
+                foreach (var workItem in this.MemberWorkItems)
+                {
+                    str.AppendLine($"In Board: {workItem.Board.BoardName}");
+                    str.AppendLine(workItem.Description);
+                }
+            }
+
+            return str.ToString();
+        }
+
     }
 }

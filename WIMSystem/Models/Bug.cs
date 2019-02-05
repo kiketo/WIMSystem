@@ -76,5 +76,23 @@ namespace WIMSystem.Models
         {
             return this.BugStatus;
         }
+
+        public override string ToString()
+        {
+            StringBuilder str = new StringBuilder();
+            str.AppendLine(base.ToString());
+            if (this.StepsToReproduce.Count>0)
+            {
+                str.AppendLine($"Steps to reproduce:");
+                foreach (var step in this.StepsToReproduce)
+                {
+                    str.AppendLine(step);
+                }
+            }
+            str.AppendLine($"Severity: {this.Severity}");
+            str.AppendLine($"Bug status: {this.BugStatus}");
+                       
+            return str.ToString();
+        }
     }
 }
