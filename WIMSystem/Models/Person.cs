@@ -31,7 +31,7 @@ namespace WIMSystem.Models
             {
                 if (value.Length<5||value.Length>15)
                 {
-                    throw new ArgumentOutOfRangeException("Members name should be between 5 and 15 symbols.");
+                    throw new ArgumentOutOfRangeException("personName", "Members name should be between 5 and 15 symbols.");
                 }
 
                 this.personName = value;
@@ -62,6 +62,24 @@ namespace WIMSystem.Models
             {
                 this.isAssignedToTeam = value;
             }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder str = new StringBuilder();
+            str.AppendLine($"Person Name: {this.PersonName}");
+            str.AppendLine($"Assigned to team: {this.IsAssignedToTeam}");
+            if (this.MemberWorkItems.Count>0)
+            {
+                str.AppendLine("Work items:");
+                foreach (var workItem in this.MemberWorkItems)
+                {
+                    str.AppendLine($"In Board: {workItem.Board.BoardName}");
+                    str.AppendLine(workItem.Description);
+                }
+            }
+
+            return str.ToString();
         }
 
     }

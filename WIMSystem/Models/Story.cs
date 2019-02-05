@@ -53,5 +53,15 @@ namespace WIMSystem.Models
         {
             return this.StoryStatus;
         }
+
+        public override string ToString()
+        {
+            StringBuilder str = new StringBuilder();
+            str.AppendLine(base.ToString());
+            str.AppendLine($"Story size: {this.StorySize}");
+            str.AppendLine($"Story status: {this.StoryStatus}");
+            
+            return str.ToString();
+        }
     }
 }

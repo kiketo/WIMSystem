@@ -69,6 +69,17 @@ namespace WIMSystem.Models
             return str.ToString();
         }
 
+        public string FilteredByPersonToString()
+        {
+            var output = new StringBuilder();
+            output.AppendLine($"Date and time: {this.CreationDate}");
+            output.AppendLine($"Team: {this.Team.TeamName}");
+            output.AppendLine($"Board: {this.Board.BoardName}");
+            output.AppendLine($"Description: {this.Description}");
+
+            return output.ToString();
+        }
+
         public string FilteredByBoardToString()
         {
             StringBuilder str = new StringBuilder();

@@ -167,16 +167,16 @@ namespace WIMSystem.Core
                         return this.CreateFeedback(feedbackTitle, feedbackDescription, feedbackRating, board);
                     }
 
-                //case "AddComment":
-                //    {
-                //        var teamName = this.GetTeam(command.Parameters[0]);
-                //        var boardName = this.GetBoard(teamName.TeamName, command.Parameters[1]);
-                //        var workItemTitle = this.GetWorkItem(boardName, command.Parameters[2]);
-                //        var comment = command.Parameters[3];
-                //        var authorName = this.Get
+                case "AddComment":
+                    {
+                        var teamName = this.GetTeam(command.Parameters[0]);
+                        var boardName = this.GetBoard(teamName.TeamName, command.Parameters[1]);
+                        var workItemTitle = this.GetWorkItem(boardName, command.Parameters[2]);
+                        var comment = command.Parameters[3];
+                        var authorName = this.Get
 
-                //        return this.AddComment()
-                //    }
+                        return this.AddComment();
+                    }
 
                 case "ShowAllPeople":
                     {
@@ -455,7 +455,7 @@ namespace WIMSystem.Core
                     nameof(board)
                     ));
             }
-            return "";//TODO board.ShowBoardActivity();
+            return board.ShowBoardActivity();
         }
 
         private string ShowAllTeamBoards(ITeam team)
@@ -488,7 +488,7 @@ namespace WIMSystem.Core
                     nameof(team)
                     ));
             }
-            return team.ShowAllTeamMembers();
+            return team.ShowAllTeamMembers();  //Стенли: Мисля, че трябва да е ShowTeamActivity?
         }
 
         private string ShowAllTeams()
@@ -504,12 +504,12 @@ namespace WIMSystem.Core
                     nameof(person)
                     ));
             }
-            return "";//TODO person.ShowPersonActivity();  
+            return person.ShowPersonActivity();  
         }
 
         private string ShowAllPeople()
         {
-            return "";//TODO this.personList.ShowAllPeople;
+            return this.personList.ShowAllPeople;
         }
 
 
@@ -622,7 +622,7 @@ namespace WIMSystem.Core
             return string.Format(ObjectCreated, nameof(Bug), bug.Title);
         }
 
-        //private string AddComment(string )
+        private string AddComment(string )
 
         private void PrintReports(IList<string> reports)
         {
@@ -644,21 +644,30 @@ namespace WIMSystem.Core
 
         }
 
-        private IPerson GetMember(string teamAsString, string memberAsString)
-        {
-            var teamResult = this.wimTeams.TeamsList
+        private IPerson GetMember(ITeam teamName, string memberAsString)
+        { 
+            if(!this.wimTeams.TeamsList.ContainsKey(teamName.TeamName))
+            {
+                throw new ArgumentException($"No {teamName.TeamName} team found!");
+            }
+            var person = this.wimTeams.TeamsList
                             .Select(team => team.Value)
-                            .Where(team => team.MemberList.Any(member => member.PersonName == memberAsString))
-                            .Single();
-            return null;
+                            .SelectMany(team => team.MemberList)
+                            .FirstOrDefault(member => member.PersonName == memberAsString);
+
+            if(person==null)
+            {
+                throw new ArgumentNullException("person", $"There is no person with name {memberAsString} in the team.");
+            }
+
+            return person;
         }
 
         private ITeam GetTeam(string teamAsString)
         {
             var team = this.wimTeams[teamAsString];
             return team;
-
-        }
+}
 
         private IBoard GetBoard(string teamName, string boardAsString)
         {

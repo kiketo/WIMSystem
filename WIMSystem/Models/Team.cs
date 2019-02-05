@@ -170,10 +170,35 @@ namespace WIMSystem.Models
 
             return str.ToString();
         }
-
+        
         public override string ToString()
         {
             StringBuilder str = new StringBuilder();
+            str.AppendLine($"Team name: {this.TeamName}");
+            str.AppendLine("Members in the team:");
+            if (this.MemberList.Count>0)
+            {
+                foreach (var member in this.MemberList)
+                {
+                    str.AppendLine(member.ToString());
+                }
+            }
+            else
+            {
+                str.AppendLine("There are no members in the team!");
+            }
+            str.AppendLine("Boards in the team:");
+            if (this.BoardList.Count>0)
+            {
+                foreach (var board in this.BoardList)
+                {
+                    str.AppendLine(board.ToString());
+                }
+            }
+            else
+            {
+                str.AppendLine("There are no boards in the team!");
+            }
 
             return str.ToString();
         }

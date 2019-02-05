@@ -122,6 +122,18 @@ namespace WIMSystem.Models
             }
             return result.ToString();
         }
-                
+
+        public override string ToString()
+        {
+            StringBuilder str = new StringBuilder();
+            str.AppendLine($"Board name: {this.BoardName}");
+            foreach (var item in this.BoardWorkItems)
+            {
+                str.AppendLine(item.Value.ToString());
+            }
+            
+            return str.ToString();
+        }
+
     }
 }
