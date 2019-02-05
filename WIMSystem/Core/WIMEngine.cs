@@ -174,7 +174,7 @@ namespace WIMSystem.Core
                         var boardName = this.GetBoard(teamName.TeamName, command.Parameters[1]);
                         var workItemTitle = this.GetWorkItem(boardName, command.Parameters[2]);
                         var comment = command.Parameters[3];
-                        var authorName = this.Get
+                        var authorName = this.GetMember(teamName, command.Parameters[4]);
 
                         return this.AddComment()
                     }
@@ -563,7 +563,7 @@ namespace WIMSystem.Core
 
         private string ShowAllPeople()
         {
-            return this.personList.ShowAllPeople;
+            return this.personList.ShowAllPeople();
         }
 
 
@@ -582,7 +582,7 @@ namespace WIMSystem.Core
 
         private string CreatePerson(string personName)
         {
-            if (this.wimTeams.Contains(personName))
+            if (this.personList.Contains(personName))
             {
                 throw new ArgumentException(string.Format(ObjectExists, nameof(Person), personName));
             }
@@ -676,7 +676,10 @@ namespace WIMSystem.Core
             return string.Format(ObjectCreated, nameof(Bug), bug.Title);
         }
 
-        private string AddComment(string )
+        private string AddComment(IComment comment)
+        {
+            
+        }
 
         private void PrintReports(IList<string> reports)
         {
@@ -698,20 +701,30 @@ namespace WIMSystem.Core
 
         }
 
-        private IPerson GetMember(string teamAsString, string memberAsString)
-        {
-            var teamResult = this.wimTeams.TeamsList
+        private IPerson GetMember(ITeam teamName, string memberAsString)
+        { 
+            if(!this.wimTeams.TeamsList.ContainsKey(teamName.TeamName))
+            {
+                throw new ArgumentException($"No {teamName.TeamName} team found!");
+            }
+            var person = this.wimTeams.TeamsList
                             .Select(team => team.Value)
-                            .Where(team => team.MemberList.Any(member => member == memberAsString))
-                            .Single();
+                            .SelectMany(team => team.MemberList)
+                            .FirstOrDefault(member => member.PersonName == memberAsString);
+
+            if(person==null)
+            {
+                throw new ArgumentNullException("person", $"There is no person with name {memberAsString} in the team.");
+            }
+
+            return person;
         }
 
         private ITeam GetTeam(string teamAsString)
         {
             var team = this.wimTeams[teamAsString];
             return team;
-
-        }
+}
 
         private IBoard GetBoard(string teamName, string boardAsString)
         {
