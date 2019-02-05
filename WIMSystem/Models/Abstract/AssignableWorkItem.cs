@@ -43,7 +43,7 @@ namespace WIMSystem.Models.Abstract
         public override string ToString()
         {
             StringBuilder str = new StringBuilder();
-            str.AppendLine(base.ToString());
+            str.Append(base.ToString());
 
             str.AppendLine($"Priority: {this.Priority}");
             if (this.Assignee==null)

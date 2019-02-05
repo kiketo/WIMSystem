@@ -65,7 +65,7 @@ namespace WIMSystem.Models
         public override string ToString()
         {
             StringBuilder str = new StringBuilder();
-            str.AppendLine(base.ToString());
+            str.Append(base.ToString());
             str.AppendLine($"Rating: {this.Rating}");
             str.AppendLine($"Feedback status: {this.FeedbackStatus}");
 

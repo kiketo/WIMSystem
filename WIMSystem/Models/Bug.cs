@@ -80,13 +80,13 @@ namespace WIMSystem.Models
         public override string ToString()
         {
             StringBuilder str = new StringBuilder();
-            str.AppendLine(base.ToString());
+            str.Append(base.ToString());
             if (this.StepsToReproduce.Count>0)
             {
                 str.AppendLine($"Steps to reproduce:");
                 foreach (var step in this.StepsToReproduce)
                 {
-                    str.AppendLine(step);
+                    str.AppendLine("\t"+step);
                 }
             }
             str.AppendLine($"Severity: {this.Severity}");

@@ -173,9 +173,9 @@ namespace WIMSystem.Core
                         var boardName = this.GetBoard(teamName.TeamName, command.Parameters[1]);
                         var workItemTitle = this.GetWorkItem(boardName, command.Parameters[2]);
                         var comment = command.Parameters[3];
-                        var authorName = this.Get
+                        var authorName = this.GetMember(teamName, "");//TODO
 
-                        return this.AddComment();
+                        return this.AddComment(null); //TODO
                     }
 
                 case "ShowAllPeople":
@@ -281,15 +281,16 @@ namespace WIMSystem.Core
                             switch (paramOption[0])
                             {
                                 case "filterType":
-                                    {
+                                    { 
+                                        var typeAsString = "WIMSystem.Models." + paramOption[1];
                                         var curAssembly = typeof(WIMEngine).Assembly;
-                                        filterType = curAssembly.GetType("Models." + paramOption[1], false, true) ??
-                                            throw new ArgumentException("Undefined type {0}", paramOption[1]);
+                                        filterType = curAssembly.GetType(typeAsString, false, true) ??
+                                            throw new ArgumentException("Undefined type {0}",paramOption[1]);
                                         break;
                                     }
                                 case "filterStatus":
                                     {
-                                        filterStatus = command.Parameters[1];
+                                        filterStatus = paramOption[1];
                                         break;
                                     }
                                 case "filterAssignee":
@@ -455,7 +456,7 @@ namespace WIMSystem.Core
                     nameof(board)
                     ));
             }
-            return board.ShowBoardActivity();
+            return "Not Implemented";//TODO board.ShowBoardActivity();
         }
 
         private string ShowAllTeamBoards(ITeam team)
@@ -504,12 +505,12 @@ namespace WIMSystem.Core
                     nameof(person)
                     ));
             }
-            return person.ShowPersonActivity();  
+            return "Not Implemented";//TODO person.ShowPersonActivity();  
         }
 
         private string ShowAllPeople()
         {
-            return this.personList.ShowAllPeople;
+            return this.personList.ShowAllPeople();
         }
 
 
@@ -587,7 +588,6 @@ namespace WIMSystem.Core
             {
                 throw new ArgumentException(string.Format(ObjectExists, nameof(Feedback), feedback.Title));
             }
-            //team.AddBoardToTeam(board);
             board.AddWorkItemToBoard(feedback);
 
             return string.Format(ObjectCreated, nameof(Feedback), feedback.Title);
@@ -622,7 +622,10 @@ namespace WIMSystem.Core
             return string.Format(ObjectCreated, nameof(Bug), bug.Title);
         }
 
-        private string AddComment(string )
+        private string AddComment(IComment comment )
+        {
+            return "Not implemented"; //TODO
+        }
 
         private void PrintReports(IList<string> reports)
         {

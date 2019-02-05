@@ -21,8 +21,8 @@ namespace WIMSystem.Models.Abstract
             this.id = IDProvider.GenerateUniqueID();
             this.Title = title;
             this.Description = description;
-            listOfComments = new List<IComment>();
-            listOfHistoryItems = new List<IHistoryItem>();
+            this.listOfComments = new List<IComment>();
+            this.listOfHistoryItems = new List<IHistoryItem>();
         }
 
         public int ID
@@ -51,7 +51,7 @@ namespace WIMSystem.Models.Abstract
                 {
                     throw new ArgumentOutOfRangeException("Title", "Title should be more than 10 and lesser than 50 characters long!");
                 }
-                if (board.BoardWorkItems.ContainsKey(value)) //
+                if (this.board.BoardWorkItems.ContainsKey(value)) //
                 {
                     Console.WriteLine($"This board already contains Work Item with name {value}!");
                 }
@@ -85,7 +85,7 @@ namespace WIMSystem.Models.Abstract
             }
         }
 
-        public IList<IComment> ListOfComments { get; }
+        public IList<IComment> ListOfComments { get => new List<IComment>(this.listOfComments); }
 
         public IList<IHistoryItem> ListOfHistoryItems { get; }
 
@@ -108,7 +108,7 @@ namespace WIMSystem.Models.Abstract
                 throw new ArgumentNullException("Comment", "Comment cannot be empty!");
             }
 
-            listOfComments.Add(comment);
+            this.listOfComments.Add(comment);
         }
 
         public void AddHistoryItem(IHistoryItem history)
@@ -118,7 +118,7 @@ namespace WIMSystem.Models.Abstract
                 throw new ArgumentNullException("History");
             }
 
-            listOfHistoryItems.Add(history);
+            this.listOfHistoryItems.Add(history);
         }
 
         public abstract void ChangeStatus(string newStatus);
@@ -128,18 +128,20 @@ namespace WIMSystem.Models.Abstract
         public override string ToString()
         {
             StringBuilder str = new StringBuilder();
+            str.AppendLine(new string('=',15));
             str.AppendLine($"Team: {this.Board.Team.TeamName}");
             str.AppendLine($"Board: {this.Board.BoardName}");
+            str.AppendLine($"Type: {this.GetType().Name}");
             str.AppendLine($"Work Item ID: {this.ID}");
             str.AppendLine($"Title: {this.Title}");
             str.AppendLine($"Description: {this.Description}");
-            if (this.ListOfComments.Count > 0)
+            if (this.listOfComments.Count > 0)
             {
                 str.AppendLine("Comments:");
-                foreach (var comment in this.ListOfComments)
+                foreach (var comment in this.listOfComments)
                 {
-                    str.AppendLine($"Author: {comment.Author}");
-                    str.AppendLine($"Comment: {comment.Message}");
+                    str.AppendLine($"\t Author: {comment.Author}");
+                    str.AppendLine($"\t Comment: {comment.Message}");
                 }
             }
 

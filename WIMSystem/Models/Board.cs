@@ -101,6 +101,8 @@ namespace WIMSystem.Models
             }
             if (!string.IsNullOrEmpty(statusFilter))
             {
+                var a = this.BoardWorkItems.First().Value.GetStatus().ToString();
+
                 filteredCollection = filteredCollection.Where(x => x.GetStatus().ToString() == statusFilter);
             }
             if (filterMember != null)
@@ -112,13 +114,13 @@ namespace WIMSystem.Models
             }
             if (!string.IsNullOrEmpty(sortBy))
             {
-                filteredCollection = filteredCollection.OrderBy(x => x.GetType().GetProperty(sortBy));
+                var a = this.BoardWorkItems.First().Value.GetType().GetProperty(sortBy);
+                filteredCollection = filteredCollection.OrderBy(x => a.GetValue(x,null));
             }
             StringBuilder result = new StringBuilder();
             foreach (var item in filteredCollection)
             {
                 result.AppendLine(item.ToString());
-                result.Append(new string('-', 15));
             }
             return result.ToString();
         }

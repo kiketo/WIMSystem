@@ -72,7 +72,6 @@ namespace WIMSystem.Menu
                 {
                     if (curItem == c)
                     {
-                        // Console.Write("-->");
                         Console.ForegroundColor = ConsoleColor.Blue;
                         Console.WriteLine(menuItems[c]);
                         Console.ResetColor();
@@ -101,10 +100,10 @@ namespace WIMSystem.Menu
 
             if (curItem != menuItems.Length - 1)
             {
-                if (curItem == menuItems.Length-2)
+                if (curItem == menuItems.Length - 2)
                 {
 
-                    ConsoleBatchCommands();
+                    this.ConsoleBatchCommands();
                 }
 
                 this.ConsoleParameters(curItem);
@@ -123,22 +122,25 @@ namespace WIMSystem.Menu
         }
 
 
-            public void ConsoleParameters(int indexOfItem)
+        public void ConsoleParameters(int indexOfItem)
         {
             Console.Clear();
 
-            Console.WriteLine(this.mainMenuItems[indexOfItem].ParamsText);
+            if (!string.IsNullOrEmpty(this.mainMenuItems[indexOfItem].ParamsText))
+            {
+                Console.WriteLine(this.mainMenuItems[indexOfItem].ParamsText);
 
-            var parameters = Console.ReadLine();
+                var parameters = Console.ReadLine();
+                this.commandParser.SaveCommand(string.Concat(
+                    this.mainMenuItems[indexOfItem].CommandText,
+                    " ",
+                    parameters));
+            }
+            else
+            {
+                this.commandParser.SaveCommand(this.mainMenuItems[indexOfItem].CommandText);
+            }
 
-            this.commandParser.SaveCommand(string.Concat(
-                this.mainMenuItems[indexOfItem].CommandText,
-                " ",
-                parameters));
-            //Console.WriteLine(string.Concat(
-            //    this.mainMenuItems[indexOfItem].CommandText,
-            //    " ",
-            //    parameters));
             this.engine.ExecuteCommands(this.commandParser);
 
             Console.WriteLine();

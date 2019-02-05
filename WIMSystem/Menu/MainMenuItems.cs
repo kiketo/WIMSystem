@@ -9,11 +9,11 @@ namespace WIMSystem.Menu
         internal static IList<MenuItem> mainMenuItems = new List<MenuItem>()
         {
             new MenuItem("CreatePerson","* Create a new person","Enter person name:"),
-            new MenuItem("ShowAllPeople","* Show all people", "People list:"),
-            new MenuItem("ShowPersonActivity","* Show person's activity", "Person's activity:"),
+            new MenuItem("ShowAllPeople","* Show all people", ""),
+            new MenuItem("ShowPersonActivity","* Show person's activity", ""),
             new MenuItem("CreateTeam","* Create a new team", "Enter team name:"),
-            new MenuItem("ShowAllTeams","* Show all teams", "Team list:"),
-            new MenuItem("ShowTeamActivity","* Show team's activity", "Team activity:"),
+            new MenuItem("ShowAllTeams","* Show all teams", ""),
+            new MenuItem("ShowTeamActivity","* Show team's activity", ""),
             new MenuItem("AddPersonToTeam","* Add person to team", "Enter parameters team name and member name:"),
             new MenuItem("ShowAllTeamMembers","* Show all team members", "Enter team name:"),
             new MenuItem("CreateBoard","* Create a new board in a team", "Enter board name and team name:"),
