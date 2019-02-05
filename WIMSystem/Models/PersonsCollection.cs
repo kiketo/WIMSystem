@@ -45,14 +45,24 @@ namespace WIMSystem.Models
 
         public string ShowAllPeople()
         {
-            var people = this.Persons;
+            var output = new StringBuilder();
 
-            if (people.Count == 0)
+            if (Persons.Count == 0)
             {
-                return "There are no people registered yet!";
+                output.AppendLine("There are no people registered yet!");
             }
 
-            return string.Join(Environment.NewLine + "-", people);
+            else
+            {
+                output.AppendLine("Registered people:");
+
+                foreach (var person in Persons)
+                {
+                    output.AppendLine($"-{person.Value.PersonName}");
+                }
+            }
+
+            return output.ToString();
         }
 
         public bool Contains(string name)
