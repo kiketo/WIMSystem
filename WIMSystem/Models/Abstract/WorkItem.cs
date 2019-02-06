@@ -128,9 +128,11 @@ namespace WIMSystem.Models.Abstract
         public override string ToString()
         {
             StringBuilder str = new StringBuilder();
-            str.AppendLine(new string('=',15));
+            str.AppendLine(new string('=', 15));
             str.AppendLine($"Team: {this.Board.Team.TeamName}");
             str.AppendLine($"Board: {this.Board.BoardName}");
+            str.AppendLine(new string('=',15));
+
             str.AppendLine($"Type: {this.GetType().Name}");
             str.AppendLine($"Work Item ID: {this.ID}");
             str.AppendLine($"Title: {this.Title}");
