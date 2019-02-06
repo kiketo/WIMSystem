@@ -60,13 +60,21 @@ namespace WIMSystem.Models
         public string ShowBoardActivity(IBoard board)
         {
             StringBuilder str = new StringBuilder();
-            var filteredActivity = Instance.HistoryItemsList.Where(team=>team.Team.TeamName==board.Team.TeamName);
+            var filteredActivity = this.HistoryItemsList.Where(x => x.Team.TeamName == board.Team.TeamName);
             filteredActivity = filteredActivity.Where(x => x.Board.BoardName == board.BoardName);
 
             str.AppendLine($"Activity history for board: {board.BoardName} in team: {board.Team.TeamName}");
-            foreach (var item in filteredActivity)
+            if (filteredActivity.Count() == 0)
             {
-                str.AppendLine(item.FilteredByBoardToString());
+                str.AppendLine("There is no history!");
+            }
+            else
+            {
+                foreach (var item in filteredActivity)
+                {
+                    str.AppendLine(item.FilteredByBoardToString());
+                }
+
             }
 
             return str.ToString();
@@ -75,13 +83,20 @@ namespace WIMSystem.Models
         public string ShowTeamActivity(ITeam team)
         {
             StringBuilder str = new StringBuilder();
-            var filteredActivity = Instance.HistoryItemsList.Where(teamm => teamm.Team.TeamName == team.TeamName);
+            var filteredActivity = this.HistoryItemsList.Where(x => x.Team.TeamName == team.TeamName);
 
 
             str.AppendLine($"Activity history for team: {team.TeamName}");
-            foreach (var item in filteredActivity)
+            if (filteredActivity.Count() == 0)
             {
-                str.AppendLine(item.FilteredByTeamToString());
+                str.AppendLine("There is no history!");
+            }
+            else
+            {
+                foreach (var item in filteredActivity)
+                {
+                    str.AppendLine(item.FilteredByTeamToString());
+                }
             }
 
             return str.ToString();
@@ -90,12 +105,19 @@ namespace WIMSystem.Models
         public string ShowPersonActivity(IPerson person)
         {
             var str = new StringBuilder();
-            var filteredActivity = Instance.HistoryItemsList.Where(member=>member.Member.PersonName==person.PersonName);
+            var filteredActivity = this.HistoryItemsList.Where(x => x.Member.PersonName == person.PersonName);
 
             str.AppendLine($"Activity history for person: {person.PersonName}");
-            foreach (var activity in filteredActivity)
+            if (filteredActivity.Count() == 0)
             {
-                str.AppendLine(activity.FilteredByPersonToString());
+                str.AppendLine("There is no history!");
+            }
+            else
+            {
+                foreach (var activity in filteredActivity)
+                {
+                    str.AppendLine(activity.FilteredByPersonToString());
+                }
             }
 
             return str.ToString();
@@ -104,7 +126,7 @@ namespace WIMSystem.Models
         public override string ToString()
         {
             StringBuilder str = new StringBuilder();
-            if (this.HistoryItemsList.Count==0)
+            if (this.HistoryItemsList.Count == 0)
             {
                 str.AppendLine("There are no history items!");
             }
