@@ -162,15 +162,15 @@ namespace WIMSystem.Core
                         return this.CreateFeedback(feedbackTitle, feedbackDescription, feedbackRating, board);
                     }
 
-                case "AddComment":
+                case "CreateComment":
                     {
                         var teamName = this.GetTeam(command.Parameters[0]);
                         var boardName = this.GetBoard(teamName.TeamName, command.Parameters[1]);
                         var workItem = this.GetWorkItem(boardName, command.Parameters[2]);
                         var comment = command.Parameters[3];
-                        var authorName = this.GetMember(teamName, "");//TODO
+                        var author = this.GetMember(teamName,command.Parameters[4]);
 
-                        return this.AddComment(null); //TODO
+                        return this.CreateComment(workItem,comment,author); //TODO
                     }
 
                 case "ShowAllPeople":
@@ -617,10 +617,12 @@ namespace WIMSystem.Core
             return string.Format(ObjectCreated, nameof(Bug), bug.Title);
         }
 
-        private string AddComment(IComment comment)
+        private string CreateComment(IWorkItem workitem,string message,IPerson author)
         {
+            var comment = this.factory.CreateComment(message, author);
+            workitem.AddComment(comment);
 
-            return "Not implemented"; //TODO
+            return string.Format(CommentAdded, comment.Message, comment.Author.PersonName, workitem.Title);
         }
 
         private void PrintReports(IList<string> reports)
