@@ -10,6 +10,6 @@ namespace WIMSystem.Models.Contracts
         IPerson Member { get; }
         IBoard Board { get; }
         ITeam Team { get; }
-        string FilteredBy(HistoryItemFilterType);
+        string FilteredBy(HistoryItemFilterType historyItemFilterType);
     }
 }
