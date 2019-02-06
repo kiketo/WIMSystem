@@ -171,7 +171,7 @@ namespace WIMSystem.Core
                     {
                         var teamName = this.GetTeam(command.Parameters[0]);
                         var boardName = this.GetBoard(teamName.TeamName, command.Parameters[1]);
-                        var workItemTitle = this.GetWorkItem(boardName, command.Parameters[2]);
+                        var workItem = this.GetWorkItem(boardName, command.Parameters[2]);
                         var comment = command.Parameters[3];
                         var authorName = this.GetMember(teamName, "");//TODO
 
@@ -622,7 +622,7 @@ namespace WIMSystem.Core
             return string.Format(ObjectCreated, nameof(Bug), bug.Title);
         }
 
-        private string AddComment(IComment comment )
+        private string AddComment(IComment comment)
         {
             return "Not implemented"; //TODO
         }
@@ -647,21 +647,19 @@ namespace WIMSystem.Core
 
         }
 
-        private IPerson GetMember(ITeam teamName, string memberAsString)
+        private IPerson GetMember(ITeam team, string memberAsString)
         { 
-            if(!this.wimTeams.TeamsList.ContainsKey(teamName.TeamName))
+            if(!this.wimTeams.TeamsList.ContainsKey(team.TeamName))
             {
-                throw new ArgumentException($"No {teamName.TeamName} team found!");
+                throw new ArgumentException($"No {team.TeamName} team found!");
             }
-            var person = this.wimTeams.TeamsList
-                            .Select(team => team.Value)
-                            .SelectMany(team => team.MemberList)
-                            .FirstOrDefault(member => member.PersonName == memberAsString);
 
-            if(person==null)
+            var person = this.personList[memberAsString];
+
+            if(!team.MemberList.Contains(person))
             {
                 throw new ArgumentNullException("person", $"There is no person with name {memberAsString} in the team.");
-            }
+            }  
 
             return person;
         }
