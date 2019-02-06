@@ -8,7 +8,7 @@ namespace WIMSystem.Models
     public class Comment : IComment
     {
         private string message;
-        private IPerson author;
+        private readonly IPerson author;
 
         public Comment(string message, IPerson author)
         {

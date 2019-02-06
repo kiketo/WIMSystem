@@ -3,7 +3,7 @@ using WIMSystem.Models.Contracts;
 
 namespace WIMSystem.Models.Contracts
 {
-    internal interface IHistoryItemsCollection
+    public interface IHistoryItemsCollection
     {
         ICollection<IHistoryItem> HistoryItemsList { get; }
 

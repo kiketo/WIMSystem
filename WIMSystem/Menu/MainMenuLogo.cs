@@ -19,8 +19,8 @@ namespace WIMSystem.Menu
    Work Item Management Console Application
 
              Stanislav Dinev
-             Kiril
-             Stilian
+             Kiril Kuzmanov
+             Stilian 
 
 ";
     }

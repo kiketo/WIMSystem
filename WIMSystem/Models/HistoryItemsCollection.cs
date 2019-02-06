@@ -7,7 +7,7 @@ using WIMSystem.Models.Contracts;
 
 namespace WIMSystem.Models
 {
-    internal class HistoryItemsCollection : IEnumerable, IHistoryItemsCollection
+    public class HistoryItemsCollection : IEnumerable, IHistoryItemsCollection
     {
         private readonly ICollection<IHistoryItem> historyItemsList;
 
@@ -60,7 +60,9 @@ namespace WIMSystem.Models
         public string ShowBoardActivity(IBoard board)
         {
             StringBuilder str = new StringBuilder();
+
             var filteredActivity = this.HistoryItemsList.Where(x => x.Team.TeamName == board.Team.TeamName);
+
             filteredActivity = filteredActivity.Where(x => x.Board.BoardName == board.BoardName);
 
             str.AppendLine($"Activity history for board: {board.BoardName} in team: {board.Team.TeamName}");
@@ -105,7 +107,9 @@ namespace WIMSystem.Models
         public string ShowPersonActivity(IPerson person)
         {
             var str = new StringBuilder();
+
             var filteredActivity = this.HistoryItemsList.Where(x => x.Member.PersonName == person.PersonName);
+
 
             str.AppendLine($"Activity history for person: {person.PersonName}");
             if (filteredActivity.Count() == 0)

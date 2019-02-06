@@ -9,7 +9,7 @@ namespace WIMSystem.Models.Abstract
     public abstract class AssignableWorkItem : WorkItem, IAssignableWorkItem, IWorkItem
     {
         public AssignableWorkItem(string title, string description, PriorityType priority, IBoard board, IPerson assignee = null)
-            :base (title,description,board)
+            : base(title, description, board)
         {
             this.Priority = priority;
             this.Assignee = assignee;
@@ -19,14 +19,14 @@ namespace WIMSystem.Models.Abstract
 
         public IPerson Assignee { get; private set; }
 
-        public void AssignMember (IPerson member)
+        public void AssignMember(IPerson member)
         {
             this.Assignee = member ?? throw new ArgumentNullException("member", "Member cannot be null or empty!");
         }
 
         public void UnassignMember()
         {
-            if (Assignee == null)
+            if (this.Assignee == null)
             {
                 throw new ArgumentException(string.Format($"{this.Title} has no assigned member"));
 
@@ -46,7 +46,7 @@ namespace WIMSystem.Models.Abstract
             str.Append(base.ToString());
 
             str.AppendLine($"Priority: {this.Priority}");
-            if (this.Assignee==null)
+            if (this.Assignee == null)
             {
                 str.AppendLine("UNASSIGNED item");
             }
