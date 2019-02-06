@@ -12,5 +12,6 @@ namespace WIMSystem.Models.Contracts
         IEnumerator<IHistoryItem> GetEnumerator();
         string ShowTeamActivity(ITeam team);
         string ShowBoardActivity(IBoard board);
+        string ShowPersonActivity(IPerson persn);
     }
 }

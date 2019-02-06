@@ -172,10 +172,11 @@ namespace WIMSystem.Core
                         var teamName = this.GetTeam(command.Parameters[0]);
                         var boardName = this.GetBoard(teamName.TeamName, command.Parameters[1]);
                         var workItemTitle = this.GetWorkItem(boardName, command.Parameters[2]);
-                        var comment = command.Parameters[3];
-                        var authorName = this.GetMember(teamName, "");//TODO
 
-                        return this.AddComment(null); //TODO
+                        var comment = command.Parameters[3];
+                        var author = this.GetMember(teamName, "");//TODO
+
+                        return this.AddComment(comment, author, workItemTitle); //TODO
                     }
 
                 case "ShowAllPeople":
@@ -281,11 +282,11 @@ namespace WIMSystem.Core
                             switch (paramOption[0])
                             {
                                 case "filterType":
-                                    { 
+                                    {
                                         var typeAsString = "WIMSystem.Models." + paramOption[1];
                                         var curAssembly = typeof(WIMEngine).Assembly;
                                         filterType = curAssembly.GetType(typeAsString, false, true) ??
-                                            throw new ArgumentException("Undefined type {0}",paramOption[1]);
+                                            throw new ArgumentException("Undefined type {0}", paramOption[1]);
                                         break;
                                     }
                                 case "filterStatus":
@@ -456,7 +457,7 @@ namespace WIMSystem.Core
                     nameof(board)
                     ));
             }
-            return "Not Implemented";//TODO board.ShowBoardActivity();
+            return historyItemsList.ShowBoardActivity(board);
         }
 
         private string ShowAllTeamBoards(ITeam team)
@@ -489,12 +490,12 @@ namespace WIMSystem.Core
                     nameof(team)
                     ));
             }
-            return "Not implemented";//team.ShowTeamActivity();  //Стенли: Мисля, че трябва да е ShowTeamActivity?
+            return historyItemsList.ShowTeamActivity(team);
         }
 
         private string ShowAllTeams()
         {
-            return wimTeams.ShowAllTeams();
+            return this.wimTeams.ShowAllTeams();
         }
 
         private string ShowPersonActivity(IPerson person)
@@ -505,7 +506,7 @@ namespace WIMSystem.Core
                     nameof(person)
                     ));
             }
-            return "Not Implemented";//TODO person.ShowPersonActivity();  
+            return historyItemsList.ShowPersonActivity(person);  
         }
 
         private string ShowAllPeople()
@@ -555,7 +556,7 @@ namespace WIMSystem.Core
 
         private string AddMemberToTeam(IPerson memberForAdding, ITeam teamToAddTo)
         {
-            teamToAddTo.AddMemberToTeam(memberForAdding);            
+            teamToAddTo.AddMemberToTeam(memberForAdding);
             return string.Format(ObjectAddedToTeam, nameof(Person), memberForAdding.PersonName, teamToAddTo.TeamName);
         }
 
@@ -608,7 +609,7 @@ namespace WIMSystem.Core
             return string.Format(ObjectCreated, nameof(Story), story.Title);
         }
 
-        private string CreateBug(string bugTitle, string bugDescription, List<string> stepsToReproduce, PriorityType bugPriority, BugSeverityType bugSeverity, IBoard board, IPerson bugAssignee=null)
+        private string CreateBug(string bugTitle, string bugDescription, List<string> stepsToReproduce, PriorityType bugPriority, BugSeverityType bugSeverity, IBoard board, IPerson bugAssignee = null)
         {
             var bug = this.factory.CreateBug(bugTitle, bugDescription, stepsToReproduce, bugPriority, bugSeverity, board, bugAssignee);
 
@@ -622,9 +623,14 @@ namespace WIMSystem.Core
             return string.Format(ObjectCreated, nameof(Bug), bug.Title);
         }
 
-        private string AddComment(IComment comment )
+        private string AddComment(string message, IPerson author, IWorkItem workItem)
         {
-            return "Not implemented"; //TODO
+            var comment = this.factory.CreateComment(message, author);
+            workItem.AddComment(comment);
+            return string.Format(CommentAdded,
+                                    message,
+                                    author.PersonName,
+                                    workItem.Title);
         }
 
         private void PrintReports(IList<string> reports)
@@ -648,17 +654,21 @@ namespace WIMSystem.Core
         }
 
         private IPerson GetMember(ITeam teamName, string memberAsString)
-        { 
-            if(!this.wimTeams.TeamsList.ContainsKey(teamName.TeamName))
+        {
+            if (!this.wimTeams.TeamsList.ContainsKey(teamName.TeamName))
             {
                 throw new ArgumentException($"No {teamName.TeamName} team found!");
             }
-            var person = this.wimTeams.TeamsList
-                            .Select(team => team.Value)
-                            .SelectMany(team => team.MemberList)
-                            .FirstOrDefault(member => member.PersonName == memberAsString);
+            IPerson person = this.personList[memberAsString];
+            bool isContain = this.wimTeams[teamName.TeamName].MemberList.Contains(person);
 
-            if(person==null)
+            //var person = this.wimTeams.TeamsList
+            //            .Where(x => x.Value == teamName)
+            //            .Select(team => team.Value)
+            //            .SelectMany(team => team.MemberList)
+            //            .FirstOrDefault(member => member.PersonName == memberAsString);
+
+            if (!isContain)
             {
                 throw new ArgumentNullException("person", $"There is no person with name {memberAsString} in the team.");
             }
@@ -670,7 +680,7 @@ namespace WIMSystem.Core
         {
             var team = this.wimTeams[teamAsString];
             return team;
-}
+        }
 
         private IBoard GetBoard(string teamName, string boardAsString)
         {
@@ -678,7 +688,7 @@ namespace WIMSystem.Core
             //                .Select(team => team.Value)
             //                .Where(team => team.BoardList.Keys.Any(board => board == boardAsString))
             //                .Single();
-            var boardResult = wimTeams[teamName].BoardList[boardAsString];
+            var boardResult = this.wimTeams[teamName].BoardList[boardAsString];
             return boardResult;
 
         }
@@ -686,6 +696,11 @@ namespace WIMSystem.Core
         private IWorkItem GetWorkItem(IBoard board, string workItemAsString)
         {
             return board.BoardWorkItems[workItemAsString];
+        }
+
+        private void AddHistoryEvent(string description, IPerson member, IBoard board, ITeam team, IWorkItem workItem)
+        {
+            this.factory.CreateHistoryItem(description,member,board,team,workItem);
         }
 
     }

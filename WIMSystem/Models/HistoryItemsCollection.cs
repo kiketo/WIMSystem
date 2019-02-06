@@ -60,7 +60,7 @@ namespace WIMSystem.Models
         public string ShowBoardActivity(IBoard board)
         {
             StringBuilder str = new StringBuilder();
-            var filteredActivity = Instance.HistoryItemsList.Where(team => team.Team.TeamName == board.Team.TeamName);
+            var filteredActivity = this.HistoryItemsList.Where(team => team.Team.TeamName == board.Team.TeamName);
             filteredActivity = filteredActivity.Where(x => x.Board.BoardName == board.BoardName);
 
             str.AppendLine($"Activity history for board: {board.BoardName} in team: {board.Team.TeamName}");

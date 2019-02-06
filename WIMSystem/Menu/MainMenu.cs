@@ -37,7 +37,7 @@ namespace WIMSystem.Menu
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Yellow;
 
-            Console.WriteLine(this.logo);
+            Console.WriteLine(MainMenuLogo.logo);
             Console.WriteLine("Press any key for main menu...");
             Console.ResetColor();
 
@@ -95,8 +95,8 @@ namespace WIMSystem.Menu
                     curItem--;
                     if (curItem < 0) curItem = 0;
                 }
-
-            } while (key.KeyChar != 13);
+                
+            } while (key.Key != ConsoleKey.Enter);
 
             if (curItem != menuItems.Length - 1)
             {
@@ -131,14 +131,15 @@ namespace WIMSystem.Menu
                 Console.WriteLine(this.mainMenuItems[indexOfItem].ParamsText);
 
                 var parameters = Console.ReadLine();
+
                 this.commandParser.SaveCommand(string.Concat(
                     this.mainMenuItems[indexOfItem].CommandText,
-                    " ",
+                    " ", //TODO
                     parameters));
             }
             else
             {
-                this.commandParser.SaveCommand(this.mainMenuItems[indexOfItem].CommandText);
+                this.commandParser.SaveCommand(this.mainMenuItems[indexOfItem].CommandText); //TODO
             }
 
             this.engine.ExecuteCommands(this.commandParser);
