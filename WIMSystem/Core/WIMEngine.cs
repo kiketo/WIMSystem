@@ -187,7 +187,7 @@ namespace WIMSystem.Core
                         var person = this.GetPerson(command.Parameters[0]);
                         return this.ShowPersonActivity(person);
                     }
-                case "ShowAllTeam":
+                case "ShowAllTeams":
                     {
                         return this.ShowAllTeams();
                     }
@@ -489,7 +489,7 @@ namespace WIMSystem.Core
                     nameof(team)
                     ));
             }
-            return team.ShowAllTeamMembers();  //Стенли: Мисля, че трябва да е ShowTeamActivity?
+            return "Not implemented";//team.ShowTeamActivity();  //Стенли: Мисля, че трябва да е ShowTeamActivity?
         }
 
         private string ShowAllTeams()

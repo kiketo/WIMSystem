@@ -9,7 +9,7 @@ namespace WIMSystem.Models
     {
         
         private string personName;
-        private IList<IWorkItem> memberWorkItem;
+        private readonly IList<IWorkItem> memberWorkItem;
         private bool isAssignedToTeam;
         
         
@@ -42,12 +42,7 @@ namespace WIMSystem.Models
         {
             get
             {
-                return this.memberWorkItem;
-            }
-
-            set
-            {
-                this.memberWorkItem = value;
+                return new List<IWorkItem>(this.memberWorkItem);
             }
         }
 

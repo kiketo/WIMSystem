@@ -9,7 +9,7 @@ namespace WIMSystem.Models
     {
         // The single instance
         private readonly IDictionary<string, IPerson> personsList;
-        private static IPersonsCollection instance;
+        private readonly static IPersonsCollection instance;
 
         static PersonsCollection()
         {
@@ -30,7 +30,7 @@ namespace WIMSystem.Models
         {
             get
             {
-                return new Dictionary<string, IPerson>(personsList);
+                return new Dictionary<string, IPerson>(this.personsList);
             }
         }
 
@@ -47,7 +47,7 @@ namespace WIMSystem.Models
         {
             var output = new StringBuilder();
 
-            if (Persons.Count == 0)
+            if (this.Persons.Count == 0)
             {
                 output.AppendLine("There are no people registered yet!");
             }
@@ -56,7 +56,7 @@ namespace WIMSystem.Models
             {
                 output.AppendLine("Registered people:");
 
-                foreach (var person in Persons)
+                foreach (var person in this.Persons)
                 {
                     output.AppendLine($"-{person.Value.PersonName}");
                 }
@@ -67,7 +67,7 @@ namespace WIMSystem.Models
 
         public bool Contains(string name)
         {
-            return personsList.ContainsKey(name);
+            return this.personsList.ContainsKey(name);
         }
 
         public IPerson this[string index]
@@ -83,7 +83,7 @@ namespace WIMSystem.Models
         {
 
             StringBuilder str = new StringBuilder();
-            if (this.Persons.Count>0)
+            if (this.Persons.Count > 0)
             {
                 foreach (var person in this.Persons)
                 {

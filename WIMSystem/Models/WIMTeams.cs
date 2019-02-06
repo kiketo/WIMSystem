@@ -8,7 +8,7 @@ namespace WIMSystem.Models
 {
     public class WIMTeams : IEnumerable<ITeam>, IWIMTeams
     {
-        private readonly IDictionary<string,ITeam> teamsList;
+        private readonly IDictionary<string, ITeam> teamsList;
 
         private readonly static IWIMTeams instance;
 
@@ -19,7 +19,7 @@ namespace WIMSystem.Models
 
         private WIMTeams()
         {
-            this.teamsList = new Dictionary<string,ITeam>();
+            this.teamsList = new Dictionary<string, ITeam>();
         }
 
         public static IWIMTeams Instance
@@ -27,9 +27,9 @@ namespace WIMSystem.Models
             get { return instance; }
         }
 
-        public IDictionary<string,ITeam> TeamsList
+        public IDictionary<string, ITeam> TeamsList
         {
-            get => new Dictionary<string,ITeam>(teamsList);
+            get => new Dictionary<string, ITeam>(this.teamsList);
         }
 
         public IEnumerator<ITeam> GetEnumerator()
@@ -58,13 +58,13 @@ namespace WIMSystem.Models
 
         public void RemoveTeam(ITeam removeTeam)
         {
-            RemoveTeam(removeTeam.TeamName);
+            this.RemoveTeam(removeTeam.TeamName);
         }
 
 
         public void RemoveTeam(string teamName)
         {
-            if (teamsList.ContainsKey(teamName))
+            if (this.teamsList.ContainsKey(teamName))
             {
                 throw new ArgumentOutOfRangeException($"Team with {teamName} does not exists");
             }
@@ -73,8 +73,8 @@ namespace WIMSystem.Models
 
         public bool Contains(string teamName)
         {
-            return (teamsList.ContainsKey(teamName));
-        
+            return (this.teamsList.ContainsKey(teamName));
+
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -82,7 +82,7 @@ namespace WIMSystem.Models
             return this.GetEnumerator();
         }
 
-        public string ShowAllTeams ()
+        public string ShowAllTeams()
         {
             StringBuilder str = new StringBuilder();
             if (this.TeamsList.Count == 0)
@@ -93,7 +93,7 @@ namespace WIMSystem.Models
             {
                 foreach (var item in this.TeamsList)
                 {
-                    str.AppendLine(item.Value.TeamName);
+                    str.AppendLine(" - "+item.Value.TeamName);
                 }
             }
             return str.ToString();

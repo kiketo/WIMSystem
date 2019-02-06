@@ -11,13 +11,13 @@ namespace WIMSystem.Models.Abstract
         private readonly int id;
         private string title;
         private string description;
-        private IBoard board;
-        private IList<IComment> listOfComments;
-        private IList<IHistoryItem> listOfHistoryItems;
+        private readonly IBoard board;
+        private readonly IList<IComment> listOfComments;
+        private readonly IList<IHistoryItem> listOfHistoryItems;
 
         public WorkItem(string title, string description, IBoard board)
         {
-            this.Board = board;
+            this.board = board;
             this.id = IDProvider.GenerateUniqueID();
             this.Title = title;
             this.Description = description;
@@ -94,10 +94,6 @@ namespace WIMSystem.Models.Abstract
             get
             {
                 return this.board;
-            }
-            private set
-            {
-                this.board = value ?? throw new ArgumentNullException("board", "Board cannot be null!");
             }
         }
 
