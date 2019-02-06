@@ -78,14 +78,14 @@ namespace WIMSystem.Core
 
             foreach (var command in commands)
             {
-                // try
+                try
                 {
                     var report = this.ProcessSingleCommand(command);
                     reports.Add(report);
                 }
-                //  catch (Exception ex)
+                catch (Exception ex)
                 {
-                    //      reports.Add(ex.Message);
+                    reports.Add(ex.Message);
                 }
             }
 

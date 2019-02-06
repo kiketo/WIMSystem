@@ -138,8 +138,9 @@ namespace WIMSystem.Models.Abstract
                 str.AppendLine("Comments:");
                 foreach (var comment in this.listOfComments)
                 {
-                    str.AppendLine($"\t Author: {comment.Author}");
-                    str.AppendLine($"\t Comment: {comment.Message}");
+                    str.Append(comment.ToString());
+                    //str.AppendLine($"\t Author: {comment.Author}");
+                    //str.AppendLine($"\t Comment: {comment.Message}");
                 }
             }
 

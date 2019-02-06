@@ -43,7 +43,7 @@ namespace WIMSystem.Models
         public override string ToString()
         {
             StringBuilder str = new StringBuilder();
-            str.AppendLine($"{this.Author.PersonName}: {this.Message}");
+            str.AppendLine($"\t{this.Author.PersonName}: {this.Message}");
 
             return str.ToString();
         }

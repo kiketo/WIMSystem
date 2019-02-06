@@ -18,6 +18,12 @@ ChangeSizeOfStory" "Gosho Team" "Gosho B." "MyStory890" "Large
 ChangeRatingOfFeedback" "Gosho Team" "Gosho B." "MyFeedback" "3
 AssignWorkItemToMember" "Gosho Team" "Gosho B." "MyStory890" "Gosho
 UnassignWorkItem" "Gosho Team" "Gosho B." "MyStory890
+"CreateComment" "Gosho Team" "Gosho B." "MyStory890" "This story is bad" "Gosho"
+"CreateComment" "Gosho Team" "Gosho B." "MyStory890" "This story is awful" "Gosho"
+"CreateComment" "Gosho Team" "Gosho B." "MyStory890" "This story is good" "Gosho"
 ListBoardWorkItems" "Gosho Team" "Gosho B." "filterType:Bug" "sortBy:Title
 ListBoardWorkItems" "Gosho Team" "Gosho B." "filterType:Bug
 ListBoardWorkItems" "Gosho Team" "Gosho B." "filterType:Bug" "filterStatus:Active
+ListBoardWorkItems" "Gosho Team" "Gosho B." "filterType:Bug" "sortBy:Title
+ListBoardWorkItems" "Gosho Team" "Gosho B." "filterType:Bug
+ListBoardWorkItems" "Gosho Team" "Gosho B." "filterType:Story"
