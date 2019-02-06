@@ -332,7 +332,11 @@ namespace WIMSystem.Core
             var member = workItem.Assignee;
             workItem.UnassignMember();
             member.MemberWorkItems.Remove(workItem);
-            return string.Format(WorkItemUnAssigned, workItem.Title, member.PersonName);
+            var returnMessage = string.Format(WorkItemUnAssigned, workItem.Title, member.PersonName);
+
+            this.AddHistoryEvent(returnMessage,member,workItem.Board,workItem.Board.Team,workItem);
+
+            return returnMessage;
         }
 
         private string AssignWorkItemToMember(IAssignableWorkItem workItem, IPerson member)
@@ -359,7 +363,12 @@ namespace WIMSystem.Core
 
             workItem.AssignMember(member);
             member.MemberWorkItems.Add(workItem);
-            return string.Format(WorkItemAssigned, workItem.Title, member.PersonName);
+            
+            var returnMessage = string.Format(WorkItemAssigned, workItem.Title, member.PersonName);
+
+            this.AddHistoryEvent(returnMessage, member, workItem.Board, workItem.Board.Team, workItem);
+
+            return returnMessage;
         }
 
         private string ListBoardWorkItems(IBoard board, Type filterType, string filterStatus, IPerson filterAssignee, string sortBy)
@@ -380,7 +389,12 @@ namespace WIMSystem.Core
                 throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Feedback)}!"));
             }
             ((IFeedback)workItem).Rating = rating;
-            return string.Format(FeedbackRatingChange, workItem.Title, rating);
+            
+            var returnMessage = string.Format(FeedbackRatingChange, workItem.Title, rating);
+
+            this.AddHistoryEvent(returnMessage, null, workItem.Board, workItem.Board.Team, workItem);
+
+            return returnMessage;
         }
 
         private string ChangeSizeOfStory(IWorkItem workItem, StorySizeType size)
@@ -396,7 +410,17 @@ namespace WIMSystem.Core
                 throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Story)}!"));
             }
             ((IStory)workItem).StorySize = size;
-            return string.Format(StorySizeChange, workItem.Title, size);
+
+            var returnMessage = string.Format(StorySizeChange, workItem.Title, size);
+
+            IPerson member = null;
+            if (workItem is IAssignableWorkItem)
+            {
+                member = (workItem as IAssignableWorkItem).Assignee;
+            }
+            this.AddHistoryEvent(returnMessage, member, workItem.Board, workItem.Board.Team, workItem);
+
+            return returnMessage; 
         }
 
         private string ChangeStatus(IWorkItem workItem, string status)
@@ -408,7 +432,17 @@ namespace WIMSystem.Core
                     ));
             }
             workItem.ChangeStatus(status);
-            return string.Format(WorkItemStatusChange, workItem.Title, status);
+
+            var returnMessage = string.Format(WorkItemStatusChange, workItem.Title, status);
+
+            IPerson member = null;
+            if (workItem is IAssignableWorkItem)
+            {
+                member = (workItem as IAssignableWorkItem).Assignee;
+            }
+            this.AddHistoryEvent(returnMessage, member, workItem.Board, workItem.Board.Team, workItem);
+
+            return returnMessage;
         }
 
         private string ChangeSeverityOfBug(IWorkItem workItem, BugSeverityType severity)
@@ -424,7 +458,17 @@ namespace WIMSystem.Core
                 throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Bug)}!"));
             }
             ((IBug)workItem).Severity = severity;
-            return string.Format(WorkItemStatusChange, workItem.Title, severity);
+
+            var returnMessage = string.Format(WorkItemStatusChange, workItem.Title, severity);
+
+            IPerson member = null;
+            if (workItem is IAssignableWorkItem)
+            {
+                member = (workItem as IAssignableWorkItem).Assignee;
+            }
+            this.AddHistoryEvent(returnMessage, member, workItem.Board, workItem.Board.Team, workItem);
+
+            return returnMessage;
         }
 
         private string ChangePriority(IAssignableWorkItem workItem, PriorityType priority)
@@ -440,7 +484,17 @@ namespace WIMSystem.Core
                 throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Feedback)}!"));
             }
             workItem.Priority = priority;
-            return string.Format(WorkItemStatusChange, workItem.Title, priority);
+
+            var returnMessage = string.Format(WorkItemStatusChange, workItem.Title, priority);
+
+            IPerson member = null;
+            if (workItem is IAssignableWorkItem)
+            {
+                member = (workItem as IAssignableWorkItem).Assignee;
+            }
+            this.AddHistoryEvent(returnMessage, member, workItem.Board, workItem.Board.Team, workItem);
+
+            return returnMessage;
         }
 
         private string ShowBoardActivity(IBoard board)
