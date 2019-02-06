@@ -31,13 +31,8 @@ namespace WIMSystem.Core
         private const string BugSeverityChange = "{0} bug's severity is changed to {1}";
         private const string CommentAdded = "Comment: \"{0}\" with author: {1} added to \"{2}\".";
 
-
-
-
-
         private const char SPLIT_CHAR = ',';
-
-
+        
         private readonly IFactory factory;
         private readonly IWIMTeams wimTeams;
         private readonly IPersonsCollection personList;
@@ -167,16 +162,15 @@ namespace WIMSystem.Core
                         return this.CreateFeedback(feedbackTitle, feedbackDescription, feedbackRating, board);
                     }
 
-                case "AddComment":
+                case "CreateComment":
                     {
                         var teamName = this.GetTeam(command.Parameters[0]);
                         var boardName = this.GetBoard(teamName.TeamName, command.Parameters[1]);
-                        var workItemTitle = this.GetWorkItem(boardName, command.Parameters[2]);
-
+                        var workItem = this.GetWorkItem(boardName, command.Parameters[2]);
                         var comment = command.Parameters[3];
-                        var author = this.GetMember(teamName, "");//TODO
+                        var author = this.GetMember(teamName,command.Parameters[4]);
 
-                        return this.AddComment(comment, author, workItemTitle); //TODO
+                        return this.CreateComment(workItem,comment,author);
                     }
 
                 case "ShowAllPeople":
@@ -623,14 +617,13 @@ namespace WIMSystem.Core
             return string.Format(ObjectCreated, nameof(Bug), bug.Title);
         }
 
-        private string AddComment(string message, IPerson author, IWorkItem workItem)
+        private string CreateComment(IWorkItem workitem,string message,IPerson author)
         {
             var comment = this.factory.CreateComment(message, author);
-            workItem.AddComment(comment);
-            return string.Format(CommentAdded,
-                                    message,
-                                    author.PersonName,
-                                    workItem.Title);
+            workitem.AddComment(comment);
+
+            return string.Format(CommentAdded, comment.Message, comment.Author.PersonName, workitem.Title);
+
         }
 
         private void PrintReports(IList<string> reports)
@@ -653,12 +646,14 @@ namespace WIMSystem.Core
 
         }
 
-        private IPerson GetMember(ITeam teamName, string memberAsString)
-        {
-            if (!this.wimTeams.TeamsList.ContainsKey(teamName.TeamName))
+
+        private IPerson GetMember(ITeam team, string memberAsString)
+        { 
+            if(!this.wimTeams.TeamsList.ContainsKey(team.TeamName))
             {
-                throw new ArgumentException($"No {teamName.TeamName} team found!");
+                throw new ArgumentException($"No {team.TeamName} team found!");
             }
+			
             IPerson person = this.personList[memberAsString];
             bool isContain = this.wimTeams[teamName.TeamName].MemberList.Contains(person);
 
@@ -669,9 +664,10 @@ namespace WIMSystem.Core
             //            .FirstOrDefault(member => member.PersonName == memberAsString);
 
             if (!isContain)
+
             {
                 throw new ArgumentNullException("person", $"There is no person with name {memberAsString} in the team.");
-            }
+            }  
 
             return person;
         }
