@@ -1,4 +1,5 @@
 ﻿using System;
+using WIMSystem.Models.Enums;
 
 namespace WIMSystem.Models.Contracts
 {
@@ -9,8 +10,6 @@ namespace WIMSystem.Models.Contracts
         IPerson Member { get; }
         IBoard Board { get; }
         ITeam Team { get; }
-        string FilteredByTeamToString();
-        string FilteredByPersonToString();
-        string FilteredByBoardToString();
+        string FilteredBy(HistoryItemFilterType);
     }
 }
