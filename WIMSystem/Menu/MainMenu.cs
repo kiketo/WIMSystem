@@ -133,13 +133,9 @@ namespace WIMSystem.Menu
 
                 var parameters = Console.ReadLine();
 
-                //this.commandParser.SaveCommand(string.Concat(
-                //    this.mainMenuItems[indexOfItem].CommandText,
-                //    "\" ", //TODO
-                //    parameters));
                 command = Command.Parse(string.Concat(
                     this.mainMenuItems[indexOfItem].CommandText,
-                    "\" ", //TODO
+                    "\" ",
                     parameters));
             }
             else

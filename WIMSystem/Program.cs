@@ -20,10 +20,10 @@ namespace WIMSystem
 
             var mainMenu = new MainMenu(
                 engine,
-               // commandParser,
                 batchParser,
                 MainMenuItems.mainMenuItems,
                 MainMenuLogo.logo);
+
             mainMenu.Start();
 
             //engine.ExecuteCommands(commandParser);

@@ -272,9 +272,11 @@ namespace WIMSystem.Core
                     {
                         var teamName = command.Parameters[0];
                         var board = this.GetBoard(teamName, command.Parameters[1]);
-                        String filterStatus = null, sortBy = null;
-                        IPerson filterAssignee = null;
+
                         Type filterType = null;
+                        string filterStatus = null;
+                        IPerson filterAssignee = null;
+                        string sortBy = null;   // "filterType:Story" "filterStatus:High" "filterAssignee:Gosho" "sortBy:Title"
 
                         for (int i = 2; i < command.Parameters.Count; i++)
                         {
@@ -376,7 +378,6 @@ namespace WIMSystem.Core
 
             return returnMessage;
         }
-
 
         private string ListBoardWorkItems(IBoard board, Type filterType, string filterStatus, IPerson filterAssignee, string sortBy)
         {

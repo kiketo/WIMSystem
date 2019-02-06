@@ -101,7 +101,7 @@ namespace WIMSystem.Models
             }
             if (!string.IsNullOrEmpty(statusFilter))
             {
-                var a = this.BoardWorkItems.First().Value.GetStatus().ToString();
+                //var a = this.BoardWorkItems.First().Value.GetStatus().ToString();
 
                 filteredCollection = filteredCollection.Where(x => x.GetStatus().ToString() == statusFilter);
             }
@@ -110,11 +110,11 @@ namespace WIMSystem.Models
 
                 filteredCollection = filteredCollection
                     .Where(x => (x as IAssignableWorkItem).Assignee == filterMember)
-                    .Where(x => x != null);
+                    .Where(x => x != null); 
             }
             if (!string.IsNullOrEmpty(sortBy))
             {
-                var a = this.BoardWorkItems.First().Value.GetType().GetProperty(sortBy);
+                var a = typeFilter.GetType().GetProperty(sortBy);
                 filteredCollection = filteredCollection.OrderBy(x => a.GetValue(x, null));
             }
             StringBuilder result = new StringBuilder();
