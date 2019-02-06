@@ -12,7 +12,7 @@ namespace WIMSystem.Models
         private string boardName;
         private readonly IDictionary<string, IWorkItem> boardWorkItems;
         private ITeam team;
-       
+
 
         public Board(string boardName, ITeam team)
         {
@@ -115,7 +115,7 @@ namespace WIMSystem.Models
             if (!string.IsNullOrEmpty(sortBy))
             {
                 var a = this.BoardWorkItems.First().Value.GetType().GetProperty(sortBy);
-                filteredCollection = filteredCollection.OrderBy(x => a.GetValue(x,null));
+                filteredCollection = filteredCollection.OrderBy(x => a.GetValue(x, null));
             }
             StringBuilder result = new StringBuilder();
             foreach (var item in filteredCollection)
@@ -133,7 +133,7 @@ namespace WIMSystem.Models
             {
                 str.AppendLine(item.Value.ToString());
             }
-            
+
             return str.ToString();
         }
 

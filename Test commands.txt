@@ -2,7 +2,13 @@ CreateTeam GoshoTeam
 CreatePerson Gosho
 AddPersonToTeam Gosho GoshoTeam
 CreateBoard GoshoBoard GoshoTeam
-CreateBug MyBug67890 BuuuuggggDes go,fast,now 1 Critical GoshoTeam GoshoBoard
+CreateBug MyBug67890 BuuuuggggDes go,fast,now High Critical GoshoTeam GoshoBoard
+CreateBug HisBug7890 BunnyGOOGOOf go,slow,wow Low Major GoshoTeam GoshoBoard
+CreateBug HerBug7890 HopHopHopbug go,down,lol Low Minor GoshoTeam GoshoBoard
+CreateBug NastyBug90 StopThisBugg go,uper,asl Medium Major GoshoTeam GoshoBoard
+CreateBug BatkaBug90 AuuBuggingMe go,some,bau High Critical GoshoTeam GoshoBoard
+ChangeStatus GoshoTeam GoshoBoard MyBug67890 Fixed
+ChangeStatus GoshoTeam GoshoBoard NastyBug90 Fixed
 CreateStory MyStory890 StoryDessss Low Small GoshoTeam GoshoBoard
 CreateFeedback MyFeedback FeedBackDessss 1 GoshoTeam GoshoBoard
 ChangeStatus GoshoTeam GoshoBoard MyFeedback Done
@@ -12,3 +18,6 @@ ChangeSizeOfStory GoshoTeam GoshoBoard MyStory890 Large
 ChangeRatingOfFeedback GoshoTeam GoshoBoard MyFeedback 3
 AssignWorkItemToMember GoshoTeam GoshoBoard MyStory890 Gosho
 UnassignWorkItem GoshoTeam GoshoBoard MyStory890
+ListBoardWorkItems GoshoTeam GoshoBoard filterType:Bug sortBy:Title
+ListBoardWorkItems GoshoTeam GoshoBoard filterType:Bug
+ListBoardWorkItems GoshoTeam GoshoBoard filterType:Bug filterStatus:Active

@@ -31,13 +31,8 @@ namespace WIMSystem.Core
         private const string BugSeverityChange = "{0} bug's severity is changed to {1}";
         private const string CommentAdded = "Comment: \"{0}\" with author: {1} added to \"{2}\".";
 
-
-
-
-
         private const char SPLIT_CHAR = ',';
-
-
+        
         private readonly IFactory factory;
         private readonly IWIMTeams wimTeams;
         private readonly IPersonsCollection personList;
@@ -187,7 +182,7 @@ namespace WIMSystem.Core
                         var person = this.GetPerson(command.Parameters[0]);
                         return this.ShowPersonActivity(person);
                     }
-                case "ShowAllTeam":
+                case "ShowAllTeams":
                     {
                         return this.ShowAllTeams();
                     }
@@ -489,7 +484,7 @@ namespace WIMSystem.Core
                     nameof(team)
                     ));
             }
-            return team.ShowAllTeamMembers();  //Стенли: Мисля, че трябва да е ShowTeamActivity?
+            return "Not implemented";//team.ShowTeamActivity();  //Стенли: Мисля, че трябва да е ShowTeamActivity?
         }
 
         private string ShowAllTeams()
@@ -624,6 +619,7 @@ namespace WIMSystem.Core
 
         private string AddComment(IComment comment)
         {
+
             return "Not implemented"; //TODO
         }
 
