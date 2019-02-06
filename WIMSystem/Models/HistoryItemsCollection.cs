@@ -69,6 +69,7 @@ namespace WIMSystem.Models
             filteredActivity = filteredActivity.Where(x => x.Board.BoardName == board.BoardName);
 
             str.AppendLine($"Activity history for board: {board.BoardName} in team: {board.Team.TeamName}");
+            str.AppendLine(new string('=', 15));
             if (filteredActivity.Count() == 0)
             {
                 str.AppendLine("There is no history!");
@@ -94,6 +95,7 @@ namespace WIMSystem.Models
 
 
             str.AppendLine($"Activity history for team: {team.TeamName}");
+            str.AppendLine(new string('=', 15));
             if (filteredActivity.Count() == 0)
             {
                 str.AppendLine("There is no history!");
@@ -119,6 +121,7 @@ namespace WIMSystem.Models
 
 
             str.AppendLine($"Activity history for person: {person.PersonName}");
+            str.AppendLine(new string('=', 15));
             if (filteredActivity.Count() == 0)
             {
                 str.AppendLine("There is no history!");
