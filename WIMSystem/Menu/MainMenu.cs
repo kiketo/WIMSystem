@@ -12,14 +12,14 @@ namespace WIMSystem.Menu
     {
         private readonly IList<MenuItem> mainMenuItems;
         private readonly string logo;
-        private readonly ICommandParser commandParser;
+        //private readonly ICommandParser commandParser;
         private readonly ICommandParser batchParser;
         private readonly IWIMEngine engine;
 
-        public MainMenu(IWIMEngine engine, ICommandParser commandParser, ICommandParser batchParser, IList<MenuItem> mainMenuItems, string logo)
+        public MainMenu(IWIMEngine engine, ICommandParser batchParser, IList<MenuItem> mainMenuItems, string logo)
         {
             this.engine = engine;
-            this.commandParser = commandParser;
+           // this.commandParser = commandParser;
             this.batchParser = batchParser;
             this.mainMenuItems = mainMenuItems ?? throw new ArgumentException("Main menu items can not be null!");
             this.logo = logo ?? throw new ArgumentException("Logo can not be null!");
