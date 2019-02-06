@@ -655,7 +655,7 @@ namespace WIMSystem.Core
             }
 			
             IPerson person = this.personList[memberAsString];
-            bool isContain = this.wimTeams[teamName.TeamName].MemberList.Contains(person);
+            bool isContain = this.wimTeams[team.TeamName].MemberList.Contains(person);
 
             //var person = this.wimTeams.TeamsList
             //            .Where(x => x.Value == teamName)
@@ -664,7 +664,6 @@ namespace WIMSystem.Core
             //            .FirstOrDefault(member => member.PersonName == memberAsString);
 
             if (!isContain)
-
             {
                 throw new ArgumentNullException("person", $"There is no person with name {memberAsString} in the team.");
             }  
@@ -694,9 +693,10 @@ namespace WIMSystem.Core
             return board.BoardWorkItems[workItemAsString];
         }
 
-        private void AddHistoryEvent(string description, IPerson member, IBoard board, ITeam team, IWorkItem workItem)
+        private void AddHistoryEvent(string description, IPerson member = null, IBoard board = null, ITeam team = null, IWorkItem workItem = null)
         {
-            this.factory.CreateHistoryItem(description,member,board,team,workItem);
+            var historyItem = this.factory.CreateHistoryItem(description,member,board,team,workItem);
+            this.historyItemsList.AddHistoryItem(historyItem);
         }
 
     }
