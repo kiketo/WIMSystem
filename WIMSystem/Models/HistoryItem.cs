@@ -67,15 +67,15 @@ namespace WIMSystem.Models
             
             if (filterType!=HistoryItemFilterType.team&&this.team!=null)
             {
-                str.AppendLine($"Team: {this.Team.TeamName}");
+                str.AppendLine($"Team: {this.team.TeamName}");
             }
             else if (filterType!=HistoryItemFilterType.board&&this.board!=null)
             {
-                str.AppendLine($"Board: {this.Board.BoardName}");
+                str.AppendLine($"Board: {this.board.BoardName}");
             }
-            else if (filterType!=HistoryItemFilterType.person&&this.team.MemberList!=null)
+            else if (filterType!=HistoryItemFilterType.person&&this.member!=null)
             {
-                str.AppendLine($"Member: {this.Member.PersonName}");
+                str.AppendLine($"Member: {this.member.PersonName}");
             }
 
             return str.ToString();

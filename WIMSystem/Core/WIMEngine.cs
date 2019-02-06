@@ -23,7 +23,7 @@ namespace WIMSystem.Core
         private const string ObjectAddedToTeam = "{0} {1} added to {2} team";
         private const string ObjectRemovedFromTeam = "{0} {1} removed from {2} team";
         private const string WorkItemAssigned = "{0} work item is assigned to {1} member";
-        private const string WorkItemUnAssigned = "{0} work item is unassigned to {1} member";
+        private const string WorkItemUnAssigned = "{0} work item is unassigned from {1} member";
         private const string WorkItemStatusChange = "{0} work item's status is changed to {1}";
         private const string FeedbackRatingChange = "{0} feedback's rating is changed to {1}";
         private const string WorkItemPriorityChange = "{0} work item's priority is changed to {1}";
@@ -466,7 +466,7 @@ namespace WIMSystem.Core
             }
             ((IBug)workItem).Severity = severity;
 
-            var returnMessage = string.Format(WorkItemStatusChange, workItem.Title, severity);
+            var returnMessage = string.Format(BugSeverityChange, workItem.Title, severity);
 
             IPerson member = null;
             if (workItem is IAssignableWorkItem)
@@ -492,7 +492,7 @@ namespace WIMSystem.Core
             }
             workItem.Priority = priority;
 
-            var returnMessage = string.Format(WorkItemStatusChange, workItem.Title, priority);
+            var returnMessage = string.Format(WorkItemPriorityChange, workItem.Title, priority);
 
             IPerson member = null;
             if (workItem is IAssignableWorkItem)
