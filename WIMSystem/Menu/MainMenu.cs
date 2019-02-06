@@ -134,7 +134,7 @@ namespace WIMSystem.Menu
 
                 this.commandParser.SaveCommand(string.Concat(
                     this.mainMenuItems[indexOfItem].CommandText,
-                    " ", //TODO
+                    "\" ", //TODO
                     parameters));
             }
             else

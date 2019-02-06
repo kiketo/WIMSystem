@@ -61,7 +61,9 @@ namespace WIMSystem.Models
         {
             StringBuilder str = new StringBuilder();
 
-            var filteredActivity = this.HistoryItemsList.Where(x => x.Team.TeamName == board.Team.TeamName);
+            var filteredActivity = this.HistoryItemsList
+                .Where(x => x.Board != null)
+                .Where(x => x.Team.TeamName == board.Team.TeamName);
 
             filteredActivity = filteredActivity.Where(x => x.Board.BoardName == board.BoardName);
 
@@ -85,7 +87,9 @@ namespace WIMSystem.Models
         public string ShowTeamActivity(ITeam team)
         {
             StringBuilder str = new StringBuilder();
-            var filteredActivity = this.HistoryItemsList.Where(x => x.Team.TeamName == team.TeamName);
+            var filteredActivity = this.HistoryItemsList
+                .Where(x => x.Team != null)
+                .Where(x => x.Team.TeamName == team.TeamName);
 
 
             str.AppendLine($"Activity history for team: {team.TeamName}");
@@ -108,7 +112,9 @@ namespace WIMSystem.Models
         {
             var str = new StringBuilder();
 
-            var filteredActivity = this.HistoryItemsList.Where(x => x.Member.PersonName == person.PersonName);
+            var filteredActivity = this.HistoryItemsList
+                .Where(x => x.Member != null)
+                .Where(x => x.Member.PersonName == person.PersonName);
 
 
             str.AppendLine($"Activity history for person: {person.PersonName}");
