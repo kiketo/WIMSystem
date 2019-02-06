@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using WIMSystem.Models.Contracts;
+using WIMSystem.Models.Enums;
 
 namespace WIMSystem.Models
 {
@@ -76,7 +77,7 @@ namespace WIMSystem.Models
             {
                 foreach (var item in filteredActivity)
                 {
-                    str.AppendLine(item.FilteredByBoardToString());
+                    str.AppendLine(item.FilteredBy(HistoryItemFilterType.board));
                 }
 
             }
@@ -101,7 +102,7 @@ namespace WIMSystem.Models
             {
                 foreach (var item in filteredActivity)
                 {
-                    str.AppendLine(item.FilteredByTeamToString());
+                    str.AppendLine(item.FilteredBy(HistoryItemFilterType.team));
                 }
             }
 
@@ -126,7 +127,7 @@ namespace WIMSystem.Models
             {
                 foreach (var activity in filteredActivity)
                 {
-                    str.AppendLine(activity.FilteredByPersonToString());
+                    str.AppendLine(activity.FilteredBy(HistoryItemFilterType.person));
                 }
             }
 

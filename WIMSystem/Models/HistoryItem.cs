@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using WIMSystem.Models.Contracts;
+using WIMSystem.Models.Enums;
 
 namespace WIMSystem.Models
 {
@@ -58,37 +59,29 @@ namespace WIMSystem.Models
             return str.ToString();
         }
 
-        public string FilteredByTeamToString()
+        public string FilteredBy(HistoryItemFilterType filterType)
         {
             StringBuilder str = new StringBuilder();
-            str.AppendLine($"Date and time: {this.CreationDate}");
-            str.AppendLine($"Board: {this.Board.BoardName}");
-            str.AppendLine($"Member: {this.Member.PersonName}");
-            str.AppendLine($"Description: {this.Description}");
+                str.AppendLine($"Date and time: {this.CreationDate}");
+                str.AppendLine($"Description: {this.Description}");
+            
+            if (filterType!=HistoryItemFilterType.team&&this.team!=null)
+            {
+                str.AppendLine($"Team: {this.Team.TeamName}");
+            }
+            else if (filterType!=HistoryItemFilterType.board&&this.board!=null)
+            {
+                str.AppendLine($"Board: {this.Board.BoardName}");
+            }
+            else if (filterType!=HistoryItemFilterType.person&&this.team.MemberList!=null)
+            {
+                str.AppendLine($"Member: {this.Member.PersonName}");
+            }
 
             return str.ToString();
         }
 
-        public string FilteredByPersonToString()
-        {
-            var output = new StringBuilder();
-            output.AppendLine($"Date and time: {this.CreationDate}");
-            output.AppendLine($"Team: {this.Team.TeamName}");
-            output.AppendLine($"Board: {this.Board.BoardName}");
-            output.AppendLine($"Description: {this.Description}");
-
-            return output.ToString();
-        }
-
-        public string FilteredByBoardToString()
-        {
-            StringBuilder str = new StringBuilder();
-            str.AppendLine($"Date and time: {this.CreationDate}");
-            str.AppendLine($"Member: {this.Member.PersonName}");
-            str.AppendLine($"Description: {this.Description}");
-
-            return str.ToString();
-        }
+       
 
     }
 }

@@ -580,7 +580,7 @@ namespace WIMSystem.Core
             this.wimTeams.AddTeam(team);
             var returnMessage = string.Format(ObjectCreated, nameof(Team), teamName);
 
-            this.AddHistoryEvent(returnMessage);
+            this.AddHistoryEvent(returnMessage,null,null,team);
 
             return returnMessage;
         }
@@ -595,7 +595,7 @@ namespace WIMSystem.Core
             var person = this.factory.CreatePerson(personName);
             this.personList.AddPerson(person);
             var returnMessage = string.Format(ObjectCreated, nameof(Person), personName);
-            this.AddHistoryEvent(returnMessage);
+            this.AddHistoryEvent(returnMessage,person);
             return returnMessage;
         }
 
@@ -608,7 +608,7 @@ namespace WIMSystem.Core
             }
             team.AddBoardToTeam(board);
             var returnMessage = string.Format(ObjectCreated, nameof(Board), boardName);
-            this.AddHistoryEvent(returnMessage, null, null, team);
+            this.AddHistoryEvent(returnMessage, null, board, team);
 
 
             return returnMessage;
