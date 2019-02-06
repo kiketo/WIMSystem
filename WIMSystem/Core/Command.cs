@@ -7,7 +7,7 @@ namespace WIMSystem.Core
 {
     internal class Command : ICommand
     {
-        private const char SplitCommandSymbol = ' ';
+        private const string SplitCommandSymbol = "\" \"";
 
         private string name;
         private IList<string> parameters;
@@ -64,12 +64,14 @@ namespace WIMSystem.Core
 
             if (indexOfFirstSeparator < 0)
             {
-                this.Name = input;
+                this.Name = input.Trim('"');
                 return;
             }
 
-            this.Name = input.Substring(0, indexOfFirstSeparator);
-            this.Parameters = input.Substring(indexOfFirstSeparator + 1).Split(new[] { SplitCommandSymbol }, StringSplitOptions.RemoveEmptyEntries);
+            this.Name = input.Substring(0, indexOfFirstSeparator).Trim('"');
+            this.Parameters = input.Substring(indexOfFirstSeparator + 2)
+                .Trim('"')
+                .Split(new[] { SplitCommandSymbol }, StringSplitOptions.RemoveEmptyEntries);
         }
     }
 }

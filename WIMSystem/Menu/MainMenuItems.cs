@@ -10,7 +10,7 @@ namespace WIMSystem.Menu
         {
             new MenuItem("CreatePerson","* Create a new person","Enter person name:"),
             new MenuItem("ShowAllPeople","* Show all people", ""),
-            new MenuItem("ShowPersonActivity","* Show person's activity", ""),
+            new MenuItem("ShowPersonActivity","* Show person's activity", "Enter person name:"),
             new MenuItem("CreateTeam","* Create a new team", "Enter team name:"),
             new MenuItem("ShowAllTeams","* Show all teams", ""),
             new MenuItem("ShowTeamActivity","* Show team's activity", ""),
