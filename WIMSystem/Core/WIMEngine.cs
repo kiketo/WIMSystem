@@ -66,6 +66,12 @@ namespace WIMSystem.Core
             this.PrintReports(commandResult);
         }
 
+        public void ExecuteCommands(IList<ICommand> commands)
+        {
+            var commandResult = this.ProcessCommands(commands);
+            this.PrintReports(commandResult);
+        }
+
         private IList<string> ProcessCommands(IList<ICommand> commands)
         {
             var reports = new List<string>();

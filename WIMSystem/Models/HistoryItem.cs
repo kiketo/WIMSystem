@@ -33,7 +33,7 @@ namespace WIMSystem.Models
         }
         public DateTime CreationDate
         {
-            get => this.CreationDate;
+            get => this.creationDate;
         }
         public IPerson Member
         {
