@@ -484,7 +484,7 @@ namespace WIMSystem.Core
                     nameof(team)
                     ));
             }
-            return "Not implemented";//team.ShowTeamActivity();  //Стенли: Мисля, че трябва да е ShowTeamActivity?
+            return historyItemsList.ShowTeamActivity(team); 
         }
 
         private string ShowAllTeams()
@@ -500,7 +500,7 @@ namespace WIMSystem.Core
                     nameof(person)
                     ));
             }
-            return "Not Implemented";//TODO person.ShowPersonActivity();  
+            return historyItemsList.ShowPersonActivity(person);
         }
 
         private string ShowAllPeople()
@@ -517,8 +517,11 @@ namespace WIMSystem.Core
 
             var team = this.factory.CreateTeam(teamName, this.wimTeams);
             this.wimTeams.AddTeam(team);
+            var returnMessage = string.Format(ObjectCreated, nameof(Team), teamName);
 
-            return string.Format(ObjectCreated, nameof(Team), teamName);
+            this.AddHistoryEvent(returnMessage);
+
+            return returnMessage;
         }
 
         private string CreatePerson(string personName)
@@ -530,8 +533,10 @@ namespace WIMSystem.Core
 
             var person = this.factory.CreatePerson(personName);
             this.personList.AddPerson(person);
+            var returnMessage = string.Format(ObjectCreated, nameof(Person), personName);
+            this.AddHistoryEvent(returnMessage);
 
-            return string.Format(ObjectCreated, nameof(Person), personName);
+            return returnMessage;
         }
 
         private string CreateBoard(string boardName, ITeam team)
@@ -542,21 +547,30 @@ namespace WIMSystem.Core
                 throw new ArgumentException(string.Format(ObjectExists, nameof(Board), board));
             }
             team.AddBoardToTeam(board);
+            var returnMessage = string.Format(ObjectCreated, nameof(Board), boardName);
+            this.AddHistoryEvent(returnMessage, null, null, team);
 
-            return string.Format(ObjectCreated, nameof(Board), boardName);
+
+            return returnMessage;
 
         }
 
         private string AddMemberToTeam(IPerson memberForAdding, ITeam teamToAddTo)
         {
-            teamToAddTo.AddMemberToTeam(memberForAdding);            
-            return string.Format(ObjectAddedToTeam, nameof(Person), memberForAdding.PersonName, teamToAddTo.TeamName);
+            teamToAddTo.AddMemberToTeam(memberForAdding);
+            var returnMessage = string.Format(ObjectAddedToTeam, nameof(Person), memberForAdding.PersonName, teamToAddTo.TeamName);
+            this.AddHistoryEvent(returnMessage,memberForAdding,null,teamToAddTo);
+
+            return returnMessage;
         }
 
         private string RemoveMemberFromTeam(ITeam teamToRemoveFrom, IPerson memberForRemoving)
         {
             teamToRemoveFrom.RemoveMemberFromTeam(memberForRemoving);
-            return string.Format(ObjectRemovedFromTeam, nameof(Person), memberForRemoving.PersonName, teamToRemoveFrom.TeamName);
+            var returnMessage = string.Format(ObjectRemovedFromTeam, nameof(Person), memberForRemoving.PersonName, teamToRemoveFrom.TeamName);
+            this.AddHistoryEvent(returnMessage, memberForRemoving, null, teamToRemoveFrom);
+
+            return returnMessage;
 
         }
 
