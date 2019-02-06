@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using WIMSystem.Core;
 using WIMSystem.Core.Contracts;
 using WIMSystem.Menu.Contracts;
 
@@ -125,24 +126,29 @@ namespace WIMSystem.Menu
         public void ConsoleParameters(int indexOfItem)
         {
             Console.Clear();
-
+            ICommand command;
             if (!string.IsNullOrEmpty(this.mainMenuItems[indexOfItem].ParamsText))
             {
                 Console.WriteLine(this.mainMenuItems[indexOfItem].ParamsText);
 
                 var parameters = Console.ReadLine();
 
-                this.commandParser.SaveCommand(string.Concat(
+                //this.commandParser.SaveCommand(string.Concat(
+                //    this.mainMenuItems[indexOfItem].CommandText,
+                //    "\" ", //TODO
+                //    parameters));
+                command = Command.Parse(string.Concat(
                     this.mainMenuItems[indexOfItem].CommandText,
                     "\" ", //TODO
                     parameters));
             }
             else
             {
-                this.commandParser.SaveCommand(this.mainMenuItems[indexOfItem].CommandText); //TODO
+                command = Command.Parse(this.mainMenuItems[indexOfItem].CommandText);
+                //this.commandParser.SaveCommand(this.mainMenuItems[indexOfItem].CommandText); //TODO
             }
 
-            this.engine.ExecuteCommands(this.commandParser);
+            this.engine.ExecuteCommands(new List<ICommand>() { command});
 
             Console.WriteLine();
             Console.Write("Press any key for main menu...");
