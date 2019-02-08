@@ -176,7 +176,7 @@ namespace WIMSystem.Core
                         var comment = command.Parameters[3];
                         var author = this.GetMember(teamName, command.Parameters[4]);
 
-                        return this.CreateComment(workItem, comment, author); //TODO
+                        return this.CreateComment(workItem, comment, author);
                     }
 
                 case "ShowAllPeople":
@@ -513,7 +513,7 @@ namespace WIMSystem.Core
                     nameof(board)
                     ));
             }
-            return "Not Implemented";//TODO board.ShowBoardActivity();
+            return historyItemsList.ShowBoardActivity(board);
         }
 
         private string ShowAllTeamBoards(ITeam team)
