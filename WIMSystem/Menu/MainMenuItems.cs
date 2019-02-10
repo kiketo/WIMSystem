@@ -32,7 +32,7 @@ namespace WIMSystem.Menu
             new MenuItem("UnassignWorkItem","* Unassign work item to a person", "Enter work item team name, board name, work item title, member name"),
             new MenuItem("CreateComment","* Add comment to a work item", "Enter work item team name, board name, work item title, comment text, author name"),
             new MenuItem("ListBoardWorkItems","* List board items by filter and sort order",
-                "List board items. Optional filter parameters: filterStatus:Bug/Story/Feedback, filterStatus:status, filterAssignee:name, sortBy:Title/Priority/Severity/Size/Rating"),
+                "List board items. Optional filter parameters: filterType:Bug/Story/Feedback, filterStatus:status, filterAssignee:name, sortBy:Title/Priority/Severity/Size/Ratin"),
             new MenuItem("BatchCommands","Enter multiple commands",""),
             new MenuItem("exit","****Exit****","")
         };
