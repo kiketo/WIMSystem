@@ -281,7 +281,7 @@ namespace WIMSystem.Core
                         for (int i = 2; i < command.Parameters.Count; i++)
                         {
                             var paramOption = command.Parameters[i].Split(new[] { ':', }, StringSplitOptions.RemoveEmptyEntries);
-                            switch (paramOption[1])
+                            switch (paramOption[0])
                             {
                                 case "filterType":
                                     {
