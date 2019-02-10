@@ -9,7 +9,6 @@ using WIMSystem.Models;
 using WIMSystem.Models.Abstract;
 using WIMSystem.Models.Contracts;
 using WIMSystem.Models.Enums;
-using WIMSystem.Utils;
 
 namespace WIMSystem.Core
 {
