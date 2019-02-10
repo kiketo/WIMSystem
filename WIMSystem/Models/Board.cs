@@ -114,17 +114,8 @@ namespace WIMSystem.Models
             }
             if (!string.IsNullOrEmpty(sortBy))
             {
-                var c = typeFilter.GetType();
-                if(c==typeof(Bug))
-                {
-                    var a = c.GetProperty(sortBy);
-                    filteredCollection = filteredCollection.OrderBy(x => a.GetValue(x, null));
-                }
-                else
-                {
-                    var a = c.GetProperty(sortBy);
-                    filteredCollection = filteredCollection.OrderBy(x => a.GetValue(x, null));
-                }
+                var a = this.BoardWorkItems.First().Value.GetType().GetProperty(sortBy);
+                filteredCollection = filteredCollection.OrderBy(x => a.GetValue(x, null));
             }
             StringBuilder result = new StringBuilder();
             foreach (var item in filteredCollection)
