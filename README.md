@@ -21,4 +21,4 @@ Created by:
 
 [Trello link](https://trello.com/b/Ockj2Cxm/oop-teamwork-assignment)
  
- For commands instruction plece see our wiki page: [Commands](https://gitlab.com/stakAtak/WIMSystem/wikis/Application-commands)
+ For commands instruction please see our wiki page: [Commands](https://gitlab.com/stakAtak/WIMSystem/wikis/Application-commands)
