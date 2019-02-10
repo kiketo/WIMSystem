@@ -114,7 +114,7 @@ namespace WIMSystem.Models
             }
             if (!string.IsNullOrEmpty(sortBy))
             {
-                var a = filteredCollection.First().GetType().GetProperty(sortBy);
+                var a = typeFilter.GetProperty(sortBy);
                 filteredCollection = filteredCollection.OrderBy(x => a.GetValue(x, null));
             }
             StringBuilder result = new StringBuilder();
