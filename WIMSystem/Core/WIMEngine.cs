@@ -55,6 +55,7 @@ namespace WIMSystem.Core
         //        var commandResult = this.ProcessCommands(commands);
         //        this.PrintReports(commandResult);
         //    }
+
         //    while (commands.Count > 0);
 
         //}

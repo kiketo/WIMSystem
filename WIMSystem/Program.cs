@@ -10,7 +10,6 @@ namespace WIMSystem
     {
         static void Main()
         {
-
             var factory = new Factory();
             var teamList = WIMTeams.Instance;
             var memberLits = PersonsCollection.Instance;
