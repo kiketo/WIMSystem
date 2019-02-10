@@ -10,16 +10,16 @@ namespace WIMSystem.Models
     public class Story : AssignableWorkItem, IStory, IAssignableWorkItem, IWorkItem
     {
         public Story(string title, string description, PriorityType priority,
-            StorySizeType storySize, IBoard board, IPerson assignee = null) //assignee is optional?
+            StorySizeType size, IBoard board, IPerson assignee = null) //assignee is optional?
             : base(title, description, priority, board, assignee)
         {
-            this.StorySize = storySize;
-            this.StoryStatus = StoryStatusType.NotDone;
+            this.Size = size;
+            this.Status = StoryStatusType.NotDone;
         }
 
-        public StorySizeType StorySize { get; set; }
+        public StorySizeType Size { get; set; }
 
-        public StoryStatusType StoryStatus { get; set; }
+        public StoryStatusType Status { get; set; }
 
         public void ChangeSize(string size)
         {
@@ -31,7 +31,7 @@ namespace WIMSystem.Models
             else
             {
                 StorySizeType sizeEnum = (StorySizeType)Enum.Parse(typeof(StorySizeType), size, true);
-                this.StorySize = sizeEnum;
+                this.Size = sizeEnum;
             }
         }
 
@@ -45,21 +45,21 @@ namespace WIMSystem.Models
             else
             {
                 StoryStatusType statusEnum = (StoryStatusType)Enum.Parse(typeof(StoryStatusType), status, true);
-                this.StoryStatus = statusEnum;
+                this.Status = statusEnum;
             }
         }
 
         public override Enum GetStatus()
         {
-            return this.StoryStatus;
+            return this.Status;
         }
 
         public override string ToString()
         {
             StringBuilder str = new StringBuilder();
             str.Append(base.ToString());
-            str.AppendLine($"Story size: {this.StorySize}");
-            str.AppendLine($"Story status: {this.StoryStatus}");
+            str.AppendLine($"Story size: {this.Size}");
+            str.AppendLine($"Story status: {this.Status}");
             
             return str.ToString();
         }

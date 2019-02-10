@@ -9,23 +9,23 @@ namespace WIMSystem.Models
 {
     public class Feedback : WorkItem, IFeedback, IWorkItem
     {
-        private FeedbackStatusType feedbackStatus;
+        private FeedbackStatusType status;
 
         public Feedback(string title, string description, int rating, IBoard board)
             : base(title, description, board)
         {
             this.Rating = rating;
-            this.FeedbackStatus = FeedbackStatusType.Unscheduled;
+            this.Status = FeedbackStatusType.Unscheduled;
         }
 
         public int Rating { get; set; } //what is rating and how do we check it?
 
-        public FeedbackStatusType FeedbackStatus
+        public FeedbackStatusType Status
         {
-            get => this.feedbackStatus;
+            get => this.status;
             set
             {
-                this.feedbackStatus = value;
+                this.status = value;
             }
         }
 
@@ -53,13 +53,13 @@ namespace WIMSystem.Models
             {
                 //FeedbackStatusType statusEnum = (FeedbackStatusType)Enum.Parse(typeof(FeedbackStatusType), status, true);
                 FeedbackStatusType statusEnum = Enum.Parse<FeedbackStatusType>(status, true);
-                this.FeedbackStatus = statusEnum;
+                this.Status = statusEnum;
             }
         }
 
         public override Enum GetStatus()
         {
-            return this.feedbackStatus;
+            return this.status;
         }
 
         public override string ToString()
@@ -67,7 +67,7 @@ namespace WIMSystem.Models
             StringBuilder str = new StringBuilder();
             str.Append(base.ToString());
             str.AppendLine($"Rating: {this.Rating}");
-            str.AppendLine($"Feedback status: {this.FeedbackStatus}");
+            str.AppendLine($"Feedback status: {this.Status}");
 
             return str.ToString();
         }

@@ -417,7 +417,7 @@ namespace WIMSystem.Core
             {
                 throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Story)}!"));
             }
-            ((IStory)workItem).StorySize = size;
+            ((IStory)workItem).Size = size;
 
             var returnMessage = string.Format(StorySizeChange, workItem.Title, size);
 

@@ -28,7 +28,7 @@ namespace WIMSystem.Models
 
             this.stepsToReproduce = stepsToReproduce;
             this.Severity = severity;
-            this.BugStatus = BugStatusType.Active;
+            this.Status = BugStatusType.Active;
 
         }
 
@@ -42,7 +42,7 @@ namespace WIMSystem.Models
 
         public BugSeverityType Severity { get; set; }
 
-        public BugStatusType BugStatus { get; set; }
+        public BugStatusType Status { get; set; }
 
         public void ChangeSeverity(string severity)
         {
@@ -68,13 +68,13 @@ namespace WIMSystem.Models
             else
             {
                 BugStatusType statusEnum = (BugStatusType)Enum.Parse(typeof(BugStatusType), newStatus, true);
-                this.BugStatus = statusEnum;
+                this.Status = statusEnum;
             }
         }
 
         public override Enum GetStatus()
         {
-            return this.BugStatus;
+            return this.Status;
         }
 
         public override string ToString()
@@ -90,7 +90,7 @@ namespace WIMSystem.Models
                 }
             }
             str.AppendLine($"Severity: {this.Severity}");
-            str.AppendLine($"Bug status: {this.BugStatus}");
+            str.AppendLine($"Bug status: {this.Status}");
                        
             return str.ToString();
         }
