@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using Utils;
 using WIMSystem.Core.Contracts;
@@ -282,7 +281,7 @@ namespace WIMSystem.Core
                         for (int i = 2; i < command.Parameters.Count; i++)
                         {
                             var paramOption = command.Parameters[i].Split(new[] { ':', }, StringSplitOptions.RemoveEmptyEntries);
-                            switch (paramOption[0])
+                            switch (paramOption[1])
                             {
                                 case "filterType":
                                     {
