@@ -19,7 +19,7 @@ namespace WIMSystem.Menu
         public MainMenu(IWIMEngine engine, ICommandParser batchParser, IList<MenuItem> mainMenuItems, string logo)
         {
             this.engine = engine;
-           // this.commandParser = commandParser;
+            // this.commandParser = commandParser;
             this.batchParser = batchParser;
             this.mainMenuItems = mainMenuItems ?? throw new ArgumentException("Main menu items can not be null!");
             this.logo = logo ?? throw new ArgumentException("Logo can not be null!");
@@ -96,7 +96,7 @@ namespace WIMSystem.Menu
                     curItem--;
                     if (curItem < 0) curItem = 0;
                 }
-                
+
             } while (key.Key != ConsoleKey.Enter);
 
             if (curItem != menuItems.Length - 1)
@@ -106,8 +106,12 @@ namespace WIMSystem.Menu
 
                     this.ConsoleBatchCommands();
                 }
+                else
+                {
 
-                this.ConsoleParameters(curItem);
+                    this.ConsoleParameters(curItem);
+                }
+
             }
             Console.WriteLine();
         }
@@ -144,7 +148,7 @@ namespace WIMSystem.Menu
                 //this.commandParser.SaveCommand(this.mainMenuItems[indexOfItem].CommandText); //TODO
             }
 
-            this.engine.ExecuteCommands(new List<ICommand>() { command});
+            this.engine.ExecuteCommands(new List<ICommand>() { command });
 
             Console.WriteLine();
             Console.Write("Press any key for main menu...");
