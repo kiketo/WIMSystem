@@ -20,16 +20,16 @@ namespace WIMSystem.Core
         private const string ObjectExists = "{0} with name {1} already exists!";
         private const string ObjectCreated = "{0} with name {1} was created!";
         private const string ObjectDoesNotExist = "{0} {1} does not exist!";
-        private const string ObjectAddedToTeam = "{0} {1} added to {2} team";
-        private const string ObjectRemovedFromTeam = "{0} {1} removed from {2} team";
-        private const string WorkItemAssigned = "{0} work item is assigned to {1} member";
-        private const string WorkItemUnAssigned = "{0} work item is unassigned from {1} member";
-        private const string WorkItemStatusChange = "{0} work item's status is changed to {1}";
-        private const string FeedbackRatingChange = "{0} feedback's rating is changed to {1}";
-        private const string WorkItemPriorityChange = "{0} work item's priority is changed to {1}";
-        private const string StorySizeChange = "{0} story's size is changed to {1}";
-        private const string BugSeverityChange = "{0} bug's severity is changed to {1}";
-        private const string CommentAdded = "Comment: \"{0}\" with author: {1} added to \"{2}\".";
+        private const string ObjectAddedToTeam = "{0} {1} added to team \"{2}\"!";
+        private const string ObjectRemovedFromTeam = "{0} {1} removed from team \"{2}\"!";
+        private const string WorkItemAssigned = "{0} work item is assigned to member {1}!";
+        private const string WorkItemUnAssigned = "{0} work item is unassigned from member {1}!";
+        private const string WorkItemStatusChange = "{0} work item's status is changed to {1}!";
+        private const string FeedbackRatingChange = "{0} feedback's rating is changed to {1}!";
+        private const string WorkItemPriorityChange = "{0} work item's priority is changed to {1}!";
+        private const string StorySizeChange = "{0} story's size is changed to {1}!";
+        private const string BugSeverityChange = "{0} bug's severity is changed to {1}!";
+        private const string CommentAdded = "Comment \"{0}\" with author {1} added to \"{2}\"!";
 
         private const char SPLIT_CHAR = ',';
 
@@ -55,6 +55,7 @@ namespace WIMSystem.Core
         //        var commandResult = this.ProcessCommands(commands);
         //        this.PrintReports(commandResult);
         //    }
+
         //    while (commands.Count > 0);
 
         //}

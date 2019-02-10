@@ -18,7 +18,7 @@ namespace WIMSystem.Menu
             new MenuItem("ShowAllTeamMembers","* Show all team members", "Enter team name:"),
             new MenuItem("CreateBoard","* Create a new board in a team", "Enter board name and team name:"),
             new MenuItem("ShowAllTeamBoards","* Show all team boards", "Enter team name:"),
-            new MenuItem("ShowBoardActivity","* Show board's activity", "Enter board name:"),
+            new MenuItem("ShowBoardActivity","* Show board's activity", "Enter team and board name:"),
             new MenuItem("CreateBug","* Create a new Bug in a board", "Enter bug title, description, stepsto reproduce (divided by comma), priority, severity,team, board"),
             new MenuItem("CreateStory","* Create a new Story in a board", "Enter story title, description, priority, storySize, team, board:"),
             new MenuItem("CreateFeedback","* Create a new Feedback in a board", "Enter feedback title, description, rating, team, board"),
