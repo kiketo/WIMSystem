@@ -2,12 +2,23 @@
 
 Work Item Management (WIM) Console Application
 
-Създал съм интерфейсите по скелета, за който се разбрахме.
-Чуствайте се напълно свободни да променяте, допълвате или триете по тях.
+OOP Teamwork Assignment
 
-Трябва да се имплементират тези интерфейси и да се направят валидации.
-Навсякъде кодете срещу абстракции (IList, IMember IBug и т.н. 
+C# .NET Jan'19
 
-Трело линк:
-https://trello.com/b/Ockj2Cxm/oop-teamwork-assignment
+Telerik Academy
+
+
+
+Created by:
+
+[Stanislav Dinev](https://gitlab.com/stakAtak)
+
+[Stiliyan Kostadinov](https://gitlab.com/cidsan)
+
+[Kiril Kuzmanov](https://gitlab.com/kiketo)
+
+
+[Trello link](https://trello.com/b/Ockj2Cxm/oop-teamwork-assignment)
  
+ For commands instruction please see our wiki page: [Commands](https://gitlab.com/stakAtak/WIMSystem/wikis/Application-commands)

@@ -1,7 +1,13 @@
 "CreateTeam" "Gosho Team"
+"CreateTeam" "Pesho Team"
 "CreatePerson" "Gosho"
+"CreatePerson" "Pesho"
 "AddPersonToTeam" "Gosho" "Gosho Team"
+"AddPersonToTeam" "Pesho" "Pesho Team"
 "CreateBoard" "Gosho B." "Gosho Team"
+"CreateBoard" "Gosho B.1" "Gosho Team"
+"CreateBoard" "Pesho B." "Pesho Team"
+"CreateBoard" "Pesho B.1" "Pesho Team"
 CreateBug" "MyBug67890" "Buuuugggg Des" "go,fast,now" "High" "Critical" "Gosho Team" "Gosho B.
 CreateBug" "HisBug7890" "Bunny GOOGOOf" "go,slow,wow" "Low" "Major" "Gosho Team" "Gosho B.
 CreateBug" "HerBug7890" "Hop Hop Hopbug" "go,down,lol" "Low" "Minor" "Gosho Team" "Gosho B.
@@ -21,9 +27,43 @@ UnassignWorkItem" "Gosho Team" "Gosho B." "MyStory890
 "CreateComment" "Gosho Team" "Gosho B." "MyStory890" "This story is bad" "Gosho"
 "CreateComment" "Gosho Team" "Gosho B." "MyStory890" "This story is awful" "Gosho"
 "CreateComment" "Gosho Team" "Gosho B." "MyStory890" "This story is good" "Gosho"
-ListBoardWorkItems" "Gosho Team" "Gosho B." "filterType:Bug" "sortBy:Title
-ListBoardWorkItems" "Gosho Team" "Gosho B." "filterType:Bug
-ListBoardWorkItems" "Gosho Team" "Gosho B." "filterType:Bug" "filterStatus:Active
-ListBoardWorkItems" "Gosho Team" "Gosho B." "filterType:Bug" "sortBy:Title
-ListBoardWorkItems" "Gosho Team" "Gosho B." "filterType:Bug
-ListBoardWorkItems" "Gosho Team" "Gosho B." "filterType:Story"
+CreateBug" "MyBug67890" "Buuuugggg Des" "go,fast,now" "High" "Critical" "Pesho Team" "Pesho B.
+CreateBug" "HisBug7890" "Bunny GOOGOOf" "go,slow,wow" "Low" "Major" "Pesho Team" "Pesho B.
+CreateBug" "HerBug7890" "Hop Hop Hopbug" "go,down,lol" "Low" "Minor" "Pesho Team" "Pesho B.
+CreateBug" "NastyBug90" "Stop This Bugg" "go,uper,asl" "Medium" "Major" "Pesho Team" "Pesho B.
+CreateBug" "BatkaBug90" "Auu Bugging Me" "go,some,bau" "High" "Critical" "Pesho Team" "Pesho B.
+ChangeStatus" "Pesho Team" "Pesho B." "MyBug67890" "Fixed
+ChangeStatus" "Pesho Team" "Pesho B." "NastyBug90" "Fixed
+CreateStory" "MyStory890" "StoryDessss" "Low" "Small" "Pesho Team" "Pesho B.
+CreateFeedback" "MyFeedback" "FeedBackDessss" "1" "Pesho Team" "Pesho B.
+ChangeStatus" "Pesho Team" "Pesho B." "MyFeedback" "Done
+ChangePriority" "Pesho Team" "Pesho B." "MyStory890" "High
+ChangeSeverityOfBug" "Pesho Team" "Pesho B." "MyBug67890" "Minor
+ChangeSizeOfStory" "Pesho Team" "Pesho B." "MyStory890" "Large
+ChangeRatingOfFeedback" "Pesho Team" "Pesho B." "MyFeedback" "3
+AssignWorkItemToMember" "Pesho Team" "Pesho B." "MyStory890" "Pesho
+"CreateComment" "Pesho Team" "Pesho B." "MyStory890" "This story is bad" "Pesho"
+"CreateComment" "Pesho Team" "Pesho B." "MyStory890" "This story is awful" "Pesho"
+"CreateComment" "Pesho Team" "Pesho B." "MyStory890" "This story is good" "Pesho"
+--------------------------------------------------------------------------------------------------------------
+"ListBoardWorkItems" "Pesho Team" "Pesho B."
+"ListBoardWorkItems" "Pesho Team" "Pesho B." "filterType:Bug"
+"ListBoardWorkItems" "Pesho Team" "Pesho B." "filterType:Story"
+"ListBoardWorkItems" "Pesho Team" "Pesho B." "filterType:Feedback"
+ListBoardWorkItems" "Pesho Team" "Pesho B." "filterType:Bug" "filterStatus:Active
+ListBoardWorkItems" "Pesho Team" "Pesho B." "filterType:Bug" "filterAssignee:Pesho
+--------------------------------------------------------------------------------------------------------------
+ListBoardWorkItems" "Pesho Team" "Pesho B." "filterType:Bug" "sortBy:Title
+ListBoardWorkItems" "Pesho Team" "Pesho B." "filterType:Bug" "sortBy:Priority
+ListBoardWorkItems" "Pesho Team" "Pesho B." "filterType:Bug" "sortBy:Severity
+--------------------------------------------------------------------------------------------------------------
+ListBoardWorkItems" "Pesho Team" "Pesho B." "filterType:Story" "sortBy:Priority
+ListBoardWorkItems" "Pesho Team" "Pesho B." "filterType:Story" "sortBy:Size
+ListBoardWorkItems" "Pesho Team" "Pesho B." "filterType:Feedback" "sortBy:Rating
+--------------------------------------------------------------------------------------------------------------
+ShowAllTeams
+ShowPersonActivity" "Pesho"
+ShowTeamActivity" "Gosho Team"
+ShowAllTeamMembers" "Pesho Team"
+ShowAllTeamBoards" "Gosho Team
+ShowBoardActivity" "Gosho Team" "Gosho B.
