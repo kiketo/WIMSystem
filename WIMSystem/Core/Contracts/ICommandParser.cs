@@ -7,7 +7,7 @@ namespace WIMSystem.Core.Contracts
     {
         IList<ICommand> ReadCommands();
 
-        void SaveCommand(string commandString);
+        //void SaveCommand(string commandString);
 
     }
 }

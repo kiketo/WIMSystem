@@ -10,10 +10,15 @@ namespace WIMSystem.Models
         IDictionary<string, ITeam> TeamsList { get; }
 
         void AddTeam(ITeam newTeam);
-        IEnumerator<ITeam> GetEnumerator();
+
         void RemoveTeam(ITeam removeTeam);
+
         void RemoveTeam(string teamName);
+
         bool Contains(string teamName);
+
         string ShowAllTeams();
+
+        string ToString();
     }
 }

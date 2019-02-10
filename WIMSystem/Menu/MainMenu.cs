@@ -8,21 +8,20 @@ using WIMSystem.Menu.Contracts;
 
 namespace WIMSystem.Menu
 {
-    public class MainMenu //: IMainMenu
+    public class MainMenu : IMainMenu
     {
         private readonly IList<MenuItem> mainMenuItems;
-        private readonly string logo;
+        //private readonly string logo;
         //private readonly ICommandParser commandParser;
         private readonly ICommandParser batchParser;
         private readonly IWIMEngine engine;
 
-        public MainMenu(IWIMEngine engine, ICommandParser batchParser, IList<MenuItem> mainMenuItems, string logo)
+        public MainMenu(IWIMEngine engine, ICommandParser batchParser, IList<MenuItem> mainMenuItems)
         {
             this.engine = engine;
-            // this.commandParser = commandParser;
             this.batchParser = batchParser;
             this.mainMenuItems = mainMenuItems ?? throw new ArgumentException("Main menu items can not be null!");
-            this.logo = logo ?? throw new ArgumentException("Logo can not be null!");
+
         }
 
         public void Start()
@@ -49,7 +48,7 @@ namespace WIMSystem.Menu
         public void ShowCredits()
         {
             Console.Clear();
-            Console.WriteLine(this.logo);
+            Console.WriteLine(MainMenuLogo.logo);
             Console.WriteLine("                 Thank you!");
         }
 
@@ -125,7 +124,6 @@ namespace WIMSystem.Menu
             Console.ReadKey();
             this.ShowMenu();
         }
-
 
         public void ConsoleParameters(int indexOfItem)
         {

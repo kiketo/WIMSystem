@@ -11,21 +11,21 @@ namespace WIMSystem
         static void Main()
         {
             var factory = new Factory();
+
             var teamList = WIMTeams.Instance;
             var memberLits = PersonsCollection.Instance;
             var historyItemsList = HistoryItemsCollection.Instance;
+
             var batchParser = new ConsoleCommandParser();
+
             var engine = new WIMEngine(factory,teamList,memberLits,historyItemsList);
 
             var mainMenu = new MainMenu(
                 engine,
                 batchParser,
-                MainMenuItems.mainMenuItems,
-                MainMenuLogo.logo);
+                MainMenuItems.mainMenuItems);
 
             mainMenu.Start();
-
-            //engine.ExecuteCommands(commandParser);
 
         }
     }

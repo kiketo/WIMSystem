@@ -15,7 +15,7 @@ namespace WIMSystem.Models.Contracts
         void RemoveMemberFromTeam(IPerson member);
         string ShowAllTeamMembers();
         string ShowAllTeamBoards();
-
+        string ToString();
 
     }
 }

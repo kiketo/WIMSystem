@@ -25,10 +25,5 @@ namespace WIMSystem.Core
 
             return commands;
         }
-
-        public void SaveCommand(string commandString)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

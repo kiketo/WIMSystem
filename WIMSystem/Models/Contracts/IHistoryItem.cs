@@ -11,5 +11,6 @@ namespace WIMSystem.Models.Contracts
         IBoard Board { get; }
         ITeam Team { get; }
         string FilteredBy(HistoryItemFilterType historyItemFilterType);
+        string ToString();
     }
 }

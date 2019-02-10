@@ -20,6 +20,8 @@ namespace WIMSystem.Models.Contracts
         void ChangeStatus(string newStatus);
 
         Enum GetStatus();
-        
+
+        string ToString();
+
     }
 }

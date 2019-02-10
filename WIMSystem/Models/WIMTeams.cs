@@ -31,14 +31,6 @@ namespace WIMSystem.Models
         {
             get => new Dictionary<string, ITeam>(this.teamsList);
         }
-
-        public IEnumerator<ITeam> GetEnumerator()
-        {
-            foreach (var item in this.teamsList)
-            {
-                yield return item.Value;
-            }
-        }
         
         public void AddTeam(ITeam newTeam)
         {
@@ -72,6 +64,14 @@ namespace WIMSystem.Models
         {
             return (this.teamsList.ContainsKey(teamName));
 
+        }
+
+        public IEnumerator<ITeam> GetEnumerator()
+        {
+            foreach (var item in this.teamsList)
+            {
+                yield return item.Value;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()

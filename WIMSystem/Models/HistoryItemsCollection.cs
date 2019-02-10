@@ -137,18 +137,5 @@ namespace WIMSystem.Models
             return str.ToString();
         }
 
-        public override string ToString()
-        {
-            StringBuilder str = new StringBuilder();
-            if (this.HistoryItemsList.Count == 0)
-            {
-                str.AppendLine("There are no history items!");
-            }
-            else
-            {
-
-            }
-            return str.ToString();
-        }
     }
 }

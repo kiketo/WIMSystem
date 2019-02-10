@@ -15,5 +15,7 @@ namespace WIMSystem.Models.Contracts
         void AddWorkItemToBoard(IWorkItem workItem);
 
         string ListWorkItems(Type typeFilter, string statusFilter, IPerson filterMember, string sortBy);
+
+        string ToString();
     }
 }
