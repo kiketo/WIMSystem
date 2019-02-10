@@ -39,14 +39,12 @@ namespace WIMSystem.Models
                 yield return item.Value;
             }
         }
-        //Кико: При създаването на нов Team, трябва да се добавя и тук!!!
+        
         public void AddTeam(ITeam newTeam)
         {
             this.teamsList.Add(newTeam.TeamName, newTeam);
         }
-
-
-        //Кико: какво прави това?
+                       
         public ITeam this[string index]
         {
             get => this.teamsList[index];
@@ -60,8 +58,7 @@ namespace WIMSystem.Models
         {
             this.RemoveTeam(removeTeam.TeamName);
         }
-
-
+        
         public void RemoveTeam(string teamName)
         {
             if (this.teamsList.ContainsKey(teamName))

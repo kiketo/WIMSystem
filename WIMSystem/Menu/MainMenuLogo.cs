@@ -20,7 +20,7 @@ namespace WIMSystem.Menu
 
              Stanislav Dinev
              Kiril Kuzmanov
-             Stilian 
+             Stiliyan Kostadinov
 
 ";
     }

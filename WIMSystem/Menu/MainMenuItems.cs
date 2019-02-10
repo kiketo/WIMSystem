@@ -18,7 +18,7 @@ namespace WIMSystem.Menu
             new MenuItem("ShowAllTeamMembers","* Show all team members", "Enter team name:"),
             new MenuItem("CreateBoard","* Create a new board in a team", "Enter board name and team name:"),
             new MenuItem("ShowAllTeamBoards","* Show all team boards", "Enter team name:"),
-            new MenuItem("ShowBoardActivity","* Show board's activity", "Enter board name:"),
+            new MenuItem("ShowBoardActivity","* Show board's activity", "Enter team and board name:"),
             new MenuItem("CreateBug","* Create a new Bug in a board", "Enter bug title, description, stepsto reproduce (divided by comma), priority, severity,team, board"),
             new MenuItem("CreateStory","* Create a new Story in a board", "Enter story title, description, priority, storySize, team, board:"),
             new MenuItem("CreateFeedback","* Create a new Feedback in a board", "Enter feedback title, description, rating, team, board"),
@@ -32,7 +32,7 @@ namespace WIMSystem.Menu
             new MenuItem("UnassignWorkItem","* Unassign work item to a person", "Enter work item team name, board name, work item title, member name"),
             new MenuItem("CreateComment","* Add comment to a work item", "Enter work item team name, board name, work item title, comment text, author name"),
             new MenuItem("ListBoardWorkItems","* List board items by filter and sort order",
-                "List board items. Optional filter parameters: filterStatus:Bug/Story/Feedback, filterStatus:status, filterAssignee:name, sortBy:Title/Priority/Severity/Size/Ratin"),
+                "List board items. Optional filter parameters: filterType:Bug/Story/Feedback, filterStatus:status, filterAssignee:name, sortBy:Title/Priority/Severity/Size/Ratin"),
             new MenuItem("BatchCommands","Enter multiple commands",""),
             new MenuItem("exit","****Exit****","")
         };
