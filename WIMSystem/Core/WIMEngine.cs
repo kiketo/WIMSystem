@@ -767,10 +767,7 @@ namespace WIMSystem.Core
 
         private IBoard GetBoard(string teamName, string boardAsString)
         {
-            //var teamResult = this.wimTeams.TeamsList
-            //                .Select(team => team.Value)
-            //                .Where(team => team.BoardList.Keys.Any(board => board == boardAsString))
-            //                .Single();
+            
             var boardResult = wimTeams[teamName].BoardList[boardAsString];
             return boardResult;
 
