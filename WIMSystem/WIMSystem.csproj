@@ -13,7 +13,6 @@
     <Folder Include="Commands\CreateCommands\" />
     <Folder Include="Commands\ListCommands\" />
     <Folder Include="Commands\ChangeCommands\" />
-    <Folder Include="Commands\Utils\" />
   </ItemGroup>
 
 </Project>
