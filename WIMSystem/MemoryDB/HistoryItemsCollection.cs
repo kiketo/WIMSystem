@@ -12,22 +12,22 @@ namespace WIMSystem.Models
     {
         private readonly ICollection<IHistoryItem> historyItemsList;
 
-        private readonly static IHistoryItemsCollection instance;
+        //private readonly static IHistoryItemsCollection instance;
 
-        static HistoryItemsCollection()
-        {
-            instance = new HistoryItemsCollection();
-        }
+        //static HistoryItemsCollection()
+        //{
+        //    instance = new HistoryItemsCollection();
+        //}
 
-        private HistoryItemsCollection()
+        public HistoryItemsCollection()
         {
             this.historyItemsList = new List<IHistoryItem>();
         }
 
-        public static IHistoryItemsCollection Instance
-        {
-            get { return instance; }
-        }
+        //public static IHistoryItemsCollection Instance
+        //{
+        //    get { return instance; }
+        //}
 
         public ICollection<IHistoryItem> HistoryItemsList
         {

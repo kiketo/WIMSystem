@@ -9,22 +9,22 @@ namespace WIMSystem.Models
     {
         // The single instance
         private readonly IDictionary<string, IPerson> personsList;
-        private readonly static IPersonsCollection instance;
+        //private readonly static IPersonsCollection instance;
 
-        static PersonsCollection()
-        {
-            instance = new PersonsCollection();
-        }
+        //static PersonsCollection()
+        //{
+        //    instance = new PersonsCollection();
+        //}
 
-        private PersonsCollection()
+        public PersonsCollection()
         {
             this.personsList = new Dictionary<string, IPerson>();
         }
 
-        public static IPersonsCollection Instance
-        {
-            get { return instance; }
-        }
+        //public static IPersonsCollection Instance
+        //{
+        //    get { return instance; }
+        //}
 
         public IDictionary<string, IPerson> Persons
         {

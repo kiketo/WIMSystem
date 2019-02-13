@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using WIMSystem.Commands.Contracts;
 using WIMSystem.Core.Contracts;
+using WIMSystem.Core.Factories.Contracts;
 using WIMSystem.Models.Contracts;
 
 namespace WIMSystem.Commands.Utils
@@ -10,9 +11,9 @@ namespace WIMSystem.Commands.Utils
     public class HistoryEventWriter : IHistoryEventWriter
     {
         private readonly IHistoryItemsCollection historyItemsList;
-        private readonly IFactory factory;
+        private readonly IComponentsFactory factory;
 
-        public HistoryEventWriter(IHistoryItemsCollection historyItemsList, IFactory factory)
+        public HistoryEventWriter(IHistoryItemsCollection historyItemsList, IComponentsFactory factory)
         {
             this.historyItemsList = historyItemsList ?? throw new ArgumentNullException(nameof(historyItemsList));
             this.factory = factory ?? throw new ArgumentNullException(nameof(factory));

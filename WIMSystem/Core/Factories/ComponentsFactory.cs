@@ -1,26 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using WIMSystem.Core.Contracts;
+using WIMSystem.Core.Factories.Contracts;
 using WIMSystem.Models;
-using WIMSystem.Models.Abstract;
 using WIMSystem.Models.Contracts;
 using WIMSystem.Models.Enums;
 
-namespace WIMSystem.Core
+namespace WIMSystem.Core.Factories
 {
-    public class Factory : IFactory
+    public class ComponentsFactory : IComponentsFactory
     {
-        public IWIMTeams CreateWIMTeams(string teamName, IWIMTeams teamsList)
-        {
-            return WIMTeams.Instance;
-        }
-
-        public IPersonsCollection CreateMembersColection()
-        {
-            return PersonsCollection.Instance;
-        }
-
         public ITeam CreateTeam(string teamName, IWIMTeams teamsList)
         {
             return new Team(teamName);

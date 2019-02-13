@@ -3,14 +3,10 @@ using WIMSystem.Models;
 using WIMSystem.Models.Contracts;
 using WIMSystem.Models.Enums;
 
-namespace WIMSystem.Core.Contracts
+namespace WIMSystem.Core.Factories.Contracts
 {
-    public interface IFactory
+    public interface IComponentsFactory
     {
-        IWIMTeams CreateWIMTeams(string teamName, IWIMTeams teamsList);
-
-        IPersonsCollection CreateMembersColection();
-
         IBoard CreateBoard(string name, ITeam team);
 
         IBug CreateBug(string title, string description, IList<string> stepsToReproduce, PriorityType priority, BugSeverityType severity, IBoard board, IPerson assignee = null);

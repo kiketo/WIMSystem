@@ -6,29 +6,22 @@ namespace Utils
     {
         public static bool IsLengthValid(string stringForChecking, int min, int max)
         {
-            if (stringForChecking.Length < min || stringForChecking.Length > max)
-            {
-                return false;
-            }
-            return true;
+            return (stringForChecking.Length < min || stringForChecking.Length > max);
         }
 
         public static bool IsValidQuantityOfObjects(ICollection list, int min)
         {
-            if (list.Count < min)
-            {
-                return false;
-            }
-            return true;
+            return (list.Count < min);
         }
 
         public static bool IsNullValue(object objectForChecking)
         {
-            if (objectForChecking == null)
-            {
-                return true;
-            }
-            return false;
+            return (objectForChecking == null);
+        }
+
+        public static bool IsNullorEmptyValue(string stringForChecking)
+        {
+            return string.IsNullOrEmpty(stringForChecking);
         }
     }
 }

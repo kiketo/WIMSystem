@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Utils;
 using WIMSystem.Core.Contracts;
+using WIMSystem.Core.Factories;
+using WIMSystem.Core.Factories.Contracts;
 using WIMSystem.Core.Utils;
 using WIMSystem.Models;
 using WIMSystem.Models.Abstract;
@@ -30,33 +32,20 @@ namespace WIMSystem.Core
         private const string CommentAdded = "Comment \"{0}\" with author {1} added to \"{2}\"!";
 
         private const char SPLIT_CHAR = ',';
-
-        private readonly IFactory factory;
+        private readonly ICommandsFactory commandsFactory;
+        private readonly IComponentsFactory factory;
         private readonly IWIMTeams wimTeams;
         private readonly IPersonsCollection personList;
         private readonly IHistoryItemsCollection historyItemsList;
 
-        public WIMEngine(IFactory factory, IWIMTeams wimTeams, IPersonsCollection personList, IHistoryItemsCollection historyItemsList)
+        public WIMEngine(ICommandsFactory commandsFactory, IComponentsFactory factory, IWIMTeams wimTeams, IPersonsCollection personList, IHistoryItemsCollection historyItemsList)
         {
+            this.commandsFactory = commandsFactory;
             this.factory = factory ?? throw new ArgumentException(string.Format(Consts.NULL_OBJECT, nameof(factory)));
             this.wimTeams = wimTeams ?? throw new ArgumentException(string.Format(Consts.NULL_OBJECT, nameof(factory)));
             this.personList = personList ?? throw new ArgumentException(string.Format(Consts.NULL_OBJECT, nameof(factory)));
             this.historyItemsList = historyItemsList ?? throw new ArgumentException(string.Format(Consts.NULL_OBJECT, nameof(factory)));
         }
-
-        //public void Start()
-        //{
-        //    IList<ICommand> commands = new List<ICommand>();
-        //    do
-        //    {
-        //        commands = this.commandParser.ReadCommands();
-        //        var commandResult = this.ProcessCommands(commands);
-        //        this.PrintReports(commandResult);
-        //    }
-
-        //    while (commands.Count > 0);
-
-        //}
 
         public void ExecuteCommands(ICommandParser commandParser)
         {
@@ -80,6 +69,8 @@ namespace WIMSystem.Core
                 try
                 {
                     var report = this.ProcessSingleCommand(command);
+                    //var report = this.commandsFactory.GetCommand(command.Name);
+                    
                     reports.Add(report);
                 }
                 catch (Exception ex)

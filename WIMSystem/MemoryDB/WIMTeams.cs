@@ -10,22 +10,22 @@ namespace WIMSystem.Models
     {
         private readonly IDictionary<string, ITeam> teamsList;
 
-        private readonly static IWIMTeams instance;
+      //  private readonly static IWIMTeams instance;
 
-        static WIMTeams()
-        {
-            instance = new WIMTeams();
-        }
+        //static WIMTeams()
+        //{
+        //    instance = new WIMTeams();
+        //}
 
-        private WIMTeams()
+        public WIMTeams()
         {
             this.teamsList = new Dictionary<string, ITeam>();
         }
 
-        public static IWIMTeams Instance
-        {
-            get { return instance; }
-        }
+        //public static IWIMTeams Instance
+        //{
+        //    get { return instance; }
+        //}
 
         public IDictionary<string, ITeam> TeamsList
         {
