@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using WIMSystem.Commands.AddCommands;
 using WIMSystem.Commands.Contracts;
+using WIMSystem.Commands.CreateCommands;
 using WIMSystem.Core.Factories;
 using WIMSystem.Core.Factories.Contracts;
 
@@ -14,6 +15,8 @@ namespace WIMSystem.ContainerModules
 
             builder.RegisterType<AddBoardToTeamCommand>().Named<IEngineCommand>("AddBoardToTeam");
             builder.RegisterType<AddPersonToTeamCommand>().Named<IEngineCommand>("AddPersonToTeam");
+            builder.RegisterType<CreatePersonCommand>().Named<IEngineCommand>("CreatePerson");
+
 
         }
     }

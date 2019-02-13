@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using WIMSystem.Commands.Contracts;
+using WIMSystem.Commands.Utils;
 using WIMSystem.Core;
 using WIMSystem.Core.Contracts;
 using WIMSystem.Core.Factories;
@@ -22,6 +24,7 @@ namespace WIMSystem.ContainerModules
             builder.RegisterType<WIMTeams>().As<IWIMTeams>().SingleInstance();
             builder.RegisterType<PersonsCollection>().As<IPersonsCollection>().SingleInstance();
             builder.RegisterType<HistoryItemsCollection>().As<IHistoryItemsCollection>().SingleInstance();
+            builder.RegisterType<HistoryEventWriter>().As<IHistoryEventWriter>().SingleInstance();
             builder.RegisterType<WIMEngine>().As<IWIMEngine>().SingleInstance();
             builder.RegisterType<MainMenu>().AsSelf().WithParameter("mainMenuItems", MainMenuItems.mainMenuItems).SingleInstance();
             builder.RegisterType<ConsoleCommandParser>().As<ICommandParser>();

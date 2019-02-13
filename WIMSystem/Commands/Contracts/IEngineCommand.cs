@@ -6,6 +6,6 @@ namespace WIMSystem.Commands.Contracts
 {
     public interface IEngineCommand
     {
-        string ReadSingleCommand();
+        string ReadSingleCommand(IList<string> parameters);
     }
 }

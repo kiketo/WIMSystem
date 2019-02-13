@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using WIMSystem.Commands.Contracts;
 using WIMSystem.Commands.Utils;
 using WIMSystem.Models;
@@ -9,13 +10,15 @@ namespace WIMSystem.Commands.AddCommands
     public class AddBoardToTeamCommand : IEngineCommand
     {
         private readonly IHistoryEventWriter historyEventWriter;
+        private readonly IGetters getters;
 
-        public AddBoardToTeamCommand(IHistoryEventWriter historyEventWriter)
+        public AddBoardToTeamCommand(IHistoryEventWriter historyEventWriter, IGetters getters)
         {
             this.historyEventWriter = historyEventWriter ?? throw new ArgumentNullException(nameof(historyEventWriter));
+            this.getters = getters;
         }
 
-        public string ReadSingleCommand()
+        public string ReadSingleCommand(IList<string> parameters)
         {
             throw new NotImplementedException();
         }

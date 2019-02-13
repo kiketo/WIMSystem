@@ -1,4 +1,5 @@
-﻿using WIMSystem.Commands.Contracts;
+﻿using System.Collections.Generic;
+using WIMSystem.Commands.Contracts;
 using WIMSystem.Commands.Utils;
 using WIMSystem.Models;
 using WIMSystem.Models.Contracts;
@@ -9,20 +10,17 @@ namespace WIMSystem.Commands.AddCommands
     {
         private readonly IGetters getter;
         private readonly IHistoryEventWriter historyEventWriter;
-        private readonly string[] parameters;
-
-
-        public AddPersonToTeamCommand(string[] parameters, IGetters getter, IHistoryEventWriter historyEventWriter)
+  
+        public AddPersonToTeamCommand(IGetters getter, IHistoryEventWriter historyEventWriter)
         {
             this.getter = getter;
             this.historyEventWriter = historyEventWriter;
-            this.parameters = parameters;
         }
 
-        public string ReadSingleCommand()
+        public string ReadSingleCommand(IList<string> parameters)
         {
-            var memberForAdding = this.getter.GetPerson(this.parameters[0]);
-            var teamToAddTo = this.getter.GetTeam(this.parameters[1]);
+            var memberForAdding = this.getter.GetPerson(parameters[0]);
+            var teamToAddTo = this.getter.GetTeam(parameters[1]);
 
             return this.Execute(memberForAdding, teamToAddTo);
         }

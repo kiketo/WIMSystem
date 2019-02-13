@@ -68,9 +68,9 @@ namespace WIMSystem.Core
             {
                 try
                 {
-                    var report = this.ProcessSingleCommand(command);
-                    //var report = this.commandsFactory.GetCommand(command.Name);
-                    
+                    //var report = this.ProcessSingleCommand(command);
+                    var engineCommand = this.commandsFactory.GetCommand(command.Name);
+                    var report = engineCommand.ReadSingleCommand(command.Parameters);
                     reports.Add(report);
                 }
                 catch (Exception ex)
