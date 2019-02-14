@@ -67,7 +67,8 @@ namespace WIMSystem.Models
 
             else
             {
-                BugStatusType statusEnum = (BugStatusType)Enum.Parse(typeof(BugStatusType), newStatus, true);
+                //BugStatusType statusEnum = (BugStatusType)Enum.Parse(typeof(BugStatusType), newStatus, true);
+                BugStatusType statusEnum = Enum.Parse<BugStatusType>(newStatus);
                 this.Status = statusEnum;
             }
         }
