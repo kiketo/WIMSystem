@@ -14,7 +14,7 @@ namespace WIMSystem.Menu
             new MenuItem("CreateTeam","* Create a new team", "Enter team name:"),
             new MenuItem("ShowAllTeams","* Show all teams", ""),
             new MenuItem("ShowTeamActivity","* Show team's activity", "Enter team name:"),
-            new MenuItem("AddPersonToTeam","* Add person to team", "Enter parameters team name and member name:"),
+            new MenuItem("AddPersonToTeam","* Add person to team", "Enter parameters member name and team name:"),
             new MenuItem("ShowAllTeamMembers","* Show all team members", "Enter team name:"),
             new MenuItem("CreateBoard","* Create a new board in a team", "Enter board name and team name:"),
             new MenuItem("ShowAllTeamBoards","* Show all team boards", "Enter team name:"),
