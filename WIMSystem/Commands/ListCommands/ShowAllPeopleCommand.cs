@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using WIMSystem.Commands.Contracts;
-using WIMSystem.Core;
 using WIMSystem.Models.Contracts;
 
 namespace WIMSystem.Commands.ListCommands
