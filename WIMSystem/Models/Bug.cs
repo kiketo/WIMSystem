@@ -67,7 +67,7 @@ namespace WIMSystem.Models
 
             else
             {
-                //BugStatusType statusEnum = (BugStatusType)Enum.Parse(typeof(BugStatusType), newStatus, true);
+                //BugStatusType statusEnum = (BugStatusType)Enum.Parse(typeof(BugStatusType), newStatus, true); // LEGACY - има кастване, което се е правило преди дженериците.
                 BugStatusType statusEnum = Enum.Parse<BugStatusType>(newStatus);
                 this.Status = statusEnum;
             }

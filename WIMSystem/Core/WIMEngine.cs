@@ -87,24 +87,24 @@ namespace WIMSystem.Core
             switch (command.Name)
             {
 
-                case "CreateTeam":
-                    {
-                        var teamName = command.Parameters[0];
-                        return this.CreateTeam(teamName);
-                    }
+                //case "CreateTeam":
+                //    {
+                //        var teamName = command.Parameters[0];
+                //        return this.CreateTeam(teamName);
+                //    }
 
-                case "CreatePerson":
-                    {
-                        var personName = command.Parameters[0];
-                        return this.CreatePerson(personName);
-                    }
+                //case "CreatePerson":
+                //    {
+                //        var personName = command.Parameters[0];
+                //        return this.CreatePerson(personName);
+                //    }
 
-                case "CreateBoard":
-                    {
-                        var boardName = command.Parameters[0];
-                        var team = this.GetTeam(command.Parameters[1]);
-                        return this.CreateBoard(boardName, team);
-                    }
+                //case "CreateBoard":
+                //    {
+                //        var boardName = command.Parameters[0];
+                //        var team = this.GetTeam(command.Parameters[1]);
+                //        return this.CreateBoard(boardName, team);
+                //    }
 
                 case "AddPersonToTeam":
                     {
@@ -120,54 +120,54 @@ namespace WIMSystem.Core
                         return this.RemoveMemberFromTeam(teamToRemove, memberForRemoving);
                     }
 
-                case "CreateBug":
-                    {
-                        var bugTitle = command.Parameters[0];
-                        var bugDescription = command.Parameters[1];
-                        var stepsToReproduce = command.Parameters[2].Trim().Split(SPLIT_CHAR).ToList();
-                        var bugPriority = StringToEnum<PriorityType>.Convert(command.Parameters[3]);
-                        var bugSeverity = StringToEnum<BugSeverityType>.Convert(command.Parameters[4]);
-                        var teamName = command.Parameters[5];
-                        var board = this.GetBoard(teamName, command.Parameters[6]);
-                        //var bugAssignee = this.GetPerson(command.Parameters[7]);
-                        //var bugComments = command.Parameters[6].Trim().Split(SPLIT_CHAR).ToList();
+                //case "CreateBug":
+                //    {
+                //        var bugTitle = command.Parameters[0];
+                //        var bugDescription = command.Parameters[1];
+                //        var stepsToReproduce = command.Parameters[2].Trim().Split(SPLIT_CHAR).ToList();
+                //        var bugPriority = StringToEnum<PriorityType>.Convert(command.Parameters[3]);
+                //        var bugSeverity = StringToEnum<BugSeverityType>.Convert(command.Parameters[4]);
+                //        var teamName = command.Parameters[5];
+                //        var board = this.GetBoard(teamName, command.Parameters[6]);
+                //        //var bugAssignee = this.GetPerson(command.Parameters[7]);
+                //        //var bugComments = command.Parameters[6].Trim().Split(SPLIT_CHAR).ToList();
 
-                        return this.CreateBug(bugTitle, bugDescription, stepsToReproduce, bugPriority, bugSeverity, board);
-                    }
+                //        return this.CreateBug(bugTitle, bugDescription, stepsToReproduce, bugPriority, bugSeverity, board);
+                //    }
 
-                case "CreateStory":
-                    {
-                        var storyTitle = command.Parameters[0];
-                        var storyDescription = command.Parameters[1];
-                        var storyPriority = StringToEnum<PriorityType>.Convert(command.Parameters[2]);
-                        var storySize = StringToEnum<StorySizeType>.Convert(command.Parameters[3]);
-                        var teamName = command.Parameters[4];
-                        var board = this.GetBoard(teamName, command.Parameters[5]);
-                        //var storyAssignee = this.GetPerson(command.Parameters[7]);
+                //case "CreateStory":
+                //    {
+                //        var storyTitle = command.Parameters[0];
+                //        var storyDescription = command.Parameters[1];
+                //        var storyPriority = StringToEnum<PriorityType>.Convert(command.Parameters[2]);
+                //        var storySize = StringToEnum<StorySizeType>.Convert(command.Parameters[3]);
+                //        var teamName = command.Parameters[4];
+                //        var board = this.GetBoard(teamName, command.Parameters[5]);
+                //        //var storyAssignee = this.GetPerson(command.Parameters[7]);
 
-                        return this.CreateStory(storyTitle, storyDescription, storyPriority, storySize, board);//, storyAssignee);
-                    }
+                //        return this.CreateStory(storyTitle, storyDescription, storyPriority, storySize, board);//, storyAssignee);
+                //    }
 
-                case "CreateFeedback":
-                    {
-                        var feedbackTitle = command.Parameters[0];
-                        var feedbackDescription = command.Parameters[1];
-                        var feedbackRating = int.Parse(command.Parameters[2]);
-                        var teamName = command.Parameters[3];
-                        var board = this.GetBoard(teamName, command.Parameters[4]);
-                        return this.CreateFeedback(feedbackTitle, feedbackDescription, feedbackRating, board);
-                    }
+                //case "CreateFeedback":
+                //    {
+                //        var feedbackTitle = command.Parameters[0];
+                //        var feedbackDescription = command.Parameters[1];
+                //        var feedbackRating = int.Parse(command.Parameters[2]);
+                //        var teamName = command.Parameters[3];
+                //        var board = this.GetBoard(teamName, command.Parameters[4]);
+                //        return this.CreateFeedback(feedbackTitle, feedbackDescription, feedbackRating, board);
+                //    }
 
-                case "CreateComment":
-                    {
-                        var teamName = this.GetTeam(command.Parameters[0]);
-                        var boardName = this.GetBoard(teamName.TeamName, command.Parameters[1]);
-                        var workItem = this.GetWorkItem(boardName, command.Parameters[2]);
-                        var comment = command.Parameters[3];
-                        var author = this.GetMember(teamName, command.Parameters[4]);
+                //case "CreateComment":
+                //    {
+                //        var teamName = this.GetTeam(command.Parameters[0]);
+                //        var boardName = this.GetBoard(teamName.TeamName, command.Parameters[1]);
+                //        var workItem = this.GetWorkItem(boardName, command.Parameters[2]);
+                //        var comment = command.Parameters[3];
+                //        var author = this.GetMember(teamName, command.Parameters[4]);
 
-                        return this.CreateComment(workItem, comment, author);
-                    }
+                //        return this.CreateComment(workItem, comment, author);
+                //    }
 
                 case "ShowAllPeople":
                     {
@@ -393,7 +393,7 @@ namespace WIMSystem.Core
             this.AddHistoryEvent(returnMessage, null, workItem.Board, workItem.Board.Team, workItem);
 
             return returnMessage;
-        }
+        } //TODO:
 
         private string ChangeSizeOfStory(IWorkItem workItem, StorySizeType size)
         {
@@ -418,8 +418,8 @@ namespace WIMSystem.Core
             }
             this.AddHistoryEvent(returnMessage, member, workItem.Board, workItem.Board.Team, workItem);
 
-            return returnMessage; 
-        }
+            return returnMessage;
+        } //TODO:
 
         private string ChangeStatus(IWorkItem workItem, string status)
         {
@@ -441,7 +441,7 @@ namespace WIMSystem.Core
             this.AddHistoryEvent(returnMessage, member, workItem.Board, workItem.Board.Team, workItem);
 
             return returnMessage;
-        }
+        } //TODO:
 
         private string ChangeSeverityOfBug(IWorkItem workItem, BugSeverityType severity)
         {
@@ -467,7 +467,7 @@ namespace WIMSystem.Core
             this.AddHistoryEvent(returnMessage, member, workItem.Board, workItem.Board.Team, workItem);
 
             return returnMessage;
-        }
+        } //TODO:
 
         private string ChangePriority(IAssignableWorkItem workItem, PriorityType priority)
         {
@@ -493,7 +493,7 @@ namespace WIMSystem.Core
             this.AddHistoryEvent(returnMessage, member, workItem.Board, workItem.Board.Team, workItem);
 
             return returnMessage;
-        }
+        } //TODO:
 
         private string ShowBoardActivity(IBoard board)
         {
@@ -560,51 +560,51 @@ namespace WIMSystem.Core
             return this.personList.ShowAllPeople();
         }
 
-        private string CreateTeam(string teamName)
-        {
-            if (this.wimTeams.Contains(teamName))
-            {
-                return string.Format(ObjectExists, nameof(Team), teamName);
-            }
+        //private string CreateTeam(string teamName)
+        //{
+        //    if (this.wimTeams.Contains(teamName))
+        //    {
+        //        return string.Format(ObjectExists, nameof(Team), teamName);
+        //    }
 
-            var team = this.factory.CreateTeam(teamName, this.wimTeams);
-            this.wimTeams.AddTeam(team);
-            var returnMessage = string.Format(ObjectCreated, nameof(Team), teamName);
+        //    var team = this.factory.CreateTeam(teamName, this.wimTeams);
+        //    this.wimTeams.AddTeam(team);
+        //    var returnMessage = string.Format(ObjectCreated, nameof(Team), teamName);
 
-            this.AddHistoryEvent(returnMessage,null,null,team);
+        //    this.AddHistoryEvent(returnMessage,null,null,team);
 
-            return returnMessage;
-        }
+        //    return returnMessage;
+        //} 
 
-        private string CreatePerson(string personName)
-        {
-            if (this.personList.Contains(personName))
-            {
-                throw new ArgumentException(string.Format(ObjectExists, nameof(Person), personName));
-            }
+        //private string CreatePerson(string personName)
+        //{
+        //    if (this.personList.Contains(personName))
+        //    {
+        //        throw new ArgumentException(string.Format(ObjectExists, nameof(Person), personName));
+        //    }
 
-            var person = this.factory.CreatePerson(personName);
-            this.personList.AddPerson(person);
-            var returnMessage = string.Format(ObjectCreated, nameof(Person), personName);
-            this.AddHistoryEvent(returnMessage,person);
-            return returnMessage;
-        }
+        //    var person = this.factory.CreatePerson(personName);
+        //    this.personList.AddPerson(person);
+        //    var returnMessage = string.Format(ObjectCreated, nameof(Person), personName);
+        //    this.AddHistoryEvent(returnMessage,person);
+        //    return returnMessage;
+        //} 
 
-        private string CreateBoard(string boardName, ITeam team)
-        {
-            var board = this.factory.CreateBoard(boardName, team);
-            if (board == null)
-            {
-                throw new ArgumentException(string.Format(ObjectExists, nameof(Board), board));
-            }
-            team.AddBoardToTeam(board);
-            var returnMessage = string.Format(ObjectCreated, nameof(Board), boardName);
-            this.AddHistoryEvent(returnMessage, null, board, team);
+        //private string CreateBoard(string boardName, ITeam team)
+        //{
+        //    var board = this.factory.CreateBoard(boardName, team);
+        //    if (board == null)
+        //    {
+        //        throw new ArgumentException(string.Format(ObjectExists, nameof(Board), board));
+        //    }
+        //    team.AddBoardToTeam(board);
+        //    var returnMessage = string.Format(ObjectCreated, nameof(Board), boardName);
+        //    this.AddHistoryEvent(returnMessage, null, board, team);
 
 
-            return returnMessage;
+        //    return returnMessage;
 
-        } 
+        //}  
 
         private string AddMemberToTeam(IPerson memberForAdding, ITeam teamToAddTo)
         {
@@ -644,68 +644,68 @@ namespace WIMSystem.Core
             return output;
         } 
 
-        private string CreateFeedback(string feedbackTitle, string feedbackDescription, int raiting, IBoard board)
-        {
-            var feedback = this.factory.CreateFeedback(feedbackTitle, feedbackDescription, raiting, board);
-            if (feedback == null)
-            {
-                throw new ArgumentException(string.Format(ObjectExists, nameof(Feedback), feedback.Title));
-            }
-            board.AddWorkItemToBoard(feedback);
+        //private string CreateFeedback(string feedbackTitle, string feedbackDescription, int raiting, IBoard board)
+        //{
+        //    var feedback = this.factory.CreateFeedback(feedbackTitle, feedbackDescription, raiting, board);
+        //    if (feedback == null)
+        //    {
+        //        throw new ArgumentException(string.Format(ObjectExists, nameof(Feedback), feedback.Title));
+        //    }
+        //    board.AddWorkItemToBoard(feedback);
 
-            string output = string.Format(ObjectCreated, nameof(Feedback), feedback.Title);
+        //    string output = string.Format(ObjectCreated, nameof(Feedback), feedback.Title);
 
-            this.AddHistoryEvent(output, board: board, team: board.Team);
+        //    this.AddHistoryEvent(output, board: board, team: board.Team);
 
-            return output;
-        } 
+        //    return output;
+        //}  
 
-        private string CreateStory(string storyTitle, string storyDescription, PriorityType storyPriority, StorySizeType storySize, IBoard board, IPerson storyAssignee = null)
-        {
-            var story = this.factory.CreateStory(storyTitle, storyDescription, storyPriority, storySize, board, storyAssignee);
-            if (story == null)
-            {
-                throw new ArgumentException(string.Format(ObjectExists, nameof(Story), story.Title));
-            }
+        //private string CreateStory(string storyTitle, string storyDescription, PriorityType storyPriority, StorySizeType storySize, IBoard board, IPerson storyAssignee = null)
+        //{
+        //    var story = this.factory.CreateStory(storyTitle, storyDescription, storyPriority, storySize, board, storyAssignee);
+        //    if (story == null)
+        //    {
+        //        throw new ArgumentException(string.Format(ObjectExists, nameof(Story), story.Title));
+        //    }
 
-            board.AddWorkItemToBoard(story);
+        //    board.AddWorkItemToBoard(story);
 
-            string output = string.Format(ObjectCreated, nameof(Story), story.Title);
+        //    string output = string.Format(ObjectCreated, nameof(Story), story.Title);
 
-            this.AddHistoryEvent(output, storyAssignee, board, board.Team);
+        //    this.AddHistoryEvent(output, storyAssignee, board, board.Team);
 
-            return output;
-        }
+        //    return output;
+        //} 
 
-        private string CreateBug(string bugTitle, string bugDescription, List<string> stepsToReproduce, PriorityType bugPriority, BugSeverityType bugSeverity, IBoard board, IPerson bugAssignee = null)
-        {
-            var bug = this.factory.CreateBug(bugTitle, bugDescription, stepsToReproduce, bugPriority, bugSeverity, board, bugAssignee);
+        //private string CreateBug(string bugTitle, string bugDescription, List<string> stepsToReproduce, PriorityType bugPriority, BugSeverityType bugSeverity, IBoard board, IPerson bugAssignee = null)
+        //{
+        //    var bug = this.factory.CreateBug(bugTitle, bugDescription, stepsToReproduce, bugPriority, bugSeverity, board, bugAssignee);
 
-            if (bug == null)
-            {
-                throw new ArgumentException(string.Format(ObjectExists, nameof(Bug), bug.Title));
-            }
+        //    if (bug == null)
+        //    {
+        //        throw new ArgumentException(string.Format(ObjectExists, nameof(Bug), bug.Title));
+        //    }
 
-            board.AddWorkItemToBoard(bug);
+        //    board.AddWorkItemToBoard(bug);
 
-            string output = string.Format(ObjectCreated, nameof(Bug), bug.Title);
+        //    string output = string.Format(ObjectCreated, nameof(Bug), bug.Title);
 
-            this.AddHistoryEvent(output, bugAssignee, board, board.Team);
+        //    this.AddHistoryEvent(output, bugAssignee, board, board.Team);
 
-            return output;
-        }
+        //    return output;
+        //}
 
-        private string CreateComment(IWorkItem workitem, string message, IPerson author)
-        {
-            var comment = this.factory.CreateComment(message, author);
-            workitem.AddComment(comment);
+        //private string CreateComment(IWorkItem workitem, string message, IPerson author)
+        //{
+        //    var comment = this.factory.CreateComment(message, author);
+        //    workitem.AddComment(comment);
 
-            string output = string.Format(CommentAdded, comment.Message, comment.Author.PersonName, workitem.Title);
+        //    string output = string.Format(CommentAdded, comment.Message, comment.Author.PersonName, workitem.Title);
 
-            this.AddHistoryEvent(output, author, workitem.Board, workitem.Board.Team, workitem);
+        //    this.AddHistoryEvent(output, author, workitem.Board, workitem.Board.Team, workitem);
 
-            return output;
-        }
+        //    return output;
+        //} //TODO:
 
         private void PrintReports(IList<string> reports)
         {
