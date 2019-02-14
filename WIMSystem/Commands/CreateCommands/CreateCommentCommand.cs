@@ -9,7 +9,7 @@ using WIMSystem.Models.Contracts;
 
 namespace WIMSystem.Commands.CreateCommands
 {
-    class CreateCommentCommand : IEngineCommand
+    public class CreateCommentCommand : IEngineCommand
     {
         private readonly IHistoryEventWriter historyEventWriter;
         private readonly IComponentsFactory componentsFactory;
@@ -38,11 +38,11 @@ namespace WIMSystem.Commands.CreateCommands
             var comment = this.componentsFactory.CreateComment(message, author);
             workitem.AddComment(comment);
 
-            string output = string.Format(ObjectConsts.CommentAdded, comment.Message, comment.Author.PersonName, workitem.Title);
+            string returnMessage = string.Format(ObjectConsts.CommentAdded, comment.Message, comment.Author.PersonName, workitem.Title);
 
-            this.historyEventWriter.AddHistoryEvent(output, author, workitem.Board, workitem.Board.Team, workitem);
+            this.historyEventWriter.AddHistoryEvent(returnMessage, author, workitem.Board, workitem.Board.Team, workitem);
 
-            return output;
+            return returnMessage;
         }
     }
 }

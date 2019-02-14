@@ -12,12 +12,12 @@ using WIMSystem.Commands.Utils;
 
 namespace WIMSystem.Commands.ChangeCommands
 {
-    public class ChangePriorityCommand : IEngineCommand
+    public class AssignWorkItemToMemberCommand : IEngineCommand
     {
         private readonly IHistoryEventWriter historyEventWriter;
         private readonly IGetters getter;
 
-        public ChangePriorityCommand(IHistoryEventWriter historyEventWriter, IGetters getter)
+        public AssignWorkItemToMemberCommand(IHistoryEventWriter historyEventWriter, IGetters getter)
         {
             this.historyEventWriter = historyEventWriter ?? throw new ArgumentNullException(nameof(historyEventWriter));
             this.getter = getter ?? throw new ArgumentNullException(nameof(getter));
@@ -28,32 +28,33 @@ namespace WIMSystem.Commands.ChangeCommands
             var teamName = parameters[0];
             var board = this.getter.GetBoard(teamName, parameters[1]);
             var workItem = this.getter.GetAssignableWorkItem(board, parameters[2]);
-            var priority = StringToEnum<PriorityType>.Convert(parameters[3]);
-            return this.Execute(workItem, priority);
+            var member = this.getter.GetPerson(parameters[3]);
+            return this.Execute(workItem, member);
         }
 
-        private string Execute(IAssignableWorkItem workItem, PriorityType priority)
+        private string Execute(IAssignableWorkItem workItem, IPerson member)
         {
+
             if (Validators.IsNullValue(workItem))
             {
                 throw new ArgumentException(string.Format(Consts.NULL_OBJECT,nameof(WorkItem)));
             }
 
-            if (!(workItem is IAssignableWorkItem))
+            if (Validators.IsNullValue(member))
             {
-                throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Feedback)}!"));
+                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,nameof(member)));
             }
 
-            workItem.Priority = priority;
-
-            var returnMessage = string.Format(ObjectConsts.WorkItemPriorityChange, workItem.Title, priority);
-
-            IPerson member = null;
-
-            if (workItem is IAssignableWorkItem)
+            if (!member.IsAssignedToTeam)
             {
-                member = (workItem as IAssignableWorkItem).Assignee;
+                throw new ArgumentException(string.Format($"{member.PersonName} is not a member of any team!"));
+
             }
+
+            workItem.AssignMember(member);
+            member.MemberWorkItems.Add(workItem);
+
+            var returnMessage = string.Format(ObjectConsts.WorkItemAssigned, workItem.Title, member.PersonName);
 
             this.historyEventWriter.AddHistoryEvent(returnMessage, member, workItem.Board, workItem.Board.Team, workItem);
 

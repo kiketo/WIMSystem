@@ -9,15 +9,14 @@ using WIMSystem.Models.Enums;
 using Utils;
 using WIMSystem.Models;
 using WIMSystem.Commands.Utils;
-
 namespace WIMSystem.Commands.ChangeCommands
 {
-    public class ChangePriorityCommand : IEngineCommand
+    public class ChangeRatingOfFeedbackCommand : IEngineCommand
     {
         private readonly IHistoryEventWriter historyEventWriter;
         private readonly IGetters getter;
 
-        public ChangePriorityCommand(IHistoryEventWriter historyEventWriter, IGetters getter)
+        public ChangeRatingOfFeedbackCommand(IHistoryEventWriter historyEventWriter, IGetters getter)
         {
             this.historyEventWriter = historyEventWriter ?? throw new ArgumentNullException(nameof(historyEventWriter));
             this.getter = getter ?? throw new ArgumentNullException(nameof(getter));
@@ -27,35 +26,29 @@ namespace WIMSystem.Commands.ChangeCommands
         {
             var teamName = parameters[0];
             var board = this.getter.GetBoard(teamName, parameters[1]);
-            var workItem = this.getter.GetAssignableWorkItem(board, parameters[2]);
-            var priority = StringToEnum<PriorityType>.Convert(parameters[3]);
+            var workItem = this.getter.GetWorkItem(board, parameters[2]);
+            var priority = int.Parse(parameters[3]);
+
             return this.Execute(workItem, priority);
         }
 
-        private string Execute(IAssignableWorkItem workItem, PriorityType priority)
+        private string Execute(IWorkItem workItem, int rating)
         {
             if (Validators.IsNullValue(workItem))
             {
-                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,nameof(WorkItem)));
+                throw new ArgumentException(string.Format(Consts.NULL_OBJECT, nameof(WorkItem)));
             }
 
-            if (!(workItem is IAssignableWorkItem))
+            if (!(workItem is IFeedback))
             {
                 throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Feedback)}!"));
             }
 
-            workItem.Priority = priority;
+           ((IFeedback)workItem).Rating = rating;
 
-            var returnMessage = string.Format(ObjectConsts.WorkItemPriorityChange, workItem.Title, priority);
+            var returnMessage = string.Format(ObjectConsts.FeedbackRatingChange, workItem.Title, rating);
 
-            IPerson member = null;
-
-            if (workItem is IAssignableWorkItem)
-            {
-                member = (workItem as IAssignableWorkItem).Assignee;
-            }
-
-            this.historyEventWriter.AddHistoryEvent(returnMessage, member, workItem.Board, workItem.Board.Team, workItem);
+            this.historyEventWriter.AddHistoryEvent(returnMessage, null, workItem.Board, workItem.Board.Team, workItem);
 
             return returnMessage;
         }

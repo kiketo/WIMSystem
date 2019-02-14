@@ -9,7 +9,7 @@ using WIMSystem.Models.Contracts;
 
 namespace WIMSystem.Commands.CreateCommands
 {
-    class CreateFeedbackCommand : IEngineCommand
+    public class CreateFeedbackCommand : IEngineCommand
     {
 
         private readonly IHistoryEventWriter historyEventWriter;
@@ -45,11 +45,11 @@ namespace WIMSystem.Commands.CreateCommands
 
             board.AddWorkItemToBoard(feedback);
 
-            string result = string.Format(ObjectConsts.ObjectCreated, nameof(Feedback), feedback.Title);
+            string returnMessage = string.Format(ObjectConsts.ObjectCreated, nameof(Feedback), feedback.Title);
 
-            this.historyEventWriter.AddHistoryEvent(result, board: board, team: board.Team);
+            this.historyEventWriter.AddHistoryEvent(returnMessage, board: board, team: board.Team);
 
-            return result;
+            return returnMessage;
         }
 
     }

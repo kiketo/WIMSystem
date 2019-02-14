@@ -12,12 +12,12 @@ using WIMSystem.Commands.Utils;
 
 namespace WIMSystem.Commands.ChangeCommands
 {
-    public class ChangePriorityCommand : IEngineCommand
+    public class ChangeSizeOfStoryCommand : IEngineCommand
     {
         private readonly IHistoryEventWriter historyEventWriter;
         private readonly IGetters getter;
 
-        public ChangePriorityCommand(IHistoryEventWriter historyEventWriter, IGetters getter)
+        public ChangeSizeOfStoryCommand(IHistoryEventWriter historyEventWriter, IGetters getter)
         {
             this.historyEventWriter = historyEventWriter ?? throw new ArgumentNullException(nameof(historyEventWriter));
             this.getter = getter ?? throw new ArgumentNullException(nameof(getter));
@@ -27,26 +27,27 @@ namespace WIMSystem.Commands.ChangeCommands
         {
             var teamName = parameters[0];
             var board = this.getter.GetBoard(teamName, parameters[1]);
-            var workItem = this.getter.GetAssignableWorkItem(board, parameters[2]);
-            var priority = StringToEnum<PriorityType>.Convert(parameters[3]);
-            return this.Execute(workItem, priority);
+            var workItem = this.getter.GetWorkItem(board, parameters[2]);
+            var size = StringToEnum<StorySizeType>.Convert(parameters[3]);
+
+            return this.Execute(workItem, size);
         }
 
-        private string Execute(IAssignableWorkItem workItem, PriorityType priority)
+        private string Execute(IWorkItem workItem, StorySizeType size)
         {
             if (Validators.IsNullValue(workItem))
             {
                 throw new ArgumentException(string.Format(Consts.NULL_OBJECT,nameof(WorkItem)));
             }
 
-            if (!(workItem is IAssignableWorkItem))
+            if (!(workItem is IStory))
             {
-                throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Feedback)}!"));
+                throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Story)}!"));
             }
 
-            workItem.Priority = priority;
+            ((IStory)workItem).Size = size;
 
-            var returnMessage = string.Format(ObjectConsts.WorkItemPriorityChange, workItem.Title, priority);
+            var returnMessage = string.Format(ObjectConsts.StorySizeChange, workItem.Title, size);
 
             IPerson member = null;
 

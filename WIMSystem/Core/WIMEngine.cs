@@ -205,61 +205,61 @@ namespace WIMSystem.Core
                         var board = this.GetBoard(teamName, command.Parameters[1]);
                         return this.ShowBoardActivity(board);
                     }
-                case "ChangePriority":
-                    {
-                        var teamName = command.Parameters[0];
-                        var board = this.GetBoard(teamName, command.Parameters[1]);
-                        var workItem = this.GetAssignableWorkItem(board, command.Parameters[2]);
-                        var priority = StringToEnum<PriorityType>.Convert(command.Parameters[3]);
-                        return this.ChangePriority(workItem, priority);
-                    }
-                case "ChangeSeverityOfBug":
-                    {
-                        var teamName = command.Parameters[0];
-                        var board = this.GetBoard(teamName, command.Parameters[1]);
-                        var workItem = this.GetWorkItem(board, command.Parameters[2]);
-                        var severity = StringToEnum<BugSeverityType>.Convert(command.Parameters[3]);
-                        return this.ChangeSeverityOfBug(workItem, severity);
-                    }
-                case "ChangeStatus":
-                    {
-                        var teamName = command.Parameters[0];
-                        var board = this.GetBoard(teamName, command.Parameters[1]);
-                        var workItem = this.GetWorkItem(board, command.Parameters[2]);
-                        var status = command.Parameters[3];
-                        return this.ChangeStatus(workItem, status);
-                    }
-                case "ChangeSizeOfStory":
-                    {
-                        var teamName = command.Parameters[0];
-                        var board = this.GetBoard(teamName, command.Parameters[1]);
-                        var workItem = this.GetWorkItem(board, command.Parameters[2]);
-                        var size = StringToEnum<StorySizeType>.Convert(command.Parameters[3]);
-                        return this.ChangeSizeOfStory(workItem, size);
-                    }
-                case "ChangeRatingOfFeedback":
-                    {
-                        var teamName = command.Parameters[0];
-                        var board = this.GetBoard(teamName, command.Parameters[1]);
-                        var workItem = this.GetWorkItem(board, command.Parameters[2]);
-                        var priority = int.Parse(command.Parameters[3]);
-                        return this.ChangeRatingOfFeedback(workItem, priority);
-                    }
-                case "AssignWorkItemToMember":
-                    {
-                        var teamName = command.Parameters[0];
-                        var board = this.GetBoard(teamName, command.Parameters[1]);
-                        var workItem = this.GetAssignableWorkItem(board, command.Parameters[2]);
-                        var member = this.GetPerson(command.Parameters[3]);
-                        return this.AssignWorkItemToMember(workItem, member);
-                    }
-                case "UnassignWorkItem":
-                    {
-                        var teamName = command.Parameters[0];
-                        var board = this.GetBoard(teamName, command.Parameters[1]);
-                        var workItem = this.GetAssignableWorkItem(board, command.Parameters[2]);
-                        return this.UnassignWorkItemToMember(workItem);
-                    }
+                //case "ChangePriority":
+                //    {
+                //        var teamName = command.Parameters[0];
+                //        var board = this.GetBoard(teamName, command.Parameters[1]);
+                //        var workItem = this.GetAssignableWorkItem(board, command.Parameters[2]);
+                //        var priority = StringToEnum<PriorityType>.Convert(command.Parameters[3]);
+                //        return this.ChangePriority(workItem, priority);
+                //    }
+                //case "ChangeSeverityOfBug":
+                //    {
+                //        var teamName = command.Parameters[0];
+                //        var board = this.GetBoard(teamName, command.Parameters[1]);
+                //        var workItem = this.GetWorkItem(board, command.Parameters[2]);
+                //        var severity = StringToEnum<BugSeverityType>.Convert(command.Parameters[3]);
+                //        return this.ChangeSeverityOfBug(workItem, severity);
+                //    }
+                //case "ChangeStatus":
+                //    {
+                //        var teamName = command.Parameters[0];
+                //        var board = this.GetBoard(teamName, command.Parameters[1]);
+                //        var workItem = this.GetWorkItem(board, command.Parameters[2]);
+                //        var status = command.Parameters[3];
+                //        return this.ChangeStatus(workItem, status);
+                //    }
+                //case "ChangeSizeOfStory":
+                //    {
+                //        var teamName = command.Parameters[0];
+                //        var board = this.GetBoard(teamName, command.Parameters[1]);
+                //        var workItem = this.GetWorkItem(board, command.Parameters[2]);
+                //        var size = StringToEnum<StorySizeType>.Convert(command.Parameters[3]);
+                //        return this.ChangeSizeOfStory(workItem, size);
+                //    }
+                //case "ChangeRatingOfFeedback":
+                //    {
+                //        var teamName = command.Parameters[0];
+                //        var board = this.GetBoard(teamName, command.Parameters[1]);
+                //        var workItem = this.GetWorkItem(board, command.Parameters[2]);
+                //        var priority = int.Parse(command.Parameters[3]);
+                //        return this.ChangeRatingOfFeedback(workItem, priority);
+                //    }
+                //case "AssignWorkItemToMember":
+                //    {
+                //        var teamName = command.Parameters[0];
+                //        var board = this.GetBoard(teamName, command.Parameters[1]);
+                //        var workItem = this.GetAssignableWorkItem(board, command.Parameters[2]);
+                //        var member = this.GetPerson(command.Parameters[3]);
+                //        return this.AssignWorkItemToMember(workItem, member);
+                //    }
+                //case "UnassignWorkItem":
+                //    {
+                //        var teamName = command.Parameters[0];
+                //        var board = this.GetBoard(teamName, command.Parameters[1]);
+                //        var workItem = this.GetAssignableWorkItem(board, command.Parameters[2]);
+                //        return this.UnassignWorkItemToMember(workItem);
+                //    }
                 //ase "ListBoardWorkItems":
                 //   {
                 //       var teamName = command.Parameters[0];
@@ -310,192 +310,192 @@ namespace WIMSystem.Core
 
         }
 
-        private IAssignableWorkItem GetAssignableWorkItem(IBoard board, string assignableWorkItemTitle)
-        {
-            if (board.BoardWorkItems[assignableWorkItemTitle] is IAssignableWorkItem)
-            {
-                return (IAssignableWorkItem)board.BoardWorkItems[assignableWorkItemTitle];
-            }
-            throw new ArgumentException(string.Format($"{board.BoardWorkItems[assignableWorkItemTitle].GetType().Name} is not assignable work item!"));
-        }
+        //private IAssignableWorkItem GetAssignableWorkItem(IBoard board, string assignableWorkItemTitle)
+        //{
+        //    if (board.BoardWorkItems[assignableWorkItemTitle] is IAssignableWorkItem)
+        //    {
+        //        return (IAssignableWorkItem)board.BoardWorkItems[assignableWorkItemTitle];
+        //    }
+        //    throw new ArgumentException(string.Format($"{board.BoardWorkItems[assignableWorkItemTitle].GetType().Name} is not assignable work item!"));
+        //}
 
-        private string UnassignWorkItemToMember(IAssignableWorkItem workItem)
-        {
+        //private string UnassignWorkItemToMember(IAssignableWorkItem workItem)
+        //{
 
-            if (Validators.IsNullValue(workItem))
-            {
-                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
-                    nameof(WorkItem)
-                    ));
-            }
+        //    if (Validators.IsNullValue(workItem))
+        //    {
+        //        throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+        //            nameof(WorkItem)
+        //            ));
+        //    }
 
-            var member = workItem.Assignee;
-            workItem.UnassignMember();
-            member.MemberWorkItems.Remove(workItem);
-            var returnMessage = string.Format(WorkItemUnAssigned, workItem.Title, member.PersonName);
+        //    var member = workItem.Assignee;
+        //    workItem.UnassignMember();
+        //    member.MemberWorkItems.Remove(workItem);
+        //    var returnMessage = string.Format(WorkItemUnAssigned, workItem.Title, member.PersonName);
 
-            this.AddHistoryEvent(returnMessage,member,workItem.Board,workItem.Board.Team,workItem);
+        //    this.AddHistoryEvent(returnMessage,member,workItem.Board,workItem.Board.Team,workItem);
 
-            return returnMessage;
-        }
+        //    return returnMessage;
+        //}
 
-        private string AssignWorkItemToMember(IAssignableWorkItem workItem, IPerson member)
-        {
+        //private string AssignWorkItemToMember(IAssignableWorkItem workItem, IPerson member)
+        //{
 
-            if (Validators.IsNullValue(workItem))
-            {
-                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
-                    nameof(WorkItem)
-                    ));
-            }
-            if (Validators.IsNullValue(member))
-            {
-                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
-                    nameof(member)
-                    ));
-            }
+        //    if (Validators.IsNullValue(workItem))
+        //    {
+        //        throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+        //            nameof(WorkItem)
+        //            ));
+        //    }
+        //    if (Validators.IsNullValue(member))
+        //    {
+        //        throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+        //            nameof(member)
+        //            ));
+        //    }
 
-            if (!member.IsAssignedToTeam)
-            {
-                throw new ArgumentException(string.Format($"{member.PersonName} is not a member of any team!"));
+        //    if (!member.IsAssignedToTeam)
+        //    {
+        //        throw new ArgumentException(string.Format($"{member.PersonName} is not a member of any team!"));
 
-            }
+        //    }
 
-            workItem.AssignMember(member);
-            member.MemberWorkItems.Add(workItem);
+        //    workItem.AssignMember(member);
+        //    member.MemberWorkItems.Add(workItem);
             
-            var returnMessage = string.Format(WorkItemAssigned, workItem.Title, member.PersonName);
+        //    var returnMessage = string.Format(WorkItemAssigned, workItem.Title, member.PersonName);
 
-            this.AddHistoryEvent(returnMessage, member, workItem.Board, workItem.Board.Team, workItem);
+        //    this.AddHistoryEvent(returnMessage, member, workItem.Board, workItem.Board.Team, workItem);
 
-            return returnMessage;
-        }
+        //    return returnMessage;
+        //}
 
-       // private string ListBoardWorkItems(IBoard board, Type filterType, string filterStatus, IPerson filterAssignee, string sortBy)
-       // {
-       //     return board.ListWorkItems(filterType, filterStatus, filterAssignee, sortBy);
-       // }
+        // private string ListBoardWorkItems(IBoard board, Type filterType, string filterStatus, IPerson filterAssignee, string sortBy)
+        // {
+        //     return board.ListWorkItems(filterType, filterStatus, filterAssignee, sortBy);
+        // }
 
-        private string ChangeRatingOfFeedback(IWorkItem workItem, int rating)
-        {
-            if (Validators.IsNullValue(workItem))
-            {
-                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
-                    nameof(WorkItem)
-                    ));
-            }
-            if (!(workItem is IFeedback))
-            {
-                throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Feedback)}!"));
-            }
-            ((IFeedback)workItem).Rating = rating;
-            
-            var returnMessage = string.Format(FeedbackRatingChange, workItem.Title, rating);
+        //private string ChangeRatingOfFeedback(IWorkItem workItem, int rating)
+        //{
+        //    if (Validators.IsNullValue(workItem))
+        //    {
+        //        throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+        //            nameof(WorkItem)
+        //            ));
+        //    }
+        //    if (!(workItem is IFeedback))
+        //    {
+        //        throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Feedback)}!"));
+        //    }
+        //    ((IFeedback)workItem).Rating = rating;
 
-            this.AddHistoryEvent(returnMessage, null, workItem.Board, workItem.Board.Team, workItem);
+        //    var returnMessage = string.Format(FeedbackRatingChange, workItem.Title, rating);
 
-            return returnMessage;
-        } //TODO:
+        //    this.AddHistoryEvent(returnMessage, null, workItem.Board, workItem.Board.Team, workItem);
 
-        private string ChangeSizeOfStory(IWorkItem workItem, StorySizeType size)
-        {
-            if (Validators.IsNullValue(workItem))
-            {
-                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
-                    nameof(WorkItem)
-                    ));
-            }
-            if (!(workItem is IStory))
-            {
-                throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Story)}!"));
-            }
-            ((IStory)workItem).Size = size;
+        //    return returnMessage;
+        //} 
 
-            var returnMessage = string.Format(StorySizeChange, workItem.Title, size);
+        //private string ChangeSizeOfStory(IWorkItem workItem, StorySizeType size)
+        //{
+        //    if (Validators.IsNullValue(workItem))
+        //    {
+        //        throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+        //            nameof(WorkItem)
+        //            ));
+        //    }
+        //    if (!(workItem is IStory))
+        //    {
+        //        throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Story)}!"));
+        //    }
+        //    ((IStory)workItem).Size = size;
 
-            IPerson member = null;
-            if (workItem is IAssignableWorkItem)
-            {
-                member = (workItem as IAssignableWorkItem).Assignee;
-            }
-            this.AddHistoryEvent(returnMessage, member, workItem.Board, workItem.Board.Team, workItem);
+        //    var returnMessage = string.Format(StorySizeChange, workItem.Title, size);
 
-            return returnMessage;
-        } //TODO:
+        //    IPerson member = null;
+        //    if (workItem is IAssignableWorkItem)
+        //    {
+        //        member = (workItem as IAssignableWorkItem).Assignee;
+        //    }
+        //    this.AddHistoryEvent(returnMessage, member, workItem.Board, workItem.Board.Team, workItem);
 
-        private string ChangeStatus(IWorkItem workItem, string status)
-        {
-            if (Validators.IsNullValue(workItem))
-            {
-                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
-                    nameof(WorkItem)
-                    ));
-            }
-            workItem.ChangeStatus(status);
+        //    return returnMessage;
+        //} 
 
-            var returnMessage = string.Format(WorkItemStatusChange, workItem.Title, status);
+        //private string ChangeStatus(IWorkItem workItem, string status)
+        //{
+        //    if (Validators.IsNullValue(workItem))
+        //    {
+        //        throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+        //            nameof(WorkItem)
+        //            ));
+        //    }
+        //    workItem.ChangeStatus(status);
 
-            IPerson member = null;
-            if (workItem is IAssignableWorkItem)
-            {
-                member = (workItem as IAssignableWorkItem).Assignee;
-            }
-            this.AddHistoryEvent(returnMessage, member, workItem.Board, workItem.Board.Team, workItem);
+        //    var returnMessage = string.Format(WorkItemStatusChange, workItem.Title, status);
 
-            return returnMessage;
-        } //TODO:
+        //    IPerson member = null;
+        //    if (workItem is IAssignableWorkItem)
+        //    {
+        //        member = (workItem as IAssignableWorkItem).Assignee;
+        //    }
+        //    this.AddHistoryEvent(returnMessage, member, workItem.Board, workItem.Board.Team, workItem);
 
-        private string ChangeSeverityOfBug(IWorkItem workItem, BugSeverityType severity)
-        {
-            if (Validators.IsNullValue(workItem))
-            {
-                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
-                    nameof(WorkItem)
-                    ));
-            }
-            if (!(workItem is IBug))
-            {
-                throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Bug)}!"));
-            }
-            ((IBug)workItem).Severity = severity;
+        //    return returnMessage;
+        //} 
 
-            var returnMessage = string.Format(BugSeverityChange, workItem.Title, severity);
+        //private string ChangeSeverityOfBug(IWorkItem workItem, BugSeverityType severity)
+        //{
+        //    if (Validators.IsNullValue(workItem))
+        //    {
+        //        throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+        //            nameof(WorkItem)
+        //            ));
+        //    }
+        //    if (!(workItem is IBug))
+        //    {
+        //        throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Bug)}!"));
+        //    }
+        //    ((IBug)workItem).Severity = severity;
 
-            IPerson member = null;
-            if (workItem is IAssignableWorkItem)
-            {
-                member = (workItem as IAssignableWorkItem).Assignee;
-            }
-            this.AddHistoryEvent(returnMessage, member, workItem.Board, workItem.Board.Team, workItem);
+        //    var returnMessage = string.Format(BugSeverityChange, workItem.Title, severity);
 
-            return returnMessage;
-        } //TODO:
+        //    IPerson member = null;
+        //    if (workItem is IAssignableWorkItem)
+        //    {
+        //        member = (workItem as IAssignableWorkItem).Assignee;
+        //    }
+        //    this.AddHistoryEvent(returnMessage, member, workItem.Board, workItem.Board.Team, workItem);
 
-        private string ChangePriority(IAssignableWorkItem workItem, PriorityType priority)
-        {
-            if (Validators.IsNullValue(workItem))
-            {
-                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
-                    nameof(WorkItem)
-                    ));
-            }
-            if (!(workItem is IAssignableWorkItem))
-            {
-                throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Feedback)}!"));
-            }
-            workItem.Priority = priority;
+        //    return returnMessage;
+        //} 
 
-            var returnMessage = string.Format(WorkItemPriorityChange, workItem.Title, priority);
+        //private string ChangePriority(IAssignableWorkItem workItem, PriorityType priority)
+        //{
+        //    if (Validators.IsNullValue(workItem))
+        //    {
+        //        throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+        //            nameof(WorkItem)
+        //            ));
+        //    }
+        //    if (!(workItem is IAssignableWorkItem))
+        //    {
+        //        throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Feedback)}!"));
+        //    }
+        //    workItem.Priority = priority;
 
-            IPerson member = null;
-            if (workItem is IAssignableWorkItem)
-            {
-                member = (workItem as IAssignableWorkItem).Assignee;
-            }
-            this.AddHistoryEvent(returnMessage, member, workItem.Board, workItem.Board.Team, workItem);
+        //    var returnMessage = string.Format(WorkItemPriorityChange, workItem.Title, priority);
 
-            return returnMessage;
-        } //TODO:
+        //    IPerson member = null;
+        //    if (workItem is IAssignableWorkItem)
+        //    {
+        //        member = (workItem as IAssignableWorkItem).Assignee;
+        //    }
+        //    this.AddHistoryEvent(returnMessage, member, workItem.Board, workItem.Board.Team, workItem);
+
+        //    return returnMessage;
+        //} 
 
         private string ShowBoardActivity(IBoard board)
         {
@@ -608,15 +608,15 @@ namespace WIMSystem.Core
 
         //}  
 
-        private string AddMemberToTeam(IPerson memberForAdding, ITeam teamToAddTo)
-        {
-            teamToAddTo.AddMemberToTeam(memberForAdding);
+        //private string AddMemberToTeam(IPerson memberForAdding, ITeam teamToAddTo)
+        //{
+        //    teamToAddTo.AddMemberToTeam(memberForAdding);
 
-            var returnMessage = string.Format(ObjectAddedToTeam, nameof(Person), memberForAdding.PersonName, teamToAddTo.TeamName);
-            this.AddHistoryEvent(returnMessage,memberForAdding,null,teamToAddTo);
+        //    var returnMessage = string.Format(ObjectAddedToTeam, nameof(Person), memberForAdding.PersonName, teamToAddTo.TeamName);
+        //    this.AddHistoryEvent(returnMessage,memberForAdding,null,teamToAddTo);
 
-            return returnMessage;
-        }
+        //    return returnMessage;
+        //}
 
         private string RemoveMemberFromTeam(ITeam teamToRemoveFrom, IPerson memberForRemoving)
         {
@@ -625,17 +625,17 @@ namespace WIMSystem.Core
             this.AddHistoryEvent(returnMessage, memberForRemoving, null, teamToRemoveFrom);
 
             return returnMessage;
-
+            //NOT USED IN THE CURRENT APPLICATION
         } 
 
-        private string AddBoardToTeam(ITeam teamToAddTo, IBoard boardForAdding)
-        {
-            teamToAddTo.AddBoardToTeam(boardForAdding);
-            string output = string.Format(ObjectAddedToTeam, nameof(Board), boardForAdding.BoardName, teamToAddTo.TeamName);
-            this.AddHistoryEvent(output, board: boardForAdding, team: teamToAddTo);
+        //private string AddBoardToTeam(ITeam teamToAddTo, IBoard boardForAdding)
+        //{
+        //    teamToAddTo.AddBoardToTeam(boardForAdding);
+        //    string output = string.Format(ObjectAddedToTeam, nameof(Board), boardForAdding.BoardName, teamToAddTo.TeamName);
+        //    this.AddHistoryEvent(output, board: boardForAdding, team: teamToAddTo);
 
-            return output;
-        } 
+        //    return output;
+        //} 
 
         private string RemoveBoardFromTeam(ITeam teamToRemoveFrom, IBoard boardForRemoving)
         {

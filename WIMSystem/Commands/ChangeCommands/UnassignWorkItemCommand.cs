@@ -12,12 +12,12 @@ using WIMSystem.Commands.Utils;
 
 namespace WIMSystem.Commands.ChangeCommands
 {
-    public class ChangePriorityCommand : IEngineCommand
+    public class UnassignWorkItemCommand : IEngineCommand
     {
         private readonly IHistoryEventWriter historyEventWriter;
         private readonly IGetters getter;
 
-        public ChangePriorityCommand(IHistoryEventWriter historyEventWriter, IGetters getter)
+        public UnassignWorkItemCommand(IHistoryEventWriter historyEventWriter, IGetters getter)
         {
             this.historyEventWriter = historyEventWriter ?? throw new ArgumentNullException(nameof(historyEventWriter));
             this.getter = getter ?? throw new ArgumentNullException(nameof(getter));
@@ -28,32 +28,22 @@ namespace WIMSystem.Commands.ChangeCommands
             var teamName = parameters[0];
             var board = this.getter.GetBoard(teamName, parameters[1]);
             var workItem = this.getter.GetAssignableWorkItem(board, parameters[2]);
-            var priority = StringToEnum<PriorityType>.Convert(parameters[3]);
-            return this.Execute(workItem, priority);
+
+            return this.Execute(workItem);
         }
 
-        private string Execute(IAssignableWorkItem workItem, PriorityType priority)
+        private string Execute(IAssignableWorkItem workItem)
         {
+
             if (Validators.IsNullValue(workItem))
             {
                 throw new ArgumentException(string.Format(Consts.NULL_OBJECT,nameof(WorkItem)));
             }
 
-            if (!(workItem is IAssignableWorkItem))
-            {
-                throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Feedback)}!"));
-            }
-
-            workItem.Priority = priority;
-
-            var returnMessage = string.Format(ObjectConsts.WorkItemPriorityChange, workItem.Title, priority);
-
-            IPerson member = null;
-
-            if (workItem is IAssignableWorkItem)
-            {
-                member = (workItem as IAssignableWorkItem).Assignee;
-            }
+            var member = workItem.Assignee;
+            workItem.UnassignMember();
+            member.MemberWorkItems.Remove(workItem);
+            var returnMessage = string.Format(ObjectConsts.WorkItemUnAssigned, workItem.Title, member.PersonName);
 
             this.historyEventWriter.AddHistoryEvent(returnMessage, member, workItem.Board, workItem.Board.Team, workItem);
 

@@ -12,12 +12,12 @@ using WIMSystem.Commands.Utils;
 
 namespace WIMSystem.Commands.ChangeCommands
 {
-    public class ChangePriorityCommand : IEngineCommand
+    public class ChangeStatus : IEngineCommand
     {
         private readonly IHistoryEventWriter historyEventWriter;
         private readonly IGetters getter;
 
-        public ChangePriorityCommand(IHistoryEventWriter historyEventWriter, IGetters getter)
+        public ChangeStatus(IHistoryEventWriter historyEventWriter, IGetters getter)
         {
             this.historyEventWriter = historyEventWriter ?? throw new ArgumentNullException(nameof(historyEventWriter));
             this.getter = getter ?? throw new ArgumentNullException(nameof(getter));
@@ -27,26 +27,22 @@ namespace WIMSystem.Commands.ChangeCommands
         {
             var teamName = parameters[0];
             var board = this.getter.GetBoard(teamName, parameters[1]);
-            var workItem = this.getter.GetAssignableWorkItem(board, parameters[2]);
-            var priority = StringToEnum<PriorityType>.Convert(parameters[3]);
-            return this.Execute(workItem, priority);
+            var workItem = this.getter.GetWorkItem(board, parameters[2]);
+            var status = parameters[3];
+
+            return this.Execute(workItem, status);
         }
 
-        private string Execute(IAssignableWorkItem workItem, PriorityType priority)
+        private string Execute(IWorkItem workItem, string status)
         {
             if (Validators.IsNullValue(workItem))
             {
                 throw new ArgumentException(string.Format(Consts.NULL_OBJECT,nameof(WorkItem)));
             }
 
-            if (!(workItem is IAssignableWorkItem))
-            {
-                throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Feedback)}!"));
-            }
+            workItem.ChangeStatus(status);
 
-            workItem.Priority = priority;
-
-            var returnMessage = string.Format(ObjectConsts.WorkItemPriorityChange, workItem.Title, priority);
+            var returnMessage = string.Format(ObjectConsts.WorkItemStatusChange, workItem.Title, status);
 
             IPerson member = null;
 
@@ -59,5 +55,6 @@ namespace WIMSystem.Commands.ChangeCommands
 
             return returnMessage;
         }
+
     }
 }

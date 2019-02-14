@@ -68,7 +68,7 @@ namespace WIMSystem.Commands.Utils
             return board.BoardWorkItems[workItemAsString];
         }
 
-        private IAssignableWorkItem GetAssignableWorkItem(IBoard board, string assignableWorkItemTitle)
+        public IAssignableWorkItem GetAssignableWorkItem(IBoard board, string assignableWorkItemTitle)
         {
             if (board.BoardWorkItems[assignableWorkItemTitle] is IAssignableWorkItem)
             {

@@ -10,7 +10,7 @@ using WIMSystem.Models.Contracts;
 
 namespace WIMSystem.Commands.CreateCommands
 {
-    class CreateBoardCommand : IEngineCommand
+    public class CreateBoardCommand : IEngineCommand
     {
         private readonly IHistoryEventWriter historyEventWriter;
         private readonly IWIMTeams wimTeams;

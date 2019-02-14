@@ -11,7 +11,7 @@ using WIMSystem.Models.Enums;
 
 namespace WIMSystem.Commands.CreateCommands
 {
-    class CreateStoryCommand : IEngineCommand
+    public class CreateStoryCommand : IEngineCommand
     {
         private readonly IHistoryEventWriter historyEventWriter;
         private readonly IComponentsFactory componentsFactory;
@@ -46,11 +46,11 @@ namespace WIMSystem.Commands.CreateCommands
 
             board.AddWorkItemToBoard(story);
 
-            string output = string.Format(ObjectConsts.ObjectCreated, nameof(Story), story.Title);
+            string returnMessage = string.Format(ObjectConsts.ObjectCreated, nameof(Story), story.Title);
 
-            this.historyEventWriter.AddHistoryEvent(output, storyAssignee, board, board.Team);
+            this.historyEventWriter.AddHistoryEvent(returnMessage, storyAssignee, board, board.Team);
 
-            return output;
+            return returnMessage;
         }
 
 

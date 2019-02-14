@@ -12,7 +12,7 @@ using WIMSystem.Models.Enums;
 
 namespace WIMSystem.Commands.CreateCommands
 {
-    class CreateBugCommand : IEngineCommand
+    public class CreateBugCommand : IEngineCommand
     {
         private readonly IHistoryEventWriter historyEventWriter;
         private readonly IComponentsFactory componentsFactory;
@@ -49,11 +49,11 @@ namespace WIMSystem.Commands.CreateCommands
 
             board.AddWorkItemToBoard(bug);
 
-            string result = string.Format(ObjectConsts.ObjectCreated, nameof(Bug), bug.Title);
+            string returnMessage = string.Format(ObjectConsts.ObjectCreated, nameof(Bug), bug.Title);
 
-            this.historyEventWriter.AddHistoryEvent(result, bugAssignee, board, board.Team);
+            this.historyEventWriter.AddHistoryEvent(returnMessage, bugAssignee, board, board.Team);
 
-            return result;
+            return returnMessage;
         }
     }
 }
