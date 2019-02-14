@@ -40,12 +40,12 @@ namespace WIMSystem.Commands.CreateCommands
 
             if (feedback == null)
             {
-                throw new ArgumentException(string.Format(Consts.ObjectExists, nameof(Feedback), feedback.Title));
+                throw new ArgumentException(string.Format(ObjectConsts.ObjectExists, nameof(Feedback), feedback.Title));
             }
 
             board.AddWorkItemToBoard(feedback);
 
-            string result = string.Format(Consts.ObjectCreated, nameof(Feedback), feedback.Title);
+            string result = string.Format(ObjectConsts.ObjectCreated, nameof(Feedback), feedback.Title);
 
             this.historyEventWriter.AddHistoryEvent(result, board: board, team: board.Team);
 

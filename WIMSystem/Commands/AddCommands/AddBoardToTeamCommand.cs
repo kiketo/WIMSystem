@@ -26,7 +26,7 @@ namespace WIMSystem.Commands.AddCommands
         private string Execute(ITeam teamToAddTo, IBoard boardForAdding)
         {
             teamToAddTo.AddBoardToTeam(boardForAdding);
-            string output = string.Format(Consts.ObjectAddedToTeam, nameof(Board), boardForAdding.BoardName, teamToAddTo.TeamName);
+            string output = string.Format(ObjectConsts.ObjectAddedToTeam, nameof(Board), boardForAdding.BoardName, teamToAddTo.TeamName);
             this.historyEventWriter.AddHistoryEvent(output, board: boardForAdding, team: teamToAddTo);
 
             return output;

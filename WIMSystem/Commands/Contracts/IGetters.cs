@@ -9,5 +9,6 @@ namespace WIMSystem.Commands.Contracts
         IPerson GetPerson(string memberAsString);
         ITeam GetTeam(string teamAsString);
         IWorkItem GetWorkItem(IBoard board, string workItemAsString);
+        IAssignableWorkItem GetAssignableWorkItem(IBoard board, string assignableWorkItemTitle);
     }
 }

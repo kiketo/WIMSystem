@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WIMSystem.Commands.Utils
 {
-    internal class Consts
+    internal class ObjectConsts
     {
         internal const string InvalidCommand = "Invalid command name: {0}!";
         internal const string ObjectExists = "{0} with name {1} already exists!";
@@ -22,5 +22,6 @@ namespace WIMSystem.Commands.Utils
         internal const string CommentAdded = "Comment \"{0}\" with author {1} added to \"{2}\"!";
 
         internal const char SPLIT_CHAR = ',';
+        internal const string NULL_OBJECT = "Passed {0} can not be null!";
     }
 }

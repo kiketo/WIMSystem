@@ -38,7 +38,7 @@ namespace WIMSystem.Commands.CreateCommands
             var comment = this.componentsFactory.CreateComment(message, author);
             workitem.AddComment(comment);
 
-            string output = string.Format(Consts.CommentAdded, comment.Message, comment.Author.PersonName, workitem.Title);
+            string output = string.Format(ObjectConsts.CommentAdded, comment.Message, comment.Author.PersonName, workitem.Title);
 
             this.historyEventWriter.AddHistoryEvent(output, author, workitem.Board, workitem.Board.Team, workitem);
 

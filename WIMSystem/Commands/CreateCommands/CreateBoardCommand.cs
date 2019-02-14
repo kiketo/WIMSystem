@@ -38,11 +38,11 @@ namespace WIMSystem.Commands.CreateCommands
 
             if (board == null)
             {
-                throw new ArgumentException(string.Format(Consts.ObjectExists, nameof(Board), board));
+                throw new ArgumentException(string.Format(ObjectConsts.ObjectExists, nameof(Board), board));
             }
 
             teamToAddTo.AddBoardToTeam(board);
-            var returnMessage = string.Format(Consts.ObjectCreated, nameof(Board), boardName);
+            var returnMessage = string.Format(ObjectConsts.ObjectCreated, nameof(Board), boardName);
             this.historyEventWriter.AddHistoryEvent(returnMessage, board: board, team: teamToAddTo);
 
             return returnMessage;

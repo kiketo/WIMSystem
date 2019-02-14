@@ -29,7 +29,7 @@ namespace WIMSystem.Commands.AddCommands
         {
             teamToAddTo.AddMemberToTeam(memberForAdding);
 
-            var returnMessage = string.Format(Consts.ObjectAddedToTeam, nameof(Person), memberForAdding.PersonName, teamToAddTo.TeamName);
+            var returnMessage = string.Format(ObjectConsts.ObjectAddedToTeam, nameof(Person), memberForAdding.PersonName, teamToAddTo.TeamName);
             this.historyEventWriter.AddHistoryEvent(returnMessage, memberForAdding, null, teamToAddTo);
 
             return returnMessage;
