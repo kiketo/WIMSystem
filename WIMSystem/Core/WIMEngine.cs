@@ -169,10 +169,10 @@ namespace WIMSystem.Core
                         return this.CreateComment(workItem, comment, author);
                     }
 
-                case "ShowAllPeople":
-                    {
-                        return this.ShowAllPeople();
-                    }
+                //case "ShowAllPeople":
+                //    {
+                //        return this.ShowAllPeople();
+                //    }
                 case "ShowPersonActivity":
                     {
                         var person = this.GetPerson(command.Parameters[0]);
@@ -258,49 +258,49 @@ namespace WIMSystem.Core
                         var workItem = this.GetAssignableWorkItem(board, command.Parameters[2]);
                         return this.UnassignWorkItemToMember(workItem);
                     }
-                case "ListBoardWorkItems":
-                    {
-                        var teamName = command.Parameters[0];
-                        var board = this.GetBoard(teamName, command.Parameters[1]);
-
-                        Type filterType = null;
-                        string filterStatus = null;
-                        IPerson filterAssignee = null;
-                        string sortBy = null;   // "filterType:Story" "filterStatus:High" "filterAssignee:Gosho" "sortBy:Title"
-
-                        for (int i = 2; i < command.Parameters.Count; i++)
-                        {
-                            var paramOption = command.Parameters[i].Split(new[] { ':', }, StringSplitOptions.RemoveEmptyEntries);
-                            switch (paramOption[0])
-                            {
-                                case "filterType":
-                                    {
-                                        var typeAsString = "WIMSystem.Models." + paramOption[1];
-                                        var curAssembly = typeof(WIMEngine).Assembly;
-                                        filterType = curAssembly.GetType(typeAsString, false, true) ??
-                                            throw new ArgumentException("Undefined type {0}", paramOption[1]);
-                                        break;
-                                    }
-                                case "filterStatus":
-                                    {
-                                        filterStatus = paramOption[1];
-                                        break;
-                                    }
-                                case "filterAssignee":
-                                    {
-                                        filterAssignee = this.GetPerson(paramOption[1]);
-                                        break;
-                                    }
-                                case "sortBy":
-                                    {
-                                        sortBy = paramOption[1];
-                                        break;
-                                    }
-                            }
-                        }
-
-                        return this.ListBoardWorkItems(board, filterType, filterStatus, filterAssignee, sortBy);
-                    }
+                //ase "ListBoardWorkItems":
+                //   {
+                //       var teamName = command.Parameters[0];
+                //       var board = this.GetBoard(teamName, command.Parameters[1]);
+                //
+                //       Type filterType = null;
+                //       string filterStatus = null;
+                //       IPerson filterAssignee = null;
+                //       string sortBy = null;   // "filterType:Story" "filterStatus:High" "filterAssignee:Gosho" "sortBy:Title"
+                //
+                //       for (int i = 2; i < command.Parameters.Count; i++)
+                //       {
+                //           var paramOption = command.Parameters[i].Split(new[] { ':', }, StringSplitOptions.RemoveEmptyEntries);
+                //           switch (paramOption[0])
+                //           {
+                //               case "filterType":
+                //                   {
+                //                       var typeAsString = "WIMSystem.Models." + paramOption[1];
+                //                       var curAssembly = typeof(WIMEngine).Assembly;
+                //                       filterType = curAssembly.GetType(typeAsString, false, true) ??
+                //                           throw new ArgumentException("Undefined type {0}", paramOption[1]);
+                //                       break;
+                //                   }
+                //               case "filterStatus":
+                //                   {
+                //                       filterStatus = paramOption[1];
+                //                       break;
+                //                   }
+                //               case "filterAssignee":
+                //                   {
+                //                       filterAssignee = this.GetPerson(paramOption[1]);
+                //                       break;
+                //                   }
+                //               case "sortBy":
+                //                   {
+                //                       sortBy = paramOption[1];
+                //                       break;
+                //                   }
+                //           }
+                //       }
+                //
+                //        return this.ListBoardWorkItems(board, filterType, filterStatus, filterAssignee, sortBy);
+                //    }
 
                 default:
                     return string.Format(InvalidCommand, command.Name);
@@ -369,10 +369,10 @@ namespace WIMSystem.Core
             return returnMessage;
         }
 
-        private string ListBoardWorkItems(IBoard board, Type filterType, string filterStatus, IPerson filterAssignee, string sortBy)
-        {
-            return board.ListWorkItems(filterType, filterStatus, filterAssignee, sortBy);
-        }
+       // private string ListBoardWorkItems(IBoard board, Type filterType, string filterStatus, IPerson filterAssignee, string sortBy)
+       // {
+       //     return board.ListWorkItems(filterType, filterStatus, filterAssignee, sortBy);
+       // }
 
         private string ChangeRatingOfFeedback(IWorkItem workItem, int rating)
         {
@@ -555,10 +555,10 @@ namespace WIMSystem.Core
             return historyItemsList.ShowPersonActivity(person);
         }
 
-        private string ShowAllPeople()
-        {
-            return this.personList.ShowAllPeople();
-        }
+        //private string ShowAllPeople()
+        //{
+        //    return this.personList.ShowAllPeople();
+        //}
 
         private string CreateTeam(string teamName)
         {

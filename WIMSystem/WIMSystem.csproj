@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\ListCommands\" />
     <Folder Include="Commands\ChangeCommands\" />
   </ItemGroup>
 
