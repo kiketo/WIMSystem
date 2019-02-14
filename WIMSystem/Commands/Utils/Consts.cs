@@ -20,5 +20,7 @@ namespace WIMSystem.Commands.Utils
         internal const string StorySizeChange = "{0} story's size is changed to {1}!";
         internal const string BugSeverityChange = "{0} bug's severity is changed to {1}!";
         internal const string CommentAdded = "Comment \"{0}\" with author {1} added to \"{2}\"!";
+
+        internal const char SPLIT_CHAR = ',';
     }
 }
