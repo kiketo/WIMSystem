@@ -173,11 +173,11 @@ namespace WIMSystem.Core
                 //    {
                 //        return this.ShowAllPeople();
                 //    }
-                case "ShowPersonActivity":
-                    {
-                        var person = this.GetPerson(command.Parameters[0]);
-                        return this.ShowPersonActivity(person);
-                    }
+                //case "ShowPersonActivity":
+                //    {
+                //        var person = this.GetPerson(command.Parameters[0]);
+                //        return this.ShowPersonActivity(person);
+                //    }
                 case "ShowAllTeams":
                     {
                         return this.ShowAllTeams();
@@ -544,16 +544,16 @@ namespace WIMSystem.Core
             return wimTeams.ShowAllTeams();
         }
 
-        private string ShowPersonActivity(IPerson person)
-        {
-            if (Validators.IsNullValue(person))
-            {
-                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
-                    nameof(person)
-                    ));
-            }
-            return historyItemsList.ShowPersonActivity(person);
-        }
+        //private string ShowPersonActivity(IPerson person)
+        //{
+        //    if (Validators.IsNullValue(person))
+        //    {
+        //        throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+        //            nameof(person)
+        //            ));
+        //    }
+        //    return historyItemsList.ShowPersonActivity(person);
+        //}
 
         //private string ShowAllPeople()
         //{
