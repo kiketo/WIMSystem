@@ -73,12 +73,12 @@ namespace WIMSystem.Models.Abstract
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentNullException("Description", "Description cannot be empty!");
+                    throw new ArgumentException("Description cannot be empty!");
                 }
 
                 if (value.Length < 10 || value.Length > 500)
                 {
-                    throw new ArgumentOutOfRangeException("Description", "Description should be more than 10 and lesser than 500 characters long!");
+                    throw new ArgumentException("Description should be more than 10 and lesser than 500 characters long!");
                 }
 
                 this.description = value;
@@ -101,7 +101,7 @@ namespace WIMSystem.Models.Abstract
         {
             if (comment == null)
             {
-                throw new ArgumentNullException("Comment", "Comment cannot be empty!");
+                throw new ArgumentException("Comment cannot be empty!");
             }
 
             this.listOfComments.Add(comment);

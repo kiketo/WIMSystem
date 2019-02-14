@@ -31,7 +31,7 @@ namespace WIMSystem.Models
             {
                 if (value.Length<5||value.Length>15)
                 {
-                    throw new ArgumentOutOfRangeException("personName", "Members name should be between 5 and 15 symbols.");
+                    throw new ArgumentException("Members name should be between 5 and 15 symbols.");
                 }
 
                 this.personName = value;

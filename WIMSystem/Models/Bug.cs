@@ -18,12 +18,12 @@ namespace WIMSystem.Models
         {
             if (stepsToReproduce == null)
             {
-                throw new ArgumentNullException("stepsToReproduce", "Steps to reproduce cannot be null!");
+                throw new ArgumentException("Steps to reproduce cannot be null!");
             }
 
             if (!stepsToReproduce.Any())
             {
-                throw new ArgumentException("stepsToReproduce", "There must be at least one step to reproduce for the bug!");
+                throw new ArgumentException("There must be at least one step to reproduce for the bug!");
             }
 
             this.stepsToReproduce = stepsToReproduce;
@@ -48,7 +48,7 @@ namespace WIMSystem.Models
         {
             if (severity == null)
             {
-                throw new ArgumentNullException("severity", "Severity cannot be null or empty!");
+                throw new ArgumentException("Severity cannot be null or empty!");
             }
 
             else
@@ -62,7 +62,7 @@ namespace WIMSystem.Models
         {
             if (newStatus == null)
             {
-                throw new ArgumentNullException("status", "Status cannot be null or empty!");
+                throw new ArgumentException("Status cannot be null or empty!");
             }
 
             else

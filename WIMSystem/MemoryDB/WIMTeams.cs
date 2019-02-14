@@ -55,7 +55,7 @@ namespace WIMSystem.Models
         {
             if (this.teamsList.ContainsKey(teamName))
             {
-                throw new ArgumentOutOfRangeException($"Team with {teamName} does not exists");
+                throw new ArgumentException($"Team with {teamName} does not exists");
             }
             this.teamsList.Remove(teamName);
         }
