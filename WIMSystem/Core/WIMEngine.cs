@@ -106,19 +106,21 @@ namespace WIMSystem.Core
                 //        return this.CreateBoard(boardName, team);
                 //    }
 
-                case "AddPersonToTeam":
-                    {
-                        var memberForAdding = this.GetPerson(command.Parameters[0]);
-                        var teamToAddTo = this.GetTeam(command.Parameters[1]);
-                        return this.AddMemberToTeam(memberForAdding, teamToAddTo);
-                    }
+                //case "AddPersonToTeam":
+                //    {
+                //        var memberForAdding = this.GetPerson(command.Parameters[0]);
+                //        var teamToAddTo = this.GetTeam(command.Parameters[1]);
+                //        return this.AddMemberToTeam(memberForAdding, teamToAddTo);
+                //    }
 
-                case "RemoveMemberFromTeam":
+                
+
+                case "RemoveMemberFromTeam": 
                     {
                         var teamToRemove = this.GetTeam(command.Parameters[0]);
                         var memberForRemoving = this.GetPerson(command.Parameters[1]);
                         return this.RemoveMemberFromTeam(teamToRemove, memberForRemoving);
-                    }
+                    }  //Not used in the current application
 
                 //case "CreateBug":
                 //    {
