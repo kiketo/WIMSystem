@@ -13,7 +13,6 @@ namespace WIMSystem.Models
         private readonly IDictionary<string, IWorkItem> boardWorkItems;
         private ITeam team;
 
-
         public Board(string boardName, ITeam team)
         {
             this.Team = team;

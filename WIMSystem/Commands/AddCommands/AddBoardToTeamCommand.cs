@@ -14,13 +14,19 @@ namespace WIMSystem.Commands.AddCommands
 
         public AddBoardToTeamCommand(IHistoryEventWriter historyEventWriter, IGetters getters)
         {
-            this.historyEventWriter = historyEventWriter ?? throw new ArgumentNullException(nameof(historyEventWriter));
-            this.getters = getters;
+            this.historyEventWriter = historyEventWriter ?? throw new ArgumentNullException(
+                                                                                string.Format(
+                                                                                Consts.NULL_OBJECT,
+                                                                                nameof(historyEventWriter)));
+            this.getters = getters ?? throw new ArgumentNullException(
+                                                                string.Format(
+                                                                Consts.NULL_OBJECT,
+                                                                nameof(getters)));
         }
 
         public string ReadSingleCommand(IList<string> parameters)
         {
-            throw new NotImplementedException();
+            return Execute(null,null);
         }
 
         private string Execute(ITeam teamToAddTo, IBoard boardForAdding)

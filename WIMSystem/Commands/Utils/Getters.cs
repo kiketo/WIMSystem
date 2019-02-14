@@ -12,12 +12,26 @@ namespace WIMSystem.Commands.Utils
 
         public Getters(IPersonsCollection personList, IWIMTeams wimTeams)
         {
-            this.personList = personList;
-            this.wimTeams = wimTeams;
+            this.personList = personList ?? throw new ArgumentNullException(
+                                                                   string.Format(
+                                                             Consts.NULL_OBJECT,
+                                                                nameof(personList)));
+            this.wimTeams = wimTeams ?? throw new ArgumentNullException(
+                                                                string.Format(
+                                                                Consts.NULL_OBJECT,
+                                                                nameof(wimTeams)));
         }
 
         public IPerson GetPerson(string memberAsString)
         {
+            if (!personList.Contains(memberAsString))
+            {
+                throw new ArgumentNullException(
+                            string.Format(
+                            Consts.NoPersonFound,
+                            memberAsString));
+
+            }
             var member = this.personList[memberAsString];
             return member;
 
@@ -27,27 +41,36 @@ namespace WIMSystem.Commands.Utils
         {
             if (!this.wimTeams.TeamsList.ContainsKey(team.TeamName))
             {
-                throw new ArgumentException($"No {team.TeamName} team found!");
+                throw new ArgumentException(
+                            string.Format(
+                            Consts.NoTeamFound,
+                            team.TeamName));
             }
 
-            //var person = this.wimTeams.TeamsList
-            //            .Where(x => x.Value == teamName)
-            //            .Select(team => team.Value)
-            //            .SelectMany(team => team.MemberList)
-            //            .FirstOrDefault(member => member.PersonName == memberAsString);
+            var person = this.GetPerson(memberAsString);//this.personList[memberAsString];
 
-            var person = this.personList[memberAsString];
-
-            if (!team.MemberList.Contains(person))
-            {
-                throw new ArgumentNullException("person", $"There is no person with name {memberAsString} in the team.");
-            }
+            //if (!team.MemberList.Contains(person))
+            //{
+            //    throw new ArgumentNullException(
+            //                string.Format(
+            //                Consts.NoPersonInTeamFound,
+            //                memberAsString));
+                
+            //}
 
             return person;
         }
 
         public ITeam GetTeam(string teamAsString)
         {
+            if (!this.wimTeams.TeamsList.ContainsKey(teamAsString))
+            {
+                throw new ArgumentException(
+                            string.Format(
+                            Consts.NoTeamFound,
+                            teamAsString));
+
+            }
             var team = this.wimTeams[teamAsString];
             return team;
         }
@@ -58,6 +81,22 @@ namespace WIMSystem.Commands.Utils
             //                .Select(team => team.Value)
             //                .Where(team => team.BoardList.Keys.Any(board => board == boardAsString))
             //                .Single();
+            if (!this.wimTeams.TeamsList.ContainsKey(teamName))
+            {
+                throw new ArgumentException(
+                            string.Format(
+                            Consts.NoTeamFound,
+                            teamName));
+            }
+
+            if (!this.wimTeams.TeamsList[teamName].BoardList.ContainsKey(boardAsString))
+            {
+                throw new ArgumentException(
+                            string.Format(
+                            Consts.NoBoardFound,
+                            boardAsString));
+            }
+
             var boardResult = this.wimTeams[teamName].BoardList[boardAsString];
             return boardResult;
 
@@ -65,6 +104,13 @@ namespace WIMSystem.Commands.Utils
 
         public IWorkItem GetWorkItem(IBoard board, string workItemAsString)
         {
+            if (!board.BoardWorkItems.ContainsKey(workItemAsString))
+            {
+                throw new ArgumentException(
+                            string.Format(
+                            Consts.NoWorkItemFound,
+                            workItemAsString));
+            }
             return board.BoardWorkItems[workItemAsString];
         }
     }
