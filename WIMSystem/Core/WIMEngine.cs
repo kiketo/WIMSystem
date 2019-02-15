@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Utils;
+using WIMSystem.Commands.Contracts;
 using WIMSystem.Core.Contracts;
 using WIMSystem.Core.Factories;
 using WIMSystem.Core.Factories.Contracts;
@@ -37,27 +38,33 @@ namespace WIMSystem.Core
         private readonly IWIMTeams wimTeams;
         private readonly IPersonsCollection personList;
         private readonly IHistoryItemsCollection historyItemsList;
+        private readonly IPrintReports printReports;
 
-        public WIMEngine(ICommandsFactory commandsFactory, IComponentsFactory factory, IWIMTeams wimTeams, IPersonsCollection personList, IHistoryItemsCollection historyItemsList)
+        public WIMEngine(ICommandsFactory commandsFactory, 
+            IComponentsFactory factory, IWIMTeams wimTeams, 
+            IPersonsCollection personList, 
+            IHistoryItemsCollection historyItemsList,
+            IPrintReports printReports)
         {
             this.commandsFactory = commandsFactory;
             this.factory = factory ?? throw new ArgumentException(string.Format(Consts.NULL_OBJECT, nameof(factory)));
-            this.wimTeams = wimTeams ?? throw new ArgumentException(string.Format(Consts.NULL_OBJECT, nameof(factory)));
-            this.personList = personList ?? throw new ArgumentException(string.Format(Consts.NULL_OBJECT, nameof(factory)));
-            this.historyItemsList = historyItemsList ?? throw new ArgumentException(string.Format(Consts.NULL_OBJECT, nameof(factory)));
+            this.wimTeams = wimTeams ?? throw new ArgumentException(string.Format(Consts.NULL_OBJECT, nameof(wimTeams)));
+            this.personList = personList ?? throw new ArgumentException(string.Format(Consts.NULL_OBJECT, nameof(personList)));
+            this.historyItemsList = historyItemsList ?? throw new ArgumentException(string.Format(Consts.NULL_OBJECT, nameof(historyItemsList)));
+            this.printReports = printReports ?? throw new ArgumentException(string.Format(Consts.NULL_OBJECT, nameof(printReports)));
         }
 
         public void ExecuteCommands(ICommandParser commandParser)
         {
             var commands = commandParser.ReadCommands();
             var commandResult = this.ProcessCommands(commands);
-            this.PrintReports(commandResult);
+            this.printReports.Print(commandResult);
         }
 
         public void ExecuteCommands(IList<ICommand> commands)
         {
             var commandResult = this.ProcessCommands(commands);
-            this.PrintReports(commandResult);
+            this.printReports.Print(commandResult);
         }
 
         private IList<string> ProcessCommands(IList<ICommand> commands)
@@ -115,12 +122,12 @@ namespace WIMSystem.Core
 
                 
 
-                case "RemoveMemberFromTeam": 
-                    {
-                        var teamToRemove = this.GetTeam(command.Parameters[0]);
-                        var memberForRemoving = this.GetPerson(command.Parameters[1]);
-                        return this.RemoveMemberFromTeam(teamToRemove, memberForRemoving);
-                    }  //Not used in the current application
+                //case "RemoveMemberFromTeam": 
+                //    {
+                //        var teamToRemove = this.GetTeam(command.Parameters[0]);
+                //        var memberForRemoving = this.GetPerson(command.Parameters[1]);
+                //        return this.RemoveMemberFromTeam(teamToRemove, memberForRemoving);
+                //    }  //Not used in the current application
 
                 //case "CreateBug":
                 //    {
@@ -709,18 +716,18 @@ namespace WIMSystem.Core
         //    return output;
         //} //TODO:
 
-        private void PrintReports(IList<string> reports)
-        {
-            var output = new StringBuilder();
+        //private void PrintReports(IList<string> reports)
+        //{
+        //    var output = new StringBuilder();
 
-            foreach (var report in reports)
-            {
-                output.AppendLine(report);
-            }
+        //    foreach (var report in reports)
+        //    {
+        //        output.AppendLine(report);
+        //    }
 
-            Console.Write(output.ToString());
-            //writer.Write(output.ToString());
-        }
+        //    Console.Write(output.ToString());
+        //    //writer.Write(output.ToString());
+        //}
 
         private IPerson GetPerson(string memberAsString)
         {

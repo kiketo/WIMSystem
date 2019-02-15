@@ -19,16 +19,16 @@ namespace WIMSystem.Commands.CreateCommands
         {
             this.historyEventWriter = historyEventWriter ?? throw new ArgumentNullException(
                                                                                 string.Format(
-                                                                                Consts.NULL_OBJECT,
+                                                                                CommandsConsts.NULL_OBJECT,
                                                                                 nameof(historyEventWriter)));
             this.personList = personList ?? throw new ArgumentNullException(
                                                                 string.Format(
-                                                                Consts.NULL_OBJECT,
+                                                                CommandsConsts.NULL_OBJECT,
                                                                 nameof(personList)));
             this.componentsFactory = componentsFactory ?? throw new ArgumentNullException(
                                                                 string.Format(
-                                                                Consts.NULL_OBJECT,
-                                                                nameof(componentsFactory));
+                                                                CommandsConsts.NULL_OBJECT,
+                                                                nameof(componentsFactory)));
         }
 
         public string ReadSingleCommand(IList<string> parameters)
@@ -41,12 +41,12 @@ namespace WIMSystem.Commands.CreateCommands
         {
             if (this.personList.Contains(personName))
             {
-                throw new ArgumentException(string.Format(ObjectConsts.ObjectExists, nameof(Person), personName));
+                throw new ArgumentException(string.Format(CommandsConsts.ObjectExists, nameof(Person), personName));
             }
 
             var person = this.componentsFactory.CreatePerson(personName);
             this.personList.AddPerson(person);
-            var returnMessage = string.Format(ObjectConsts.ObjectCreated, nameof(Person), personName);
+            var returnMessage = string.Format(CommandsConsts.ObjectCreated, nameof(Person), personName);
             this.historyEventWriter.AddHistoryEvent(returnMessage, person);
             return returnMessage;
         }
