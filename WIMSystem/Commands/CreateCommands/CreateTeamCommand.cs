@@ -33,12 +33,12 @@ namespace WIMSystem.Commands.CreateCommands
         {
             if (this.wimTeams.Contains(teamName))
             {
-                return string.Format(ObjectConsts.ObjectExists, nameof(Team), teamName);
+                return string.Format(CommandsConsts.ObjectExists, nameof(Team), teamName);
             }
 
             var team = this.componentsFactory.CreateTeam(teamName, this.wimTeams);
             this.wimTeams.AddTeam(team);
-            var returnMessage = string.Format(ObjectConsts.ObjectCreated, nameof(Team), teamName);
+            var returnMessage = string.Format(CommandsConsts.ObjectCreated, nameof(Team), teamName);
             this.historyEventWriter.AddHistoryEvent(returnMessage, team: team);
 
             return returnMessage;

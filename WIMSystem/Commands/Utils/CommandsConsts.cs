@@ -33,5 +33,6 @@ namespace WIMSystem.Commands.Utils
         internal const string NULL_PROPERTY_NAME = "{0} {1} can not be null!";
         internal const string NULL_OBJECT = "Passed {0} can not be null!";
         internal const string NOT_FOUND_OBJECT = "Passed {0} can not be found!";
+        internal const string SPLIT_CHAR = ",";
     }
 }

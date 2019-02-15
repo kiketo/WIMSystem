@@ -9,6 +9,7 @@ using WIMSystem.Models.Enums;
 using Utils;
 using WIMSystem.Models;
 using WIMSystem.Commands.Utils;
+using WIMSystem.Utils;
 
 namespace WIMSystem.Commands.ChangeCommands
 {
@@ -47,7 +48,7 @@ namespace WIMSystem.Commands.ChangeCommands
 
             ((IStory)workItem).Size = size;
 
-            var returnMessage = string.Format(ObjectConsts.StorySizeChange, workItem.Title, size);
+            var returnMessage = string.Format(CommandsConsts.StorySizeChange, workItem.Title, size);
 
             IPerson member = null;
 
