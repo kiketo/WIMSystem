@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using WIMSystem.Commands.Contracts;
 using WIMSystem.Commands.Utils;
 using WIMSystem.Models;
@@ -13,8 +14,12 @@ namespace WIMSystem.Commands.AddCommands
   
         public AddPersonToTeamCommand(IGetters getter, IHistoryEventWriter historyEventWriter)
         {
-            this.getter = getter;
-            this.historyEventWriter = historyEventWriter;
+            this.getter = getter?? throw new ArgumentNullException(string.Format(
+                                                                Consts.NULL_OBJECT,
+                                                                nameof(getter)));
+            this.historyEventWriter = historyEventWriter ?? throw new ArgumentNullException(string.Format(
+                                                                                      Consts.NULL_OBJECT,
+                                                                                      nameof(historyEventWriter)));
         }
 
         public string ReadSingleCommand(IList<string> parameters)
