@@ -199,12 +199,12 @@ namespace WIMSystem.Core
                         var team = this.GetTeam(command.Parameters[0]);
                         return this.ShowAllTeamBoards(team);
                     }
-                case "ShowBoardActivity":
-                    {
-                        var teamName = command.Parameters[0];
-                        var board = this.GetBoard(teamName, command.Parameters[1]);
-                        return this.ShowBoardActivity(board);
-                    }
+                //case "ShowBoardActivity":
+                //    {
+                //        var teamName = command.Parameters[0];
+                //        var board = this.GetBoard(teamName, command.Parameters[1]);
+                //        return this.ShowBoardActivity(board);
+                //    }
                 //case "ChangePriority":
                 //    {
                 //        var teamName = command.Parameters[0];
@@ -497,16 +497,16 @@ namespace WIMSystem.Core
         //    return returnMessage;
         //} 
 
-        private string ShowBoardActivity(IBoard board)
-        {
-            if (Validators.IsNullValue(board))
-            {
-                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
-                    nameof(board)
-                    ));
-            }
-            return historyItemsList.ShowBoardActivity(board);
-        }
+        //private string ShowBoardActivity(IBoard board)
+        //{
+        //    if (Validators.IsNullValue(board))
+        //    {
+        //        throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+        //            nameof(board)
+        //            ));
+        //    }
+        //    return historyItemsList.ShowBoardActivity(board);
+        //}
 
         private string ShowAllTeamBoards(ITeam team)
         {
