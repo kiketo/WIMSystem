@@ -180,10 +180,10 @@ namespace WIMSystem.Core
                 //        var person = this.GetPerson(command.Parameters[0]);
                 //        return this.ShowPersonActivity(person);
                 //    }
-                case "ShowAllTeams":
-                    {
-                        return this.ShowAllTeams();
-                    }
+                //case "ShowAllTeams":
+                //    {
+                //        return this.ShowAllTeams();
+                //    }
                 //case "ShowTeamActivity":
                 //    {
                 //        var team = this.GetTeam(command.Parameters[0]);
@@ -541,10 +541,10 @@ namespace WIMSystem.Core
         //    return historyItemsList.ShowTeamActivity(team); 
         //}
 
-        private string ShowAllTeams()
-        {
-            return wimTeams.ShowAllTeams();
-        }
+        //private string ShowAllTeams()
+        //{
+        //    return wimTeams.ShowAllTeams();
+        //}
 
         //private string ShowPersonActivity(IPerson person)
         //{
