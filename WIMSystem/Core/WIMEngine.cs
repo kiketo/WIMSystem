@@ -541,10 +541,10 @@ namespace WIMSystem.Core
         //    return historyItemsList.ShowTeamActivity(team); 
         //}
 
-       // private string ShowAllTeams()
-       // {
-       //     return wimTeams.ShowAllTeams();
-       // }
+        //private string ShowAllTeams()
+        //{
+        //    return wimTeams.ShowAllTeams();
+        //}
 
         //private string ShowPersonActivity(IPerson person)
         //{
