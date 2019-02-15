@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using Utils;
 using WIMSystem.Commands.Contracts;
+using WIMSystem.Commands.Utils;
 using WIMSystem.Models.Contracts;
+using WIMSystem.Utils;
 
 namespace WIMSystem.Commands.ListCommands
 {
     public class ShowAllTeamMembersCommand : IEngineCommand
     {
-        private IGetters getters;
+        private readonly IGetters getters;
         private readonly IHistoryItemsCollection historyItemsCollection;
 
         public ShowAllTeamMembersCommand(IGetters getters, IHistoryItemsCollection historyItemsCollection)
@@ -28,7 +29,7 @@ namespace WIMSystem.Commands.ListCommands
         {
             if (Validators.IsNullValue(team))
             {
-                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+                throw new ArgumentException(string.Format(CommandsConsts.NULL_OBJECT,
                     nameof(team)
                     ));
             }

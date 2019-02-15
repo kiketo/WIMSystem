@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Utils;
 using WIMSystem.Commands.Contracts;
 using WIMSystem.Models;
 using WIMSystem.Models.Contracts;
@@ -9,7 +8,7 @@ namespace WIMSystem.Commands.ListCommands
 {
     public class ShowAllTeamsCommand : IEngineCommand
     {
-        private IWIMTeams wIMTeams;
+        private readonly IWIMTeams wIMTeams;
 
         public ShowAllTeamsCommand(IWIMTeams wIMTeams)
         {

@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace Utils
+namespace WIMSystem.Utils
 {
     public static class Validators
     {

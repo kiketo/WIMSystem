@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Utils;
+using WIMSystem.Utils;
 using WIMSystem.Commands.Contracts;
 using WIMSystem.Models.Contracts;
 
@@ -8,7 +8,7 @@ namespace WIMSystem.Commands.ListCommands
 {
     public class ShowAllTeamBoardsCommand : IEngineCommand
     {
-        private IGetters getters;
+        private readonly IGetters getters;
         private readonly IHistoryItemsCollection historyItemsCollection;
 
         public ShowAllTeamBoardsCommand(IGetters getters, IHistoryItemsCollection historyItemsCollection)

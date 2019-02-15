@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
-using Utils;
 using WIMSystem.Commands.Contracts;
 using WIMSystem.Core.Factories.Contracts;
+using WIMSystem.Utils;
 
 namespace WIMSystem.Core.Factories
 {

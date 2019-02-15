@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Utils;
+using WIMSystem.Commands.Utils;
 using WIMSystem.Commands.Contracts;
 using WIMSystem.Models.Contracts;
+using WIMSystem.Utils;
 
 namespace WIMSystem.Commands.ListCommands
 {
@@ -27,7 +28,7 @@ namespace WIMSystem.Commands.ListCommands
         {
             if (Validators.IsNullValue(person))
             {
-                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,nameof(person)));
+                throw new ArgumentException(string.Format(CommandsConsts.NULL_OBJECT,nameof(person)));
             }
             var returnMessage= historyItemsCollection.ShowPersonActivity(person);
            

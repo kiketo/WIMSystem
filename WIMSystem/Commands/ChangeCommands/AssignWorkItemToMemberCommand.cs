@@ -6,7 +6,6 @@ using WIMSystem.Core.Utils;
 using WIMSystem.Models.Abstract;
 using WIMSystem.Models.Contracts;
 using WIMSystem.Models.Enums;
-using Utils;
 using WIMSystem.Models;
 using WIMSystem.Commands.Utils;
 using WIMSystem.Utils;
