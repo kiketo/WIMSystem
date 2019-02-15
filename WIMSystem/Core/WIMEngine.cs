@@ -519,16 +519,16 @@ namespace WIMSystem.Core
         //    return team.ShowAllTeamBoards();
         //}
 
-        private string ShowAllTeamMembers(ITeam team)
-        {
-            if (Validators.IsNullValue(team))
-            {
-                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
-                    nameof(team)
-                    ));
-            }
-            return team.ShowAllTeamMembers();
-        }
+        //private string ShowAllTeamMembers(ITeam team)
+        //{
+        //    if (Validators.IsNullValue(team))
+        //    {
+        //        throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+        //            nameof(team)
+        //            ));
+        //    }
+        //    return team.ShowAllTeamMembers();
+        //}
 
         private string ShowTeamActivity(ITeam team)
         {
