@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WIMSystem.Commands.Utils
 {
-    internal class Consts
+    internal class CommandsConsts
     {
         internal const string InvalidCommand = "Invalid command name: {0}!";
         internal const string ObjectExists = "{0} with name {1} already exists!";
@@ -20,5 +20,18 @@ namespace WIMSystem.Commands.Utils
         internal const string StorySizeChange = "{0} story's size is changed to {1}!";
         internal const string BugSeverityChange = "{0} bug's severity is changed to {1}!";
         internal const string CommentAdded = "Comment \"{0}\" with author {1} added to \"{2}\"!";
+
+        internal const string NoTeamFound = "No {0} team found!";
+        internal const string NoBoardFound = "No {0} board found!";
+        internal const string NoPersonFound = "No {0} person found!";
+        internal const string NoWorkItemFound = "No {0} work item found!";
+        internal const string NoPersonInTeamFound = "There is no person with name {0} in the team.";
+
+        //Common
+        internal const string INVALID_QUANTITY = "{0} {1} have to be more than {2}! It was passed {3}";
+        internal const string INVALID_PROPERTY_LENGTH = "{0} {1} can not be less than {2} or more than {3} chars! It was passed {4}";
+        internal const string NULL_PROPERTY_NAME = "{0} {1} can not be null!";
+        internal const string NULL_OBJECT = "Passed {0} can not be null!";
+        internal const string NOT_FOUND_OBJECT = "Passed {0} can not be found!";
     }
 }

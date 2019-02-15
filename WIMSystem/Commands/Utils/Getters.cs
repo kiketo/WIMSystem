@@ -14,11 +14,11 @@ namespace WIMSystem.Commands.Utils
         {
             this.personList = personList ?? throw new ArgumentNullException(
                                                                    string.Format(
-                                                             Consts.NULL_OBJECT,
+                                                             CommandsConsts.NULL_OBJECT,
                                                                 nameof(personList)));
             this.wimTeams = wimTeams ?? throw new ArgumentNullException(
                                                                 string.Format(
-                                                                Consts.NULL_OBJECT,
+                                                                CommandsConsts.NULL_OBJECT,
                                                                 nameof(wimTeams)));
         }
 
@@ -28,7 +28,7 @@ namespace WIMSystem.Commands.Utils
             {
                 throw new ArgumentNullException(
                             string.Format(
-                            Consts.NoPersonFound,
+                            CommandsConsts.NoPersonFound,
                             memberAsString));
 
             }
@@ -43,7 +43,7 @@ namespace WIMSystem.Commands.Utils
             {
                 throw new ArgumentException(
                             string.Format(
-                            Consts.NoTeamFound,
+                            CommandsConsts.NoTeamFound,
                             team.TeamName));
             }
 
@@ -53,7 +53,7 @@ namespace WIMSystem.Commands.Utils
             //{
             //    throw new ArgumentNullException(
             //                string.Format(
-            //                Consts.NoPersonInTeamFound,
+            //                CommandsConsts.NoPersonInTeamFound,
             //                memberAsString));
                 
             //}
@@ -67,7 +67,7 @@ namespace WIMSystem.Commands.Utils
             {
                 throw new ArgumentException(
                             string.Format(
-                            Consts.NoTeamFound,
+                            CommandsConsts.NoTeamFound,
                             teamAsString));
 
             }
@@ -85,7 +85,7 @@ namespace WIMSystem.Commands.Utils
             {
                 throw new ArgumentException(
                             string.Format(
-                            Consts.NoTeamFound,
+                            CommandsConsts.NoTeamFound,
                             teamName));
             }
 
@@ -93,7 +93,7 @@ namespace WIMSystem.Commands.Utils
             {
                 throw new ArgumentException(
                             string.Format(
-                            Consts.NoBoardFound,
+                            CommandsConsts.NoBoardFound,
                             boardAsString));
             }
 
@@ -108,7 +108,7 @@ namespace WIMSystem.Commands.Utils
             {
                 throw new ArgumentException(
                             string.Format(
-                            Consts.NoWorkItemFound,
+                            CommandsConsts.NoWorkItemFound,
                             workItemAsString));
             }
             return board.BoardWorkItems[workItemAsString];
