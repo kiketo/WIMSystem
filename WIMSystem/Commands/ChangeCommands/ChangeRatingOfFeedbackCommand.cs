@@ -9,6 +9,8 @@ using WIMSystem.Models.Enums;
 using Utils;
 using WIMSystem.Models;
 using WIMSystem.Commands.Utils;
+using WIMSystem.Utils;
+
 namespace WIMSystem.Commands.ChangeCommands
 {
     public class ChangeRatingOfFeedbackCommand : IEngineCommand
@@ -46,7 +48,7 @@ namespace WIMSystem.Commands.ChangeCommands
 
            ((IFeedback)workItem).Rating = rating;
 
-            var returnMessage = string.Format(ObjectConsts.FeedbackRatingChange, workItem.Title, rating);
+            var returnMessage = string.Format(CommandsConsts.FeedbackRatingChange, workItem.Title, rating);
 
             this.historyEventWriter.AddHistoryEvent(returnMessage, null, workItem.Board, workItem.Board.Team, workItem);
 

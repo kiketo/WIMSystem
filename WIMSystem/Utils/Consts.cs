@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Utils
+namespace WIMSystem.Utils
 {
     internal static class Consts
     {

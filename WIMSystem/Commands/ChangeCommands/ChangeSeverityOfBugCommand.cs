@@ -9,6 +9,7 @@ using WIMSystem.Models.Enums;
 using Utils;
 using WIMSystem.Models;
 using WIMSystem.Commands.Utils;
+using WIMSystem.Utils;
 
 namespace WIMSystem.Commands.ChangeCommands
 {
@@ -46,7 +47,7 @@ namespace WIMSystem.Commands.ChangeCommands
 
             ((IBug)workItem).Severity = severity;
 
-            var returnMessage = string.Format(ObjectConsts.BugSeverityChange, workItem.Title, severity);
+            var returnMessage = string.Format(CommandsConsts.BugSeverityChange, workItem.Title, severity);
 
             IPerson member = null;
 

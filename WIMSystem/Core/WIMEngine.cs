@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Utils;
+using WIMSystem.Utils;
 using WIMSystem.Core.Contracts;
 using WIMSystem.Core.Factories;
 using WIMSystem.Core.Factories.Contracts;

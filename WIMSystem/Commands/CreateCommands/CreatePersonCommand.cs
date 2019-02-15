@@ -6,6 +6,7 @@ using WIMSystem.Commands.Utils;
 using WIMSystem.Core.Factories.Contracts;
 using WIMSystem.Models;
 using WIMSystem.Models.Contracts;
+using WIMSystem.Utils;
 
 namespace WIMSystem.Commands.CreateCommands
 {
@@ -28,7 +29,7 @@ namespace WIMSystem.Commands.CreateCommands
             this.componentsFactory = componentsFactory ?? throw new ArgumentNullException(
                                                                 string.Format(
                                                                 Consts.NULL_OBJECT,
-                                                                nameof(componentsFactory));
+                                                                nameof(componentsFactory)));
         }
 
         public string ReadSingleCommand(IList<string> parameters)
@@ -41,12 +42,12 @@ namespace WIMSystem.Commands.CreateCommands
         {
             if (this.personList.Contains(personName))
             {
-                throw new ArgumentException(string.Format(ObjectConsts.ObjectExists, nameof(Person), personName));
+                throw new ArgumentException(string.Format(CommandsConsts.ObjectExists, nameof(Person), personName));
             }
 
             var person = this.componentsFactory.CreatePerson(personName);
             this.personList.AddPerson(person);
-            var returnMessage = string.Format(ObjectConsts.ObjectCreated, nameof(Person), personName);
+            var returnMessage = string.Format(CommandsConsts.ObjectCreated, nameof(Person), personName);
             this.historyEventWriter.AddHistoryEvent(returnMessage, person);
             return returnMessage;
         }

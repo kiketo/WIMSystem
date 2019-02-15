@@ -6,9 +6,10 @@ using WIMSystem.Core.Utils;
 using WIMSystem.Models.Abstract;
 using WIMSystem.Models.Contracts;
 using WIMSystem.Models.Enums;
-using Utils;
+using WIMSystem.Utils;
 using WIMSystem.Models;
 using WIMSystem.Commands.Utils;
+using Utils;
 
 namespace WIMSystem.Commands.ChangeCommands
 {
@@ -42,7 +43,7 @@ namespace WIMSystem.Commands.ChangeCommands
 
             workItem.ChangeStatus(status);
 
-            var returnMessage = string.Format(ObjectConsts.WorkItemStatusChange, workItem.Title, status);
+            var returnMessage = string.Format(CommandsConsts.WorkItemStatusChange, workItem.Title, status);
 
             IPerson member = null;
 
