@@ -113,5 +113,15 @@ namespace WIMSystem.Commands.Utils
             }
             return board.BoardWorkItems[workItemAsString];
         }
+
+        public IAssignableWorkItem GetAssignableWorkItem(IBoard board, string assignableWorkItemTitle)
+        {
+            if (board.BoardWorkItems[assignableWorkItemTitle] is IAssignableWorkItem)
+            {
+                return (IAssignableWorkItem)board.BoardWorkItems[assignableWorkItemTitle];
+            }
+
+            throw new ArgumentException(string.Format($"{board.BoardWorkItems[assignableWorkItemTitle].GetType().Name} is not assignable work item!"));
+        }
     }
 }

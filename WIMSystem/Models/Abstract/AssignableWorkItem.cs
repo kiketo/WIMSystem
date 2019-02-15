@@ -21,7 +21,7 @@ namespace WIMSystem.Models.Abstract
 
         public void AssignMember(IPerson member)
         {
-            this.Assignee = member ?? throw new ArgumentNullException("member", "Member cannot be null or empty!");
+            this.Assignee = member ?? throw new ArgumentException("Member cannot be null or empty!");
         }
 
         public void UnassignMember()

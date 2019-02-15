@@ -31,7 +31,7 @@ namespace WIMSystem.Models
             {
                 if (value.Length < 5 || value.Length > 10)
                 {
-                    throw new ArgumentOutOfRangeException("Board name should be between 5 and 10 symbols.");
+                    throw new ArgumentException("Board name should be between 5 and 10 symbols.");
                 }
 
                 //Board name should be unique in the team
@@ -64,7 +64,7 @@ namespace WIMSystem.Models
 
             private set
             {
-                this.team = value ?? throw new ArgumentNullException("team", "Team cannot be null!");
+                this.team = value ?? throw new ArgumentException("Team cannot be null!");
             }
         }
 
@@ -72,7 +72,7 @@ namespace WIMSystem.Models
         {
             if (workItem == null)
             {
-                throw new ArgumentNullException("Work item cannot be null!");
+                throw new ArgumentException("Work item cannot be null!");
             }
             if (this.boardWorkItems.ContainsKey(workItem.Title))
             {

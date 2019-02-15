@@ -41,12 +41,12 @@ namespace WIMSystem.Commands.CreateCommands
         {
             if (this.personList.Contains(personName))
             {
-                throw new ArgumentException(string.Format(Consts.ObjectExists, nameof(Person), personName));
+                throw new ArgumentException(string.Format(ObjectConsts.ObjectExists, nameof(Person), personName));
             }
 
             var person = this.componentsFactory.CreatePerson(personName);
             this.personList.AddPerson(person);
-            var returnMessage = string.Format(Consts.ObjectCreated, nameof(Person), personName);
+            var returnMessage = string.Format(ObjectConsts.ObjectCreated, nameof(Person), personName);
             this.historyEventWriter.AddHistoryEvent(returnMessage, person);
             return returnMessage;
         }

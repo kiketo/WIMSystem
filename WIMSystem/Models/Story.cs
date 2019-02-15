@@ -25,7 +25,7 @@ namespace WIMSystem.Models
         {
             if (size == null)
             {
-                throw new ArgumentNullException("size", "Size cannot be null or empty!");
+                throw new ArgumentException("Size cannot be null or empty!");
             }
 
             else
@@ -39,7 +39,7 @@ namespace WIMSystem.Models
         {
             if (status == null)
             {
-                throw new ArgumentNullException("status", "Status cannot be null or empty!");
+                throw new ArgumentException("Status cannot be null or empty!");
             }
 
             else

@@ -14,11 +14,11 @@ namespace WIMSystem.Models
         {
             if(string.IsNullOrEmpty(message))
             {
-                throw new ArgumentNullException("Message", "Message cannot be null or empty!");
+                throw new ArgumentException("Message cannot be null or empty!");
             }
             if (author == null)
             {
-                throw new ArgumentNullException("Author", "Author cannot be null or empty!");
+                throw new ArgumentException("Author cannot be null or empty!");
             }
             this.message = message;
             this.author = author;

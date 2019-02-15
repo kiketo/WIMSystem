@@ -33,7 +33,7 @@ namespace WIMSystem.Models
         {
             if (rating < 0)
             {
-                throw new ArgumentOutOfRangeException("rating", "Rating cannot be negative!");
+                throw new ArgumentException("Rating cannot be negative!");
             }
 
             else
@@ -46,7 +46,7 @@ namespace WIMSystem.Models
         {
             if (status == null)
             {
-                throw new ArgumentNullException("status", "Status cannot be null or empty!");
+                throw new ArgumentException("Status cannot be null or empty!");
             }
 
             else

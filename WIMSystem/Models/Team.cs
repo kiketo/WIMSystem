@@ -32,7 +32,7 @@ namespace WIMSystem.Models
             {
                 if (value.Length < 3 || value.Length > 25)
                 {
-                    throw new ArgumentOutOfRangeException("Teams name should be between 3 and 25 symbols.");
+                    throw new ArgumentException("Teams name should be between 3 and 25 symbols.");
                 }
                 this.teamName = value;
             }

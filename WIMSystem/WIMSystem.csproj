@@ -10,11 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\ListCommands\" />
-    <Folder Include="Commands\ChangeCommands\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Autofac" Version="4.9.0" />
   </ItemGroup>
 
