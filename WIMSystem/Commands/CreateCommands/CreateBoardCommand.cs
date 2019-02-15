@@ -29,6 +29,7 @@ namespace WIMSystem.Commands.CreateCommands
         {
             var boardName = parameters[0];
             var teamToAddTo = this.getter.GetTeam(parameters[1]);
+
             return this.Execute(boardName, teamToAddTo);
         }
 
