@@ -184,16 +184,16 @@ namespace WIMSystem.Core
                     {
                         return this.ShowAllTeams();
                     }
-                case "ShowTeamActivity":
-                    {
-                        var team = this.GetTeam(command.Parameters[0]);
-                        return this.ShowTeamActivity(team);
-                    }
-                case "ShowAllTeamMembers":
-                    {
-                        var team = this.GetTeam(command.Parameters[0]);
-                        return this.ShowAllTeamMembers(team);
-                    }
+                //case "ShowTeamActivity":
+                //    {
+                //        var team = this.GetTeam(command.Parameters[0]);
+                //        return this.ShowTeamActivity(team);
+                //    }
+                //case "ShowAllTeamMembers":
+                //    {
+                //        var team = this.GetTeam(command.Parameters[0]);
+                //        return this.ShowAllTeamMembers(team);
+                //    }
                // case "ShowAllTeamBoards":
                //     {
                //         var team = this.GetTeam(command.Parameters[0]);
@@ -530,16 +530,16 @@ namespace WIMSystem.Core
         //    return team.ShowAllTeamMembers();
         //}
 
-        private string ShowTeamActivity(ITeam team)
-        {
-            if (Validators.IsNullValue(team))
-            {
-                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
-                    nameof(team)
-                    ));
-            }
-            return historyItemsList.ShowTeamActivity(team); 
-        }
+        //private string ShowTeamActivity(ITeam team)
+        //{
+        //    if (Validators.IsNullValue(team))
+        //    {
+        //        throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+        //            nameof(team)
+        //            ));
+        //    }
+        //    return historyItemsList.ShowTeamActivity(team); 
+        //}
 
         private string ShowAllTeams()
         {

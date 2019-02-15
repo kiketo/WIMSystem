@@ -6,12 +6,12 @@ using WIMSystem.Models.Contracts;
 
 namespace WIMSystem.Commands.ListCommands
 {
-    public class ShowAllTeamMembersCommand : IEngineCommand
+    public class ShowTeamActivityCommand : IEngineCommand
     {
         private IGetters getters;
         private readonly IHistoryItemsCollection historyItemsCollection;
 
-        public ShowAllTeamMembersCommand(IGetters getters, IHistoryItemsCollection historyItemsCollection)
+        public ShowTeamActivityCommand(IGetters getters, IHistoryItemsCollection historyItemsCollection)
         {
             this.getters = getters ?? throw new ArgumentNullException(nameof(getters));
             this.historyItemsCollection = historyItemsCollection ?? throw new ArgumentNullException(nameof(historyItemsCollection));
@@ -20,7 +20,6 @@ namespace WIMSystem.Commands.ListCommands
         public string ReadSingleCommand(IList<string> parameters)
         {
             var team = this.getters.GetTeam(parameters[0]);
-            
             return this.Execute(team);
         }
 
@@ -32,10 +31,9 @@ namespace WIMSystem.Commands.ListCommands
                     nameof(team)
                     ));
             }
-            var returnMessage = team.ShowAllTeamMembers();
+            var returnMessage = historyItemsCollection.ShowTeamActivity(team);
 
             return returnMessage;
-           
         }
     }
 }
