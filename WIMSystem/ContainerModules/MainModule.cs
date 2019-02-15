@@ -8,6 +8,7 @@ using WIMSystem.Core;
 using WIMSystem.Core.Contracts;
 using WIMSystem.Core.Factories;
 using WIMSystem.Core.Factories.Contracts;
+using WIMSystem.Core.Utils;
 using WIMSystem.Menu;
 using WIMSystem.Models;
 using WIMSystem.Models.Contracts;
@@ -15,6 +16,7 @@ using WIMSystem.Models.Contracts;
 namespace WIMSystem.ContainerModules
 {
     class MainModule : Module
+
     {
         protected override void Load(ContainerBuilder builder)
         {
@@ -27,8 +29,8 @@ namespace WIMSystem.ContainerModules
             builder.RegisterType<HistoryEventWriter>().As<IHistoryEventWriter>().SingleInstance();
             builder.RegisterType<WIMEngine>().As<IWIMEngine>().SingleInstance();
             builder.RegisterType<MainMenu>().AsSelf().WithParameter("mainMenuItems", MainMenuItems.mainMenuItems).SingleInstance();
-            builder.RegisterType<ConsoleCommandParser>().As<ICommandParser>();
-            
+            builder.RegisterType<ConsoleCommandParser>().As<ICommandParser>().SingleInstance();
+            builder.RegisterType<PrintReports>().As<IPrintReports>().SingleInstance();            builder.RegisterType<ConsoleWriter>().As<IWriter>().SingleInstance();
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using WIMSystem.Commands.Contracts;
+using WIMSystem.Commands.Utils;
 using WIMSystem.Core.Factories.Contracts;
 using WIMSystem.Utils;
 
@@ -19,11 +20,20 @@ namespace WIMSystem.Core.Factories
 
         public IEngineCommand GetCommand(string commandName)
         {
-            if (Validators.IsNullorEmptyValue(commandName))
+            
+                if (Validators.IsNullorEmptyValue(commandName))
+                {
+                    throw new ArgumentException(); //TODO
+                }
+            try
             {
-                throw new ArgumentException(); //TODO
+                return containerResolver.GetService(commandName);
             }
-           return containerResolver.GetService(commandName);
+            catch (Exception)
+            {
+                throw new  ArgumentException(string.Format(CommandsConsts.InvalidCommand, commandName));
+            }
+            
         }
     }
 }

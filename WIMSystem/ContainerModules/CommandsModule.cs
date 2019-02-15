@@ -4,6 +4,7 @@ using WIMSystem.Commands.ChangeCommands;
 using WIMSystem.Commands.Contracts;
 using WIMSystem.Commands.CreateCommands;
 using WIMSystem.Commands.ListCommands;
+using WIMSystem.Commands.Utils;
 using WIMSystem.Core.Factories;
 using WIMSystem.Core.Factories.Contracts;
 
@@ -14,6 +15,7 @@ namespace WIMSystem.ContainerModules
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<CommandsFactory>().As<ICommandsFactory>();
+            builder.RegisterType<Getters>().As<IGetters>();
 
             builder.RegisterType<AddBoardToTeamCommand>().Named<IEngineCommand>("AddBoardToTeam");
             builder.RegisterType<AddPersonToTeamCommand>().Named<IEngineCommand>("AddPersonToTeam");
