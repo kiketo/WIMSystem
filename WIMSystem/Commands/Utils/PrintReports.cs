@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using WIMSystem.Commands.Contracts;
 using WIMSystem.Core.Contracts;
 
 namespace WIMSystem.Commands.Utils
 {
-    class PrintReports
+    internal class PrintReports : IPrintReports
     {
-        readonly IWriter writer;
+        private readonly IWriter writer;
 
         public PrintReports(IWriter writer)
         {
             this.writer = writer;
         }
 
-        private void Print(IList<string> reports)
+        public void Print(IList<string> reports)
         {
             var output = new StringBuilder();
 
@@ -24,7 +25,7 @@ namespace WIMSystem.Commands.Utils
             }
 
             //Console.Write(output.ToString());
-            writer.Write(output.ToString());
+            this.writer.Write(output.ToString());
         }
     }
 }
