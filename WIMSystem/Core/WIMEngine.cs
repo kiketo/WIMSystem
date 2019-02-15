@@ -184,27 +184,27 @@ namespace WIMSystem.Core
                     {
                         return this.ShowAllTeams();
                     }
-                case "ShowTeamActivity":
-                    {
-                        var team = this.GetTeam(command.Parameters[0]);
-                        return this.ShowTeamActivity(team);
-                    }
-                case "ShowAllTeamMembers":
-                    {
-                        var team = this.GetTeam(command.Parameters[0]);
-                        return this.ShowAllTeamMembers(team);
-                    }
-                case "ShowAllTeamBoards":
-                    {
-                        var team = this.GetTeam(command.Parameters[0]);
-                        return this.ShowAllTeamBoards(team);
-                    }
-                case "ShowBoardActivity":
-                    {
-                        var teamName = command.Parameters[0];
-                        var board = this.GetBoard(teamName, command.Parameters[1]);
-                        return this.ShowBoardActivity(board);
-                    }
+                //case "ShowTeamActivity":
+                //    {
+                //        var team = this.GetTeam(command.Parameters[0]);
+                //        return this.ShowTeamActivity(team);
+                //    }
+                //case "ShowAllTeamMembers":
+                //    {
+                //        var team = this.GetTeam(command.Parameters[0]);
+                //        return this.ShowAllTeamMembers(team);
+                //    }
+               // case "ShowAllTeamBoards":
+               //     {
+               //         var team = this.GetTeam(command.Parameters[0]);
+               //         return this.ShowAllTeamBoards(team);
+               //     }
+                //case "ShowBoardActivity":
+                //    {
+                //        var teamName = command.Parameters[0];
+                //        var board = this.GetBoard(teamName, command.Parameters[1]);
+                //        return this.ShowBoardActivity(board);
+                //    }
                 //case "ChangePriority":
                 //    {
                 //        var teamName = command.Parameters[0];
@@ -497,49 +497,49 @@ namespace WIMSystem.Core
         //    return returnMessage;
         //} 
 
-        private string ShowBoardActivity(IBoard board)
-        {
-            if (Validators.IsNullValue(board))
-            {
-                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
-                    nameof(board)
-                    ));
-            }
-            return historyItemsList.ShowBoardActivity(board);
-        }
+        //private string ShowBoardActivity(IBoard board)
+        //{
+        //    if (Validators.IsNullValue(board))
+        //    {
+        //        throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+        //            nameof(board)
+        //            ));
+        //    }
+        //    return historyItemsList.ShowBoardActivity(board);
+        //}
 
-        private string ShowAllTeamBoards(ITeam team)
-        {
-            if (Validators.IsNullValue(team))
-            {
-                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
-                    nameof(team)
-                    ));
-            }
-            return team.ShowAllTeamBoards();
-        }
+        //private string ShowAllTeamBoards(ITeam team)
+        //{
+        //    if (Validators.IsNullValue(team))
+        //    {
+        //        throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+        //            nameof(team)
+        //            ));
+        //    }
+        //    return team.ShowAllTeamBoards();
+        //}
 
-        private string ShowAllTeamMembers(ITeam team)
-        {
-            if (Validators.IsNullValue(team))
-            {
-                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
-                    nameof(team)
-                    ));
-            }
-            return team.ShowAllTeamMembers();
-        }
+        //private string ShowAllTeamMembers(ITeam team)
+        //{
+        //    if (Validators.IsNullValue(team))
+        //    {
+        //        throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+        //            nameof(team)
+        //            ));
+        //    }
+        //    return team.ShowAllTeamMembers();
+        //}
 
-        private string ShowTeamActivity(ITeam team)
-        {
-            if (Validators.IsNullValue(team))
-            {
-                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
-                    nameof(team)
-                    ));
-            }
-            return historyItemsList.ShowTeamActivity(team); 
-        }
+        //private string ShowTeamActivity(ITeam team)
+        //{
+        //    if (Validators.IsNullValue(team))
+        //    {
+        //        throw new ArgumentException(string.Format(Consts.NULL_OBJECT,
+        //            nameof(team)
+        //            ));
+        //    }
+        //    return historyItemsList.ShowTeamActivity(team); 
+        //}
 
         private string ShowAllTeams()
         {

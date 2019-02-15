@@ -11,9 +11,10 @@ namespace WIMSystem.Commands.ListCommands
         private readonly IGetters getter;
         private readonly IHistoryItemsCollection historyItemsCollection;
 
-        public ShowPersonActivityCommand(IGetters getter)
+        public ShowPersonActivityCommand(IGetters getter, IHistoryItemsCollection historyItemsCollection)
         {
             this.getter = getter;
+            this.historyItemsCollection = historyItemsCollection;
         }
 
         public string ReadSingleCommand(IList<string> parameters)

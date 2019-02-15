@@ -17,9 +17,18 @@ namespace WIMSystem.Commands.CreateCommands
 
         public CreatePersonCommand(IHistoryEventWriter historyEventWriter, IPersonsCollection personList, IComponentsFactory componentsFactory)
         {
-            this.historyEventWriter = historyEventWriter ?? throw new ArgumentNullException(nameof(historyEventWriter));
-            this.personList = personList ?? throw new ArgumentNullException(nameof(personList));
-            this.componentsFactory = componentsFactory ?? throw new ArgumentNullException(nameof(componentsFactory));
+            this.historyEventWriter = historyEventWriter ?? throw new ArgumentNullException(
+                                                                                string.Format(
+                                                                                Consts.NULL_OBJECT,
+                                                                                nameof(historyEventWriter)));
+            this.personList = personList ?? throw new ArgumentNullException(
+                                                                string.Format(
+                                                                Consts.NULL_OBJECT,
+                                                                nameof(personList)));
+            this.componentsFactory = componentsFactory ?? throw new ArgumentNullException(
+                                                                string.Format(
+                                                                Consts.NULL_OBJECT,
+                                                                nameof(componentsFactory));
         }
 
         public string ReadSingleCommand(IList<string> parameters)
