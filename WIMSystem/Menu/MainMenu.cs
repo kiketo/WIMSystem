@@ -146,7 +146,7 @@ namespace WIMSystem.Menu
                 //this.commandParser.SaveCommand(this.mainMenuItems[indexOfItem].CommandText); //TODO
             }
 
-            this.engine.ExecuteCommands(new List<ICommand>() { command });
+            this.engine.ExecuteCommands(command);
 
             Console.WriteLine();
             Console.Write("Press any key for main menu...");

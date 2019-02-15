@@ -6,6 +6,6 @@ namespace WIMSystem.Core.Contracts
     public interface IWIMEngine
     {
         void ExecuteCommands(ICommandParser commandParser);
-        void ExecuteCommands(IList<ICommand> commands);
+        void ExecuteCommands(ICommand command);
     }
 }
