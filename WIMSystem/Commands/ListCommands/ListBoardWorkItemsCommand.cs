@@ -6,11 +6,11 @@ using WIMSystem.Models.Contracts;
 
 namespace WIMSystem.Commands.ListCommands
 {
-    public class ListBoardWorkItemsCommands : IEngineCommand
+    public class ListBoardWorkItemsCommand : IEngineCommand
     {
         private readonly IGetters getter;
 
-        public ListBoardWorkItemsCommands(IGetters getter)
+        public ListBoardWorkItemsCommand(IGetters getter)
         {
             this.getter = getter;
         }

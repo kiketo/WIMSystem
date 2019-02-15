@@ -9,6 +9,7 @@ using WIMSystem.Models.Enums;
 using Utils;
 using WIMSystem.Models;
 using WIMSystem.Commands.Utils;
+using WIMSystem.Utils;
 
 namespace WIMSystem.Commands.ChangeCommands
 {
@@ -46,7 +47,7 @@ namespace WIMSystem.Commands.ChangeCommands
 
             workItem.Priority = priority;
 
-            var returnMessage = string.Format(ObjectConsts.WorkItemPriorityChange, workItem.Title, priority);
+            var returnMessage = string.Format(CommandsConsts.WorkItemPriorityChange, workItem.Title, priority);
 
             IPerson member = null;
 

@@ -6,12 +6,12 @@ using WIMSystem.Models.Contracts;
 
 namespace WIMSystem.Commands.ListCommands
 {
-    public class ShowAllTeamBoardsCommand : IEngineCommand
+    public class ShowTeamActivityCommand : IEngineCommand
     {
         private IGetters getters;
         private readonly IHistoryItemsCollection historyItemsCollection;
 
-        public ShowAllTeamBoardsCommand(IGetters getters, IHistoryItemsCollection historyItemsCollection)
+        public ShowTeamActivityCommand(IGetters getters, IHistoryItemsCollection historyItemsCollection)
         {
             this.getters = getters ?? throw new ArgumentNullException(nameof(getters));
             this.historyItemsCollection = historyItemsCollection ?? throw new ArgumentNullException(nameof(historyItemsCollection));
@@ -31,7 +31,8 @@ namespace WIMSystem.Commands.ListCommands
                     nameof(team)
                     ));
             }
-            var returnMessage = team.ShowAllTeamBoards();
+            var returnMessage = historyItemsCollection.ShowTeamActivity(team);
+
             return returnMessage;
         }
     }

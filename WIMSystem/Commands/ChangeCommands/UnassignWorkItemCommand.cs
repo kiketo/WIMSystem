@@ -9,6 +9,7 @@ using WIMSystem.Models.Enums;
 using Utils;
 using WIMSystem.Models;
 using WIMSystem.Commands.Utils;
+using WIMSystem.Utils;
 
 namespace WIMSystem.Commands.ChangeCommands
 {
@@ -43,7 +44,7 @@ namespace WIMSystem.Commands.ChangeCommands
             var member = workItem.Assignee;
             workItem.UnassignMember();
             member.MemberWorkItems.Remove(workItem);
-            var returnMessage = string.Format(ObjectConsts.WorkItemUnAssigned, workItem.Title, member.PersonName);
+            var returnMessage = string.Format(CommandsConsts.WorkItemUnAssigned, workItem.Title, member.PersonName);
 
             this.historyEventWriter.AddHistoryEvent(returnMessage, member, workItem.Board, workItem.Board.Team, workItem);
 

@@ -29,7 +29,7 @@ namespace WIMSystem.Commands.CreateCommands
         {
             var bugTitle = parameters[0];
             var bugDescription = parameters[1];
-            var stepsToReproduce = parameters[2].Trim().Split(ObjectConsts.SPLIT_CHAR).ToList();
+            var stepsToReproduce = parameters[2].Trim().Split(CommandsConsts.SPLIT_CHAR).ToList();
             var bugPriority = StringToEnum<PriorityType>.Convert(parameters[3]);
             var bugSeverity = StringToEnum<BugSeverityType>.Convert(parameters[4]);
             var teamName = parameters[5];
@@ -44,12 +44,12 @@ namespace WIMSystem.Commands.CreateCommands
 
             if (bug == null)
             {
-                throw new ArgumentException(string.Format(ObjectConsts.ObjectExists, nameof(Bug), bug.Title));
+                throw new ArgumentException(string.Format(CommandsConsts.ObjectExists, nameof(Bug), bug.Title));
             }
 
             board.AddWorkItemToBoard(bug);
 
-            string returnMessage = string.Format(ObjectConsts.ObjectCreated, nameof(Bug), bug.Title);
+            string returnMessage = string.Format(CommandsConsts.ObjectCreated, nameof(Bug), bug.Title);
 
             this.historyEventWriter.AddHistoryEvent(returnMessage, bugAssignee, board, board.Team);
 

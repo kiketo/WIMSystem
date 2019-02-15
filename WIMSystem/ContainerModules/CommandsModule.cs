@@ -3,6 +3,7 @@ using WIMSystem.Commands.AddCommands;
 using WIMSystem.Commands.ChangeCommands;
 using WIMSystem.Commands.Contracts;
 using WIMSystem.Commands.CreateCommands;
+using WIMSystem.Commands.ListCommands;
 using WIMSystem.Core.Factories;
 using WIMSystem.Core.Factories.Contracts;
 
@@ -30,6 +31,14 @@ namespace WIMSystem.ContainerModules
             builder.RegisterType<ChangeStatus>().Named<IEngineCommand>("ChangeStatus");
             builder.RegisterType<AssignWorkItemToMemberCommand>().Named<IEngineCommand>("AssignWorkItemToMember");
             builder.RegisterType<UnassignWorkItemCommand>().Named<IEngineCommand>("UnassignWorkItem");
+            builder.RegisterType<ListBoardWorkItemsCommand>().Named<IEngineCommand>("ListBoardWorkItems");
+            builder.RegisterType<ShowAllPeopleCommand>().Named<IEngineCommand>("ShowAllPeople");
+            builder.RegisterType<ShowAllTeamBoardsCommand>().Named<IEngineCommand>("ShowAllTeamBoards");
+            builder.RegisterType<ShowAllTeamMembersCommand>().Named<IEngineCommand>("ShowAllTeamMembers");
+            builder.RegisterType<ShowAllTeamsCommand>().Named<IEngineCommand>("ShowAllTeams");
+            builder.RegisterType<ShowBoardActivityCommand>().Named<IEngineCommand>("ShowBoardActivity");
+            builder.RegisterType<ShowPersonActivityCommand>().Named<IEngineCommand>("ShowPersonActivity");
+            builder.RegisterType<ShowTeamActivityCommand>().Named<IEngineCommand>("ShowTeamActivity");
 
         }
     }

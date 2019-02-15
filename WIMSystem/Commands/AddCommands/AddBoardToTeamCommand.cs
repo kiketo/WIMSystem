@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using Utils;
 using WIMSystem.Commands.Contracts;
 using WIMSystem.Commands.Utils;
 using WIMSystem.Models;
 using WIMSystem.Models.Contracts;
+using WIMSystem.Utils;
 
 namespace WIMSystem.Commands.AddCommands
 {
@@ -32,7 +34,7 @@ namespace WIMSystem.Commands.AddCommands
         private string Execute(ITeam teamToAddTo, IBoard boardForAdding)
         {
             teamToAddTo.AddBoardToTeam(boardForAdding);
-            string output = string.Format(ObjectConsts.ObjectAddedToTeam, nameof(Board), boardForAdding.BoardName, teamToAddTo.TeamName);
+            string output = string.Format(CommandsConsts.ObjectAddedToTeam, nameof(Board), boardForAdding.BoardName, teamToAddTo.TeamName);
             this.historyEventWriter.AddHistoryEvent(output, board: boardForAdding, team: teamToAddTo);
 
             return output;

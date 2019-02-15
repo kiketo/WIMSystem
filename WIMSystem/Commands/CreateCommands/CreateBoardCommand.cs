@@ -29,6 +29,7 @@ namespace WIMSystem.Commands.CreateCommands
         {
             var boardName = parameters[0];
             var teamToAddTo = this.getter.GetTeam(parameters[1]);
+
             return this.Execute(boardName, teamToAddTo);
         }
 
@@ -38,11 +39,11 @@ namespace WIMSystem.Commands.CreateCommands
 
             if (board == null)
             {
-                throw new ArgumentException(string.Format(ObjectConsts.ObjectExists, nameof(Board), board));
+                throw new ArgumentException(string.Format(CommandsConsts.ObjectExists, nameof(Board), board));
             }
 
             teamToAddTo.AddBoardToTeam(board);
-            var returnMessage = string.Format(ObjectConsts.ObjectCreated, nameof(Board), boardName);
+            var returnMessage = string.Format(CommandsConsts.ObjectCreated, nameof(Board), boardName);
             this.historyEventWriter.AddHistoryEvent(returnMessage, board: board, team: teamToAddTo);
 
             return returnMessage;
