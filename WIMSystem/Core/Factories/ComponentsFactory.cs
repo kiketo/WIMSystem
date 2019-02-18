@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using WIMSystem.Core.Contracts;
 using WIMSystem.Core.Factories.Contracts;
 using WIMSystem.Models;
 using WIMSystem.Models.Contracts;
@@ -43,6 +44,11 @@ namespace WIMSystem.Core.Factories
         public IComment CreateComment(string message, IPerson author)
         {
             return new Comment(message, author);
+        }
+
+        public ICommand CreateCommand(string commandName, IList<string> parameters)
+        {
+            return new Command(commandName, parameters);
         }
 
         public IHistoryItem CreateHistoryItem(string description, IPerson member, IBoard board, ITeam team, IWorkItem workItem)

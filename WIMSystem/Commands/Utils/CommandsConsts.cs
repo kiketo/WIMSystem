@@ -6,6 +6,9 @@ namespace WIMSystem.Commands.Utils
 {
     internal class CommandsConsts
     {
+        internal const string TerminationCommand = "Exit";
+        internal const string TerminationAppCommand = "AppExit";
+
         internal const string InvalidCommand = "Invalid command name: {0}!";
         internal const string ObjectExists = "{0} with name {1} already exists!";
         internal const string ObjectCreated = "{0} with name {1} was created!";

@@ -9,22 +9,36 @@ namespace WIMSystem.Commands.Utils
     internal class PrintReports : IPrintReports
     {
         private readonly IWriter writer;
+        private IList<string> reports;
 
         public PrintReports(IWriter writer)
         {
             this.writer = writer;
+            reports = new List<string>();
         }
 
-        public void Print(IList<string> reports)
+        public IList<string> Reports
+        {
+            get
+            {
+                return this.reports;
+            }
+
+            set
+            {
+                this.reports = value;
+            }
+        }
+
+        public void Print()
         {
             var output = new StringBuilder();
 
-            foreach (var report in reports)
+            foreach (var report in this.Reports)
             {
                 output.AppendLine(report);
             }
 
-            //Console.Write(output.ToString());
             this.writer.Write(output.ToString());
         }
     }

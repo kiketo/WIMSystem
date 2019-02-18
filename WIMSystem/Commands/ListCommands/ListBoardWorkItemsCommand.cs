@@ -34,7 +34,7 @@ namespace WIMSystem.Commands.ListCommands
                     case "filterType":
                         {
                             var typeAsString = "WIMSystem.Models." + paramOption[1];
-                            var curAssembly = typeof(WIMEngine).Assembly;
+                            var curAssembly = typeof(Engine).Assembly;
                             filterType = curAssembly.GetType(typeAsString, false, true) ??
                                 throw new ArgumentException("Undefined type {0}", paramOption[1]);
                             break;

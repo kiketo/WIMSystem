@@ -8,6 +8,7 @@ namespace WIMSystem.Menu
     {
         internal static IList<MenuItem> mainMenuItems = new List<MenuItem>()
         {
+            new MenuItem("","Select Commands:",""),
             new MenuItem("CreatePerson","* Create a new person","Enter person name:"),
             new MenuItem("ShowAllPeople","* Show all people", ""),
             new MenuItem("ShowPersonActivity","* Show person's activity", "Enter person name:"),
@@ -33,9 +34,19 @@ namespace WIMSystem.Menu
             new MenuItem("CreateComment","* Add comment to a work item", "Enter work item team name, board name, work item title, comment text, author name"),
             new MenuItem("ListBoardWorkItems","* List board items by filter and sort order",
                 "List board items. Optional filter parameters: filterType:Bug/Story/Feedback, filterStatus:status, filterAssignee:name, sortBy:Title/Priority/Severity/Size/Rating"),
-            new MenuItem("BatchCommands","Enter multiple commands",""),
-            new MenuItem("exit","****Exit****","")
+           // new MenuItem("BatchCommands","Enter multiple commands",""),
+            new MenuItem("AppExit","****Exit****","")
         };
+
+        internal static IList<MenuItem> InputTypeItems = new List<MenuItem>()
+        {
+            new MenuItem("","Select input type:",""),
+            new MenuItem("MenuCommands","* Use main menu",""),
+            new MenuItem("BatchCommands","* Enter multiple commands",""),
+            new MenuItem("Exit","****Exit****","")
+        };
+
+
 
     }
 

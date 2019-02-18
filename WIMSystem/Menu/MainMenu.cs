@@ -10,26 +10,8 @@ namespace WIMSystem.Menu
 {
     public class MainMenu : IMainMenu
     {
-        private readonly IList<MenuItem> mainMenuItems;
-        //private readonly string logo;
-        //private readonly ICommandParser commandParser;
-        private readonly ICommandParser batchParser;
-        private readonly IWIMEngine engine;
-
-        public MainMenu(IWIMEngine engine, ICommandParser batchParser, IList<MenuItem> mainMenuItems)
+        public MainMenu()
         {
-            this.engine = engine;
-            this.batchParser = batchParser;
-            this.mainMenuItems = mainMenuItems ?? throw new ArgumentException("Main menu items can not be null!");
-
-        }
-
-        public void Start()
-        {
-            this.ShowLogo();
-            this.ShowMenu();
-            this.ShowCredits();
-
         }
 
         public void ShowLogo()
@@ -52,20 +34,21 @@ namespace WIMSystem.Menu
             Console.WriteLine("                 Thank you!");
         }
 
-        public void ShowMenu()
+        public string ShowMenu(IList<MenuItem> mainMenuItems)
         {
             int curItem = 0;
             int c = 0;
 
             ConsoleKeyInfo key;
 
-            string[] menuItems = this.mainMenuItems.Select(x => x.MenuText).ToArray();
+            var titleString = mainMenuItems[0].MenuText;
+            string[] menuItems = mainMenuItems.Skip(1).Select(x => x.MenuText).ToArray();
             do
             {
                 Console.Clear();
 
                 Console.WriteLine("Work Item Management (WIM) Console Application");
-                Console.WriteLine("Select command:");
+                Console.WriteLine(titleString);
                 Console.WriteLine();
 
                 for (c = 0; c < menuItems.Length; c++)
@@ -100,59 +83,31 @@ namespace WIMSystem.Menu
 
             if (curItem != menuItems.Length - 1)
             {
-                if (curItem == menuItems.Length - 2)
-                {
-
-                    this.ConsoleBatchCommands();
-                }
-                else
-                {
-
-                    this.ConsoleParameters(curItem);
-                }
-
+                   return  this.ConsoleParameters(curItem+1, mainMenuItems);
             }
-            Console.WriteLine();
-        }
 
-        public void ConsoleBatchCommands()
+            return mainMenuItems[mainMenuItems.Count-1].CommandText;
+        }
+        
+        public string ConsoleParameters(int indexOfItem, IList<MenuItem> mainMenuItems)
         {
             Console.Clear();
-            this.engine.ExecuteCommands(this.batchParser);
-            Console.WriteLine();
-            Console.Write("Press any key for main menu...");
-            Console.ReadKey();
-            this.ShowMenu();
-        }
 
-        public void ConsoleParameters(int indexOfItem)
-        {
-            Console.Clear();
-            ICommand command;
-            if (!string.IsNullOrEmpty(this.mainMenuItems[indexOfItem].ParamsText))
+            if (!string.IsNullOrEmpty(mainMenuItems[indexOfItem].ParamsText))
             {
-                Console.WriteLine(this.mainMenuItems[indexOfItem].ParamsText);
+                Console.WriteLine(mainMenuItems[indexOfItem].ParamsText);
 
                 var parameters = Console.ReadLine();
 
-                command = Command.Parse(string.Concat(
-                    this.mainMenuItems[indexOfItem].CommandText,
+                return string.Concat(
+                    mainMenuItems[indexOfItem].CommandText,
                     "\" ",
-                    parameters));
+                    parameters);
             }
             else
             {
-                command = Command.Parse(this.mainMenuItems[indexOfItem].CommandText);
-                //this.commandParser.SaveCommand(this.mainMenuItems[indexOfItem].CommandText); //TODO
+                return mainMenuItems[indexOfItem].CommandText;
             }
-
-            this.engine.ExecuteCommands(command);
-
-            Console.WriteLine();
-            Console.Write("Press any key for main menu...");
-            Console.ReadKey();
-            this.ShowMenu();
-
         }
 
     }

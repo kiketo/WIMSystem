@@ -1,4 +1,6 @@
-﻿namespace WIMSystem.Menu.Contracts
+﻿using System.Collections.Generic;
+
+namespace WIMSystem.Menu.Contracts
 {
     public interface IMainMenu
     {
@@ -6,12 +8,12 @@
 
         void ShowLogo();
 
-        void ShowMenu();
+        string ShowMenu(IList<MenuItem> mainMenuItems);
 
-        void Start();
+        //void Start();
 
-        void ConsoleBatchCommands();
+        //void ConsoleBatchCommands();
 
-        void ConsoleParameters(int indexOfItem);
+        string ConsoleParameters(int indexOfItem, IList<MenuItem> mainMenuItems);
     }
 }

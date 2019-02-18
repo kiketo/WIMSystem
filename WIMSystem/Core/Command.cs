@@ -1,20 +1,19 @@
-﻿    using System;
-    using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
-    using WIMSystem.Core.Contracts;
+using WIMSystem.Core.Contracts;
 
 namespace WIMSystem.Core
 {
     internal class Command : ICommand
     {
-        private const string SplitCommandSymbol = "\" \"";
-
         private string name;
-        private IList<string> parameters;
+        private ICollection<string> parameters;
 
-        private Command(string input)
+        public Command(string commandName, ICollection<string> parameters)
         {
-            this.TranslateInput(input);
+            this.name = commandName;
+            this.parameters = parameters;
         }
 
         public string Name
@@ -28,7 +27,7 @@ namespace WIMSystem.Core
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentNullException("Name cannot be null or empty.");
+                    throw new ArgumentNullException("Command Name cannot be null or empty.");
                 }
 
                 this.name = value;
@@ -39,39 +38,10 @@ namespace WIMSystem.Core
         {
             get
             {
-                return this.parameters;
-            }
-
-            private set
-            {
-                if (value == null || value.Count == 0)
-                {
-                    throw new ArgumentNullException("List of strings cannot be null or empty.");
-                }
-
-                this.parameters = value;
+                return new List<string>(this.parameters);
             }
         }
 
-        public static Command Parse(string input)
-        {
-            return new Command(input);
-        }
-
-        private void TranslateInput(string input)
-        {
-            var indexOfFirstSeparator = input.IndexOf(SplitCommandSymbol);
-
-            if (indexOfFirstSeparator < 0)
-            {
-                this.Name = input.Trim('"');
-                return;
-            }
-
-            this.Name = input.Substring(0, indexOfFirstSeparator).Trim('"');
-            this.Parameters = input.Substring(indexOfFirstSeparator + 2)
-                .Trim('"')
-                .Split(new[] { SplitCommandSymbol }, StringSplitOptions.RemoveEmptyEntries);
-        }
+        
     }
 }

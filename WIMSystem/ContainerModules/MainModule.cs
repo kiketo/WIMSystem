@@ -10,6 +10,7 @@ using WIMSystem.Core.Factories;
 using WIMSystem.Core.Factories.Contracts;
 using WIMSystem.Core.Utils;
 using WIMSystem.Menu;
+using WIMSystem.Menu.Contracts;
 using WIMSystem.Models;
 using WIMSystem.Models.Contracts;
 
@@ -27,10 +28,14 @@ namespace WIMSystem.ContainerModules
             builder.RegisterType<PersonsCollection>().As<IPersonsCollection>().SingleInstance();
             builder.RegisterType<HistoryItemsCollection>().As<IHistoryItemsCollection>().SingleInstance();
             builder.RegisterType<HistoryEventWriter>().As<IHistoryEventWriter>().SingleInstance();
-            builder.RegisterType<WIMEngine>().As<IWIMEngine>().SingleInstance();
-            builder.RegisterType<MainMenu>().AsSelf().WithParameter("mainMenuItems", MainMenuItems.mainMenuItems).SingleInstance();
-            builder.RegisterType<ConsoleCommandParser>().As<ICommandParser>().SingleInstance();
-            builder.RegisterType<PrintReports>().As<IPrintReports>().SingleInstance();            builder.RegisterType<ConsoleWriter>().As<IWriter>().SingleInstance();
+           // builder.RegisterType<WIMEngine>().As<IWIMEngine>().SingleInstance();
+            builder.RegisterType<MainMenu>().As<IMainMenu>().SingleInstance();
+           // builder.RegisterType<ConsoleCommandParser>().As<ICommandParser>().SingleInstance();
+            builder.RegisterType<PrintReports>().As<IPrintReports>().SingleInstance();
+            builder.RegisterType<ConsoleWriter>().As<IWriter>().SingleInstance();
+            builder.RegisterType<CommandParser>().As<ICommandParser>().SingleInstance();
+            builder.RegisterType<MenuReader>().As<IReader>().SingleInstance();
+            builder.RegisterType<Engine>().AsSelf();
         }
     }
 }

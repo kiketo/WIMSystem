@@ -4,6 +4,8 @@ namespace WIMSystem.Commands.Contracts
 {
     interface IPrintReports
     {
-        void Print(IList<string> reports);
+        void Print();
+
+        IList<string> Reports { get; set; }
     }
 }

@@ -41,8 +41,10 @@ namespace WIMSystem
 
             using (var scope = container.BeginLifetimeScope())
             {
-                var menu = scope.Resolve<MainMenu>();
-                menu.Start();
+                var engine = scope.Resolve<Engine>();
+                
+
+                engine.Start();
             }
         }
     }

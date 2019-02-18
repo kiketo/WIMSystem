@@ -1,13 +1,9 @@
-﻿using System.Collections.Generic;
-using WIMSystem.Core.Contracts;
+﻿using WIMSystem.Core.Contracts;
 
-namespace WIMSystem.Core.Contracts
+namespace WIMSystem.Core
 {
     public interface ICommandParser
     {
-        IList<ICommand> ReadCommands();
-
-        //void SaveCommand(string commandString);
-
+        ICommand Parse(string input);
     }
 }

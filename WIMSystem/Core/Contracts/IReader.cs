@@ -6,6 +6,6 @@ namespace WIMSystem.Core.Contracts
 {
     internal interface IReader
     {
-        string Read();
+        ICollection<string> Read();
     }
 }

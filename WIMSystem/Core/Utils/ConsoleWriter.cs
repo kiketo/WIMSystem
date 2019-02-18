@@ -8,6 +8,7 @@ namespace WIMSystem.Core.Utils
         public void Write(string message)
         {
             Console.WriteLine(message);
+            Console.ReadKey();
         }
     }
 }
