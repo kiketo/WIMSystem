@@ -11,6 +11,8 @@ namespace WIMSystem.Commands.Utils
         internal const string ConsoleExitCommand = "ConsoleExit";
 
         internal const string InvalidCommand = "Invalid command name: {0}!";
+        internal const string EmptyCommand = "Command name: {0} can not be null or empty!";
+
         internal const string ObjectExists = "{0} with name {1} already exists!";
         internal const string ObjectCreated = "{0} with name {1} was created!";
         internal const string ObjectDoesNotExist = "{0} {1} does not exist!";
