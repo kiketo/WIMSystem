@@ -31,57 +31,20 @@ namespace WIMSystem.Core
             this.parser = parser1;
         }
 
-        public void Start()
+        public void Start(bool showLogo)
         {
-            this.mainMenu.ShowLogo();
-            //var inputType = StringToEnum<InputType>.Convert(this.mainMenu.ShowMenu(MainMenuItems.InputTypeItems));
-            //switch (inputType)
-            //{
-            //    case InputType.MenuCommands:
-            //        this.mainMenu.Run(menuReader);
-            //        break;
-            //    case InputType.BatchCommands:
-            //        this.mainMenu.Run(consoleReader);
-            //        break;
-            //    default:
-            //        break;
-            //}
-            this.Run(this.reader);
+            if (showLogo)
+            {
+                this.mainMenu.ShowLogo();
+            }
+
+            var myReader = this.mainMenu.InputTypeChooser();
+            if (myReader != null)
+            {
+                this.Run(myReader);
+            }
             this.mainMenu.ShowCredits();
         }
-
-        //public virtual void Run()
-        //{
-        //    string input = Console.ReadLine();
-        //    while (input != "end")
-        //    {
-        //        try
-        //        {
-        //            var lineParameters = input.Trim().Split(
-        //                new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-        //            var commandName = lineParameters[0];
-        //            var parameters = lineParameters.Skip(1);
-
-        //            var command = this.parser.ParseCommand(commandName);
-        //            var output = command.Execute(parameters.ToList());
-
-        //            this.outputWriter.WriteLine(output);
-        //            this.outputWriter.WriteLine(Delimiter);
-
-        //            input = Console.ReadLine();
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            while (ex.InnerException != null)
-        //            {
-        //                ex = ex.InnerException;
-        //            }
-
-        //            this.outputWriter.WriteLine($"ERROR: {ex.Message}");
-        //        }
-        //    }
-        //}
 
         public void Run(IReader reader)
         {
@@ -103,8 +66,14 @@ namespace WIMSystem.Core
                         if (inputString == CommandsConsts.TerminationCommand)
                         {
                             this.printReports.Print();
-                            this.printReports.Reports.Clear();
                             break;
+                        }
+
+                        if (inputString == CommandsConsts.ConsoleExitCommand)
+                        {
+                            this.printReports.Print();
+                            this.Start(false);
+                            return;
                         }
 
                         var command = this.parser.Parse(inputString);
@@ -120,6 +89,7 @@ namespace WIMSystem.Core
                 catch (Exception ex)
                 {
                     this.printReports.Reports.Add(ex.Message);
+                    Start(false);
                 }
             }
         }

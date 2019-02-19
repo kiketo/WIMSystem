@@ -32,14 +32,18 @@ namespace WIMSystem.Commands.Utils
 
         public void Print()
         {
-            var output = new StringBuilder();
-
-            foreach (var report in this.Reports)
+            if (this.Reports.Count != 0)
             {
-                output.AppendLine(report);
-            }
+                var output = new StringBuilder();
 
-            this.writer.Write(output.ToString());
+                foreach (var report in this.Reports)
+                {
+                    output.AppendLine(report);
+                }
+
+                this.writer.Write(output.ToString());
+                this.Reports.Clear();
+            }
         }
     }
 }

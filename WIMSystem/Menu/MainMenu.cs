@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using WIMSystem.Core;
 using WIMSystem.Core.Contracts;
+using WIMSystem.Core.Utils;
 using WIMSystem.Menu.Contracts;
 
 namespace WIMSystem.Menu
@@ -110,5 +111,17 @@ namespace WIMSystem.Menu
             }
         }
 
+        public IReader InputTypeChooser()
+        {
+            var result = ShowMenu(MainMenuItems.InputTypeItems);
+            switch (result)
+            {
+                case "MenuCommands": return new MenuReader(this);
+                case "BatchCommands": return new ConsoleReader();
+                case "AppExit": return null;
+                default:
+                    throw new ArgumentException("No such type");
+            }
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WIMSystem.Core.Contracts
 {
-    internal interface IReader
+    public interface IReader
     {
         ICollection<string> Read();
     }

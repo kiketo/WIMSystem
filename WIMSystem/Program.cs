@@ -44,7 +44,7 @@ namespace WIMSystem
                 var engine = scope.Resolve<Engine>();
                 
 
-                engine.Start();
+                engine.Start(true);
             }
         }
     }

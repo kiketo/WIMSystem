@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using WIMSystem.Core.Contracts;
 
 namespace WIMSystem.Menu.Contracts
 {
@@ -15,5 +16,7 @@ namespace WIMSystem.Menu.Contracts
         //void ConsoleBatchCommands();
 
         string ConsoleParameters(int indexOfItem, IList<MenuItem> mainMenuItems);
+
+        IReader InputTypeChooser();
     }
 }
