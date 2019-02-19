@@ -17,8 +17,6 @@ namespace WIMSystem.Commands.ListCommands
                 nameof(personList)));
         }
 
-
-
         //TODO Кико: OK ли е, при положение, че нямаме параметри за тази команда
         public string ReadSingleCommand(IList<string> parameters)
         {
