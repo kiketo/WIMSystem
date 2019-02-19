@@ -89,6 +89,5 @@ namespace WIMSystem.Core
                 }
             }
         }
-
     }
 }

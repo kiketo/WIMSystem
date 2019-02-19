@@ -5,7 +5,8 @@ using WIMSystem.Models;
 using WIMSystem.Models.Contracts;
 
 namespace WIMSystem.Commands.ListCommands
-{//TODO: Да има текст : ALL TEAM: ....
+
+{ 
     public class ShowAllTeamsCommand : IEngineCommand
     {
         private readonly IWIMTeams wIMTeams;

@@ -88,6 +88,7 @@ namespace WIMSystem.Models
             }
             else
             {
+                str.AppendLine("All Teams:");
                 foreach (var item in this.TeamsList)
                 {
                     str.AppendLine(" - "+item.Value.TeamName);
