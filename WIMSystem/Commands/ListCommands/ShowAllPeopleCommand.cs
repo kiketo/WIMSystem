@@ -8,7 +8,7 @@ namespace WIMSystem.Commands.ListCommands
 {
     public class ShowAllPeopleCommand : IEngineCommand
     {
-        private readonly IPersonsCollection personList;
+        protected readonly IPersonsCollection personList;
 
         public ShowAllPeopleCommand(IPersonsCollection personList)
         {
