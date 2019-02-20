@@ -9,16 +9,19 @@ using WIMSystem.Models.Contracts;
 namespace WIMSystem.Tests.CommandsTest.ListCommandsTest.ShowAllPeopleCommandTest
 {
     [TestClass]
-    public class ShowAllPeopleCommandExecute_Should
+    public class Execute_Should
     {
         [TestMethod]
         public void Call_ShowAllPeople_Method_To_The_Persons_Collection()
         {
             var fakeList = new Mock<IPersonsCollection>();
             var sut = new ShowAllPeopleCommand(fakeList.Object);
-            fakeList.Setup(x => x.ShowAllPeople()); 
-            //TODO:
-            
+            fakeList.Setup(x => x.ShowAllPeople());
+            var fakeParameters = new List<string>();
+
+            sut.Execute(fakeParameters);
+
+            fakeList.Verify(x => x.ShowAllPeople(), Times.Once);
         }
     }
 }

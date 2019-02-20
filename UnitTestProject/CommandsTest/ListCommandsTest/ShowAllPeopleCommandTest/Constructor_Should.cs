@@ -11,7 +11,7 @@ using WIMSystem.Tests.FakeClasses;
 namespace UnitTestProject.CommandsTest.ListCommandsTest.ShowAllPeopleCommandTest
 {
     [TestClass]
-    public class ShowAllPeopleCommandConstructor_Should
+    public class Constructor_Should
     {
         [TestMethod]
         public void Throw_When_A_Passed_Value_Is_Null()
