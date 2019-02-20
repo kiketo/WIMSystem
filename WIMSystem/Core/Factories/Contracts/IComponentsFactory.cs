@@ -22,7 +22,7 @@ namespace WIMSystem.Core.Factories.Contracts
 
         IStory CreateStory(string title, string description, PriorityType priority, StorySizeType storySize, IBoard board, IPerson assignee = null);
 
-        ITeam CreateTeam(string teamName, IWIMTeams teamsList);
+        ITeam CreateTeam(string teamName);
 
         ICommand CreateCommand(string commandName, IList<string> parameters);
     }

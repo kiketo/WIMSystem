@@ -16,7 +16,7 @@ namespace WIMSystem.Commands.CreateCommands
         private readonly IComponentsFactory componentsFactory;
         private readonly IGetters getter;
 
-        public CreateFeedbackCommand(IHistoryEventWriter historyEventWriter, IPersonsCollection personList, IComponentsFactory componentsFactory, IGetters getter)
+        public CreateFeedbackCommand(IHistoryEventWriter historyEventWriter, IComponentsFactory componentsFactory, IGetters getter)
         {
             this.historyEventWriter = historyEventWriter ?? throw new ArgumentNullException(nameof(historyEventWriter));
             this.componentsFactory = componentsFactory ?? throw new ArgumentNullException(nameof(componentsFactory));
@@ -35,12 +35,12 @@ namespace WIMSystem.Commands.CreateCommands
 
             if (feedback == null)
             {
-                throw new ArgumentException(string.Format(CommandsConsts.ObjectExists, nameof(Feedback), feedback.Title));
+                throw new ArgumentException(string.Format(CommandsConsts.NULL_OBJECT, nameof(Feedback)));
             }
 
             board.AddWorkItemToBoard(feedback);
 
-            string returnMessage = string.Format(CommandsConsts.ObjectCreated, nameof(Feedback), feedback.Title);
+            string returnMessage = string.Format(CommandsConsts.ObjectCreated, nameof(Feedback), feedbackTitle);
 
             this.historyEventWriter.AddHistoryEvent(returnMessage, board: board, team: board.Team);
 

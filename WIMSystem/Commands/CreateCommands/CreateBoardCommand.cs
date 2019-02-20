@@ -32,7 +32,7 @@ namespace WIMSystem.Commands.CreateCommands
 
             if (board == null)
             {
-                throw new ArgumentException(string.Format(CommandsConsts.NULL_OBJECT, nameof(Board), board));
+                throw new ArgumentException(string.Format(CommandsConsts.NULL_OBJECT, nameof(Board)));
             }
                        
             teamToAddTo.AddBoardToTeam(board);

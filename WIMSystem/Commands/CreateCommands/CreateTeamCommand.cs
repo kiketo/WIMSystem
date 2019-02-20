@@ -27,12 +27,12 @@ namespace WIMSystem.Commands.CreateCommands
         {
             var teamName = parameters[0];
 
-            if (this.wimTeams.Contains(teamName))
+            var team = this.componentsFactory.CreateTeam(teamName);
+            if (team == null)
             {
-                return string.Format(CommandsConsts.ObjectExists, nameof(Team), teamName);
+                throw new ArgumentException(string.Format(CommandsConsts.NULL_OBJECT, nameof(Team)));
             }
 
-            var team = this.componentsFactory.CreateTeam(teamName, this.wimTeams);
             this.wimTeams.AddTeam(team);
             var returnMessage = string.Format(CommandsConsts.ObjectCreated, nameof(Team), teamName);
             this.historyEventWriter.AddHistoryEvent(returnMessage, team: team);
