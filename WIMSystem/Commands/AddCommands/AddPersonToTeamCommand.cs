@@ -22,16 +22,11 @@ namespace WIMSystem.Commands.AddCommands
                                                                                       nameof(historyEventWriter)));
         }
 
-        public string ReadSingleCommand(IList<string> parameters)
+        public string Execute(IList<string> parameters)
         {
             var memberForAdding = this.getter.GetPerson(parameters[0]);
             var teamToAddTo = this.getter.GetTeam(parameters[1]);
 
-            return this.Execute(memberForAdding, teamToAddTo);
-        }
-
-        private string Execute(IPerson memberForAdding, ITeam teamToAddTo)
-        {
             teamToAddTo.AddMemberToTeam(memberForAdding);
 
             var returnMessage = string.Format(CommandsConsts.ObjectAddedToTeam, nameof(Person), memberForAdding.PersonName, teamToAddTo.TeamName);

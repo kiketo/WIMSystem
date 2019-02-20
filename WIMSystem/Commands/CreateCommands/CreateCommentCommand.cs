@@ -22,25 +22,20 @@ namespace WIMSystem.Commands.CreateCommands
             this.getter = getter ?? throw new ArgumentNullException(nameof(getter));
         }
 
-        public string ReadSingleCommand(IList<string> parameters)
+        public string Execute(IList<string> parameters)
         {
             var teamName = this.getter.GetTeam(parameters[0]);
             var boardName = this.getter.GetBoard(teamName.TeamName, parameters[1]);
             var workItem = this.getter.GetWorkItem(boardName, parameters[2]);
-            var comment = parameters[3];
+            var message = parameters[3];
             var author = this.getter.GetMember(teamName, parameters[4]);
 
-            return this.Execute(workItem, comment, author);
-        }
-
-        private string Execute(IWorkItem workitem, string message, IPerson author)
-        {
             var comment = this.componentsFactory.CreateComment(message, author);
-            workitem.AddComment(comment);
+            workItem.AddComment(comment);
 
-            string returnMessage = string.Format(CommandsConsts.CommentAdded, comment.Message, comment.Author.PersonName, workitem.Title);
+            string returnMessage = string.Format(CommandsConsts.CommentAdded, comment.Message, comment.Author.PersonName, workItem.Title);
 
-            this.historyEventWriter.AddHistoryEvent(returnMessage, author, workitem.Board, workitem.Board.Team, workitem);
+            this.historyEventWriter.AddHistoryEvent(returnMessage, author, workItem.Board, workItem.Board.Team, workItem);
 
             return returnMessage;
         }

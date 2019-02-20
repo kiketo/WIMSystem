@@ -25,7 +25,7 @@ namespace WIMSystem.Commands.CreateCommands
             this.getter = getter ?? throw new ArgumentNullException(nameof(getter));
         }
 
-        public string ReadSingleCommand(IList<string> parameters)
+        public string Execute(IList<string> parameters)
         {
             var bugTitle = parameters[0];
             var bugDescription = parameters[1];
@@ -34,12 +34,8 @@ namespace WIMSystem.Commands.CreateCommands
             var bugSeverity = StringToEnum<BugSeverityType>.Convert(parameters[4]);
             var teamName = parameters[5];
             var board = this.getter.GetBoard(teamName, parameters[6]);
+            IPerson bugAssignee = null;
 
-            return this.Execute(bugTitle, bugDescription, stepsToReproduce, bugPriority, bugSeverity, board);
-        }
-
-        private string Execute(string bugTitle, string bugDescription, List<string> stepsToReproduce, PriorityType bugPriority, BugSeverityType bugSeverity, IBoard board, IPerson bugAssignee = null)
-        {
             var bug = this.componentsFactory.CreateBug(bugTitle, bugDescription, stepsToReproduce, bugPriority, bugSeverity, board, bugAssignee);
 
             if (bug == null)

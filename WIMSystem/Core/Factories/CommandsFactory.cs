@@ -11,7 +11,7 @@ namespace WIMSystem.Core.Factories
 {
     public class CommandsFactory : ICommandsFactory
     {
-        readonly IContainerResolver<IEngineCommand> containerResolver;
+        private readonly IContainerResolver<IEngineCommand> containerResolver;
 
         public CommandsFactory(IContainerResolver<IEngineCommand> containerResolver)
         {
@@ -20,20 +20,21 @@ namespace WIMSystem.Core.Factories
 
         public IEngineCommand GetCommand(string commandName)
         {
-            
-                if (Validators.IsNullorEmptyValue(commandName))
-                {
-                    throw new ArgumentException(); //TODO
-                }
+
+            if (Validators.IsNullorEmptyValue(commandName))
+            {
+                throw new ArgumentException(string.Format(CommandsConsts.EmptyCommand, commandName));
+            }
+
             try
             {
-                return containerResolver.GetService(commandName);
+                return this.containerResolver.GetService(commandName);
             }
             catch (Exception)
             {
-                throw new  ArgumentException(string.Format(CommandsConsts.InvalidCommand, commandName));
+                throw new ArgumentException(string.Format(CommandsConsts.InvalidCommand, commandName));
             }
-            
+
         }
     }
 }

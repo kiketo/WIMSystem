@@ -5,7 +5,8 @@ using WIMSystem.Models;
 using WIMSystem.Models.Contracts;
 
 namespace WIMSystem.Commands.ListCommands
-{//TODO: Да има текст : ALL TEAM: ....
+
+{ 
     public class ShowAllTeamsCommand : IEngineCommand
     {
         private readonly IWIMTeams wIMTeams;
@@ -15,13 +16,8 @@ namespace WIMSystem.Commands.ListCommands
             this.wIMTeams = wIMTeams ?? throw new ArgumentNullException(nameof(wIMTeams));
         }
 
-        public string ReadSingleCommand(IList<string> parameters)
+        public string Execute(IList<string> parameters)
         {            
-            return this.Execute();
-        }
-
-        private string Execute()
-        {
             var returnMessage = this.wIMTeams.ShowAllTeams();
             return returnMessage;
         }

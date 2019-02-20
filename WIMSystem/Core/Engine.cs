@@ -78,14 +78,10 @@ namespace WIMSystem.Core
 
                         var command = this.parser.Parse(inputString);
                         var engineCommand = this.commandsFactory.GetCommand(command.Name);
-                        var report = engineCommand.ReadSingleCommand(command.Parameters);
+                        var report = engineCommand.Execute(command.Parameters);
                         this.printReports.Reports.Add(report);
                     }
                 }
-                //catch (ArgumentOutOfRangeException)
-                //{
-                //    this.printReports.Reports.Add("Invalid..."); //TODO
-                //}
                 catch (Exception ex)
                 {
                     this.printReports.Reports.Add(ex.Message);
@@ -93,6 +89,5 @@ namespace WIMSystem.Core
                 }
             }
         }
-
     }
 }
