@@ -15,7 +15,7 @@ namespace WIMSystem.Commands.ListCommands
             this.getter = getter;
         }
 
-        public string ReadSingleCommand(IList<string> parameters)
+        public string Execute(IList<string> parameters)
         {
 
             var teamName = parameters[0];
@@ -56,11 +56,7 @@ namespace WIMSystem.Commands.ListCommands
                         }
                 }
             }
-            return this.Execute(board, filterType, filterStatus, filterAssignee, sortBy);
-        }
 
-        private string Execute(IBoard board, Type filterType, string filterStatus, IPerson filterAssignee, string sortBy)
-        {
             string returnMessage = board.ListWorkItems(filterType, filterStatus, filterAssignee, sortBy);
 
             return returnMessage;

@@ -17,13 +17,8 @@ namespace WIMSystem.Commands.ListCommands
                 nameof(personList)));
         }
 
-        public string ReadSingleCommand(IList<string> parameters)
-        {
-            return Execute();
-        }
-
-        private string Execute()
-        {
+        public string Execute(IList<string> parameters)
+        { 
             string returnMessage;
             returnMessage = personList.ShowAllPeople();
 

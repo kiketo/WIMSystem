@@ -25,9 +25,9 @@ namespace WIMSystem.Commands.AddCommands
                                                                 nameof(getters)));
         }
 
-        public string ReadSingleCommand(IList<string> parameters)
+        public string Execute(IList<string> parameters)
         {
-            return Execute(null,null);
+            return Execute(null,null);//TODO
         }
 
         private string Execute(ITeam teamToAddTo, IBoard boardForAdding)

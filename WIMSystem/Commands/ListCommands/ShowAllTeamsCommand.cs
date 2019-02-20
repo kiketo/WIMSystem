@@ -16,13 +16,8 @@ namespace WIMSystem.Commands.ListCommands
             this.wIMTeams = wIMTeams ?? throw new ArgumentNullException(nameof(wIMTeams));
         }
 
-        public string ReadSingleCommand(IList<string> parameters)
+        public string Execute(IList<string> parameters)
         {            
-            return this.Execute();
-        }
-
-        private string Execute()
-        {
             var returnMessage = this.wIMTeams.ShowAllTeams();
             return returnMessage;
         }
