@@ -82,10 +82,10 @@ namespace WIMSystem.Core
                         this.printReports.Reports.Add(report);
                     }
                 }
-                catch (ArgumentOutOfRangeException)
-                {
-                    this.printReports.Reports.Add("Invalid..."); //TODO
-                }
+                //catch (ArgumentOutOfRangeException)
+                //{
+                //    this.printReports.Reports.Add("Invalid..."); //TODO
+                //}
                 catch (Exception ex)
                 {
                     this.printReports.Reports.Add(ex.Message);
