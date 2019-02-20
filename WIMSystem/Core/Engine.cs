@@ -78,7 +78,7 @@ namespace WIMSystem.Core
 
                         var command = this.parser.Parse(inputString);
                         var engineCommand = this.commandsFactory.GetCommand(command.Name);
-                        var report = engineCommand.ReadSingleCommand(command.Parameters);
+                        var report = engineCommand.Execute(command.Parameters);
                         this.printReports.Reports.Add(report);
                     }
                 }

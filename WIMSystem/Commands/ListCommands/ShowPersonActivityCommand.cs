@@ -18,7 +18,7 @@ namespace WIMSystem.Commands.ListCommands
             this.historyItemsCollection = historyItemsCollection;
         }
 
-        public string ReadSingleCommand(IList<string> parameters)
+        public string Execute(IList<string> parameters)
         {
             var person = this.getter.GetPerson(parameters[0]);
             return this.Execute(person);

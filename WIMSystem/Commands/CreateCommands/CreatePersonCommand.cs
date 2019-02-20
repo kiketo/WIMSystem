@@ -32,14 +32,10 @@ namespace WIMSystem.Commands.CreateCommands
                                                                 nameof(componentsFactory)));
         }
 
-        public string ReadSingleCommand(IList<string> parameters)
+        public string Execute(IList<string> parameters)
         {
             var personName = parameters[0];
-            return this.Execute(personName);
-        }
 
-        private string Execute(string personName)
-        {
             if (this.personList.Contains(personName))
             {
                 throw new ArgumentException(string.Format(CommandsConsts.ObjectExists, nameof(Person), personName));

@@ -24,7 +24,7 @@ namespace WIMSystem.Commands.CreateCommands
             this.getter = getter ?? throw new ArgumentNullException(nameof(getter));
         }
 
-        public string ReadSingleCommand(IList<string> parameters)
+        public string Execute(IList<string> parameters)
         {
             var storyTitle = parameters[0];
             var storyDescription = parameters[1];
@@ -32,12 +32,8 @@ namespace WIMSystem.Commands.CreateCommands
             var storySize = StringToEnum<StorySizeType>.Convert(parameters[3]);
             var teamName = parameters[4];
             var board = this.getter.GetBoard(teamName, parameters[5]);
+            IPerson storyAssignee = null; 
 
-            return this.Execute(storyTitle, storyDescription, storyPriority, storySize, board);
-        }
-
-        private string Execute(string storyTitle, string storyDescription, PriorityType storyPriority, StorySizeType storySize, IBoard board, IPerson storyAssignee = null)
-        {
             var story = this.componentsFactory.CreateStory(storyTitle, storyDescription, storyPriority, storySize, board, storyAssignee);
             if (story == null)
             {

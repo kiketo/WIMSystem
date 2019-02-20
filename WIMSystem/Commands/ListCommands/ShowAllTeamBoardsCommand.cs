@@ -17,14 +17,10 @@ namespace WIMSystem.Commands.ListCommands
             this.historyItemsCollection = historyItemsCollection ?? throw new ArgumentNullException(nameof(historyItemsCollection));
         }
 
-        public string ReadSingleCommand(IList<string> parameters)
+        public string Execute(IList<string> parameters)
         {
             var team = this.getters.GetTeam(parameters[0]);
-            return this.Execute(team);
-        }
 
-        private string Execute(ITeam team)
-        {
             if (Validators.IsNullValue(team))
             {
                 throw new ArgumentException(string.Format(Consts.NULL_OBJECT,

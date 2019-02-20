@@ -23,17 +23,11 @@ namespace WIMSystem.Commands.ChangeCommands
             this.getter = getter ?? throw new ArgumentNullException(nameof(getter));
         }
 
-        public string ReadSingleCommand(IList<string> parameters)
+        public string Execute(IList<string> parameters)
         {
             var teamName = parameters[0];
             var board = this.getter.GetBoard(teamName, parameters[1]);
             var workItem = this.getter.GetAssignableWorkItem(board, parameters[2]);
-
-            return this.Execute(workItem);
-        }
-
-        private string Execute(IAssignableWorkItem workItem)
-        {
 
             if (Validators.IsNullValue(workItem))
             {

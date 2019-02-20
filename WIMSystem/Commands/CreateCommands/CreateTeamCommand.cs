@@ -23,14 +23,10 @@ namespace WIMSystem.Commands.CreateCommands
             this.componentsFactory = componentsFactory ?? throw new ArgumentNullException(nameof(componentsFactory));
         }
 
-        public string ReadSingleCommand(IList<string> parameters)
+        public string Execute(IList<string> parameters)
         {
             var teamName = parameters[0];
-            return this.Execute(teamName);
-        }
 
-        private string Execute(string teamName)
-        {
             if (this.wimTeams.Contains(teamName))
             {
                 return string.Format(CommandsConsts.ObjectExists, nameof(Team), teamName);

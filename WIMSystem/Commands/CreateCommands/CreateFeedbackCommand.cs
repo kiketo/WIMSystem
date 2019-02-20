@@ -23,19 +23,14 @@ namespace WIMSystem.Commands.CreateCommands
             this.getter = getter ?? throw new ArgumentNullException(nameof(getter));
         }
 
-        public string ReadSingleCommand(IList<string> parameters)
+        public string Execute(IList<string> parameters)
         {
             var feedbackTitle = parameters[0];
             var feedbackDescription = parameters[1];
-            var feedbackRating = int.Parse(parameters[2]);
+            var raiting = int.Parse(parameters[2]);
             var teamName = parameters[3];
             var board = this.getter.GetBoard(teamName, parameters[4]);
 
-            return this.CreateFeedback(feedbackTitle, feedbackDescription, feedbackRating, board);
-        }
-
-        private string CreateFeedback(string feedbackTitle, string feedbackDescription, int raiting, IBoard board)
-        {
             var feedback = this.componentsFactory.CreateFeedback(feedbackTitle, feedbackDescription, raiting, board);
 
             if (feedback == null)

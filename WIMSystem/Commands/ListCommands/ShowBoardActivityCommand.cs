@@ -19,16 +19,12 @@ namespace WIMSystem.Commands.ListCommands
         }
 
 
-        public string ReadSingleCommand(IList<string> parameters)
+        public string Execute(IList<string> parameters)
         {
             var teamName = parameters[0];
             var boardName = parameters[1];
             var board = this.getters.GetBoard(teamName, boardName);
-            return this.Execute(board);
-        }
 
-        private string Execute(IBoard board)
-        {
             if (Validators.IsNullValue(board))
             {
                 throw new ArgumentException(string.Format(CommandsConsts.NULL_OBJECT,
