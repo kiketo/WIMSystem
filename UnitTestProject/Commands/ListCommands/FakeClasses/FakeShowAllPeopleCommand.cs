@@ -4,7 +4,7 @@ using System.Text;
 using WIMSystem.Commands.ListCommands;
 using WIMSystem.Models.Contracts;
 
-namespace WIMSystem.Tests.FakeClasses
+namespace WIMSystem.Tests.Commands.ListCommans.FakeClasses
 {
     public class FakeShowAllPeopleCommand : ShowAllPeopleCommand
     {
