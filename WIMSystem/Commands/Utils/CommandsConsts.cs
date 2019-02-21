@@ -26,6 +26,7 @@ namespace WIMSystem.Commands.Utils
         internal const string StorySizeChange = "{0} story's size is changed to {1}!";
         internal const string BugSeverityChange = "{0} bug's severity is changed to {1}!";
         internal const string CommentAdded = "Comment \"{0}\" with author {1} added to \"{2}\"!";
+        internal const string NotMemberOfAnyTeam = "{0} is not a member of any team!";
 
         internal const string NoTeamFound = "No {0} team found!";
         internal const string NoBoardFound = "No {0} board found!";

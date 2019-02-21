@@ -37,21 +37,21 @@ namespace WIMSystem.Commands.ChangeCommands
 
             if (Validators.IsNullValue(member))
             {
-                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,nameof(member)));
+                throw new ArgumentException(string.Format(Consts.NULL_OBJECT,nameof(Person)));
             }
 
             if (!member.IsAssignedToTeam)
             {
-                throw new ArgumentException(string.Format($"{member.PersonName} is not a member of any team!"));
+                throw new ArgumentException(string.Format(CommandsConsts.NotMemberOfAnyTeam, member.PersonName));
 
             }
 
             workItem.AssignMember(member);
-            member.MemberWorkItems.Add(workItem);
+            member.MemberWorkItems.Add(workItem); //TODO - does not working ... ccccc fucking bugs
 
             var returnMessage = string.Format(CommandsConsts.WorkItemAssigned, workItem.Title, member.PersonName);
 
-            this.historyEventWriter.AddHistoryEvent(returnMessage, member, workItem.Board, workItem.Board.Team, workItem);
+            this.historyEventWriter.AddHistoryEvent(returnMessage, member, workItem.Board, board.Team, workItem);
 
             return returnMessage;
         }

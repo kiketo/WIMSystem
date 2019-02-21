@@ -21,14 +21,14 @@ namespace WIMSystem.Core
         public Engine(ICommandsFactory commandsFactory,
             IPrintReports printReports,
             IMainMenu mainMenu,
-            ICommandParser parser1,
+            ICommandParser parser,
             IReader reader)
         {
             this.commandsFactory = commandsFactory ?? throw new ArgumentException(string.Format(Consts.NULL_OBJECT, nameof(printReports)));
             this.printReports = printReports ?? throw new ArgumentException(string.Format(Consts.NULL_OBJECT, nameof(printReports)));
             this.mainMenu = mainMenu ?? throw new ArgumentException(string.Format(Consts.NULL_OBJECT, nameof(printReports)));
             this.reader = reader;
-            this.parser = parser1;
+            this.parser = parser;
         }
 
         public void Start(bool showLogo)
