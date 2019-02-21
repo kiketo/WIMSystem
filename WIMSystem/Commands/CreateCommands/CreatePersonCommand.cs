@@ -36,15 +36,18 @@ namespace WIMSystem.Commands.CreateCommands
         {
             var personName = parameters[0];
 
-            if (this.personList.Contains(personName))
+            var person = this.componentsFactory.CreatePerson(personName);
+            if (person == null)
             {
-                throw new ArgumentException(string.Format(CommandsConsts.ObjectExists, nameof(Person), personName));
+                throw new ArgumentException(string.Format(CommandsConsts.NULL_OBJECT, nameof(Person)));
             }
 
-            var person = this.componentsFactory.CreatePerson(personName);
             this.personList.AddPerson(person);
+
             var returnMessage = string.Format(CommandsConsts.ObjectCreated, nameof(Person), personName);
+
             this.historyEventWriter.AddHistoryEvent(returnMessage, person);
+
             return returnMessage;
         }
     }

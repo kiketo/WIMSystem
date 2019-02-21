@@ -37,12 +37,12 @@ namespace WIMSystem.Commands.CreateCommands
             var story = this.componentsFactory.CreateStory(storyTitle, storyDescription, storyPriority, storySize, board, storyAssignee);
             if (story == null)
             {
-                throw new ArgumentException(string.Format(CommandsConsts.ObjectExists, nameof(Story), story.Title));
+                throw new ArgumentException(string.Format(CommandsConsts.NULL_OBJECT, nameof(Story)));
             }
 
             board.AddWorkItemToBoard(story);
 
-            string returnMessage = string.Format(CommandsConsts.ObjectCreated, nameof(Story), story.Title);
+            string returnMessage = string.Format(CommandsConsts.ObjectCreated, nameof(Story), storyTitle);
 
             this.historyEventWriter.AddHistoryEvent(returnMessage, storyAssignee, board, board.Team);
 

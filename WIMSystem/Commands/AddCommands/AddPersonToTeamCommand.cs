@@ -9,8 +9,8 @@ namespace WIMSystem.Commands.AddCommands
 {
     public class AddPersonToTeamCommand : IEngineCommand
     {
-        private readonly IGetters getter;
-        private readonly IHistoryEventWriter historyEventWriter;
+        protected readonly IGetters getter;
+        protected readonly IHistoryEventWriter historyEventWriter;
   
         public AddPersonToTeamCommand(IGetters getter, IHistoryEventWriter historyEventWriter)
         {

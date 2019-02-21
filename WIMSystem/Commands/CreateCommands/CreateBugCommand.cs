@@ -40,14 +40,14 @@ namespace WIMSystem.Commands.CreateCommands
 
             if (bug == null)
             {
-                throw new ArgumentException(string.Format(CommandsConsts.ObjectExists, nameof(Bug), bug.Title));
+                throw new ArgumentException(string.Format(CommandsConsts.NULL_OBJECT, nameof(Bug)));
             }
 
             board.AddWorkItemToBoard(bug);
 
-            string returnMessage = string.Format(CommandsConsts.ObjectCreated, nameof(Bug), bug.Title);
+            string returnMessage = string.Format(CommandsConsts.ObjectCreated, nameof(Bug), bugTitle);
 
-            this.historyEventWriter.AddHistoryEvent(returnMessage, bugAssignee, board, board.Team);
+            this.historyEventWriter.AddHistoryEvent(returnMessage, bugAssignee, board, board.Team, bug);
 
             return returnMessage;
         }

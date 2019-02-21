@@ -10,7 +10,7 @@ namespace WIMSystem.Core.Factories
 {
     public class ComponentsFactory : IComponentsFactory
     {
-        public ITeam CreateTeam(string teamName, IWIMTeams teamsList)
+        public ITeam CreateTeam(string teamName)
         {
             return new Team(teamName);
         }

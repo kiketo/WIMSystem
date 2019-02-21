@@ -24,18 +24,28 @@ namespace WIMSystem.Commands.CreateCommands
 
         public string Execute(IList<string> parameters)
         {
-            var teamName = this.getter.GetTeam(parameters[0]);
-            var boardName = this.getter.GetBoard(teamName.TeamName, parameters[1]);
-            var workItem = this.getter.GetWorkItem(boardName, parameters[2]);
+            var teamName = parameters[0];
+            var boardName = parameters[1];
+            var workItemTitle = parameters[2];
             var message = parameters[3];
-            var author = this.getter.GetMember(teamName, parameters[4]);
+            var authorName = parameters[4];
+
+            var team = this.getter.GetTeam(parameters[0]);
+            var board = this.getter.GetBoard(teamName, parameters[1]);
+            var workItem = this.getter.GetWorkItem(board, parameters[2]);
+            var author = this.getter.GetMember(team, parameters[4]);
 
             var comment = this.componentsFactory.CreateComment(message, author);
+            if (comment == null)
+            {
+                throw new ArgumentException(string.Format(CommandsConsts.NULL_OBJECT, nameof(Comment)));
+            }
+
             workItem.AddComment(comment);
 
-            string returnMessage = string.Format(CommandsConsts.CommentAdded, comment.Message, comment.Author.PersonName, workItem.Title);
+            string returnMessage = string.Format(CommandsConsts.CommentAdded, message, authorName, workItemTitle);
 
-            this.historyEventWriter.AddHistoryEvent(returnMessage, author, workItem.Board, workItem.Board.Team, workItem);
+            this.historyEventWriter.AddHistoryEvent(returnMessage, author, board, team, workItem);
 
             return returnMessage;
         }

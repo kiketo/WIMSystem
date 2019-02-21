@@ -14,7 +14,7 @@ using WIMSystem.Tests.Commands.CreateCommands.CreateBoardCommandTest.Fake;
 namespace WIMSystem.Tests.Commands.CreateCommands.CreateBoardCommandTest
 {
     [TestClass]
-    public class ReadSingleCommands_Should
+    public class Execute_Should
     {
         [TestMethod]
         public void ExecuteAllFourMethodsOnce_WhenValidParametersArePassed()
@@ -82,8 +82,9 @@ namespace WIMSystem.Tests.Commands.CreateCommands.CreateBoardCommandTest
             //Assert
             Assert.AreEqual(expectedReturn, actualReturn);
         }
+
         [TestMethod]
-        public void ThrowArgumentException_WhenValidBoardNameIsReturned()
+        public void ThrowArgumentException_WhenNullBoardIsReturned()
         {
             //Arrange
             var validBoarName = "Valid";
