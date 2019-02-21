@@ -1,12 +1,14 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
+using System.Text;
 using WIMSystem.Commands.ListCommands;
 using WIMSystem.Models.Contracts;
 using WIMSystem.Commands.Utils;
 using Moq;
-using WIMSystem.Tests.Commands.ListCommans.FakeClasses;
+using WIMSystem.Tests.FakeClasses;
 
-namespace UnitTestProject.Commands.ListCommands.ShowAllPeopleCommandTest
+namespace UnitTestProject.CommandsTest.ListCommandsTest.ShowAllPeopleCommandTest
 {
     [TestClass]
     public class Constructor_Should
