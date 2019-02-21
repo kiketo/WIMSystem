@@ -18,7 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Folder Include="Models\BoardTest\" />
+    <Folder Include="Models\CommentTest\" />
+    <Folder Include="Models\WorkItemAbstractClassTest\" />
   </ItemGroup>
 
 </Project>
