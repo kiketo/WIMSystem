@@ -7,8 +7,8 @@ namespace WIMSystem.Commands.Utils
 {
     public class Getters : IGetters
     {
-        private readonly IPersonsCollection personList;
-        private readonly IWIMTeams wimTeams;
+        protected readonly IPersonsCollection personList;
+        protected readonly IWIMTeams wimTeams;
 
         public Getters(IPersonsCollection personList, IWIMTeams wimTeams)
         {

@@ -6,15 +6,15 @@ using System.Text;
 using WIMSystem.Commands.AddCommands;
 using WIMSystem.Commands.Contracts;
 using WIMSystem.Commands.Utils;
-using WIMSystem.Tests.CommandsTest.AddCommandsTest.FakeClasses;
+using WIMSystem.Tests.CommandsTest.AddCommands.FakeClasses;
 
-namespace WIMSystem.Tests.CommandsTest.AddCommandsTest.AddPersonToTeamCommandTest
+namespace WIMSystem.Tests.CommandsTest.AddCommands.AddPersonToTeamCommandTest
 {
     [TestClass]
     public class Constructor_Should
     {
         [TestMethod]
-        public void Throw_When_A_Passed_Value_For_Getter_Is_Null()
+        public void Throw_WhenPassedValueForGetterIsNull()
         {
             //Arrange
             IGetters getter = null;
@@ -28,7 +28,7 @@ namespace WIMSystem.Tests.CommandsTest.AddCommandsTest.AddPersonToTeamCommandTes
         }
 
         [TestMethod]
-        public void Throw_When_A_Passed_Value_For_HistoryEventWriter_Is_Null()
+        public void Throw_WhenPassedValueForHistoryEventWriterIsNull()
         {
             //Arrange            
             var getter = new Mock<IGetters>();
@@ -41,7 +41,7 @@ namespace WIMSystem.Tests.CommandsTest.AddCommandsTest.AddPersonToTeamCommandTes
             Assert.AreEqual(string.Format(CommandsConsts.NULL_OBJECT, nameof(historyEventWriter)), exception.ParamName);
         }
         [TestMethod]
-        public void Correctrly_Assign_Getter_And_HistoryEventWriter()
+        public void CorrectrlyAssignGetterAndHistoryEventWriter()
         {
             //Arrange
             var getter = new Mock<IGetters>();
