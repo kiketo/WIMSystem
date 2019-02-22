@@ -24,7 +24,7 @@ namespace WIMSystem.Commands.Utils
 
         public IPerson GetPerson(string memberAsString)
         {
-            if (!personList.Contains(memberAsString))
+            if (!this.personList.Contains(memberAsString))
             {
                 throw new ArgumentNullException(
                             string.Format(
@@ -55,7 +55,7 @@ namespace WIMSystem.Commands.Utils
             //                string.Format(
             //                CommandsConsts.NoPersonInTeamFound,
             //                memberAsString));
-                
+
             //}
 
             return person;
