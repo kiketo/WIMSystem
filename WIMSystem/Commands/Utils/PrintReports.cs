@@ -13,7 +13,7 @@ namespace WIMSystem.Commands.Utils
 
         public PrintReports(IWriter writer)
         {
-            this.writer = writer;
+            this.writer = writer ?? throw new ArgumentNullException(string.Format(CommandsConsts.NULL_OBJECT, nameof(writer)));
             reports = new List<string>();
         }
 

@@ -8,6 +8,7 @@ namespace WIMSystem.Models.Enums
     {
         team,
         board,
-        person
+        person,
+        workitem//TODO 
     }
 }
