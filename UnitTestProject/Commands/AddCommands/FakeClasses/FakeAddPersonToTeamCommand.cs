@@ -4,7 +4,7 @@ using System.Text;
 using WIMSystem.Commands.AddCommands;
 using WIMSystem.Commands.Contracts;
 
-namespace WIMSystem.Tests.CommandsTest.AddCommandsTest.FakeClasses
+namespace WIMSystem.Tests.CommandsTest.AddCommands.FakeClasses
 {
     public class FakeAddPersonToTeamCommand : AddPersonToTeamCommand
     {
