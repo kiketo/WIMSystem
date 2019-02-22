@@ -25,6 +25,8 @@ namespace WIMSystem.Tests.Commands.ChangeCommands.ChangePriorityCommandTests
             var gettersMock = new Mock<IGetters>();
             var boardMock = new Mock<IBoard>();
             var workItemMock = new Mock<IBug>();
+            var mockAssignee = new Mock<IPerson>();
+            var teamMock = new Mock<ITeam>();
             var workItemCollection = new Dictionary<string, IWorkItem>();
 
 
@@ -34,24 +36,16 @@ namespace WIMSystem.Tests.Commands.ChangeCommands.ChangePriorityCommandTests
             gettersMock.Setup(b => b.GetBoard(validTeamName, validBoardName)).Returns(boardMock.Object);
             gettersMock.Setup(w => w.GetAssignableWorkItem(boardMock.Object, validWorkItemTitle)).Returns(workItemMock.Object);
 
-            historyEventWriterMock.Setup(r => r.AddHistoryEvent(
-                It.IsAny<string>(),
-                    It.IsAny<IPerson>(),
-                    It.IsAny<IBoard>(),
-                    It.IsAny<ITeam>(),
-                    It.IsAny<IWorkItem>()));
-
-
             boardMock.Setup(n => n.BoardName).Returns(validBoardName);
             boardMock.Setup(n => n.Team).Returns(It.IsAny<ITeam>());
             boardMock.Setup(n => n.BoardWorkItems).Returns(workItemCollection);
 
             workItemMock.Setup(p => p.Priority).Returns(PriorityType.Low);
             workItemMock.Setup(p => p.Title).Returns(validWorkItemTitle);
-            workItemMock.Setup(a => a.Assignee).Returns(It.IsAny<IPerson>());
-            workItemMock.Setup(b => b.Board).Returns(It.IsAny<IBoard>());
-            workItemMock.Setup(b => b.Board.BoardName).Returns(validBoardName);
-
+            workItemMock.Setup(a => a.Assignee).Returns(mockAssignee.Object);
+            workItemMock.Setup(a => a.Board).Returns(boardMock.Object);
+            workItemMock.Setup(a => a.Board.Team).Returns(teamMock.Object);
+            
             var parameters = new List<string>() { validTeamName, validBoardName, validWorkItemTitle, priority };
 
             var sut = new ChangePriorityCommand(historyEventWriterMock.Object, gettersMock.Object);
@@ -59,14 +53,7 @@ namespace WIMSystem.Tests.Commands.ChangeCommands.ChangePriorityCommandTests
             sut.Execute(parameters);
 
             gettersMock.Verify(x => x.GetBoard(validTeamName, validBoardName), Times.Once);
-            historyEventWriterMock.
-                Verify(x => x.AddHistoryEvent(
-                    It.IsAny<string>(),
-                    It.IsAny<IPerson>(),
-                    It.IsAny<IBoard>(),
-                    It.IsAny<ITeam>(),
-                    It.IsAny<IWorkItem>()
-                    ), Times.Once);
+
         }
     }
 }

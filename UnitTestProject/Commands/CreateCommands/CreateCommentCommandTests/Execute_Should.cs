@@ -45,7 +45,7 @@ namespace WIMSystem.Tests.Commands.CreateCommands.CreateCommentCommandTests
             };
 
             //Act
-            sut.Execute(parameters);
+            var returnMessage = sut.Execute(parameters);
 
             //Assert
             this.gettersMock.Verify(x => x.GetBoard(this.validTeamName, this.validBoardName), Times.Once);
@@ -56,11 +56,11 @@ namespace WIMSystem.Tests.Commands.CreateCommands.CreateCommentCommandTests
             this.workItemMock.Verify(x => x.AddComment(commentMock.Object), Times.Once);
             this.historyEventWriterMock.
                 Verify(x => x.AddHistoryEvent(
-                    It.IsAny<string>(),
+                    returnMessage,
                     It.IsAny<IPerson>(),
                     It.IsAny<IBoard>(),
                     It.IsAny<ITeam>(),
-                    It.IsAny<IWorkItem>()
+                    workItemMock.Object
                     ), Times.Once);
         }
 

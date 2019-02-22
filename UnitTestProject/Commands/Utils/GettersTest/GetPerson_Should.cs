@@ -27,6 +27,17 @@ namespace WIMSystem.Tests.Commands.Utils.GettersTest
         [TestMethod]
         public void CorectrlyPassData()//TODO I need help here
         {
+            /*
+            Според мен:
+            Трябва да провериш дали метода GetPerson извиква 
+            1. personList.Contains
+            2. Индексатора (индексатор се тества по следния начин: personListMock.Verify(x => x["Pesho"], Times.Once);)
+            
+            Не мисля, че трябва да проверяваш дали връщаното е нашия обект, защото за това се грижи нашия индексатор в класа
+            personList т.е. като (ако изобщо) му правим unit test-ове ще проверяваме дали работи правилно този индексатор в
+            този клас. В нашия метод GetPerson би следвало да се извикват тези методи, а вече си е тяхно задължение да работят
+            правилно.
+            */
             //Arrange 
             var wIMTeamMock = new Mock<IWIMTeams>();
             var personListMock = new Mock<IPersonsCollection>();
@@ -43,7 +54,6 @@ namespace WIMSystem.Tests.Commands.Utils.GettersTest
             var getPerson=sut.GetPerson("Pesho");
             //Assert
             Assert.AreEqual(personMock.Object, getPerson);
-
         }
     }
 }

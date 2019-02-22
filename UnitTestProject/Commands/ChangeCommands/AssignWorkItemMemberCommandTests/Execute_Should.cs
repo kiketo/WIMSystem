@@ -30,7 +30,7 @@ namespace WIMSystem.Tests.Commands.ChangeCommands.AssignWorkItemMemberCommandTes
         {
             //Arrange
             this.gettersMock.Setup(x => x.GetBoard(validTeamName, validBoardName)).Returns(boardMock.Object);
-            this.gettersMock.Setup(x => x.GetAssignableWorkItem(It.IsAny<IBoard>(), this.validWorkItemTitle)).Returns(this.workItemMock.Object);
+            this.gettersMock.Setup(x => x.GetAssignableWorkItem(boardMock.Object, this.validWorkItemTitle)).Returns(this.workItemMock.Object);
             this.gettersMock.Setup(x => x.GetPerson(this.validPersonName)).Returns(this.personMock.Object);
 
             this.personMock.SetupGet(x => x.PersonName).Returns(this.validPersonName);
@@ -47,20 +47,20 @@ namespace WIMSystem.Tests.Commands.ChangeCommands.AssignWorkItemMemberCommandTes
             };
 
             //Act
-            sut.Execute(parameters);
+            var returnMessage = sut.Execute(parameters);
 
             //Assert
             this.gettersMock.Verify(x => x.GetBoard(this.validTeamName, this.validBoardName), Times.Once);
             this.gettersMock.Verify(x => x.GetPerson(this.validPersonName), Times.Once);
-            this.gettersMock.Verify(x => x.GetAssignableWorkItem(It.IsAny<IBoard>(), this.validWorkItemTitle), Times.Once);
+            this.gettersMock.Verify(x => x.GetAssignableWorkItem(boardMock.Object, this.validWorkItemTitle), Times.Once);
             this.workItemMock.Verify(x => x.AssignMember(this.personMock.Object), Times.Once);
             this.historyEventWriterMock.
                 Verify(x => x.AddHistoryEvent(
-                    It.IsAny<string>(),
-                    It.IsAny<IPerson>(),
+                    returnMessage,
+                    personMock.Object,
                     It.IsAny<IBoard>(),
                     It.IsAny<ITeam>(),
-                    It.IsAny<IWorkItem>()
+                    workItemMock.Object
                     ), Times.Once);
         }
 
@@ -69,7 +69,7 @@ namespace WIMSystem.Tests.Commands.ChangeCommands.AssignWorkItemMemberCommandTes
         {
             //Arrange
             this.gettersMock.Setup(x => x.GetBoard(validTeamName, validBoardName)).Returns(boardMock.Object);
-            this.gettersMock.Setup(x => x.GetAssignableWorkItem(It.IsAny<IBoard>(), this.validWorkItemTitle)).Returns(this.workItemMock.Object);
+            this.gettersMock.Setup(x => x.GetAssignableWorkItem(boardMock.Object, this.validWorkItemTitle)).Returns(this.workItemMock.Object);
             this.gettersMock.Setup(x => x.GetPerson(this.validPersonName)).Returns(this.personMock.Object);
 
             this.personMock.SetupGet(x => x.PersonName).Returns(this.validPersonName);
@@ -101,8 +101,7 @@ namespace WIMSystem.Tests.Commands.ChangeCommands.AssignWorkItemMemberCommandTes
         {
             //Arrange
             this.gettersMock.Setup(x => x.GetBoard(validTeamName, validBoardName)).Returns(boardMock.Object);
-            this.gettersMock.Setup(x => x.GetAssignableWorkItem(It.IsAny<IBoard>(), this.validWorkItemTitle)).Returns(this.workItemMock.Object);
-            //this.gettersMock.Setup(x => x.GetPerson(this.validPersonName)).Returns(this.personMock.Object);
+            this.gettersMock.Setup(x => x.GetAssignableWorkItem(boardMock.Object, this.validWorkItemTitle)).Returns(this.workItemMock.Object);
 
             this.personMock.SetupGet(x => x.PersonName).Returns(this.validPersonName);
             this.personMock.SetupGet(x => x.IsAssignedToTeam).Returns(true);

@@ -33,7 +33,7 @@ namespace WIMSystem.Tests.Commands.CreateCommands.CreateFeedbackCommandTests
             this.gettersMock.Setup(x => x.GetBoard(this.validTeamName, this.validBoardName)).Returns(this.boardMock.Object);
 
             this.componentsFactoryMock
-                .Setup(x => x.CreateFeedback(this.validTitle, this.validDescription, this.validRating, It.IsAny<IBoard>()))
+                .Setup(x => x.CreateFeedback(this.validTitle, this.validDescription, this.validRating, boardMock.Object))
                 .Returns(this.feedbackMock.Object);
 
             var sut = new CreateFeedbackCommand(this.historyEventWriterMock.Object, this.componentsFactoryMock.Object, this.gettersMock.Object);
@@ -47,19 +47,19 @@ namespace WIMSystem.Tests.Commands.CreateCommands.CreateFeedbackCommandTests
             };
 
             //Act
-            sut.Execute(parameters);
+            var returnMessage = sut.Execute(parameters);
 
             //Assert
             this.gettersMock.Verify(x => x.GetBoard(this.validTeamName, this.validBoardName), Times.Once);
-            this.componentsFactoryMock.Verify(x => x.CreateFeedback(this.validTitle, this.validDescription, this.validRating, It.IsAny<IBoard>()), Times.Once);
+            this.componentsFactoryMock.Verify(x => x.CreateFeedback(this.validTitle, this.validDescription, this.validRating, boardMock.Object), Times.Once);
             this.boardMock.Verify(x => x.AddWorkItemToBoard(feedbackMock.Object), Times.Once);
             this.historyEventWriterMock.
                 Verify(x => x.AddHistoryEvent(
-                    It.IsAny<string>(),
-                    It.IsAny<IPerson>(),
-                    It.IsAny<IBoard>(),
+                    returnMessage,
+                    null,
+                    boardMock.Object,
                     It.IsAny<ITeam>(),
-                    It.IsAny<IWorkItem>()
+                    null
                     ), Times.Once);
         }
 
@@ -70,7 +70,7 @@ namespace WIMSystem.Tests.Commands.CreateCommands.CreateFeedbackCommandTests
             this.gettersMock.Setup(x => x.GetBoard(this.validTeamName, this.validBoardName)).Returns(this.boardMock.Object);
 
             this.componentsFactoryMock
-                .Setup(x => x.CreateFeedback(this.validTitle, this.validDescription, this.validRating, It.IsAny<IBoard>()))
+                .Setup(x => x.CreateFeedback(this.validTitle, this.validDescription, this.validRating, boardMock.Object))
                 .Returns(this.feedbackMock.Object);
 
             var sut = new CreateFeedbackCommand(this.historyEventWriterMock.Object, this.componentsFactoryMock.Object, this.gettersMock.Object);
@@ -100,7 +100,7 @@ namespace WIMSystem.Tests.Commands.CreateCommands.CreateFeedbackCommandTests
             this.gettersMock.Setup(x => x.GetBoard(this.validTeamName, this.validBoardName)).Returns(this.boardMock.Object);
 
             this.componentsFactoryMock
-                .Setup(x => x.CreateFeedback(this.validTitle, this.validDescription, this.validRating, It.IsAny<IBoard>()));
+                .Setup(x => x.CreateFeedback(this.validTitle, this.validDescription, this.validRating, boardMock.Object));
 
             var sut = new CreateFeedbackCommand(this.historyEventWriterMock.Object, this.componentsFactoryMock.Object, this.gettersMock.Object);
             var parameters = new List<string>()

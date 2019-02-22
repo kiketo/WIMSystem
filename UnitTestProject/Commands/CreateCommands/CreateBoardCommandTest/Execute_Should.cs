@@ -26,10 +26,8 @@ namespace WIMSystem.Tests.Commands.CreateCommands.CreateBoardCommandTest
             var boardMock = new Mock<IBoard>();
 
             var teamMock = new Mock<ITeam>();
-           // teamMock.Setup(x => x.AddBoardToTeam(It.IsAny<IBoard>()));
 
             var historyEventWriterMock = new Mock<IHistoryEventWriter>();
-            //historyEventWriterMock.Setup(x => x.AddHistoryEvent(It.IsAny<string>(),null,null,null,null));
 
             var componentsFactoryMock = new Mock<IComponentsFactory>();
             componentsFactoryMock.Setup(x => x.CreateBoard(validBoarName, teamMock.Object)).Returns(boardMock.Object);
@@ -44,8 +42,8 @@ namespace WIMSystem.Tests.Commands.CreateCommands.CreateBoardCommandTest
             sut.Execute(parameters);
             
             //Assert
-            gettersMock.Verify(x => x.GetTeam(It.IsAny<string>()), Times.Once);
-            componentsFactoryMock.Verify(x => x.CreateBoard(It.IsAny<string>(), teamMock.Object), Times.Once);
+            gettersMock.Verify(x => x.GetTeam(validTeamname), Times.Once);
+            componentsFactoryMock.Verify(x => x.CreateBoard(validBoarName, teamMock.Object), Times.Once);
             teamMock.Verify(x => x.AddBoardToTeam(It.IsAny<IBoard>()), Times.Once);
             historyEventWriterMock.Verify(x => x.AddHistoryEvent(It.IsAny<string>(),null, boardMock.Object,teamMock.Object,null), Times.Once);
         }
@@ -63,7 +61,6 @@ namespace WIMSystem.Tests.Commands.CreateCommands.CreateBoardCommandTest
             // teamMock.Setup(x => x.AddBoardToTeam(It.IsAny<IBoard>()));
 
             var historyEventWriterMock = new Mock<IHistoryEventWriter>();
-            //historyEventWriterMock.Setup(x => x.AddHistoryEvent(It.IsAny<string>(),null,null,null,null));
 
             var componentsFactoryMock = new Mock<IComponentsFactory>();
             componentsFactoryMock.Setup(x => x.CreateBoard(validBoarName, teamMock.Object)).Returns(boardMock.Object);
@@ -93,10 +90,8 @@ namespace WIMSystem.Tests.Commands.CreateCommands.CreateBoardCommandTest
             var boardMock = new Mock<IBoard>();
 
             var teamMock = new Mock<ITeam>();
-            // teamMock.Setup(x => x.AddBoardToTeam(It.IsAny<IBoard>()));
 
             var historyEventWriterMock = new Mock<IHistoryEventWriter>();
-            //historyEventWriterMock.Setup(x => x.AddHistoryEvent(It.IsAny<string>(),null,null,null,null));
 
             var componentsFactoryMock = new Mock<IComponentsFactory>();
 

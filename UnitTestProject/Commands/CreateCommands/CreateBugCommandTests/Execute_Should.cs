@@ -88,14 +88,13 @@ namespace WIMSystem.Tests.Commands.CreateCommands.CreateBugCommandTests
             //Assert
             Assert.AreEqual(expectedReturn, actualReturn);
         }
+
         [TestMethod]
         public void ThrowArgumentException_WhenNullBugIsReturned()
         {
             //Arrange
             
             gettersMock.Setup(x => x.GetBoard(validTeamName, validBoardName)).Returns(boardMock.Object);
-
-           // componentsFactoryMock.Setup(x => x.CreateBug(validTitle, validDescription, validSteps, validPriority, validSeverity, boardMock.Object, null));
 
             var sut = new CreateBugCommand(historyEventWriterMock.Object, componentsFactoryMock.Object, gettersMock.Object);
             var parameters = new List<string>()
