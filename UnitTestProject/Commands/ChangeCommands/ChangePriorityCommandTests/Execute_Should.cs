@@ -49,8 +49,9 @@ namespace WIMSystem.Tests.Commands.ChangeCommands.ChangePriorityCommandTests
             workItemMock.Setup(p => p.Priority).Returns(PriorityType.Low);
             workItemMock.Setup(p => p.Title).Returns(validWorkItemTitle);
             workItemMock.Setup(a => a.Assignee).Returns(It.IsAny<IPerson>());
-            
-            
+            workItemMock.Setup(b => b.Board).Returns(It.IsAny<IBoard>());
+            workItemMock.Setup(b => b.Board.BoardName).Returns(validBoardName);
+
             var parameters = new List<string>() { validTeamName, validBoardName, validWorkItemTitle, priority };
 
             var sut = new ChangePriorityCommand(historyEventWriterMock.Object, gettersMock.Object);
