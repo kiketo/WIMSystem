@@ -25,9 +25,9 @@ namespace WIMSystem.Tests.Commands.Utils.GettersTest
             Assert.AreEqual(string.Format(CommandsConsts.NoPersonFound,"Some Member"),ex.ParamName);
         }
         [TestMethod]
-        public void CorectrlyPassData()
+        public void CorectrlyPassData()//TODO I need help here
         {
-            //Arrange //TODO I need help here
+            //Arrange 
             var wIMTeamMock = new Mock<IWIMTeams>();
             var personListMock = new Mock<IPersonsCollection>();
             personListMock.Setup(x => x.Contains("Pesho")).Returns(true);
