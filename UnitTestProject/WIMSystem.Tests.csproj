@@ -18,6 +18,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Commands\ChangeCommands\ChangePriorityCommandTests\FakeClasses\" />
+    <Folder Include="Commands\ChangeCommands\ChangeRatingOfFeedbackCommandTests\" />
+    <Folder Include="Commands\ChangeCommands\ChangeSeverityOfBugCommandTests\" />
+    <Folder Include="Commands\ChangeCommands\ChangeSizeOfStoryCommandTests\" />
+    <Folder Include="Commands\ChangeCommands\ChangeStatusCommandTests\" />
+    <Folder Include="Commands\ChangeCommands\UnassignWorkitemCommandTests\" />
     <Folder Include="Models\BoardTest\" />
     <Folder Include="Models\CommentTest\" />
     <Folder Include="Models\WorkItemAbstractClassTest\" />
