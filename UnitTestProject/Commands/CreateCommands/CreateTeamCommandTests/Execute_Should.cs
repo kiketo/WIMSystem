@@ -36,18 +36,18 @@ namespace WIMSystem.Tests.Commands.CreateCommands.CreateTeamCommandTests
             };
 
             //Act
-            sut.Execute(parameters);
+            var returnMessage = sut.Execute(parameters);
 
             //Assert
             this.componentsFactoryMock.Verify(x => x.CreateTeam(this.validTeamName), Times.Once);
             this.personsCollectionMock.Verify(x => x.AddTeam(teamMock.Object), Times.Once);
             this.historyEventWriterMock.
                 Verify(x => x.AddHistoryEvent(
-                    It.IsAny<string>(),
-                    It.IsAny<IPerson>(),
-                    It.IsAny<IBoard>(),
-                    It.IsAny<ITeam>(),
-                    It.IsAny<IWorkItem>()
+                    returnMessage,
+                    null,
+                    null,
+                    teamMock.Object,
+                    null
                     ), Times.Once);
 
         }

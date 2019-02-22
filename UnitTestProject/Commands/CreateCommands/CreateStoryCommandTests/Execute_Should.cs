@@ -35,7 +35,7 @@ namespace WIMSystem.Tests.Commands.CreateCommands.CreateStoryCommandTests
             this.gettersMock.Setup(x => x.GetBoard(this.validTeamName, this.validBoardName)).Returns(this.boardMock.Object);
 
             this.componentsFactoryMock
-                .Setup(x => x.CreateStory(this.validTitle, this.validDescription, this.validPriority, this.validStorySize, It.IsAny<IBoard>(), null))
+                .Setup(x => x.CreateStory(this.validTitle, this.validDescription, this.validPriority, this.validStorySize, boardMock.Object, null))
                 .Returns(this.storyMock.Object);
 
             var sut = new CreateStoryCommand(this.historyEventWriterMock.Object, this.componentsFactoryMock.Object, this.gettersMock.Object);
@@ -50,7 +50,7 @@ namespace WIMSystem.Tests.Commands.CreateCommands.CreateStoryCommandTests
             };
 
             //Act
-            sut.Execute(parameters);
+            var returnMessage = sut.Execute(parameters);
 
             //Assert
             this.gettersMock.Verify(x => x.GetBoard(this.validTeamName, this.validBoardName), Times.Once);
@@ -60,17 +60,17 @@ namespace WIMSystem.Tests.Commands.CreateCommands.CreateStoryCommandTests
                     this.validDescription,
                     this.validPriority,
                     this.validStorySize,
-                    It.IsAny<IBoard>(),
+                    boardMock.Object,
                     null),
                Times.Once);
             this.boardMock.Verify(x => x.AddWorkItemToBoard(this.storyMock.Object), Times.Once);
             this.historyEventWriterMock.
                 Verify(x => x.AddHistoryEvent(
-                    It.IsAny<string>(),
+                    returnMessage,
                     It.IsAny<IPerson>(),
-                    It.IsAny<IBoard>(),
+                    boardMock.Object,
                     It.IsAny<ITeam>(),
-                    It.IsAny<IWorkItem>()
+                    null
                     ), Times.Once);
         }
 
@@ -81,7 +81,7 @@ namespace WIMSystem.Tests.Commands.CreateCommands.CreateStoryCommandTests
             this.gettersMock.Setup(x => x.GetBoard(this.validTeamName, this.validBoardName)).Returns(this.boardMock.Object);
 
             this.componentsFactoryMock
-                .Setup(x => x.CreateStory(this.validTitle, this.validDescription, this.validPriority, this.validStorySize, It.IsAny<IBoard>(), null))
+                .Setup(x => x.CreateStory(this.validTitle, this.validDescription, this.validPriority, this.validStorySize, boardMock.Object, null))
                 .Returns(this.storyMock.Object);
 
             var sut = new CreateStoryCommand(this.historyEventWriterMock.Object, this.componentsFactoryMock.Object, this.gettersMock.Object);
@@ -111,7 +111,7 @@ namespace WIMSystem.Tests.Commands.CreateCommands.CreateStoryCommandTests
             this.gettersMock.Setup(x => x.GetBoard(this.validTeamName, this.validBoardName)).Returns(this.boardMock.Object);
 
             this.componentsFactoryMock
-                .Setup(x => x.CreateStory(this.validTitle, this.validDescription, this.validPriority, this.validStorySize, It.IsAny<IBoard>(), null));
+                .Setup(x => x.CreateStory(this.validTitle, this.validDescription, this.validPriority, this.validStorySize, boardMock.Object, null));
 
             var sut = new CreateStoryCommand(this.historyEventWriterMock.Object, this.componentsFactoryMock.Object, this.gettersMock.Object);
             var parameters = new List<string>()

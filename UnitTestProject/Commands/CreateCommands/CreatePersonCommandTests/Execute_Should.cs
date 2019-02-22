@@ -36,18 +36,18 @@ namespace WIMSystem.Tests.Commands.CreateCommands.CreatePersonCommandTests
             };
 
             //Act
-            sut.Execute(parameters);
+            var returnMessage = sut.Execute(parameters);
 
             //Assert
             this.componentsFactoryMock.Verify(x => x.CreatePerson(this.validPersonName), Times.Once);
             this.personsCollectionMock.Verify(x => x.AddPerson(personMock.Object), Times.Once);
             this.historyEventWriterMock.
                 Verify(x => x.AddHistoryEvent(
-                    It.IsAny<string>(),
-                    It.IsAny<IPerson>(),
-                    It.IsAny<IBoard>(),
-                    It.IsAny<ITeam>(),
-                    It.IsAny<IWorkItem>()
+                    returnMessage,
+                    personMock.Object,
+                    null,
+                    null,
+                    null
                     ), Times.Once);
         }
 
