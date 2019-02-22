@@ -17,7 +17,7 @@ namespace WIMSystem.ContainerModules
             builder.RegisterType<CommandsFactory>().As<ICommandsFactory>();
             builder.RegisterType<Getters>().As<IGetters>();
 
-            builder.RegisterType<AddBoardToTeamCommand>().Named<IEngineCommand>("AddBoardToTeam");
+            //builder.RegisterType<AddBoardToTeamCommand>().Named<IEngineCommand>("AddBoardToTeam");
             builder.RegisterType<AddPersonToTeamCommand>().Named<IEngineCommand>("AddPersonToTeam");
             builder.RegisterType<CreatePersonCommand>().Named<IEngineCommand>("CreatePerson");
             builder.RegisterType<CreateTeamCommand>().Named<IEngineCommand>("CreateTeam");
