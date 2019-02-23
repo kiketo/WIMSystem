@@ -26,7 +26,7 @@ namespace WIMSystem.Tests.Commands.ChangeCommands.ChangeRatingOfFeedbackCommandT
         private Mock<IGetters> gettersMock = new Mock<IGetters>();
 
         [TestMethod]
-        public void ExecuteAllMethodsOnce_WhenValidParametersArePassed()//TODO: In debug-mode works fine!!!
+        public void ExecuteAllMethodsOnce_WhenValidParametersArePassed()
         {
             //Arrange
             var workItemMock = new Mock<IFeedback>();
