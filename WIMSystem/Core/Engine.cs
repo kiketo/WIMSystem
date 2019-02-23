@@ -58,18 +58,18 @@ namespace WIMSystem.Core
 
                     foreach (var inputString in inputStringList)
                     {
-                        if (inputString == CommandsConsts.TerminationAppCommand)
+                        if (inputString.ToLower() == CommandsConsts.TerminationAppCommand)
                         {
                             return;
                         }
 
-                        if (inputString == CommandsConsts.TerminationCommand)
+                        if (inputString.ToLower() == CommandsConsts.TerminationCommand)
                         {
                             this.printReports.Print();
                             break;
                         }
 
-                        if ( inputString == CommandsConsts.ConsoleExitCommand)
+                        if ( inputString.ToLower() == CommandsConsts.ConsoleExitCommand)
                         {
                             this.printReports.Print();
                             this.Start(false);

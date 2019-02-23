@@ -47,7 +47,7 @@ namespace WIMSystem.Commands.ChangeCommands
             }
 
             workItem.AssignMember(member);
-            member.MemberWorkItems.Add(workItem); //TODO - does not working ... ccccc fucking bugs - Done added set in the property!
+            member.MemberWorkItems.Add(workItem);
 
             var returnMessage = string.Format(CommandsConsts.WorkItemAssigned, workItem.Title, member.PersonName);
 

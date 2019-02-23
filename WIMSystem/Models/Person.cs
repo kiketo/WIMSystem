@@ -7,17 +7,17 @@ namespace WIMSystem.Models
 {
     public class Person : IPerson
     {
-        
+
         private string personName;
         private IList<IWorkItem> memberWorkItem;
         private bool isAssignedToTeam;
-        
-        
+
+
         public Person(string personName)
         {
             this.PersonName = personName;
-            memberWorkItem = new List<IWorkItem>();
-            this.IsAssignedToTeam = isAssignedToTeam;
+            this.memberWorkItem = new List<IWorkItem>();
+            this.IsAssignedToTeam = this.isAssignedToTeam;
         }
 
         public string PersonName
@@ -29,7 +29,7 @@ namespace WIMSystem.Models
 
             private set
             {
-                if (value.Length<5||value.Length>15)
+                if (value.Length < 5 || value.Length > 15)
                 {
                     throw new ArgumentException("Members name should be between 5 and 15 symbols.");
                 }
@@ -42,13 +42,12 @@ namespace WIMSystem.Models
         {
             get
             {
-                return new List<IWorkItem>(this.memberWorkItem);
-            }
-            set
-            {
-                this.memberWorkItem = value;
+                //return new List<IWorkItem>(this.memberWorkItem);
+                return this.memberWorkItem;
             }
         }
+
+
 
         public bool IsAssignedToTeam
         {
@@ -68,7 +67,7 @@ namespace WIMSystem.Models
             StringBuilder str = new StringBuilder();
             str.AppendLine($"Person Name: {this.PersonName}");
             str.AppendLine($"Assigned to team: {this.IsAssignedToTeam}");
-            if (this.MemberWorkItems.Count>0)
+            if (this.MemberWorkItems.Count > 0)
             {
                 str.AppendLine("Work items:");
                 foreach (var workItem in this.MemberWorkItems)

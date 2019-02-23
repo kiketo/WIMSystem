@@ -13,8 +13,6 @@ namespace WIMSystem.Tests.Commands.Utils.GettersTest
     [TestClass]
     public class Constructor_Should
     {
-        private IWIMTeams wIMTeams;
-
         [TestMethod]
         public void ThrowArgumentNullException_WhenNullPersonsCollectionIsPassed()
         {
@@ -34,7 +32,7 @@ namespace WIMSystem.Tests.Commands.Utils.GettersTest
             IWIMTeams wimTeams = null;
 
             //Act&Assert
-            var ex = Assert.ThrowsException<ArgumentNullException>(() => new Getters(personList.Object, wIMTeams));
+            var ex = Assert.ThrowsException<ArgumentNullException>(() => new Getters(personList.Object, null));
             Assert.AreEqual(string.Format(CommandsConsts.NULL_OBJECT, nameof(wimTeams)), ex.ParamName);
         }
         [TestMethod]

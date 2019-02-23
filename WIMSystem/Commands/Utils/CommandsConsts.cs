@@ -6,9 +6,9 @@ namespace WIMSystem.Commands.Utils
 {
     internal class CommandsConsts
     {
-        internal const string TerminationCommand = "Exit";
-        internal const string TerminationAppCommand = "AppExit";
-        internal const string ConsoleExitCommand = "ConsoleExit";
+        internal const string TerminationCommand = "exit";
+        internal const string TerminationAppCommand = "appexit";
+        internal const string ConsoleExitCommand = "consoleexit";
 
         internal const string InvalidCommand = "Invalid command name: {0}!";
         internal const string EmptyCommand = "Command name: {0} can not be null or empty!";
