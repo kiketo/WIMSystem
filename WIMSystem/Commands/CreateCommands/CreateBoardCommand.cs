@@ -10,10 +10,6 @@ using WIMSystem.Models.Contracts;
 
 namespace WIMSystem.Commands.CreateCommands
 {
-    //TODO: Тук имаме бъг в тази команда, когато се опитвам да вкарам борд в тийм, през menu Items,
-    //или ме връща в менюто, или ми хвърля два ексепшъна, a когато го дебъгвам, си работи нормално и не мога да намеря проблемът
-
-
     public class CreateBoardCommand : IEngineCommand
     {
         private readonly IHistoryEventWriter historyEventWriter;

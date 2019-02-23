@@ -86,7 +86,6 @@ namespace WIMSystem.Core
                 {
                     this.printReports.Reports.Add(ex.Message);
                     this.printReports.Print();
-                    Start(false);
                 }
             }
         }
