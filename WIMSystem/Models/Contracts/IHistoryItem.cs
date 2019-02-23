@@ -6,6 +6,7 @@ namespace WIMSystem.Models.Contracts
     public interface IHistoryItem
     {
         string Description { get; set; }
+        IWorkItem WorkItem { get; }
         DateTime CreationDate { get; }
         IPerson Member { get; }
         IBoard Board { get; }

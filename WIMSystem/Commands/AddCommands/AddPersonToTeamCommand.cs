@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using WIMSystem.Commands.Contracts;
 using WIMSystem.Commands.Utils;
 using WIMSystem.Models;
-using WIMSystem.Models.Contracts;
 
 namespace WIMSystem.Commands.AddCommands
 {
@@ -11,15 +10,13 @@ namespace WIMSystem.Commands.AddCommands
     {
         protected readonly IGetters getter;
         protected readonly IHistoryEventWriter historyEventWriter;
-  
+
         public AddPersonToTeamCommand(IGetters getter, IHistoryEventWriter historyEventWriter)
         {
-            this.getter = getter?? throw new ArgumentNullException(string.Format(
-                                                                CommandsConsts.NULL_OBJECT,
-                                                                nameof(getter)));
-            this.historyEventWriter = historyEventWriter ?? throw new ArgumentNullException(string.Format(
-                                                                                      CommandsConsts.NULL_OBJECT,
-                                                                                      nameof(historyEventWriter)));
+            this.getter = getter ?? throw new ArgumentNullException(
+                string.Format(CommandsConsts.NULL_OBJECT,nameof(getter)));
+            this.historyEventWriter = historyEventWriter ?? throw new ArgumentNullException(
+                string.Format(CommandsConsts.NULL_OBJECT,nameof(historyEventWriter)));
         }
 
         public string Execute(IList<string> parameters)

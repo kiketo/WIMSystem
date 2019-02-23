@@ -7,18 +7,10 @@
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="WIMSystem.Commands.AddCommands.AddBoardToTeamCommand" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="7.5" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAARAAAAAAAAAAAAAAAAAAAAAAAAAAIA=</HashCode>
-      <FileName>Commands\AddCommands\AddBoardToTeamCommand.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
-  </Class>
   <Class Name="WIMSystem.Commands.AddCommands.AddPersonToTeamCommand" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="9.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAIA=</HashCode>
       <FileName>Commands\AddCommands\AddPersonToTeamCommand.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -26,7 +18,7 @@
   <Class Name="WIMSystem.Commands.ChangeCommands.AssignWorkItemToMemberCommand" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="11" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAIA=</HashCode>
       <FileName>Commands\ChangeCommands\AssignWorkItemToMemberCommand.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -34,7 +26,7 @@
   <Class Name="WIMSystem.Commands.ChangeCommands.ChangePriorityCommand" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="14.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAIA=</HashCode>
       <FileName>Commands\ChangeCommands\ChangePriorityCommand.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -42,7 +34,7 @@
   <Class Name="WIMSystem.Commands.ChangeCommands.ChangeRatingOfFeedbackCommand" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="16.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAIA=</HashCode>
       <FileName>Commands\ChangeCommands\ChangeRatingOfFeedbackCommand.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -50,7 +42,7 @@
   <Class Name="WIMSystem.Commands.ChangeCommands.ChangeSeverityOfBugCommand" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="18" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAIA=</HashCode>
       <FileName>Commands\ChangeCommands\ChangeSeverityOfBugCommand.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -58,7 +50,7 @@
   <Class Name="WIMSystem.Commands.ChangeCommands.ChangeSizeOfStoryCommand" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="19.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAIA=</HashCode>
       <FileName>Commands\ChangeCommands\ChangeSizeOfStoryCommand.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -66,7 +58,7 @@
   <Class Name="WIMSystem.Commands.ChangeCommands.ChangeStatus" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="7.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAIA=</HashCode>
       <FileName>Commands\ChangeCommands\ChangeStatus.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -74,7 +66,7 @@
   <Class Name="WIMSystem.Commands.ChangeCommands.UnassignWorkItemCommand" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="18" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAIA=</HashCode>
       <FileName>Commands\ChangeCommands\UnassignWorkItemCommand.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -82,7 +74,7 @@
   <Class Name="WIMSystem.Commands.CreateCommands.CreateBoardCommand" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="16.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAIAQAAAAAAACAAAAAAAAAAAAAAAAAAoA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAoA=</HashCode>
       <FileName>Commands\CreateCommands\CreateBoardCommand.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -90,7 +82,7 @@
   <Class Name="WIMSystem.Commands.CreateCommands.CreateBugCommand" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="18" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAoA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAoA=</HashCode>
       <FileName>Commands\CreateCommands\CreateBugCommand.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -98,7 +90,7 @@
   <Class Name="WIMSystem.Commands.CreateCommands.CreateCommentCommand" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="19.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAoA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAoA=</HashCode>
       <FileName>Commands\CreateCommands\CreateCommentCommand.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -106,7 +98,7 @@
   <Class Name="WIMSystem.Commands.CreateCommands.CreateFeedbackCommand" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="7.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAACAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAoA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAoA=</HashCode>
       <FileName>Commands\CreateCommands\CreateFeedbackCommand.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -114,7 +106,7 @@
   <Class Name="WIMSystem.Commands.CreateCommands.CreatePersonCommand" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="9.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAQAAAAAEAAAAAAAAAAAAAAAAAAAAoA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAEAAAAAAAAAAAAAAAAAAAAoA=</HashCode>
       <FileName>Commands\CreateCommands\CreatePersonCommand.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -122,7 +114,7 @@
   <Class Name="WIMSystem.Commands.CreateCommands.CreateStoryCommand" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="11" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAoA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAoA=</HashCode>
       <FileName>Commands\CreateCommands\CreateStoryCommand.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -130,7 +122,7 @@
   <Class Name="WIMSystem.Commands.CreateCommands.CreateTeamCommand" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="12.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAIAQAAAAAAAAAAAAAAAAAAAAAAAAAAoA=</HashCode>
+      <HashCode>AAAAAAAAAAAAIAQAAAAAAAAAAAAAAAAAAAAAAAAAAoA=</HashCode>
       <FileName>Commands\CreateCommands\CreateTeamCommand.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -138,7 +130,7 @@
   <Class Name="WIMSystem.Commands.ListCommands.ListBoardWorkItemsCommand" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="11" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\ListCommands\ListBoardWorkItemsCommand.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -146,7 +138,7 @@
   <Class Name="WIMSystem.Commands.ListCommands.ShowAllPeopleCommand" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="16.25" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAQAAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\ListCommands\ShowAllPeopleCommand.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -154,7 +146,7 @@
   <Class Name="WIMSystem.Commands.ListCommands.ShowAllTeamBoardsCommand" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="18" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAABAAAARAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAABAAAARAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\ListCommands\ShowAllTeamBoardsCommand.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -162,7 +154,7 @@
   <Class Name="WIMSystem.Commands.ListCommands.ShowAllTeamMembersCommand" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="19.75" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAABAAAARAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAABAAAARAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\ListCommands\ShowAllTeamMembersCommand.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -170,7 +162,7 @@
   <Class Name="WIMSystem.Commands.ListCommands.ShowAllTeamsCommand" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="7.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
       <FileName>Commands\ListCommands\ShowAllTeamsCommand.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -178,7 +170,7 @@
   <Class Name="WIMSystem.Commands.ListCommands.ShowBoardActivityCommand" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="9.25" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAABAAAARAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAABAAAARAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\ListCommands\ShowBoardActivityCommand.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -186,7 +178,7 @@
   <Class Name="WIMSystem.Commands.ListCommands.ShowPersonActivityCommand" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="11" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAABAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAABAAAAQAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\ListCommands\ShowPersonActivityCommand.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -194,7 +186,7 @@
   <Class Name="WIMSystem.Commands.ListCommands.ShowTeamActivityCommand" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="12.75" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAABAAAARAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAABAAAARAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\ListCommands\ShowTeamActivityCommand.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -202,7 +194,7 @@
   <Class Name="WIMSystem.Commands.Utils.CommandsConsts" Collapsed="true">
     <Position X="12.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>YJcAABBAAAIAICAIADAABAAEQUAAACAAAgAAABQAEIM=</HashCode>
+      <HashCode>YJcAABBAAAIAICAIADAABAAEQVAAACAAAgAAABQQEIM=</HashCode>
       <FileName>Commands\Utils\CommandsConsts.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -388,7 +380,7 @@
   <Class Name="WIMSystem.Models.HistoryItem" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="19.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QAAAAEAAAAAgAAAEIAAQAAAAAAAYAAAAOAAAACAAAAA=</HashCode>
+      <HashCode>QAAAAEAAAAAkAAAEJAAQAAAAAAAYAAAAOAAAACAAAAA=</HashCode>
       <FileName>Models\HistoryItem.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -487,7 +479,7 @@
   <Interface Name="WIMSystem.Commands.Contracts.IEngineCommand" Collapsed="true">
     <Position X="19.75" Y="8.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\Contracts\IEngineCommand.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -613,7 +605,7 @@
   <Interface Name="WIMSystem.Models.Contracts.IHistoryItem" Collapsed="true">
     <Position X="11" Y="9.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QAAAAAAAAAAgAAAEAAAQAAAAAAAIAAAAEAAAACAAAAA=</HashCode>
+      <HashCode>QAAAAAAAAAAgAAAEBAAQAAAAAAAIAAAAEAAAACAAAAA=</HashCode>
       <FileName>Models\Contracts\IHistoryItem.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -697,7 +689,7 @@
   <Enum Name="WIMSystem.Models.Enums.HistoryItemFilterType" Collapsed="true">
     <Position X="12.75" Y="11.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAIAAAAACAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAQAAAAIAAAAACAAAA=</HashCode>
       <FileName>Models\Enums\FilterType.cs</FileName>
     </TypeIdentifier>
   </Enum>

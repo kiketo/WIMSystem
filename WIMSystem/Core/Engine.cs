@@ -24,9 +24,9 @@ namespace WIMSystem.Core
             ICommandParser parser,
             IReader reader)
         {
-            this.commandsFactory = commandsFactory ?? throw new ArgumentException(string.Format(Consts.NULL_OBJECT, nameof(printReports)));
+            this.commandsFactory = commandsFactory ?? throw new ArgumentException(string.Format(Consts.NULL_OBJECT, nameof(commandsFactory)));
             this.printReports = printReports ?? throw new ArgumentException(string.Format(Consts.NULL_OBJECT, nameof(printReports)));
-            this.mainMenu = mainMenu ?? throw new ArgumentException(string.Format(Consts.NULL_OBJECT, nameof(printReports)));
+            this.mainMenu = mainMenu ?? throw new ArgumentException(string.Format(Consts.NULL_OBJECT, nameof(mainMenu)));
             this.reader = reader;
             this.parser = parser;
         }
@@ -69,7 +69,7 @@ namespace WIMSystem.Core
                             break;
                         }
 
-                        if (inputString == CommandsConsts.ConsoleExitCommand)
+                        if ( inputString == CommandsConsts.ConsoleExitCommand)
                         {
                             this.printReports.Print();
                             this.Start(false);
@@ -85,7 +85,7 @@ namespace WIMSystem.Core
                 catch (Exception ex)
                 {
                     this.printReports.Reports.Add(ex.Message);
-                    Start(false);
+                    this.printReports.Print();
                 }
             }
         }

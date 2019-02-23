@@ -14,7 +14,7 @@ namespace WIMSystem.Tests.Commands.Utils.GettersTest
     public class GetPerson_Should
     {
         [TestMethod]
-        public void Throw_ArgumentNullException_When_MemberDontExist()
+        public void Throw_ArgumentNullException_When_PersonDontExist()
         {
             //Arrange
             var personListMock = new Mock<IPersonsCollection>();
@@ -25,35 +25,19 @@ namespace WIMSystem.Tests.Commands.Utils.GettersTest
             Assert.AreEqual(string.Format(CommandsConsts.NoPersonFound,"Some Member"),ex.ParamName);
         }
         [TestMethod]
-        public void CorectrlyPassData()//TODO I need help here
-        {
-            /*
-            Според мен:
-            Трябва да провериш дали метода GetPerson извиква 
-            1. personList.Contains
-            2. Индексатора (индексатор се тества по следния начин: personListMock.Verify(x => x["Pesho"], Times.Once);)
-            
-            Не мисля, че трябва да проверяваш дали връщаното е нашия обект, защото за това се грижи нашия индексатор в класа
-            personList т.е. като (ако изобщо) му правим unit test-ове ще проверяваме дали работи правилно този индексатор в
-            този клас. В нашия метод GetPerson би следвало да се извикват тези методи, а вече си е тяхно задължение да работят
-            правилно.
-            */
+        public void CorrectlyPassData()
+        {            
             //Arrange 
             var wIMTeamMock = new Mock<IWIMTeams>();
             var personListMock = new Mock<IPersonsCollection>();
             personListMock.Setup(x => x.Contains("Pesho")).Returns(true);
-            var personMock = new Mock<IPerson>();
-            personMock.Setup(p => p.PersonName).Returns("Pesho");
-                        
-            personListMock.Setup(p => p.Persons).Returns(new Dictionary<string, IPerson> { { "Pesho", personMock.Object } });
-            
-            personListMock.Setup(p => p.Persons["Pesho"]).Returns(personMock.Object);
-           
+            personListMock.SetupGet(p => p["Pesho"]).Returns(new Mock<IPerson>().Object);
             var sut = new Getters(personListMock.Object, wIMTeamMock.Object);
             //Act
             var getPerson=sut.GetPerson("Pesho");
             //Assert
-            Assert.AreEqual(personMock.Object, getPerson);
-        }
+            personListMock.Verify(x => x.Contains("Pesho"), Times.Once);
+            personListMock.Verify(p => p["Pesho"], Times.Once);                    
+        }        
     }
 }
