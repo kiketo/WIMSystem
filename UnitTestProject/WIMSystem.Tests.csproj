@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <Folder Include="Commands\ChangeCommands\ChangePriorityCommandTests\FakeClasses\" />
-    <Folder Include="Commands\ChangeCommands\ChangeSeverityOfBugCommandTests\" />
     <Folder Include="Commands\ChangeCommands\ChangeSizeOfStoryCommandTests\" />
     <Folder Include="Commands\ChangeCommands\ChangeStatusCommandTests\" />
     <Folder Include="Commands\ChangeCommands\UnassignWorkitemCommandTests\" />
