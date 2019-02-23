@@ -6,8 +6,11 @@ using System.Text;
 using WIMSystem.Commands.ChangeCommands;
 using WIMSystem.Commands.Contracts;
 using WIMSystem.Commands.Utils;
+using WIMSystem.Models;
+using WIMSystem.Models.Abstract;
 using WIMSystem.Models.Contracts;
 using WIMSystem.Models.Enums;
+using WIMSystem.Utils;
 
 namespace WIMSystem.Tests.Commands.ChangeCommands.ChangePriorityCommandTests
 {
@@ -97,10 +100,80 @@ namespace WIMSystem.Tests.Commands.ChangeCommands.ChangePriorityCommandTests
             Assert.AreEqual(expecterMessage, actualMessage);
         }
 
-        //TODO: Member is assignee if it is assignable work item
+        [TestMethod]
+        public void MemberIsAssignee_WhenWorkItemIsAssignable()
+        {
+            var validTeamName = "validTeam";
+            var validBoardName = "validB";
+            var validWorkItemTitle = "validW";
+            var priority = "High";
 
-        //TODO: Member is null if it is not assignable work item
+            var historyEventWriterMock = new Mock<IHistoryEventWriter>();
+            var gettersMock = new Mock<IGetters>();
+            var boardMock = new Mock<IBoard>();
+            var workItemMock = new Mock<IBug>();
+            var mockAssignee = new Mock<IPerson>();
+            var teamMock = new Mock<ITeam>();
 
-        //TODO: ExceptionThrowing
+            gettersMock.Setup(b => b.GetBoard(validTeamName, validBoardName)).Returns(boardMock.Object);
+            gettersMock.Setup(w => w.GetAssignableWorkItem(boardMock.Object, validWorkItemTitle)).Returns(workItemMock.Object);
+
+            boardMock.Setup(n => n.BoardName).Returns(validBoardName);
+            boardMock.Setup(n => n.Team).Returns(It.IsAny<ITeam>());
+
+            workItemMock.Setup(p => p.Priority).Returns(PriorityType.Low);
+            workItemMock.Setup(p => p.Title).Returns(validWorkItemTitle);
+            workItemMock.Setup(a => a.Assignee).Returns(mockAssignee.Object);
+            workItemMock.Setup(a => a.Board).Returns(boardMock.Object);
+            workItemMock.Setup(a => a.Board.Team).Returns(teamMock.Object);
+
+            var parameters = new List<string>() { validTeamName, validBoardName, validWorkItemTitle, priority };
+
+            var sut = new ChangePriorityCommand(historyEventWriterMock.Object, gettersMock.Object);
+
+            sut.Execute(parameters);
+
+            Assert.AreEqual(mockAssignee.Object, workItemMock.Object.Assignee);
+        }
+
+        [TestMethod]
+        public void ThrowsArgumentException_WhenPassedWorkItemIsNull()
+        {
+            var validTeamName = "validTeam";
+            var validBoardName = "validB";
+            var validWorkItemTitle = "validW";
+            var priority = "High";
+
+            var historyEventWriterMock = new Mock<IHistoryEventWriter>();
+            var gettersMock = new Mock<IGetters>();
+            var boardMock = new Mock<IBoard>();
+            IBug fakeWorkItem = null;
+            var workItemMock = new Mock<IBug>();
+            var mockAssignee = new Mock<IPerson>();
+            var teamMock = new Mock<ITeam>();
+
+            gettersMock.Setup(b => b.GetBoard(validTeamName, validBoardName)).Returns(boardMock.Object);
+            gettersMock.Setup(w => w.GetAssignableWorkItem(boardMock.Object, validWorkItemTitle)).Returns(fakeWorkItem);
+
+            boardMock.Setup(n => n.BoardName).Returns(validBoardName);
+            boardMock.Setup(n => n.Team).Returns(It.IsAny<ITeam>());
+
+            workItemMock.Setup(p => p.Priority).Returns(PriorityType.Low);
+            workItemMock.Setup(p => p.Title).Returns(validWorkItemTitle);
+            workItemMock.Setup(a => a.Assignee).Returns(mockAssignee.Object);
+            workItemMock.Setup(a => a.Board).Returns(boardMock.Object);
+            workItemMock.Setup(a => a.Board.Team).Returns(teamMock.Object);
+
+            var parameters = new List<string>() { validTeamName, validBoardName, validWorkItemTitle, priority };
+
+            var sut = new ChangePriorityCommand(historyEventWriterMock.Object, gettersMock.Object);
+
+            var expectedMessage = string.Format(Consts.NULL_OBJECT, nameof(WorkItem));
+
+            var realMessage = 
+                    Assert.ThrowsException<ArgumentException>(() => sut.Execute(parameters));
+
+            Assert.AreEqual(expectedMessage, realMessage.Message);
+        }
     }
 }
