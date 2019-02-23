@@ -2,14 +2,12 @@
 using Moq;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using WIMSystem.Commands.Contracts;
 using WIMSystem.Commands.CreateCommands;
 using WIMSystem.Commands.Utils;
 using WIMSystem.Core.Factories.Contracts;
 using WIMSystem.Models;
 using WIMSystem.Models.Contracts;
-using WIMSystem.Tests.Commands.CreateCommands.CreateBoardCommandTest.Fake;
 
 namespace WIMSystem.Tests.Commands.CreateCommands.CreateBoardCommandTest
 {
