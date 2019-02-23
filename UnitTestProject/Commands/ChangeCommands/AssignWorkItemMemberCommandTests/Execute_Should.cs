@@ -149,10 +149,8 @@ namespace WIMSystem.Tests.Commands.ChangeCommands.AssignWorkItemMemberCommandTes
             string expectedExceptionMessage = string.Format(CommandsConsts.NULL_OBJECT, nameof(Person));
 
             //Act, Assert
-            Assert.AreEqual(
-                expectedExceptionMessage,
-                Assert.ThrowsException<ArgumentException>(() => sut.Execute(parameters)).Message
-                );
+            Assert.AreEqual(expectedExceptionMessage,Assert.ThrowsException<ArgumentException>
+                (() => sut.Execute(parameters)).Message);
         }
 
         [TestMethod]
