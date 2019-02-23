@@ -53,7 +53,7 @@ namespace WIMSystem.Models.Abstract
                 }
                 if (this.board.BoardWorkItems.ContainsKey(value)) //
                 {
-                    Console.WriteLine($"This board already contains Work Item with name {value}!");
+                    throw new ArgumentException($"This board already contains Work Item with name {value}!");
                 }
                 else
                 {
