@@ -53,7 +53,7 @@ namespace WIMSystem.Tests.Commands.ChangeCommands.ChangeRatingOfFeedbackCommandT
             //Assert
             gettersMock.Verify(x => x.GetWorkItem(boardMock.Object, validWorkItemTitle), Times.Once);
             gettersMock.Verify(x => x.GetBoard(validTeamName, validBoardName), Times.Once);
-            workItemMock.Verify(x => x.Rating, Times.Once);
+            workItemMock.VerifySet(x => x.Rating = 6, Times.Once);
             historyEventWriterMock.Verify(x => x.AddHistoryEvent(It.IsAny<string>(), It.IsAny<IPerson>(), It.IsAny<IBoard>(), It.IsAny<ITeam>(), It.IsAny<IWorkItem>()), Times.Once);
 
         }
