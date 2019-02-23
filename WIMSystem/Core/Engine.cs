@@ -85,6 +85,7 @@ namespace WIMSystem.Core
                 catch (Exception ex)
                 {
                     this.printReports.Reports.Add(ex.Message);
+                    this.printReports.Print();
                     Start(false);
                 }
             }
