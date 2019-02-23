@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using WIMSystem.Commands.Contracts;
 using WIMSystem.Commands.Utils;
+using WIMSystem.Models;
 using WIMSystem.Models.Contracts;
 using WIMSystem.Utils;
 
@@ -25,7 +26,7 @@ namespace WIMSystem.Commands.ListCommands
             if (Validators.IsNullValue(team))
             {
                 throw new ArgumentException(string.Format(CommandsConsts.NULL_OBJECT,
-                    nameof(team)
+                    nameof(Team)
                     ));
             }
             var returnMessage = team.ShowAllTeamMembers();

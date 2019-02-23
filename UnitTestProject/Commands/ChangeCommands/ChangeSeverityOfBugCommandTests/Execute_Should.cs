@@ -6,6 +6,7 @@ using System.Text;
 using WIMSystem.Commands.ChangeCommands;
 using WIMSystem.Commands.Contracts;
 using WIMSystem.Commands.Utils;
+using WIMSystem.Models;
 using WIMSystem.Models.Abstract;
 using WIMSystem.Models.Contracts;
 using WIMSystem.Models.Enums;
@@ -60,6 +61,7 @@ namespace WIMSystem.Tests.Commands.ChangeCommands.ChangeSeverityOfBugCommandTest
             //Assert
             gettersMock.Verify(x => x.GetBoard(validTeamName, validBoardName), Times.Once);
             gettersMock.Verify(x => x.GetWorkItem(boardMock.Object, validBugTitle), Times.Once);
+            workItemMock.VerifySet(x => x.Severity = BugSeverityType.Critical, Times.Once);
             historyEventWriterMock.
             Verify(x => x.AddHistoryEvent(
                 returnMessage,
@@ -141,6 +143,41 @@ namespace WIMSystem.Tests.Commands.ChangeCommands.ChangeSeverityOfBugCommandTest
 
             var sut = new ChangeSeverityOfBugCommand(historyEventWriterMock.Object, gettersMock.Object);
             var expectedMessage = string.Format(Consts.NULL_OBJECT, nameof(WorkItem));
+
+
+            //Act,Assert
+            var realMessage =
+                    Assert.ThrowsException<ArgumentException>(() => sut.Execute(parameters));
+
+            //Assert
+            Assert.AreEqual(expectedMessage, realMessage.Message);
+        }
+
+        [TestMethod]
+        public void ThrowsArgumentException_WhenPassedWorkItemIsNotBug()
+        {
+            //Arrange
+            var validTeamName = "validTeam";
+            var validBoardName = "validB";
+            var validTitle = "validItem";
+            var severity = "Critical";
+
+            //Arrange
+            var historyEventWriterMock = new Mock<IHistoryEventWriter>();
+            var gettersMock = new Mock<IGetters>();
+            var boardMock = new Mock<IBoard>();
+            var workItemMock = new Mock<IStory>();
+            var teamMock = new Mock<ITeam>();
+
+            //Arrange
+            gettersMock.Setup(b => b.GetBoard(validTeamName, validBoardName)).Returns(boardMock.Object);
+            gettersMock.Setup(w => w.GetWorkItem(boardMock.Object, validTitle)).Returns(workItemMock.Object);
+
+            //Arrange
+            var parameters = new List<string>() { validTeamName, validBoardName, validTitle, severity };
+
+            var sut = new ChangeSeverityOfBugCommand(historyEventWriterMock.Object, gettersMock.Object);
+            var expectedMessage = string.Format($"{workItemMock.Object.GetType().Name} is not a {nameof(Bug)}!");
 
 
             //Act,Assert

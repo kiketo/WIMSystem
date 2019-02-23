@@ -14,13 +14,16 @@ namespace WIMSystem.Tests.CommandsTest.ListCommandsTest.ShowAllPeopleCommandTest
         [TestMethod]
         public void Call_ShowAllPeople_Method_To_The_Persons_Collection()
         {
+            //Arrange
             var fakeList = new Mock<IPersonsCollection>();
             var sut = new ShowAllPeopleCommand(fakeList.Object);
             fakeList.Setup(x => x.ShowAllPeople());
             var fakeParameters = new List<string>();
 
+            //Act
             sut.Execute(fakeParameters);
 
+            //Assert
             fakeList.Verify(x => x.ShowAllPeople(), Times.Once);
         }
     }
