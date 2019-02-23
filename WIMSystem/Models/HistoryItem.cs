@@ -13,7 +13,7 @@ namespace WIMSystem.Models
         private readonly IPerson member;
         private readonly IBoard board;
         private readonly ITeam team;
-        private readonly IWorkItem workItem;//TODO: ??? added by Kiko
+        private readonly IWorkItem workItem;//TODO:  added by Kiko
 
         public HistoryItem(string description, DateTime creationDate, IPerson member, IBoard board, ITeam team, IWorkItem workItem)
         {
