@@ -46,18 +46,15 @@ namespace WIMSystem.Commands.Utils
                             CommandsConsts.NoTeamFound,
                             team.TeamName));
             }
-
+            if (!team.MemberList.Contains(this.GetPerson(memberAsString)))
+            {
+                throw new ArgumentNullException(
+                            string.Format(
+                            CommandsConsts.NoPersonInTeamFound,
+                            memberAsString));
+            }
             var person = this.GetPerson(memberAsString);//this.personList[memberAsString];
-
-            //if (!team.MemberList.Contains(person))
-            //{
-            //    throw new ArgumentNullException(
-            //                string.Format(
-            //                CommandsConsts.NoPersonInTeamFound,
-            //                memberAsString));
-
-            //}
-
+            
             return person;
         }
 

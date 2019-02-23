@@ -103,10 +103,10 @@ namespace WIMSystem.Models
             {
                 throw new ArgumentException("Board cannot be null!");
             }
-            if (this.boardList.ContainsKey(board.BoardName))
-            {
-                throw new ArgumentException($"This team already has {board.BoardName} board");
-            }
+           //if (this.boardList.ContainsKey(board.BoardName))
+           //{
+           //    throw new ArgumentException($"This team already has {board.BoardName} board");
+           //}
 
             else
             {
@@ -124,7 +124,7 @@ namespace WIMSystem.Models
             }
             if (!this.boardList.ContainsKey(board.BoardName))
             {
-                throw new ArgumentException($"This team has  {board.BoardName} board");
+                throw new ArgumentException($"This {this.TeamName} team doesn't have  {board.BoardName} board!");
             }
 
             else

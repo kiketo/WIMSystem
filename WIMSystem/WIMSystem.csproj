@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Commands\AddCommands\AddBoardToTeamCommand.cs" />
     <Compile Remove="Models\BoardsCollecton.cs" />
   </ItemGroup>
 

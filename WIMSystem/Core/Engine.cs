@@ -69,7 +69,7 @@ namespace WIMSystem.Core
                             break;
                         }
 
-                        if (inputString == CommandsConsts.ConsoleExitCommand)
+                        if ( inputString == CommandsConsts.ConsoleExitCommand)
                         {
                             this.printReports.Print();
                             this.Start(false);

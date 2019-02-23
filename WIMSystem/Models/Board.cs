@@ -37,16 +37,14 @@ namespace WIMSystem.Models
                 //Board name should be unique in the team
                 if (this.team.BoardList.ContainsKey(value))
                 {
-                    Console.WriteLine("Board with the same name already exists in the current Team.");
+                    throw new ArgumentException($"This team already has {this.BoardName} board");
                 }
-
                 else
                 {
                     this.boardName = value;
                 }
             }
         }
-
         public IDictionary<string, IWorkItem> BoardWorkItems
         {
             get
