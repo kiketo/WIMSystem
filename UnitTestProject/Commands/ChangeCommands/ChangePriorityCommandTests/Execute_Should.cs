@@ -59,6 +59,7 @@ namespace WIMSystem.Tests.Commands.ChangeCommands.ChangePriorityCommandTests
             //Assert
             gettersMock.Verify(x => x.GetBoard(validTeamName, validBoardName), Times.Once);
             gettersMock.Verify(x => x.GetAssignableWorkItem(boardMock.Object, validWorkItemTitle), Times.Once);
+            workItemMock.VerifySet(x => x.Priority=PriorityType.High, Times.Once);
             historyEventWriterMock.
             Verify(x => x.AddHistoryEvent(
                 returnMessage,

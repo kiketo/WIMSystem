@@ -16,22 +16,28 @@ namespace UnitTestProject.CommandsTest.ListCommandsTest.ShowAllPeopleCommandTest
         [TestMethod]
         public void Throw_When_A_Passed_Value_Is_Null()
         {
+            //Arrange
             IPersonsCollection personList = null;
             var expectedMessage = string.Format(CommandsConsts.NULL_OBJECT,
                 nameof(personList));
 
+            //Act,Assert
             var testMessage = Assert.ThrowsException<ArgumentNullException>(() => new ShowAllPeopleCommand(personList));
 
+            //Assert
             Assert.AreEqual(expectedMessage, testMessage.ParamName);
         }
 
         [TestMethod]
         public void Correctly_Assign_PersonList_Value()
         {
+            //Arrange
             var fakeList = new Mock<IPersonsCollection>();
 
+            //Act
             var sut = new FakeShowAllPeopleCommand(fakeList.Object);
 
+            //Assert
             Assert.AreEqual(fakeList.Object, sut.PersonList);
         }
     }
