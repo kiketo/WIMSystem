@@ -1,8 +1,9 @@
 # WIMSystem
 
 Work Item Management (WIM) Console Application
+                                        ver 2.0
 
-OOP Teamwork Assignment
+OOP&HQC Teamwork Assignment
 
 C# .NET Jan'19
 
@@ -22,3 +23,6 @@ Created by:
 [Trello link](https://trello.com/b/Ockj2Cxm/oop-teamwork-assignment)
  
  For commands instruction please see our wiki page: [Commands](https://gitlab.com/stakAtak/WIMSystem/wikis/Application-commands)
+ 
+ P.S.
+ For version 1.0, please use branch OOP_Project_Final_Version!
