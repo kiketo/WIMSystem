@@ -31,35 +31,36 @@ namespace WIMSystem.Core
             this.parser = parser;
         }
 
+        //public void Start()
+        //{
+        //
+        //}
+
         public void Start(bool showLogo)
         {
             if (showLogo)
             {
                 this.mainMenu.ShowLogo();
             }
-
-            var myReader = this.mainMenu.InputTypeChooser();
-            if (myReader != null)
-            {
-                this.Run(myReader);
-            }
-            this.mainMenu.ShowCredits();
-        }
-
-        public void Run(IReader reader)
-        {
             //var inputString = reader.Read();
 
             while (true)
             {
+                var myReader = this.mainMenu.InputTypeChooser();
+                if (myReader == null)
+                {
+                    this.mainMenu.ShowCredits();
+                    return;
+                }
                 try
                 {
-                    var inputStringList = reader.Read();
+                    var inputStringList = myReader.Read();
 
                     foreach (var inputString in inputStringList)
                     {
                         if (inputString.ToLower() == CommandsConsts.TerminationAppCommand)
                         {
+                            this.mainMenu.ShowCredits();
                             return;
                         }
 
@@ -69,11 +70,11 @@ namespace WIMSystem.Core
                             break;
                         }
 
-                        if ( inputString.ToLower() == CommandsConsts.ConsoleExitCommand)
+                        if (inputString == CommandsConsts.ConsoleExitCommand)
                         {
                             this.printReports.Print();
-                            this.Start(false);
-                            return;
+                            //this.Start(false);
+                            break;
                         }
 
                         var command = this.parser.Parse(inputString);
