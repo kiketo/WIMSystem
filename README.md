@@ -1,7 +1,7 @@
 # WIMSystem
 
 Work Item Management (WIM) Console Application
-                                        ver 2.0
+                                        (ver 2.0)
 
 OOP&HQC Teamwork Assignment
 
