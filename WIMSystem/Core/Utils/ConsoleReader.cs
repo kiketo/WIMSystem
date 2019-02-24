@@ -14,7 +14,7 @@ namespace WIMSystem.Core.Utils
             {
                 result.Add(Console.ReadLine());
 
-                if (result[result.Count-1] == CommandsConsts.ConsoleExitCommand)
+                if (string.IsNullOrEmpty(result[result.Count-1]))
                 {
                     break;
                 }
