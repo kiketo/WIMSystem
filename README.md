@@ -25,4 +25,4 @@ Created by:
  For commands instruction please see our wiki page: [Commands](https://gitlab.com/stakAtak/WIMSystem/wikis/Application-commands)
  
  P.S.
- For version 1.0, please use branch OOP_Project_Final_Version!
+ For version 1.0, please use branch [OOP_Project_Final_Version](https://gitlab.com/stakAtak/WIMSystem/tree/OOP_Project_Final_Version)!
