@@ -41,7 +41,7 @@ namespace WIMSystem.Menu
         internal static IList<MenuItem> InputTypeItems = new List<MenuItem>()
         {
             new MenuItem("","Select input type:",""),
-            new MenuItem("MenuCommands","* Use main menu",""),
+            new MenuItem("MenuCommands","* Use list with commands",""),
             new MenuItem("BatchCommands","* Enter multiple commands",""),
             new MenuItem("AppExit","****Exit****","")
         };
