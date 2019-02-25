@@ -22,7 +22,6 @@
     <Folder Include="Commands\ChangeCommands\ChangeSizeOfStoryCommandTests\" />
     <Folder Include="Commands\ChangeCommands\ChangeStatusCommandTests\" />
     <Folder Include="Commands\ChangeCommands\UnassignWorkitemCommandTests\" />
-    <Folder Include="Commands\ListCommands\ListBoardWorkItemsCommandTest\" />
     <Folder Include="Models\BoardTest\" />
     <Folder Include="Models\CommentTest\" />
     <Folder Include="Models\WorkItemAbstractClassTest\" />
