@@ -13,22 +13,7 @@ namespace WIMSystem
     {
         private static void Main()
         {
-            //var factory = new Factory();
-
-            //var teamList = WIMTeams.Instance;
-            //var memberLits = PersonsCollection.Instance;
-            //var historyItemsList = HistoryItemsCollection.Instance;
-
-            //var batchParser = new ConsoleCommandParser();
-
-            //var engine = new WIMEngine(factory,teamList,memberLits,historyItemsList);
-
-            //var mainMenu = new MainMenu(
-            //    engine,
-            //    batchParser,
-            //    MainMenuItems.mainMenuItems);
-
-            //mainMenu.Start();
+            
 
             var builder = new ContainerBuilder();
 
@@ -37,13 +22,10 @@ namespace WIMSystem
 
 
             var container = builder.Build();
-            //builder.RegisterGeneric(typeof(ContainerResolver<>)).As(typeof(IContainerResolver<>)).WithParameter("container", container);
 
             using (var scope = container.BeginLifetimeScope())
             {
                 var engine = scope.Resolve<Engine>();
-                
-
                 engine.Start(true);
             }
         }

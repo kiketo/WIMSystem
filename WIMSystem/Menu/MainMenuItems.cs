@@ -35,7 +35,7 @@ namespace WIMSystem.Menu
             new MenuItem("ListBoardWorkItems","* List board items by filter and sort order",
                 "List board items. Optional filter parameters: filterType:Bug/Story/Feedback, filterStatus:status, filterAssignee:name, sortBy:Title/Priority/Severity/Size/Rating"),
            // new MenuItem("BatchCommands","Enter multiple commands",""),
-            new MenuItem("ConsoleExit","****Exit****","")
+            new MenuItem("","****Exit****","")
         };
 
         internal static IList<MenuItem> InputTypeItems = new List<MenuItem>()
