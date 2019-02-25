@@ -2,8 +2,6 @@
 using Moq;
 using System;
 using WIMSystem.Commands.Utils;
-using System.Collections.Generic;
-using System.Text;
 using WIMSystem.Models;
 using WIMSystem.Models.Contracts;
 using WIMSystem.Tests.Commands.Utils.FakeClasses;
@@ -21,8 +19,8 @@ namespace WIMSystem.Tests.Commands.Utils.GettersTest
             var wIMTeams = new Mock<IWIMTeams>();
 
             //Act&Assert
-            var ex=Assert.ThrowsException<ArgumentNullException>(() => new Getters(personList, wIMTeams.Object));
-            Assert.AreEqual(string.Format(CommandsConsts.NULL_OBJECT,nameof(personList)),ex.ParamName);
+            var ex = Assert.ThrowsException<ArgumentNullException>(() => new Getters(personList, wIMTeams.Object));
+            Assert.AreEqual(string.Format(CommandsConsts.NULL_OBJECT, nameof(personList)), ex.ParamName);
         }
         [TestMethod]
         public void ThrowArgumentNullException_WhenNullWIMTeamsIsPassed()
