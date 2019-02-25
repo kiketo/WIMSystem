@@ -35,14 +35,6 @@ namespace WIMSystem.Commands.ChangeCommands
                 throw new ArgumentException(string.Format(Consts.NULL_OBJECT, nameof(WorkItem)));
             }
 
-            //TODO: Стенли: Мисля, че тази проверка ни е излишна, тъй като няма как workitem-a да не е Assignable.
-            //Също така правим и проверка в Getters.GetAssignableWorkItem и там хвърляме ексепшън.
-
-            //if (!(workItem is IAssignableWorkItem))
-            //{
-            //    throw new ArgumentException(string.Format($"{workItem.GetType().Name} is not a {nameof(Feedback)}!"));
-            //}
-
             workItem.Priority = priority;
 
             var returnMessage = string.Format(CommandsConsts.WorkItemPriorityChange, workItem.Title, priority);

@@ -31,21 +31,13 @@ namespace WIMSystem.Core
             this.parser = parser;
         }
 
-        //public void Start()
-        //{
-        //
-        //}
-
-        public void Start(bool showLogo)
+        public void Start()
         {
-            if (showLogo)
-            {
-                this.mainMenu.ShowLogo();
-            }
-            //var inputString = reader.Read();
+            this.mainMenu.ShowLogo();
 
             while (true)
             {
+
                 var myReader = this.mainMenu.InputTypeChooser();
                 if (myReader == null)
                 {
@@ -64,17 +56,9 @@ namespace WIMSystem.Core
                             return;
                         }
 
-                        if (inputString.ToLower() == CommandsConsts.TerminationCommand)//TODO
-                        {
-                            this.printReports.Print();
-
-                            break;
-                        }
-
                         if (inputString == CommandsConsts.ConsoleExitCommand)
                         {
                             this.printReports.Print();
-                            //this.Start(false);
                             break;
                         }
 

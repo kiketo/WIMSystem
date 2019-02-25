@@ -12,7 +12,7 @@ using WIMSystem.Menu.Contracts;
 
 namespace WIMSystem.Tests.Core.EngineTests
 {
-    [TestClass]
+    
     public class Run_Should
     {
         Mock<ICommandsFactory> commandsFactoryMock = new Mock<ICommandsFactory>();

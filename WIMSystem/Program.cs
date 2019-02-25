@@ -26,7 +26,7 @@ namespace WIMSystem
             using (var scope = container.BeginLifetimeScope())
             {
                 var engine = scope.Resolve<Engine>();
-                engine.Start(true);
+                engine.Start();
             }
         }
     }
