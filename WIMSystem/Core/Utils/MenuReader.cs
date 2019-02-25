@@ -21,7 +21,7 @@ namespace WIMSystem.Core.Utils
             return new List<string>()
             {
                 this.mainMenu.ShowMenu(MainMenuItems.mainMenuItems),
-                CommandsConsts.TerminationCommand
+                CommandsConsts.TerminationCommand//TODO
             };
         }
     }
