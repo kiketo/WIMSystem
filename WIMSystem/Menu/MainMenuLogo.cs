@@ -17,7 +17,7 @@ namespace WIMSystem.Menu
        WWWW WWWW    IIIII  MMM       MMM
 
    Work Item Management Console Application
-
+                                      v.2.0
              Stanislav Dinev
              Kiril Kuzmanov
              Stiliyan Kostadinov
