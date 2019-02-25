@@ -60,7 +60,7 @@ namespace WIMSystem.Tests.Core.EngineTests
             );
 
             //Act
-            sut.Run(readerMock.Object);
+            //sut.Run(readerMock.Object);
 
             //Assert
             Assert.AreEqual(expextedOutput, printReporstMock.Object.Reports.Single());
