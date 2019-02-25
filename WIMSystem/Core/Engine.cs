@@ -64,9 +64,10 @@ namespace WIMSystem.Core
                             return;
                         }
 
-                        if (inputString.ToLower() == CommandsConsts.TerminationCommand)
+                        if (inputString.ToLower() == CommandsConsts.TerminationCommand)//TODO
                         {
                             this.printReports.Print();
+
                             break;
                         }
 

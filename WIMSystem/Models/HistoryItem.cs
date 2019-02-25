@@ -13,7 +13,7 @@ namespace WIMSystem.Models
         private readonly IPerson member;
         private readonly IBoard board;
         private readonly ITeam team;
-        private readonly IWorkItem workItem;//TODO:  added by Kiko
+        private readonly IWorkItem workItem;
 
         public HistoryItem(string description, DateTime creationDate, IPerson member, IBoard board, ITeam team, IWorkItem workItem)
         {
@@ -22,11 +22,11 @@ namespace WIMSystem.Models
             this.member = member;
             this.board = board;
             this.team = team;
-            this.workItem = workItem;//////////////////////////
+            this.workItem = workItem;
         }
-        public IWorkItem WorkItem    ///
-        {                            ///
-            get => this.workItem;    ///
+        public IWorkItem WorkItem    
+        {                            
+            get => this.workItem;    
         }                           
 
         public string Description
@@ -60,7 +60,7 @@ namespace WIMSystem.Models
             str.AppendLine($"Team: {this.Team.TeamName}");
             str.AppendLine($"Board: {this.Board.BoardName}");
             str.AppendLine($"Member: {this.Member.PersonName}");
-            str.AppendLine($"WorkItem:{this.WorkItem.Title}");///////////////////////////////
+            str.AppendLine($"WorkItem:{this.WorkItem.Title}");
             str.AppendLine($"Description: {this.Description}");
             
             return str.ToString();
@@ -84,9 +84,9 @@ namespace WIMSystem.Models
             {
                 str.AppendLine($"Member: {this.member.PersonName}");
             }
-            else if (filterType!=HistoryItemFilterType.workitem&&this.workItem!=null)//////////////////
-            {                                                                        //////////////////
-                str.AppendLine($"WorkItem:{this.WorkItem.Title}");                   //////////////////
+            else if (filterType!=HistoryItemFilterType.workitem&&this.workItem!=null)
+            {                                                                        
+                str.AppendLine($"WorkItem:{this.WorkItem.Title}");                   
             }
 
             return str.ToString();

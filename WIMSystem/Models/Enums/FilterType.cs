@@ -9,6 +9,6 @@ namespace WIMSystem.Models.Enums
         team,
         board,
         person,
-        workitem//TODO 
+        workitem
     }
 }
